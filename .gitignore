@@ -1,0 +1,14 @@
+bin/
+data/
+db/
+dist/
+logs/
+lib/
+test-result/
+tmp/
+modules/
+eclipse/
+.settings/
+.project
+.classpath
+precompiled/
