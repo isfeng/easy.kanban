@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="@{'/public/stylesheets/bootstrap.css'}" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="@{'/public/stylesheets/main.css'}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="@{'/public/stylesheets/screen.css'}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="@{'/public/stylesheets/print.css'}" type="text/css" media="screen, projection">
+    <!--[if IE]>
+    <link rel="stylesheet" href="@{'/public/stylesheets/ie.css'}" type="text/css" media="screen, projection">
+    <![endif]-->
+    <script src="@{'/public/javascripts/mootools-core.js'}" type="text/javascript" charset="UTF-8"></script>
+    <script src="@{'/public/javascripts/mootools-more.js'}" type="text/javascript" charset="UTF-8"></script>
+    <script src="@{'/public/javascripts/raphael-min.js'}" type="text/javascript" charset="UTF-8"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-
-
-    <script src="@{'/public/javascripts/built.js'}" type="text/javascript" charset="UTF-8"></script>
+    #{doLayout /}
   </body>
 </html>
 

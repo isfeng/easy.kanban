@@ -6,6 +6,8 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /kanban                                       Application.kanban
+
 GET     /test                                TaskController.addTask
 
 # Ignore favicon requests

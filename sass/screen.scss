@@ -1,0 +1,29 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+@import "compass/css3";
+
+#board{
+    position: relative;
+    background-image: image-url("SB690_box_full.jpg");
+    height: image-height("SB690_box_full.jpg");
+    width: image-width("SB690_box_full.jpg");
+}
+
+#postit{
+    position: absolute;
+    margin-top: (image-height("SB690_box_full.jpg")+-100);
+    margin-left: image-width("SB690_box_full.jpg")/1.5;
+    background-image: image-url("http://3.bp.blogspot.com/-YWlZxLe6HmY/Te_kkDoU7xI/AAAAAAAAAiw/VN_SJpyWBB0/s1600/images-16.jpeg");
+    a{
+        display: block;
+        height: 50px;
+        width: 50px;
+    }
+    span{
+        display: none;
+    }
+}

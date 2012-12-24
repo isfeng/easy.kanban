@@ -4,7 +4,6 @@ import play.mvc.Controller;
 import play.mvc.With;
 import securesocial.provider.SocialUser;
 import controllers.securesocial.SecureSocial;
-@With( SecureSocial.class )
 public class Application extends Controller
 {
 	
@@ -14,7 +13,10 @@ public class Application extends Controller
 		System.out.println(user.email);
 		System.out.println(user.displayName);
 		render();
-		
 	}
 	
+	public static void kanban()
+	{
+		render();
+	}
 }
