@@ -67,28 +67,54 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 9, ../../sass/screen.scss */
+/* line 10, ../../sass/screen.scss */
 #board {
   position: relative;
   background-image: url('/public/images/SB690_box_full.jpg?1356320109');
-  height: 784px;
+  height: 759px;
   width: 1298px;
 }
+/* line 15, ../../sass/screen.scss */
+#board #space {
+  position: absolute;
+  top: 50px;
+  bottom: 65px;
+  left: 65px;
+  right: 80px;
+}
 
-/* line 16, ../../sass/screen.scss */
+/* line 20, ../../sass/screen.scss */
 #postit {
   position: absolute;
   margin-top: 684px;
   margin-left: 865.33333px;
-  background-image: url(http://3.bp.blogspot.com/-YWlZxLe6HmY/Te_kkDoU7xI/AAAAAAAAAiw/VN_SJpyWBB0/s1600/images-16.jpeg);
+  background-image: url('/public/images/images-16.jpeg?1356337829');
 }
-/* line 21, ../../sass/screen.scss */
+/* line 25, ../../sass/screen.scss */
 #postit a {
   display: block;
   height: 50px;
   width: 50px;
 }
-/* line 26, ../../sass/screen.scss */
+/* line 30, ../../sass/screen.scss */
 #postit span {
   display: none;
+}
+
+/* line 35, ../../sass/screen.scss */
+.note {
+  cursor: move;
+  margin: auto;
+  width: 150px;
+  background: yellow;
+}
+/* line 40, ../../sass/screen.scss */
+.note h1 {
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: bold;
+}
+/* line 44, ../../sass/screen.scss */
+.note p {
+  font-family: 'Shadows Into Light', cursive;
+  margin: 5px 1px 5px 1px;
 }

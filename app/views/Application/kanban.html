@@ -2,10 +2,40 @@
 <div id="kanban">
 
     <div id="board">
-    
-        <div id="postit">
-            <a href="javascript:alert('post it')"><span>new post</span></a>
-        </div>
-    </div>
+        
+        <div id="space">
+            
+            <div class="note">
+	            <h1>Drag Me</h1>
+	            <p>Lorem ipsum dolor sit amet, etc.</p>
+	        </div>
+	        
+        </div><!--end of space-->
 
-</div>
+        <div id="postit">
+            <a href="javascript: tear();"><span>new post</span></a>
+        </div>
+    
+    </div><!--end of board-->
+
+</div><!--end of kanban-->
+
+<script type="text/javascript">
+
+    var k = new Kanban('board');
+    var postit = new Postit();
+
+    function tear()
+    {
+        alert('new sticky');
+    }
+    
+    window.addEvent('domready', function(){
+	    $$('#kanban .note').each(function(drag){
+            new Drag.Move(drag,{
+                container : 'space'
+            });
+        });
+    });
+    
+</script>
