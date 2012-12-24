@@ -104,16 +104,17 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 /* line 35, ../../sass/screen.scss */
 .note {
   cursor: move;
+  word-wrap: break-word;
   margin: auto;
   width: 150px;
   background: yellow;
 }
-/* line 40, ../../sass/screen.scss */
+/* line 41, ../../sass/screen.scss */
 .note h1 {
   font-family: 'Shadows Into Light', cursive;
   font-weight: bold;
 }
-/* line 44, ../../sass/screen.scss */
+/* line 45, ../../sass/screen.scss */
 .note p {
   font-family: 'Shadows Into Light', cursive;
   margin: 5px 1px 5px 1px;
