@@ -9,9 +9,11 @@ public class Application extends Controller
 	
 	public static void index()
 	{
+		/*
 		SocialUser user = SecureSocial.getCurrentUser();
 		System.out.println(user.email);
 		System.out.println(user.displayName);
+		*/
 		render();
 	}
 	

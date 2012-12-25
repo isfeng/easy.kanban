@@ -13,7 +13,7 @@
         </div><!--end of space-->
 
         <div id="postit">
-            <a href="javascript: tear();"><span>new post</span></a>
+            <a id="postlink" href="javascript:"><span>new post</span></a>
         </div>
     
     </div><!--end of board-->
@@ -32,8 +32,24 @@
     
     window.addEvent('domready', function(){
 	    $$('#kanban .note').each(function(drag){
+            //draggable notes
             new Drag.Move(drag,{
                 container : 'space'
+            });
+            
+            //tear
+            $("postlink").addEvent("click", function(){
+                var sm = new SimpleModal({"btn_ok":"post it"});
+                sm.addButton("Action button", "btn primary", function(){
+                    alert("Add your code");
+                    this.hide();
+                });
+                sm.addButton("Cancel", "btn");
+                sm.show({
+                    "model":"modal",
+                    "title":"Title",
+                    "contents":"Your message..."
+                }); 
             });
         });
     });
