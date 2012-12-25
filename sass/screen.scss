@@ -157,14 +157,9 @@
                 }
             }
             &.secondary {
-                color: #FFF;
-                background-color: #999;
-                background-repeat: repeat-x;
-                margin-right: 15px;
-                @include text-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+                padding: 5px 2px 6px;
                 &:hover {
-                    border: 1px solid #444;
-                    background-color: #444;
+                    color: #999;
                 }
             }
         }
