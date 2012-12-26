@@ -41,14 +41,14 @@
             $("postlink").addEvent("click", function(){
                 var sm = new SimpleModal({"btn_ok":"post it"});
                 sm.addButton("Action button", "btn primary", function(){
-                    alert("Add your code");
+                    alert($('notetitle').value);
                     this.hide();
                 });
                 sm.addButton("Cancel", "btn secondary");
                 sm.show({
                     "model":"modal",
                     "title":"Title",
-                    "contents":"Your message..."
+                    "contents":"<div id=\"textnoteed\">Title<input type=\"text\" name=\"notetitle\" id=\"notetitle\" value=\"\"/></div>"
                 }); 
             });
         });

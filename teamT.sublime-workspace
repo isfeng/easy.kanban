@@ -1,0 +1,190 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"myl",
+				"myLong"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 311.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/E/project/teamT/teamT.sublime-project",
+		"/D/downloads/dev/mootools/plasm-simplemodal-1.2-1-ge0316d8/plasm-simplemodal-e0316d8/Source/simple-modal.js",
+		"/D/downloads/dev/mootools/plasm-simplemodal-1.2-1-ge0316d8/plasm-simplemodal-e0316d8/Demos/index.html",
+		"/D/downloads/dev/mootools/eneko-mooml-1.3.0-0-gd238571/eneko-mooml-2f3be29/Source/mooml.js",
+		"/D/downloads/dev/mootools/eneko-mooml-1.3.0-0-gd238571/eneko-mooml-2f3be29/Source/mooml-globalize.js",
+		"/E/project/teamT/app/views/Application/kanban.html",
+		"/D/downloads/dev/mootools/plasm-simplemodal-1.2-1-ge0316d8/plasm-simplemodal-e0316d8/Source/assets/css/simplemodal.css",
+		"/D/downloads/dev/mootools/plasm-simplemodal-1.2-1-ge0316d8/plasm-simplemodal-e0316d8/Source/assets/less/simplemodal.less",
+		"/C/Users/sergio/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/E/project/teamT/app/models/Task.java",
+		"/E/project/teamT/app/controllers/Application.java",
+		"/E/project/teamT/app/views/main.html",
+		"/C/Users/sergio/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/sergio/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/sergio/RippleSites/Maps/b.html",
+		"/C/Users/sergio/RippleSites/Maps/js/maps.js",
+		"/D/downloads/dev/blackberry/openid-selector-1.3/openid-selector/README.txt",
+		"/D/downloads/dev/blackberry/openid-selector-1.3/openid-selector/demo.html",
+		"/C/Users/sergio/RippleSites/Maps/index.html",
+		"/C/Users/sergio/RippleSites/Maps/google.html",
+		"/D/downloads/dev/blackberry/openid-selector-1.3/openid-selector/demo-mootools.html",
+		"/C/Users/sergio/RippleSites/Maps/data.json",
+		"/C/Users/sergio/RippleSites/HelloBlackBerry/config.xml",
+		"/C/Users/sergio/RippleSites/HelloBlackBerry/b.html",
+		"/C/Users/sergio/RippleSites/HelloBlackBerry/a.html",
+		"/C/Users/sergio/RippleSites/HelloBlackBerry/js/maps.js",
+		"/C/Users/sergio/RippleSites/HelloBlackBerry/index.html",
+		"/C/Users/sergio/RippleSites/samples/dataOnLoad.htm",
+		"/C/Users/sergio/RippleSites/HelloBlackBerry/data.json",
+		"/C/Users/sergio/AppData/Roaming/Sublime Text 2/Packages/User/HTML.sublime-settings"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"* ",
+			"   ",
+			"SM",
+			"({\n",
+			"SM",
+			"sm",
+			"SM",
+			"it",
+			"out",
+			"\n",
+			"+D",
+			"pr",
+			"data",
+			"startGeolocation",
+			"initmap",
+			"key"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 267.0,
+	"status_bar_visible": true
+}
