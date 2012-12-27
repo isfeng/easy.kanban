@@ -2,12 +2,9 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
-@import "compass/reset";
 @import "compass/css3";
 @import "compass/layout";
 @import "animate";
-
 
 #board {
     position: relative;
@@ -50,5 +47,13 @@
     }
 }
 
+#text_note{
+    width: 200px;
+    #text_note_title{
 
+    }
+    #text_note_area{
+        
+    }
+}
 

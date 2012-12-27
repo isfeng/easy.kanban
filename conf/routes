@@ -6,9 +6,9 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /kanban                                       Application.kanban
+GET     /kanban                                 Application.kanban
 
-GET     /test                                TaskController.addTask
+GET     /test                                	Application.test
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

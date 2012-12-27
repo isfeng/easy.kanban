@@ -23,7 +23,9 @@ javascripts_dir = "public/javascripts"
 # and then run:
 # sass-convert -R --from scss --to sass sass scss && rm -rf sass && mv scss sass
 
-require 'compass-normalize'
-require 'compass-recipes'
-require 'animate'
-
+# my bootstrap mixins
+# require "compass-normalize"
+# require "compass-recipes"
+require "animate"
+# require "compass_twitter_bootstrap"
+require "zurb-foundation"

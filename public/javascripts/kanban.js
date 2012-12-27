@@ -1,9 +1,13 @@
+
 //google web font
-WebFontConfig = {
-	google : {
+WebFontConfig = 
+{
+	google : 
+	{
 		families : [ 'Shadows+Into+Light::latin' ]
 	}
 };
+
 (function() {
 	var wf = document.createElement('script');
 	wf.src = ('https:' == document.location.protocol ? 'https' : 'http')
@@ -13,13 +17,15 @@ WebFontConfig = {
 	var s = document.getElementsByTagName('script')[0];
 	s.parentNode.insertBefore(wf, s);
 })();
-  
+
+
 var Sticky = new Class
 ({
 	
 	Implements:[Options, Events],
 	
-	options:{
+	options:
+	{
 		
 	},
 	
@@ -40,7 +46,8 @@ var Postit = new Class
 	
 	Implements:[Options, Events],
 	
-	options:{
+	options:
+	{
 		
 	},
 	
@@ -61,7 +68,8 @@ var Kanban = new Class
 	
 	Implements:[Options, Events],
 	
-	options:{
+	options:
+	{
 		
 	},
 	

@@ -1,0 +1,61 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 9, ../../sass/kanban.scss */
+#board {
+  position: relative;
+  background-image: url('/public/images/SB690_box_full.jpg?1356320109');
+  height: 759px;
+  width: 1298px;
+}
+/* line 14, ../../sass/kanban.scss */
+#board #space {
+  position: absolute;
+  top: 50px;
+  bottom: 65px;
+  left: 65px;
+  right: 80px;
+}
+
+/* line 19, ../../sass/kanban.scss */
+#postit {
+  position: absolute;
+  margin-top: 684px;
+  margin-left: 865.33333px;
+  background-image: url('/public/images/images-16.jpeg?1356337829');
+}
+/* line 24, ../../sass/kanban.scss */
+#postit a {
+  display: block;
+  height: 50px;
+  width: 50px;
+}
+/* line 29, ../../sass/kanban.scss */
+#postit span {
+  display: none;
+}
+
+/* line 34, ../../sass/kanban.scss */
+.note {
+  cursor: move;
+  word-wrap: break-word;
+  margin: auto;
+  width: 150px;
+  background: yellow;
+}
+/* line 40, ../../sass/kanban.scss */
+.note h1 {
+  font-family: 'Shadows Into Light', cursive;
+  font-weight: bold;
+}
+/* line 44, ../../sass/kanban.scss */
+.note p {
+  font-family: 'Shadows Into Light', cursive;
+  margin: 5px 1px 5px 1px;
+}
+
+/* line 50, ../../sass/kanban.scss */
+#text_note {
+  width: 200px;
+}
