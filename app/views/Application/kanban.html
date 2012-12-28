@@ -6,14 +6,14 @@
         <div id="space">
             
             <div class="note">
-	            <h1>10K</h1>
+	            <h5>10K</h5>
 	            <p>WaHaHaHaHaHaHaWaHaHaHaHaHaHaWaHaHaHaHaHaHaWaHaHaHaHaHaHa</p>
 	        </div>
 	        
         </div><!--end of space-->
 
-        <div id="postit">
-            <a id="postlink" href="javascript:"><span>new post</span></a>
+        <div id="board_control">
+            <a id="post_stack" href="javascript:"><span>new post</span></a>
         </div>
     
     </div><!--end of board-->
@@ -22,36 +22,16 @@
 
 <script type="text/javascript">
 
-    var k = new Kanban('board');
-    var postit = new Postit();
-
-    function tear()
+    window.addEvent('domready', function()
     {
-        alert('new sticky');
-    }
-    
-    window.addEvent('domready', function(){
-	    $$('#kanban .note').each(function(drag){
-            //draggable notes
+        $$('#kanban .note').each(function(drag){
             new Drag.Move(drag,{
                 container : 'space'
-            });
-            
-            //tear
-            $("postlink").addEvent("click", function(){
-                var sm = new SimpleModal({"btn_ok":"post it"});
-                sm.addButton("Action button", "btn primary", function(){
-                    alert($('notetitle').value);
-                    this.hide();
-                });
-                sm.addButton("Cancel", "btn secondary");
-                sm.show({
-                    "model":"modal",
-                    "title":"Title",
-                    "contents":""
-                }); 
-            });
+            })
         });
+        var kanban = new Kanban('space');
+        kanban.load();//load notes
+        kanban.addStack('post_stack');
     });
     
 </script>

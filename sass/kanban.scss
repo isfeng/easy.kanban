@@ -16,18 +16,20 @@
     }
 }
 
-#postit {
+#board_control {
     position: absolute;
     margin-top: (image-height("SB690_box_full.jpg")+-100);
     margin-left: image-width("SB690_box_full.jpg")/1.5;
     background-image: image-url("images-16.jpeg");
     a {
-        display: block;
-        height: 50px;
-        width: 50px;
-    }
-    span {
-        display: none;
+        &#post_stack {
+            display: block;
+            height: 50px;
+            width: 50px;    
+        }
+        span {
+            display: none;    
+        }
     }
 }
 
@@ -37,7 +39,7 @@
     margin: auto;
     width: 150px;
     background: yellow;
-    h1 {
+    h5 {
         font-family: 'Shadows Into Light', cursive;
         font-weight: bold;
     }
@@ -47,8 +49,8 @@
     }
 }
 
-#text_note{
-    width: 200px;
+#text_note_form {
+    width: 95%;
     #text_note_title{
 
     }

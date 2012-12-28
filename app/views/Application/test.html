@@ -1,4 +1,4 @@
-#{extends 'main.html' /}
+p#{extends 'main.html' /}
 
 <div id="test"></div>
     <div class="row">
@@ -112,11 +112,8 @@
     Mooml.register('text_note_tmpl', function(){
         div ({'id':'text_note'},
             label('Title'),
-            br(),
             input({'type':'text', 'id':'text_note_title'}),
-            br(),
             label('Note'),
-            br(),
             textarea({'id':'text_note_area', 'cols':'20', 'rows':'10'})
         );
     });

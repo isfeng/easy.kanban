@@ -19,29 +19,70 @@ WebFontConfig =
 })();
 
 
-var Sticky = new Class
+var StickyNote = new Class
 ({
 	
-	Implements:[Options, Events],
+	Implements:[Options, Events, Mooml.Templates],
 	
 	options:
 	{
-		
+		onTextOk: Class.empty,
+		onDrawOk: Class.empty
 	},
 	
-	initialize:function()
+	initialize:function(options)
 	{
+		this.setOptions(options);
 		
+		this.registerTemplate('text_note_tmpl', function() {
+			div(
+				div ({'id':'text_note_form'},
+		            label('Title'),
+		            input({'type':'text', 'id':'text_note_title'}),
+		            label('Note'),
+		            textarea({'id':'text_note_area'})
+	        	)
+			);
+		});
+
+		this.registerTemplate('draw_note_tmpl', function() {
+			
+		});
 	},
 	
 	tear: function()
 	{
+		alert('tear');
+	},
+
+	showTextForm: function()
+	{
+		this.sm = new SimpleModal({"btn_ok":"post it"});
+        this.sm.addButton("Action button", "btn primary", function(){
+        	this.fireEvent('textOk', [$('text_note_title').value, $('text_note_area').value]);
+        	this.hide();
+        }.bind(this));
+        this.sm.addButton("Cancel", "btn secondary");
+        this.sm.show({
+            "model": "modal",
+            "title": "Title",
+            "contents": this.renderTemplate('text_note_tmpl').get('html')
+        }); 
+	},
+
+	showDrawForm: function()
+	{
 		
+	},
+
+	hide: function()
+	{
+		this.sm.hide();
 	}
-	
+		
 });
 
-var Postit = new Class
+var PostStack = new Class
 ({
 	
 	Implements:[Options, Events],
@@ -51,14 +92,23 @@ var Postit = new Class
 		
 	},
 	
-	initialize:function()
+	/* add edit event */
+	initialize:function(kanban, stack)
 	{
-		
+		this.kanban = kanban;
+		$(stack).addEvent("click", function(){
+			this.pull();
+			}.bind(this)
+		);
 	},
 	
 	pull: function()
 	{
-		
+		var stickyNote = new StickyNote({onTextOk: function(title, area){
+				this.kanban.stickText(title, area);
+			}.bind(this)
+		});
+		stickyNote.showTextForm();
 	}
 	
 });
@@ -73,14 +123,43 @@ var Kanban = new Class
 		
 	},
 	
-	initialize:function()
+	initialize:function(container)
+	{
+		this.container = container;
+		this.template = new Mooml.Template('post_tmpl', function(note) {
+		    div({'class': 'note'},
+		        h6(note.title),
+		        p(note.area)
+		    );
+		});
+	},
+	
+	stickText: function(title, area)
+	{
+		var el = this.template.render({'title':title,'area':area}).inject($(this.container));
+		new Drag.Move(el,{
+            container : this.container
+        })
+	},
+
+	stickDraw: function()
 	{
 		
 	},
-	
-	stick: function(sticky)
+
+	clear: function()
 	{
-		
+
+	},
+
+	load: function()
+	{
+
+	},
+
+	addStack: function(stack)
+	{
+		var postStack = new PostStack(this, stack);
 	}
 	
 });
