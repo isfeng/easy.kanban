@@ -1,17 +1,18 @@
-import org.junit.*;
-import play.test.*;
-import play.mvc.*;
-import play.mvc.Http.*;
-import models.*;
+import org.junit.Test;
 
-public class ApplicationTest extends FunctionalTest {
+import play.mvc.Http.Response;
+import play.test.FunctionalTest;
 
-    @Test
-    public void testThatIndexPageWorks() {
-        Response response = GET("/");
-        assertIsOk(response);
-        assertContentType("text/html", response);
-        assertCharset(play.Play.defaultWebEncoding, response);
-    }
-    
+public class ApplicationTest extends FunctionalTest
+{
+	
+	@Test
+	public void testThatIndexPageWorks()
+	{
+		Response response = GET("/");
+		assertIsOk(response);
+		assertContentType("text/html", response);
+		assertCharset(play.Play.defaultWebEncoding, response);
+	}
+	
 }

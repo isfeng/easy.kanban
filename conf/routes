@@ -2,11 +2,16 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-*       /auth       module:securesocial
+*       /auth       							module:securesocial
 
 # Home page
 GET     /                                       Application.index
-GET     /kanban                                 Application.kanban
+GET     /kanban	                            	Application.kanban
+GET     /kanbans/{id}                            Application.load
+
+POST	/notes									Application.postNote
+DELETE	/notes/{id}								Application.delNote
+
 
 GET     /test                                	Application.test
 

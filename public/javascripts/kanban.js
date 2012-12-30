@@ -1,8 +1,7 @@
-
 //google web font
-WebFontConfig = 
+WebFontConfig =
 {
-	google : 
+	google :
 	{
 		families : [ 'Shadows+Into+Light::latin' ]
 	}
@@ -21,19 +20,19 @@ WebFontConfig =
 
 var StickyNote = new Class
 ({
-	
+
 	Implements:[Options, Events, Mooml.Templates],
-	
+
 	options:
 	{
 		onTextOk: Class.empty,
 		onDrawOk: Class.empty
 	},
-	
+
 	initialize:function(options)
 	{
 		this.setOptions(options);
-		
+
 		this.registerTemplate('text_note_tmpl', function() {
 			div(
 				div ({'id':'text_note_form'},
@@ -46,10 +45,10 @@ var StickyNote = new Class
 		});
 
 		this.registerTemplate('draw_note_tmpl', function() {
-			
+
 		});
 	},
-	
+
 	tear: function()
 	{
 		alert('tear');
@@ -67,31 +66,31 @@ var StickyNote = new Class
             "model": "modal",
             "title": "Title",
             "contents": this.renderTemplate('text_note_tmpl').get('html')
-        }); 
+        });
 	},
 
 	showDrawForm: function()
 	{
-		
+
 	},
 
 	hide: function()
 	{
 		this.sm.hide();
 	}
-		
+
 });
 
 var PostStack = new Class
 ({
-	
+
 	Implements:[Options, Events],
-	
+
 	options:
 	{
-		
+
 	},
-	
+
 	/* add edit event */
 	initialize:function(kanban, stack)
 	{
@@ -101,7 +100,7 @@ var PostStack = new Class
 			}.bind(this)
 		);
 	},
-	
+
 	pull: function()
 	{
 		var stickyNote = new StickyNote({onTextOk: function(title, area){
@@ -110,21 +109,22 @@ var PostStack = new Class
 		});
 		stickyNote.showTextForm();
 	}
-	
+
 });
 
 var Kanban = new Class
 ({
-	
+
 	Implements:[Options, Events],
-	
+
 	options:
 	{
-		
+
 	},
-	
-	initialize:function(container)
+
+	initialize:function(id, container)
 	{
+		this.id = id;
 		this.container = container;
 		this.template = new Mooml.Template('post_tmpl', function(note) {
 		    div({'class': 'note'},
@@ -133,7 +133,7 @@ var Kanban = new Class
 		    );
 		});
 	},
-	
+
 	stickText: function(title, area)
 	{
 		var el = this.template.render({'title':title,'area':area}).inject($(this.container));
@@ -144,7 +144,7 @@ var Kanban = new Class
 
 	stickDraw: function()
 	{
-		
+
 	},
 
 	clear: function()
@@ -154,12 +154,25 @@ var Kanban = new Class
 
 	load: function()
 	{
-
+		var myRequest = new Request.JSON({
+		    url: 'kanbans/id',
+		    method: 'get',
+		    onRequest: function(){
+		    	console.log('loading');
+		    },
+		    onSuccess: function(json){
+				console.log(json[0]);
+		    },
+		    onFailure: function(){
+		        console.log('failure');
+		    }
+		});
+		myRequest.send();
 	},
 
 	addStack: function(stack)
 	{
 		var postStack = new PostStack(this, stack);
 	}
-	
+
 });
