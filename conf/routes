@@ -7,9 +7,10 @@
 # Home page
 GET     /                                       Application.index
 GET     /kanban	                            	Application.kanban
-GET     /kanbans/{id}                            Application.load
+GET     /kanbans/{id}                           Application.load
 
 POST	/notes									Application.postNote
+POST	/notes/pos								Application.updateNotePosition
 DELETE	/notes/{id}								Application.delNote
 
 

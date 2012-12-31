@@ -7,7 +7,7 @@
 #   fullname: Bob
 Kanban(kanban1):
   goal: 10K
-  
+
 TextNote(note1):
   kanban: kanban1
   x: 100

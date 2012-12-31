@@ -11,8 +11,8 @@ public class Bootstrap extends Job<Void>
 	@Override
 	public void doJob() throws Exception
 	{
-		if (Kanban.count() == 0)
-			Fixtures.loadModels("data.yml");
+		Fixtures.deleteAllModels();
+		Fixtures.loadModels("data.yml");
 	}
 
 }

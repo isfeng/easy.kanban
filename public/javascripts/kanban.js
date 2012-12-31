@@ -1,8 +1,8 @@
 
 //google web font
-WebFontConfig = 
+WebFontConfig =
 {
-	google : 
+	google :
 	{
 		families : [ 'Shadows+Into+Light::latin' ]
 	}
@@ -40,21 +40,21 @@ Mooml.register('post_tmpl', function(note) {
 
 var StickyNote = new Class
 ({
-	
+
 	Implements:[Options, Events, Mooml.Templates],
-	
+
 	options:
 	{
 		onTextOk: Class.empty,
 		onDrawOk: Class.empty,
 		onMove: Class.empty
 	},
-	
+
 	initialize:function(options)
 	{
 		this.setOptions(options);
 	},
-	
+
 	tear: function()
 	{
 		alert('tear');
@@ -64,7 +64,7 @@ var StickyNote = new Class
 	{
 		this.sm = new SimpleModal({"btn_ok":"post it"});
         this.sm.addButton("Action button", "btn primary", function(){
-        	this._onTextOK('noid', $('text_note_title').value, $('text_note_area').value);
+        	this._onTextOK($('text_note_title').value, $('text_note_area').value);
         	this.fireEvent('textOk', this.post_text_el);
         	this.hide();
         }.bind(this));
@@ -73,12 +73,12 @@ var StickyNote = new Class
             "model": "modal",
             "title": "Title",
             "contents": Mooml.render('text_note_tmpl').get('html')
-        }); 
+        });
 	},
 
 	showDrawForm: function()
 	{
-		
+
 	},
 
 	hide: function()
@@ -86,11 +86,29 @@ var StickyNote = new Class
 		this.sm.hide();
 	},
 
-	_onTextOK: function(nid, title, note)
+	_onTextOK: function(title, note)
 	{
+		var req = new Request.JSON({
+		    url: 'notes',
+		    method: 'post',
+		    data: {'kid':'1', 'title':title, 'note':note},
+		    async: false,
+		    onRequest: function() {
+		        console.log('onRequest');
+		    },
+		    onSuccess: function(nid) {
+		       	this.nid = nid;
+		    }.bind(this),
+		    onFailure: function() {
+		        console.log('onFailure');
+		    }
+		});
+
+		req.send();
+		//
 		this.title = title;
 		this.note = note;
-		this.post_text_el = Mooml.render('post_tmpl',{'title':title,'note':note,'nid':nid});
+		this.post_text_el = Mooml.render('post_tmpl',{'title':title,'note':note,'nid':this.nid});
 	},
 
 	_onDrawOK: function()
@@ -98,7 +116,7 @@ var StickyNote = new Class
 
 	}
 
-		
+
 });
 
 StickyNote.buildNoteEl = function(nid, title, note)
@@ -108,14 +126,14 @@ StickyNote.buildNoteEl = function(nid, title, note)
 
 var PostStack = new Class
 ({
-	
+
 	Implements:[Options, Events],
-	
+
 	options:
 	{
-		
+
 	},
-	
+
 	/* add edit event */
 	initialize:function(kanban, stack)
 	{
@@ -125,7 +143,7 @@ var PostStack = new Class
 			}.bind(this)
 		);
 	},
-	
+
 	pull: function()
 	{
 		var stickyNote = new StickyNote({onTextOk: function(el){
@@ -134,36 +152,50 @@ var PostStack = new Class
 		});
 		stickyNote.showTextForm();
 	}
-	
+
 });
 
 var Kanban = new Class
 ({
-	
+
 	Implements:[Options, Events],
-	
+
 	options:
 	{
-		
+
 	},
-	
+
 	initialize:function(container, kid)
 	{
-		this.kanbanID = kid;
+		this.kid = kid;
 		this.container = container;
-		
+
 	},
-	
+
 	stickText: function(textNote, x, y)
 	{
 		var el = textNote.inject($(this.container));
-		console.log({'x':x,'y':y});
 		new Drag.Move(el,{
             container : this.container,
             onComplete: function()
             {
-            	console.log(el.getPosition());
+            	var req = new Request.JSON({
+				    url: 'notes/pos',
+				    method: 'post',
+				    data: {'nid':el.get('nid'),'x':el.getPosition('space').x, 'y':el.getPosition('space').y},
+				    onRequest: function() {
+						console.log(el.getPosition('space'));
+				    },
+				    onSuccess: function(nid) {
+				       	console.log('onSuccess');
+				    },
+				    onFailure: function() {
+				        console.log('onFailure');
+				    }
+				});
 
+				req.send();
+            	//
             }
         })
 
@@ -172,7 +204,7 @@ var Kanban = new Class
 
 	stickDraw: function()
 	{
-		
+
 	},
 
 	clear: function()
@@ -182,7 +214,7 @@ var Kanban = new Class
 
 	load: function()
 	{
-		var myRequest = new Request.JSON({
+		var req = new Request.JSON({
 		    url: 'kanbans/'+this.kanbanID,
 		    method: 'get',
 		    onRequest: function(){
@@ -199,12 +231,12 @@ var Kanban = new Class
 		    }
 		});
 
-		myRequest.send();
+		req.send();
 	},
 
 	addStack: function(stack)
 	{
 		var postStack = new PostStack(this, stack);
 	}
-	
+
 });

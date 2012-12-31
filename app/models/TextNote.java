@@ -15,6 +15,14 @@ public class TextNote extends StickyNote
 	}
 
 
+	public TextNote(Kanban kanban, String title, String note)
+	{
+		super(kanban, 0, 0);
+		this.title = title;
+		this.note = note;
+	}
+
+
 	public String title;
 	public String note;
 }

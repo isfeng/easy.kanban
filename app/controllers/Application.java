@@ -26,12 +26,14 @@ public class Application extends Controller
 		render();
 	}
 
+
 	public static void load(long id)
 	{
-//		List<TextNote> notes = TextNote.find("byKanban", Kanban.findById(id)).fetch();
+		// List<TextNote> notes = TextNote.find("byKanban", Kanban.findById(id)).fetch();
 		List<TextNote> notes = TextNote.findAll();
 		renderJSON(notes);
 	}
+
 
 	public static void test()
 	{
@@ -40,11 +42,21 @@ public class Application extends Controller
 	}
 
 
-	public static void postNote(int id, int x, int y, String title, String note)
+	public static void postNote(long kid, String title, String note)
 	{
-		Kanban k = Kanban.findById(id);
-		TextNote stickynote = new TextNote(k, x, y, title, note);
+		Kanban k = Kanban.findById(kid);
+		TextNote stickynote = new TextNote(k, title, note);
 		stickynote.save();
-		ok();
+		renderJSON(stickynote.id);
+	}
+
+
+	public static void updateNotePosition(long nid, int x, int y)
+	{
+		TextNote stickynote = TextNote.findById(nid);
+		stickynote.x = x;
+		stickynote.y = y;
+		stickynote.save();
+		renderJSON("OK");
 	}
 }
