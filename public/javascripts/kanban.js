@@ -1,7 +1,8 @@
+
 //google web font
-WebFontConfig =
+WebFontConfig = 
 {
-	google :
+	google : 
 	{
 		families : [ 'Shadows+Into+Light::latin' ]
 	}
@@ -18,37 +19,42 @@ WebFontConfig =
 })();
 
 
+Mooml.register('text_note_tmpl', function() {
+    div(
+		div ({'id':'text_note_form'},
+            label('Title'),
+            input({'type':'text', 'id':'text_note_title'}),
+            label('Note'),
+            textarea({'id':'text_note_area'})
+    	)
+	);
+});
+
+Mooml.register('post_tmpl', function(note) {
+    div({'class':'note', 'nid':note.nid},
+        h6(note.title),
+        p(note.note)
+    );
+});
+
+
 var StickyNote = new Class
 ({
-
+	
 	Implements:[Options, Events, Mooml.Templates],
-
+	
 	options:
 	{
 		onTextOk: Class.empty,
-		onDrawOk: Class.empty
+		onDrawOk: Class.empty,
+		onMove: Class.empty
 	},
-
+	
 	initialize:function(options)
 	{
 		this.setOptions(options);
-
-		this.registerTemplate('text_note_tmpl', function() {
-			div(
-				div ({'id':'text_note_form'},
-		            label('Title'),
-		            input({'type':'text', 'id':'text_note_title'}),
-		            label('Note'),
-		            textarea({'id':'text_note_area'})
-	        	)
-			);
-		});
-
-		this.registerTemplate('draw_note_tmpl', function() {
-
-		});
 	},
-
+	
 	tear: function()
 	{
 		alert('tear');
@@ -58,39 +64,58 @@ var StickyNote = new Class
 	{
 		this.sm = new SimpleModal({"btn_ok":"post it"});
         this.sm.addButton("Action button", "btn primary", function(){
-        	this.fireEvent('textOk', [$('text_note_title').value, $('text_note_area').value]);
+        	this._onTextOK('noid', $('text_note_title').value, $('text_note_area').value);
+        	this.fireEvent('textOk', this.post_text_el);
         	this.hide();
         }.bind(this));
         this.sm.addButton("Cancel", "btn secondary");
         this.sm.show({
             "model": "modal",
             "title": "Title",
-            "contents": this.renderTemplate('text_note_tmpl').get('html')
-        });
+            "contents": Mooml.render('text_note_tmpl').get('html')
+        }); 
 	},
 
 	showDrawForm: function()
 	{
-
+		
 	},
 
 	hide: function()
 	{
 		this.sm.hide();
+	},
+
+	_onTextOK: function(nid, title, note)
+	{
+		this.title = title;
+		this.note = note;
+		this.post_text_el = Mooml.render('post_tmpl',{'title':title,'note':note,'nid':nid});
+	},
+
+	_onDrawOK: function()
+	{
+
 	}
 
+		
 });
+
+StickyNote.buildNoteEl = function(nid, title, note)
+{
+	return Mooml.render('post_tmpl',{'title':title,'note':note,'nid':nid});
+}
 
 var PostStack = new Class
 ({
-
+	
 	Implements:[Options, Events],
-
+	
 	options:
 	{
-
+		
 	},
-
+	
 	/* add edit event */
 	initialize:function(kanban, stack)
 	{
@@ -100,51 +125,54 @@ var PostStack = new Class
 			}.bind(this)
 		);
 	},
-
+	
 	pull: function()
 	{
-		var stickyNote = new StickyNote({onTextOk: function(title, area){
-				this.kanban.stickText(title, area);
+		var stickyNote = new StickyNote({onTextOk: function(el){
+				this.kanban.stickText(el, 0, 0);
 			}.bind(this)
 		});
 		stickyNote.showTextForm();
 	}
-
+	
 });
 
 var Kanban = new Class
 ({
-
+	
 	Implements:[Options, Events],
-
+	
 	options:
 	{
-
+		
 	},
-
-	initialize:function(id, container)
+	
+	initialize:function(container, kid)
 	{
-		this.id = id;
+		this.kanbanID = kid;
 		this.container = container;
-		this.template = new Mooml.Template('post_tmpl', function(note) {
-		    div({'class': 'note'},
-		        h6(note.title),
-		        p(note.area)
-		    );
-		});
+		
 	},
-
-	stickText: function(title, area)
+	
+	stickText: function(textNote, x, y)
 	{
-		var el = this.template.render({'title':title,'area':area}).inject($(this.container));
+		var el = textNote.inject($(this.container));
+		console.log({'x':x,'y':y});
 		new Drag.Move(el,{
-            container : this.container
+            container : this.container,
+            onComplete: function()
+            {
+            	console.log(el.getPosition());
+
+            }
         })
+
+        el.setPosition({'x':x,'y':y});
 	},
 
 	stickDraw: function()
 	{
-
+		
 	},
 
 	clear: function()
@@ -155,18 +183,22 @@ var Kanban = new Class
 	load: function()
 	{
 		var myRequest = new Request.JSON({
-		    url: 'kanbans/id',
+		    url: 'kanbans/'+this.kanbanID,
 		    method: 'get',
 		    onRequest: function(){
-		    	console.log('loading');
+		        console.log('onRequest');
 		    },
 		    onSuccess: function(json){
-				console.log(json[0]);
-		    },
+		        json.each(function(el){
+		        	console.log(el);
+		        	this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y);
+		        }.bind(this));
+		    }.bind(this),
 		    onFailure: function(){
-		        console.log('failure');
+		        console.log('onFailure');
 		    }
 		});
+
 		myRequest.send();
 	},
 
@@ -174,5 +206,5 @@ var Kanban = new Class
 	{
 		var postStack = new PostStack(this, stack);
 	}
-
+	
 });
