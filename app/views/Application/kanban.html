@@ -3,32 +3,20 @@
 
     <div id="board">
         
-        <div id="space">
-            
-            <div class="note">
-	            <h5>10K</h5>
-	            <p>WaHaHaHaHaHaHaWaHaHaHaHaHaHaWaHaHaHaHaHaHaWaHaHaHaHaHaHa</p>
-	        </div>
-	        
-        </div><!--end of space-->
+        <div id="space"></div>
 
         <div id="board_control">
             <a id="post_stack" href="javascript:"><span>new post</span></a>
         </div>
     
-    </div><!--end of board-->
+    </div>
 
-</div><!--end of kanban-->
+</div>
 
 <script type="text/javascript">
 
     window.addEvent('domready', function()
     {
-        $$('#kanban .note').each(function(drag){
-            new Drag.Move(drag,{
-                container : 'space'
-            })
-        });
         var kanban = new Kanban('space','kid');
         kanban.load();//load notes
         kanban.addStack('post_stack');
