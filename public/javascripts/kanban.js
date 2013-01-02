@@ -63,7 +63,7 @@ var StickyNote = new Class
 	showTextForm: function()
 	{
 		this.sm = new SimpleModal({"btn_ok":"post it"});
-        this.sm.addButton("Action button", "btn primary", function(){
+        this.sm.addButton("post it", "btn primary", function(){
         	this._onTextOK($('text_note_title').value, $('text_note_area').value);
         	this.fireEvent('textOk', this.post_text_el);
         	this.hide();
