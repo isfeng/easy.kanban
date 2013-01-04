@@ -94,7 +94,7 @@ var StickyNote = new Class
 		    data: {'kid':'1', 'title':title, 'note':note},
 		    async: false,
 		    onRequest: function() {
-		        console.log('onRequest');
+//		        console.log('onRequest');
 		    },
 		    onSuccess: function(nid) {
 		       	this.nid = nid;
@@ -184,10 +184,10 @@ var Kanban = new Class
 				    method: 'post',
 				    data: {'nid':el.get('nid'),'x':el.getPosition('space').x, 'y':el.getPosition('space').y},
 				    onRequest: function() {
-						console.log(el.getPosition('space'));
+//						console.log(el.getPosition('space'));
 				    },
 				    onSuccess: function(nid) {
-				       	console.log('onSuccess');
+//				       	console.log('onSuccess');
 				    },
 				    onFailure: function() {
 				        console.log('onFailure');
@@ -218,11 +218,11 @@ var Kanban = new Class
 		    url: 'kanbans/'+this.kanbanID,
 		    method: 'get',
 		    onRequest: function(){
-		        console.log('onRequest');
+//		        console.log('onRequest');
 		    },
 		    onSuccess: function(json){
 		        json.each(function(el){
-		        	console.log(el);
+//		        	console.log(el);
 		        	this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y);
 		        }.bind(this));
 		    }.bind(this),
