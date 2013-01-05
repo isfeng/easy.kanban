@@ -232,11 +232,73 @@ var Kanban = new Class
 		});
 
 		req.send();
+
+		this._loadBackground();
 	},
 
 	addStack: function(stack)
 	{
 		var postStack = new PostStack(this, stack);
-	}
+	},
+
+	_loadNotes: function()
+	{
+
+	},
+
+	_loadBackground: function()
+	{
+		this.canvas = document.getElementById("mycanvas");
+        console.log($('space').getSize());
+        this.canvas.width  = $('space').getSize().x;
+        this.canvas.height = $('space').getSize().y;
+
+        this.stage = new createjs.Stage(this.canvas);
+        this.stage.autoClear = true;
+        this.stage.onMouseDown = function(){
+			this.isMouseDown = true;
+
+	        var s = new createjs.Shape();
+	        this.oldX = this.stage.mouseX;
+	        this.oldY = this.stage.mouseY;
+	        this.oldMidX = this.stage.mouseX;
+	        this.oldMidY = this.stage.mouseY;
+	        var g = s.graphics;
+	        var thickness = 5;
+	        g.setStrokeStyle(thickness + 1, 'round', 'round');
+	        var color = createjs.Graphics.getRGB(0, 0, 0);
+	        g.beginStroke(color);
+	        this.stage.addChild(s);
+	        this.currentShape = s;
+        }.bind(this);
+
+        this.stage.onMouseUp = function(){
+        	this.isMouseDown = false;
+        }.bind(this);
+
+		createjs.Touch.enable(this.stage);
+
+        this.stage.update();
+		createjs.Ticker.addListener(this);
+	},
+
+	tick: function()
+	{
+        if (this.isMouseDown)
+        {
+            var pt = new createjs.Point(this.stage.mouseX, this.stage.mouseY);
+            var midPoint = new createjs.Point(this.oldX + pt.x>>1, this.oldY+pt.y>>1);
+            this.currentShape.graphics.moveTo(midPoint.x, midPoint.y);
+            this.currentShape.graphics.curveTo(this.oldX, this.oldY, this.oldMidX, this.oldMidY);
+
+            this.oldX = pt.x;
+            this.oldY = pt.y;
+
+            this.oldMidX = midPoint.x;
+            this.oldMidY = midPoint.y;
+
+            this.stage.update();
+        }
+    }
 
 });
