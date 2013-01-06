@@ -50,8 +50,9 @@ var StickyNote = new Class
 		onMove: Class.empty
 	},
 
-	initialize:function(options)
+	initialize:function(kid, options)
 	{
+		this.kid = kid;
 		this.setOptions(options);
 	},
 
@@ -64,7 +65,7 @@ var StickyNote = new Class
 	{
 		this.sm = new SimpleModal({"btn_ok":"post it"});
         this.sm.addButton("post it", "btn primary", function(){
-        	this._onTextOK($('text_note_title').value, $('text_note_area').value);
+        	this._onTextOK(this.kid, $('text_note_title').value, $('text_note_area').value);
         	this.fireEvent('textOk', this.post_text_el);
         	this.hide();
         }.bind(this));
@@ -86,26 +87,24 @@ var StickyNote = new Class
 		this.sm.hide();
 	},
 
-	_onTextOK: function(title, note)
+	_onTextOK: function(kid, title, note)
 	{
 		var req = new Request.JSON({
-		    url: 'notes',
+		    url: '/notes',
 		    method: 'post',
-		    data: {'kid':'1', 'title':title, 'note':note},
+		    data: {'id': kid, 'title':title, 'note':note},
 		    async: false,
 		    onRequest: function() {
-//		        console.log('onRequest');
 		    },
 		    onSuccess: function(nid) {
 		       	this.nid = nid;
 		    }.bind(this),
 		    onFailure: function() {
-		        console.log('onFailure');
 		    }
 		});
 
 		req.send();
-		//
+
 		this.title = title;
 		this.note = note;
 		this.post_text_el = Mooml.render('post_tmpl',{'title':title,'note':note,'nid':this.nid});
@@ -146,7 +145,7 @@ var PostStack = new Class
 
 	pull: function()
 	{
-		var stickyNote = new StickyNote({onTextOk: function(el){
+		var stickyNote = new StickyNote(this.kanban.kid, {onTextOk: function(el){
 				this.kanban.stickText(el, 0, 0);
 			}.bind(this)
 		});
@@ -167,9 +166,8 @@ var Kanban = new Class
 
 	initialize:function(container, kid)
 	{
-		this.kid = kid;
 		this.container = container;
-
+		this.kid = kid;
 	},
 
 	stickText: function(textNote, x, y)
@@ -180,17 +178,14 @@ var Kanban = new Class
             onComplete: function()
             {
             	var req = new Request.JSON({
-				    url: 'notes/pos',
+				    url: '/notes/pos',
 				    method: 'post',
-				    data: {'nid':el.get('nid'),'x':el.getPosition('space').x, 'y':el.getPosition('space').y},
+				    data: {'id':el.get('nid'),'x':el.getPosition('space').x, 'y':el.getPosition('space').y},
 				    onRequest: function() {
-//						console.log(el.getPosition('space'));
 				    },
 				    onSuccess: function(nid) {
-//				       	console.log('onSuccess');
 				    },
 				    onFailure: function() {
-				        console.log('onFailure');
 				    }
 				});
 
@@ -214,20 +209,18 @@ var Kanban = new Class
 
 	load: function()
 	{
+		var kid = this.kid;
 		var req = new Request.JSON({
-		    url: 'kanbans/'+this.kanbanID,
+		    url: '/kanbans/'+kid+'/notes',
 		    method: 'get',
 		    onRequest: function(){
-//		        console.log('onRequest');
 		    },
 		    onSuccess: function(json){
 		        json.each(function(el){
-//		        	console.log(el);
 		        	this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y);
 		        }.bind(this));
 		    }.bind(this),
 		    onFailure: function(){
-		        console.log('onFailure');
 		    }
 		});
 
@@ -249,7 +242,6 @@ var Kanban = new Class
 	_loadBackground: function()
 	{
 		this.canvas = document.getElementById("mycanvas");
-        console.log($('space').getSize());
         this.canvas.width  = $('space').getSize().x;
         this.canvas.height = $('space').getSize().y;
 
@@ -274,12 +266,30 @@ var Kanban = new Class
 
         this.stage.onMouseUp = function(){
         	this.isMouseDown = false;
+        	this.saveBackground();
         }.bind(this);
 
 		createjs.Touch.enable(this.stage);
 
         this.stage.update();
 		createjs.Ticker.addListener(this);
+
+		var kid = this.kid;
+		var req = new Request({
+		    url: '/kanbans/'+kid+'/background',
+		    method: 'get',
+		    onRequest: function(){
+		    	console.log('load background');
+		    },
+		    onSuccess: function(txt){
+		        console.log(txt);
+		        var canvas = document.getElementById('mycanvas');
+		        canvas.src = txt;
+		    },
+		    onFailure: function(){
+		    }
+		});
+		req.send();
 	},
 
 	tick: function()
@@ -299,6 +309,25 @@ var Kanban = new Class
 
             this.stage.update();
         }
+    },
+
+    saveBackground: function()
+    {
+    	var dataURL = this.canvas.toDataURL();
+    	var kid = this.kid;
+		var req = new Request({
+		    url: '/kanbans/'+kid+'/background',
+		    data: {'dataURL': dataURL, 'id':kid},
+		    method: 'post',
+		    onRequest: function(){
+		    },
+		    onSuccess: function(txt){
+		        alert(txt);
+		    },
+		    onFailure: function(){
+		    }
+		});
+		req.send();
     }
 
 });

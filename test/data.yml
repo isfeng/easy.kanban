@@ -6,6 +6,7 @@
 #   password: secret
 #   fullname: Bob
 Kanban(kanban1):
+  name: 10K
   goal: 10K
 
 TextNote(note1):
@@ -14,3 +15,7 @@ TextNote(note1):
   y: 100
   title: this is a title
   note: this is some note
+  
+User(tryit):
+  email: tryit@easykanban.com
+  name: tryit

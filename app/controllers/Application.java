@@ -2,61 +2,41 @@ package controllers;
 
 import java.util.List;
 
+import controllers.securesocial.SecureSocial;
+
 import models.Kanban;
 import models.StickyNote;
 import models.TextNote;
 import play.mvc.Controller;
+import play.mvc.With;
+import securesocial.provider.SocialUser;
 
 public class Application extends Controller
 {
 
+	public static void welcome()
+	{
+		SocialUser user = SecureSocial.getCurrentUser();
+		if(user==null)
+			render();
+		else
+			KanbanController.index();
+	}
+
+
+	public static void tryit()
+	{
+		Kanban tryit = Kanban.find("byName", "10K").first();
+		flash.put("tryit", "Y");
+		renderArgs.put("id", tryit.id);
+		render("KanbanController/show.html");
+	}
+
+
 	public static void index()
 	{
-		/*
-		 * SocialUser user = SecureSocial.getCurrentUser();
-		 * System.out.println(user.email);
-		 * System.out.println(user.displayName);
-		 */
 		render();
 	}
 
 
-	public static void kanban(long id)
-	{
-		render();
-	}
-
-
-	public static void load(long id)
-	{
-		// List<TextNote> notes = TextNote.find("byKanban", Kanban.findById(id)).fetch();
-		List<TextNote> notes = TextNote.findAll();
-		renderJSON(notes);
-	}
-
-
-	public static void test()
-	{
-		System.out.println("test");
-		render();
-	}
-
-
-	public static void postNote(long kid, String title, String note)
-	{
-		Kanban k = Kanban.findById(kid);
-		TextNote stickynote = new TextNote(k, title, note);
-		stickynote.save();
-		renderJSON(stickynote.id);
-	}
-
-
-	public static void updateNotePosition(long nid, int x, int y)
-	{
-		TextNote stickynote = TextNote.findById(nid);
-		stickynote.x = x;
-		stickynote.y = y;
-		stickynote.save();
-		renderJSON("OK");
-	}
 }

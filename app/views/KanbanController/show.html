@@ -17,7 +17,7 @@
 
     window.addEvent('domready', function()
     {
-        var kanban = new Kanban('space','kid');
+        var kanban = new Kanban('space','${id}');
         kanban.load();//load notes
         kanban.addStack('post_stack');
 

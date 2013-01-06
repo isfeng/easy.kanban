@@ -20,4 +20,10 @@ public class StickyNote extends Model
 		this.x = x;
 		this.y = y;
 	}
+
+	public StickyNote(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+	}
 }

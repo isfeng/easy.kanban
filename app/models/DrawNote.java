@@ -13,4 +13,11 @@ public class DrawNote extends StickyNote
 		super(kanban, x, y);
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public DrawNote(int x, int y)
+	{
+		super(x, y);
+		// TODO Auto-generated constructor stub
+	}
 }

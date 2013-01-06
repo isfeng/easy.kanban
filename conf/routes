@@ -5,13 +5,19 @@
 *       /auth       							module:securesocial
 
 # Home page
-GET     /                                       Application.index
-GET     /kanban	                            	Application.kanban
-GET     /kanbans/{id}                           Application.load
+GET     /                                       Application.welcome
+GET     /tryit                                  Application.tryit
+GET     /kanbans                                KanbanController.index
+POST    /kanbans                                KanbanController.create
+GET     /kanbans/{id}                           KanbanController.show
+DELETE	/kanbans/{id}                           KanbanController.delete
+GET     /kanbans/{id}/notes                     KanbanController.notes
+GET     /kanbans/{id}/background                KanbanController.getBackground
+POST    /kanbans/{id}/background                KanbanController.setBackground
 
-POST	/notes									Application.postNote
-POST	/notes/pos								Application.updateNotePosition
-DELETE	/notes/{id}								Application.delNote
+POST	/notes									NoteController.create
+POST	/notes/pos								NoteController.updatePosition
+DELETE	/notes/{id}								NoteController.delete
 
 
 GET     /test                                	Application.test

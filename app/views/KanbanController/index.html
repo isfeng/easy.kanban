@@ -1,0 +1,6 @@
+#{extends 'main.html' /}
+<ul>
+#{list items:kanbans, as:'kanban'}
+    <li>${kanban.name} -> ${kanban.goal}</li>
+#{/list}
+</ul>
