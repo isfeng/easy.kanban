@@ -6,11 +6,5 @@
 #   password: secret
 #   fullname: Bob
 Kanban(kanban1):
+  name: 10K
   goal: 10K
-
-TextNote(note1):
-  kanban: kanban1
-  x: 100
-  y: 100
-  title: this is a title
-  note: this is some note
