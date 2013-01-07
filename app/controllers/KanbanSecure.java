@@ -22,41 +22,42 @@ public class KanbanSecure extends Controller
 	@Before(unless = { "login", "authenticate", "authByPost", "logout" })
 	static void checkAccess() throws Throwable
 	{
-		String tryit = flash.get("tryit");
-		if (tryit == null)
+		// String tryit = flash.get("tryit");
+		// if (tryit == null)
+		// {
+		final String userId = session.get("securesocial.user");
+		final String networkId = session.get("securesocial.network");
+		
+		if (userId == null || networkId == null)
 		{
-			final String userId = session.get("securesocial.user");
-			final String networkId = session.get("securesocial.network");
-
-			if (userId == null || networkId == null)
+			final String originalUrl = request.method.equals("GET") ? request.url : "/";
+			flash.put("originalUrl", originalUrl);
+			login();
+		}
+		else
+		{
+			UserId uid = new UserId();
+			uid.id = userId;
+			uid.provider = ProviderType.valueOf(networkId);
+			
+			final SocialUser user = loadCurrentUser(uid);
+			if (user == null)
 			{
-				final String originalUrl = request.method.equals("GET") ? request.url : "/";
-				flash.put("originalUrl", originalUrl);
+				session.remove("securesocial.user");
+				session.remove("securesocial.network");
 				login();
 			}
-			else
-			{
-				UserId uid = new UserId();
-				uid.id = userId;
-				uid.provider = ProviderType.valueOf(networkId);
-
-				final SocialUser user = loadCurrentUser(uid);
-				if (user == null)
-				{
-					session.remove("securesocial.user");
-					session.remove("securesocial.network");
-					login();
-				}
-			}
 		}
-		flash.put("tryit", "Y");
+		// }
+		// else
+		// flash.put("tryit", "Y");
 	}
-
-
+	
+	
 	private static SocialUser loadCurrentUser(UserId userID)
 	{
 		SocialUser user = UserService.find(userID);
-
+		
 		if (user != null)
 		{
 			// if the user is using OAUTH1 or OPENID HYBRID OAUTH set the ServiceInfo
@@ -80,11 +81,11 @@ public class KanbanSecure extends Controller
 		}
 		return user;
 	}
-
-
+	
+	
 	public static void login()
 	{
 		SecureSocial.login();
-
+		
 	}
 }

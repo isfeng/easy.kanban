@@ -17,10 +17,11 @@
 
     window.addEvent('domready', function()
     {
+    	#{if offline}KanbanApp.offline=true;#{/if}
         var kanban = new Kanban('space','${id}');
         kanban.load();//load notes
         kanban.addStack('post_stack');
-
+        
     });
 
 </script>

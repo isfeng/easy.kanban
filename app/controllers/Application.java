@@ -13,30 +13,30 @@ import securesocial.provider.SocialUser;
 
 public class Application extends Controller
 {
-
+	
 	public static void welcome()
 	{
 		SocialUser user = SecureSocial.getCurrentUser();
-		if(user==null)
+		if (user == null)
 			render();
 		else
 			KanbanController.index();
 	}
-
-
+	
+	
 	public static void tryit()
 	{
 		Kanban tryit = Kanban.find("byName", "10K").first();
-		flash.put("tryit", "Y");
+		renderArgs.put("offline", true);
 		renderArgs.put("id", tryit.id);
 		render("KanbanController/show.html");
 	}
-
-
+	
+	
 	public static void index()
 	{
 		render();
 	}
-
-
+	
+	
 }

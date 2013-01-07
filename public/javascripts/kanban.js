@@ -18,6 +18,12 @@ WebFontConfig =
 	s.parentNode.insertBefore(wf, s);
 })();
 
+(function(){
+	this.KanbanApp = {
+			offline: false
+	}
+})();
+
 
 Mooml.register('text_note_tmpl', function() {
     div(
@@ -102,8 +108,9 @@ var StickyNote = new Class
 		    onFailure: function() {
 		    }
 		});
-
-		req.send();
+		
+		if(!KanbanApp.offline)
+			req.send();
 
 		this.title = title;
 		this.note = note;
@@ -161,13 +168,14 @@ var Kanban = new Class
 
 	options:
 	{
-
 	},
 
-	initialize:function(container, kid)
+	initialize:function(container, kid, options)
 	{
 		this.container = container;
 		this.kid = kid;
+		if(options)
+			this.setOptions(options);
 	},
 
 	stickText: function(textNote, x, y)
@@ -183,14 +191,14 @@ var Kanban = new Class
 				    data: {'id':el.get('nid'),'x':el.getPosition('space').x, 'y':el.getPosition('space').y},
 				    onRequest: function() {
 				    },
-				    onSuccess: function(nid) {
+				    onSuccess: function() {
 				    },
 				    onFailure: function() {
 				    }
 				});
 
-				req.send();
-            	//
+            	if(!KanbanApp.offline)
+            		req.send();
             }
         })
 
@@ -223,8 +231,9 @@ var Kanban = new Class
 		    onFailure: function(){
 		    }
 		});
-
-		req.send();
+		
+		if(!KanbanApp.offline)
+			req.send();
 
 		this._loadBackground();
 	},
@@ -240,56 +249,60 @@ var Kanban = new Class
 	},
 
 	_loadBackground: function()
-	{
+ 	{
 		this.canvas = document.getElementById("mycanvas");
-        this.canvas.width  = $('space').getSize().x;
-        this.canvas.height = $('space').getSize().y;
-
-        this.stage = new createjs.Stage(this.canvas);
-        this.stage.autoClear = true;
-        this.stage.onMouseDown = function(){
-			this.isMouseDown = true;
-
-	        var s = new createjs.Shape();
-	        this.oldX = this.stage.mouseX;
-	        this.oldY = this.stage.mouseY;
-	        this.oldMidX = this.stage.mouseX;
-	        this.oldMidY = this.stage.mouseY;
-	        var g = s.graphics;
-	        var thickness = 5;
-	        g.setStrokeStyle(thickness + 1, 'round', 'round');
-	        var color = createjs.Graphics.getRGB(0, 0, 0);
-	        g.beginStroke(color);
-	        this.stage.addChild(s);
-	        this.currentShape = s;
-        }.bind(this);
-
-        this.stage.onMouseUp = function(){
-        	this.isMouseDown = false;
-        	this.saveBackground();
-        }.bind(this);
-
-		createjs.Touch.enable(this.stage);
-
-        this.stage.update();
-		createjs.Ticker.addListener(this);
+		this.canvas.width = $('space').getSize().x;
+		this.canvas.height = $('space').getSize().y;
 
 		var kid = this.kid;
 		var req = new Request({
-		    url: '/kanbans/'+kid+'/background',
-		    method: 'get',
-		    onRequest: function(){
-		    	console.log('load background');
-		    },
-		    onSuccess: function(txt){
-		        console.log(txt);
-		        var canvas = document.getElementById('mycanvas');
-		        canvas.src = txt;
-		    },
-		    onFailure: function(){
-		    }
+			url : '/kanbans/' + kid + '/background',
+			method : 'get',
+			onRequest : function() {
+//				console.log('load background');
+			},
+			onSuccess : function(url) {
+				var image = new Image();
+				image.src = url;
+				image.onload = function() {
+					document.getElementById("mycanvas").getContext('2d').drawImage(image, 0, 0);
+				}
+			},
+			onFailure : function() {
+			}
 		});
-		req.send();
+
+		if(!KanbanApp.offline)
+			req.send();
+
+		this.stage = new createjs.Stage(this.canvas);
+		this.stage.autoClear = false;
+		this.stage.onMouseDown = function() 
+		{
+			this.isMouseDown = true;
+			var s = new createjs.Shape();
+			this.oldX = this.stage.mouseX;
+			this.oldY = this.stage.mouseY;
+			this.oldMidX = this.stage.mouseX;
+			this.oldMidY = this.stage.mouseY;
+			var g = s.graphics;
+			var thickness = 3;
+			g.setStrokeStyle(thickness, 'round', 'round');
+			var color = createjs.Graphics.getRGB(0, 0, 0);
+			g.beginStroke(color);
+			this.stage.addChild(s);
+			this.currentShape = s;
+		}.bind(this);
+
+		this.stage.onMouseUp = function() {
+			this.isMouseDown = false;
+			this.saveBackground();
+		}.bind(this);
+
+		// createjs.Touch.enable(this.stage);
+
+		this.stage.update();
+		createjs.Ticker.addListener(this);
 	},
 
 	tick: function()
@@ -313,21 +326,29 @@ var Kanban = new Class
 
     saveBackground: function()
     {
-    	var dataURL = this.canvas.toDataURL();
+    	var dataURL = this.stage.toDataURL();
     	var kid = this.kid;
-		var req = new Request({
+		var req = new Request.JSON({
 		    url: '/kanbans/'+kid+'/background',
 		    data: {'dataURL': dataURL, 'id':kid},
 		    method: 'post',
 		    onRequest: function(){
 		    },
-		    onSuccess: function(txt){
-		        alert(txt);
+		    onSuccess: function(json){
+		        //alert(txt);
 		    },
 		    onFailure: function(){
 		    }
 		});
-		req.send();
+
+		if(!KanbanApp.offline)
+			req.send();
+			
+    },
+    
+    offline: function()
+    {
+    	this.options.offline = true;
     }
 
 });

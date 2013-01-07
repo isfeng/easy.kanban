@@ -9,6 +9,7 @@ GET     /                                       Application.welcome
 GET     /tryit                                  Application.tryit
 GET     /kanbans                                KanbanController.index
 POST    /kanbans                                KanbanController.create
+GET     /kanbans/new                          	KanbanController._new
 GET     /kanbans/{id}                           KanbanController.show
 DELETE	/kanbans/{id}                           KanbanController.delete
 GET     /kanbans/{id}/notes                     KanbanController.notes

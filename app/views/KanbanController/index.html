@@ -1,6 +1,23 @@
 #{extends 'main.html' /}
+
+<div class="page-header">
+	<h2>
+		<img src="${user.avatarUrl}" width="40px" height="40px" />Welcome ${user.displayName}
+	</h2>
+</div>
+<div class="clearfix">
+	<h2>User details</h2>
+	<ul>
+		<li>User id: ${user.id.id}</li>
+		<li>Logged in from: ${user.id.provider}</li>
+		<li>Email: ${user.email}</li>
+	</ul>
+</div>
+
 <ul>
 #{list items:kanbans, as:'kanban'}
-    <li>${kanban.name} -> ${kanban.goal}</li>
+    <li>${kanban.name} -> ${kanban.goal}  <a href="/kanbans/${kanban.id}">start kanban</a></li>
 #{/list}
 </ul>
+
+<a href="/kanbans/new"><span>new kanban</span></a>

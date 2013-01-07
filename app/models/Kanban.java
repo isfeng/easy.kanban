@@ -12,9 +12,9 @@ public class Kanban extends Model
 	public String goal;
 	public String name;
 	@Column(length = 65535)
-	public String background;
-
+	public String background = "";
+	
 	@ManyToOne
 	public User user;
-
+	
 }
