@@ -5,7 +5,7 @@
 /* line 9, ../../sass/kanban.scss */
 #board {
   position: relative;
-  background-image: url('/public/images/SB690_box_full.jpg?1356320109');
+  background-image: url('/public/images/SB690_box_full.jpg?1356444760');
   height: 759px;
   width: 1298px;
 }
@@ -23,7 +23,7 @@
   position: absolute;
   margin-top: 684px;
   margin-left: 865.33333px;
-  background-image: url('/public/images/images-16.jpeg?1356337829');
+  background-image: url('/public/images/images-16.jpeg?1356444760');
 }
 /* line 25, ../../sass/kanban.scss */
 #board_control a#post_stack {
@@ -31,12 +31,12 @@
   height: 50px;
   width: 50px;
 }
-/* line 30, ../../sass/kanban.scss */
-#board_control a span {
+/* line 29, ../../sass/kanban.scss */
+#board_control a#post_stack span {
   display: none;
 }
 
-/* line 36, ../../sass/kanban.scss */
+/* line 37, ../../sass/kanban.scss */
 .note {
   cursor: move;
   word-wrap: break-word;
@@ -44,18 +44,18 @@
   width: 150px;
   background: yellow;
 }
-/* line 42, ../../sass/kanban.scss */
+/* line 43, ../../sass/kanban.scss */
 .note h5 {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Shadows Into Light", cursive;
   font-weight: bold;
 }
-/* line 46, ../../sass/kanban.scss */
+/* line 47, ../../sass/kanban.scss */
 .note p {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Shadows Into Light", cursive;
   margin: 5px 1px 5px 1px;
 }
 
-/* line 52, ../../sass/kanban.scss */
+/* line 53, ../../sass/kanban.scss */
 #text_note_form {
   width: 95%;
 }

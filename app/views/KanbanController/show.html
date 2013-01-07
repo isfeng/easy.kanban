@@ -1,17 +1,15 @@
 #{extends 'main.html' /}
 <div id="kanban">
-
     <div id="board">
-
         <div id="space"><canvas id="mycanvas"></canvas></div>
 
         <div id="board_control">
             <a id="post_stack" href="javascript:"><span>new post</span></a>
+            <a id="eraser" href="javascript:"><span>eraser</span></a>
         </div>
-
     </div>
-
 </div>
+
 
 <script type="text/javascript">
 
@@ -21,7 +19,7 @@
         var kanban = new Kanban('space','${id}');
         kanban.load();//load notes
         kanban.addStack('post_stack');
-        
+		kanban.addEraser('eraser');
     });
 
 </script>

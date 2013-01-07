@@ -25,11 +25,12 @@
         &#post_stack {
             display: block;
             height: 50px;
-            width: 50px;    
+            width: 50px;
+            span {
+            	display: none;
+        	}
         }
-        span {
-            display: none;    
-        }
+
     }
 }
 
@@ -55,7 +56,7 @@
 
     }
     #text_note_area{
-        
+
     }
 }
 

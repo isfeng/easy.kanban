@@ -108,7 +108,7 @@ var StickyNote = new Class
 		    onFailure: function() {
 		    }
 		});
-		
+
 		if(!KanbanApp.offline)
 			req.send();
 
@@ -174,8 +174,14 @@ var Kanban = new Class
 	{
 		this.container = container;
 		this.kid = kid;
-		if(options)
-			this.setOptions(options);
+		this.setOptions(options);
+
+		this.canvas = document.getElementById("mycanvas");
+		this.canvas.width = $('space').getSize().x;
+		this.canvas.height = $('space').getSize().y;
+		this.context = this.canvas.getContext('2d');
+
+		this.thickness = 2;
 	},
 
 	stickText: function(textNote, x, y)
@@ -231,7 +237,7 @@ var Kanban = new Class
 		    onFailure: function(){
 		    }
 		});
-		
+
 		if(!KanbanApp.offline)
 			req.send();
 
@@ -250,10 +256,6 @@ var Kanban = new Class
 
 	_loadBackground: function()
  	{
-		this.canvas = document.getElementById("mycanvas");
-		this.canvas.width = $('space').getSize().x;
-		this.canvas.height = $('space').getSize().y;
-
 		var kid = this.kid;
 		var req = new Request({
 			url : '/kanbans/' + kid + '/background',
@@ -277,7 +279,7 @@ var Kanban = new Class
 
 		this.stage = new createjs.Stage(this.canvas);
 		this.stage.autoClear = false;
-		this.stage.onMouseDown = function() 
+		this.stage.onMouseDown = function()
 		{
 			this.isMouseDown = true;
 			var s = new createjs.Shape();
@@ -286,8 +288,8 @@ var Kanban = new Class
 			this.oldMidX = this.stage.mouseX;
 			this.oldMidY = this.stage.mouseY;
 			var g = s.graphics;
-			var thickness = 3;
-			g.setStrokeStyle(thickness, 'round', 'round');
+//			this.thickness = 2;
+			g.setStrokeStyle(this.thickness+1, 'round', 'round');
 			var color = createjs.Graphics.getRGB(0, 0, 0);
 			g.beginStroke(color);
 			this.stage.addChild(s);
@@ -343,12 +345,16 @@ var Kanban = new Class
 
 		if(!KanbanApp.offline)
 			req.send();
-			
+
     },
-    
-    offline: function()
+
+    addEraser: function(eraser)
     {
-    	this.options.offline = true;
+		$(eraser).addEvent("click", function(){
+			this.context.globalCompositeOperation  = 'destination-out';
+			this.thickness = 20;
+		}.bind(this));
     }
+
 
 });
