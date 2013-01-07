@@ -1,11 +1,13 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import play.db.jpa.Model;
 import securesocial.provider.ProviderType;
 
 @Entity
+@Table(name="kanban_user")
 public class User extends Model
 {
 	public String email;
