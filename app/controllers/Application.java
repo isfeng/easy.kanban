@@ -31,12 +31,6 @@ public class Application extends Controller
 		renderArgs.put("id", tryit.id);
 		render("KanbanController/show.html");
 	}
-	
-	
-	public static void index()
-	{
-		render();
-	}
-	
+
 	
 }
