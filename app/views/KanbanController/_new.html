@@ -1,7 +1,24 @@
-<form id="" action="/kanbans" method="POST">
-    <label>Name: </label>
-    <label><input type="text" name="name" placeholder="kanban name"/></label>
-    <label>Goal: </label>
-    <label><input type="text" name="goal" placeholder="kanban goal"/></label>
-    <input type="submit" value="OK"/>
-</form>
+#{extends 'main.html' /}
+
+<div class="row">
+	<div class="twelve columns">
+		<form id="" action="/kanbans" method="POST">
+			<fieldset>
+			    <legend>Create New Kanban</legend>
+			    <label>Name: </label>
+			    #{ifErrors}
+			    <div class="alert-box secondary">#{error 'name' /}</div>
+			    #{/ifErrors}
+			    <input type="text" name="name" placeholder="kanban name"/>
+			    <label>Goal: </label>
+			    #{ifErrors}
+			    <div class="alert-box secondary">#{error 'goal' /}</div>
+			    #{/ifErrors}
+			    <input type="text" name="goal" placeholder="kanban goal"/>
+			    <label>Value Stream: (optional)</label>
+			    <input type="text" name="values" placeholder="seperate by comma[,]"/>
+			    <input type="submit" value="OK" class="small button"/>
+		    </fieldset>
+		</form>
+	</div>
+</div>

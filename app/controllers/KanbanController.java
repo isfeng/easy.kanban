@@ -7,6 +7,8 @@ import controllers.securesocial.SecureSocial;
 import models.Kanban;
 import models.TextNote;
 import models.User;
+import models.ValueStream;
+import play.data.validation.Required;
 import play.mvc.Controller;
 import play.mvc.With;
 import securesocial.provider.SocialUser;
@@ -21,8 +23,15 @@ public class KanbanController extends Controller
 	}
 
 
-	public static void create(String name, String goal)
+	public static void create(@Required String name, @Required String goal, String values)
 	{
+		if (validation.hasErrors())
+		{
+			params.flash(); // add http parameters to the flash scope
+			validation.keep(); // keep the errors for the next request
+			_new();
+		}
+
 		SocialUser socialUser = SecureSocial.getCurrentUser();
 		User _user = User.find("byEmail", socialUser.email).first();
 
@@ -30,6 +39,36 @@ public class KanbanController extends Controller
 		k.name = name;
 		k.goal = goal;
 		k.user = _user;
+		k.save();
+
+		if (values != null && !values.equals(""))
+		{
+			String valuearr[] = values.split(",");
+			for (String v : valuearr)
+			{
+				ValueStream value = new ValueStream(v);
+				value.save();
+			}
+		}
+
+		index();
+	}
+
+
+	/**
+	 * cant update value stream currently
+	 * @param id
+	 * @param name
+	 * @param goal
+	 */
+	public static void update(long id, String name, String goal)
+	{
+		SocialUser socialUser = SecureSocial.getCurrentUser();
+		User _user = User.find("byEmail", socialUser.email).first();
+
+		Kanban k = Kanban.findById(id);
+		k.name = name;
+		k.goal = goal;
 		k.save();
 
 		index();
@@ -80,5 +119,12 @@ public class KanbanController extends Controller
 	public static void _new()
 	{
 		render();
+	}
+
+
+	public static void _update(long id)
+	{
+		Kanban kanban = Kanban.findById(id);
+		render(kanban);
 	}
 }

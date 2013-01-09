@@ -8,10 +8,14 @@ import play.db.jpa.Model;
 @Entity
 public class StickyNote extends Model
 {
-	@ManyToOne
-	public Kanban kanban;
 	public int x;
 	public int y;
+
+	@ManyToOne
+	public Kanban kanban;
+	@ManyToOne
+	public ValueStream value;
+
 
 
 	public StickyNote(Kanban kanban, int x, int y)
@@ -21,9 +25,4 @@ public class StickyNote extends Model
 		this.y = y;
 	}
 
-	public StickyNote(int x, int y)
-	{
-		this.x = x;
-		this.y = y;
-	}
 }

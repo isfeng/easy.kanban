@@ -1,0 +1,17 @@
+#{extends 'main.html' /}
+
+<div class="row">
+	<div class="twelve columns">
+		<form id="" action="/kanbans/${kanban.id}/edit" method="POST">
+			<input type="hidden" name="id" value="${kanban.id}"/>
+			<fieldset>
+			    <legend>Create New Kanban</legend>
+			    <label>Name: </label>
+			    <input type="text" name="name" placeholder="kanban name" value="${kanban.name}"/>
+			    <label>Goal: </label>
+			    <input type="text" name="goal" placeholder="kanban goal" value="${kanban.goal}"/>
+			    <input type="submit" value="OK" class="small button"/>
+		    </fieldset>
+		</form>
+	</div>
+</div>

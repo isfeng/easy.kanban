@@ -24,7 +24,7 @@
 @import "foundation/mixins/semantic-grid";
 
 @import "modular-scale";
-// @import "foundation/common/globals";
+@import "foundation/common/globals";
 
 // Must include the grid for any responsiveness
 
@@ -37,11 +37,11 @@
 
 // Control which components you get if customizing
 
-// @import "foundation/components/modules/buttons";
-// @import "foundation/components/modules/tabs";
-// @import "foundation/components/modules/ui";
-// @import "foundation/components/modules/topbar";
-// @import "foundation/components/modules/navbar";
+@import "foundation/components/modules/buttons";
+@import "foundation/components/modules/tabs";
+@import "foundation/components/modules/ui";
+@import "foundation/components/modules/topbar";
+@import "foundation/components/modules/navbar";
 // @import "foundation/components/modules/orbit";
 // @import "foundation/components/modules/reveal";
 // @import "foundation/components/modules/offcanvas";

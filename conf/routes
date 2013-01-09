@@ -13,6 +13,8 @@ GET     /kanbans/new                          	KanbanController._new
 GET     /kanbans/{id}                           KanbanController.show
 DELETE	/kanbans/{id}                           KanbanController.delete
 GET     /kanbans/{id}/notes                     KanbanController.notes
+GET     /kanbans/{id}/edit                      KanbanController._edit
+POST    /kanbans/{id}/edit                      KanbanController.update
 GET     /kanbans/{id}/background                KanbanController.getBackground
 POST    /kanbans/{id}/background                KanbanController.setBackground
 

@@ -1,5 +1,5 @@
 /*
-     main kanban style 
+     main kanban style
 */
 
 @import "compass/css3";
@@ -71,6 +71,7 @@
     margin: auto;
     width: 150px;
     background: yellow;
+    border: 1px solid gray;
     h5 {
         font-family: 'Shadows Into Light', cursive;
         font-weight: bold;

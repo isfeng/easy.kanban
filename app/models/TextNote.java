@@ -23,14 +23,6 @@ public class TextNote extends StickyNote
 	}
 
 
-	public TextNote(String title, String note)
-	{
-		super(0, 0);
-		this.title = title;
-		this.note = note;
-	}
-
-
 	public String title;
 	public String note;
 }

@@ -16,8 +16,8 @@ public class Kanban extends Model
 	public String name;
 	@Lob
 	public String background = "";
-	
+
 	@ManyToOne
 	public User user;
-	
+
 }

@@ -259,7 +259,7 @@ var Kanban = new Class
  	{
 		this.stage = new createjs.Stage(this.canvas);
 		this.stage.autoClear = false;
-		
+
 		var kid = this.kid;
 		var req = new Request({
 			url : '/kanbans/' + kid + '/background',
@@ -282,7 +282,7 @@ var Kanban = new Class
 
 		if(!KanbanApp.offline)
 			req.send();
-		
+
 		this.stage.onMouseDown = function()
 		{
 			this.isMouseDown = true;
@@ -309,7 +309,7 @@ var Kanban = new Class
 				this.oldMidX = this.stage.mouseX;
 				this.oldMidY = this.stage.mouseY;
 				var g = s.graphics;
-				var eraser_thickness = 20;
+				var eraser_thickness = 35;
 				g.setStrokeStyle(eraser_thickness, 'round', 'round');
 				var color = createjs.Graphics.getRGB(0, 0, 0);
 				g.beginStroke(color);
@@ -395,7 +395,7 @@ var Kanban = new Class
 			this.draw = false;
 		}.bind(this));
     },
-    
+
     addPen: function(pen)
     {
     	$(pen).addEvent("click", function(){

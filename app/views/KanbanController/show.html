@@ -19,7 +19,7 @@
     {
     	#{if offline}KanbanApp.offline=true;#{/if}
         var kanban = new Kanban('space','${id}');
-        kanban.load();//load notes
+        kanban.load();//load notes & back;
         kanban.addStack('post_stack_yellow');
         kanban.addStack('post_stack_pink');
         kanban.addPen('black_pen');
