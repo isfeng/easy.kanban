@@ -182,6 +182,7 @@ var Kanban = new Class
 		this.context = this.canvas.getContext('2d');
 
 		this.thickness = 2;
+		this.draw = true;
 	},
 
 	stickText: function(textNote, x, y)
@@ -256,6 +257,9 @@ var Kanban = new Class
 
 	_loadBackground: function()
  	{
+		this.stage = new createjs.Stage(this.canvas);
+		this.stage.autoClear = false;
+		
 		var kid = this.kid;
 		var req = new Request({
 			url : '/kanbans/' + kid + '/background',
@@ -267,33 +271,52 @@ var Kanban = new Class
 				var image = new Image();
 				image.src = url;
 				image.onload = function() {
-					document.getElementById("mycanvas").getContext('2d').drawImage(image, 0, 0);
-				}
-			},
+					var bm = new createjs.Bitmap(image);
+					this.stage.addChild(bm);
+					this.stage.update();
+				}.bind(this);
+			}.bind(this),
 			onFailure : function() {
 			}
 		});
 
 		if(!KanbanApp.offline)
 			req.send();
-
-		this.stage = new createjs.Stage(this.canvas);
-		this.stage.autoClear = false;
+		
 		this.stage.onMouseDown = function()
 		{
 			this.isMouseDown = true;
-			var s = new createjs.Shape();
-			this.oldX = this.stage.mouseX;
-			this.oldY = this.stage.mouseY;
-			this.oldMidX = this.stage.mouseX;
-			this.oldMidY = this.stage.mouseY;
-			var g = s.graphics;
-//			this.thickness = 2;
-			g.setStrokeStyle(this.thickness+1, 'round', 'round');
-			var color = createjs.Graphics.getRGB(0, 0, 0);
-			g.beginStroke(color);
-			this.stage.addChild(s);
-			this.currentShape = s;
+			if(this.draw)
+			{
+				var s = new createjs.Shape();
+				this.oldX = this.stage.mouseX;
+				this.oldY = this.stage.mouseY;
+				this.oldMidX = this.stage.mouseX;
+				this.oldMidY = this.stage.mouseY;
+				var g = s.graphics;
+//				this.thickness = 2;
+				g.setStrokeStyle(this.thickness+1, 'round', 'round');
+				var color = createjs.Graphics.getRGB(0, 0, 0);
+				g.beginStroke(color);
+				this.stage.addChild(s);
+				this.currentDrawShape = s;
+			}
+			else
+			{
+				var s = new createjs.Shape();
+				this.oldX = this.stage.mouseX;
+				this.oldY = this.stage.mouseY;
+				this.oldMidX = this.stage.mouseX;
+				this.oldMidY = this.stage.mouseY;
+				var g = s.graphics;
+				var eraser_thickness = 20;
+				g.setStrokeStyle(eraser_thickness, 'round', 'round');
+				var color = createjs.Graphics.getRGB(0, 0, 0);
+				g.beginStroke(color);
+				this.stage.addChild(s);
+				s.compositeOperation = "destination-out";
+				this.currentEraserShape = s;
+			}
 		}.bind(this);
 
 		this.stage.onMouseUp = function() {
@@ -311,18 +334,36 @@ var Kanban = new Class
 	{
         if (this.isMouseDown)
         {
-            var pt = new createjs.Point(this.stage.mouseX, this.stage.mouseY);
-            var midPoint = new createjs.Point(this.oldX + pt.x>>1, this.oldY+pt.y>>1);
-            this.currentShape.graphics.moveTo(midPoint.x, midPoint.y);
-            this.currentShape.graphics.curveTo(this.oldX, this.oldY, this.oldMidX, this.oldMidY);
+        	if(this.draw)
+        	{
+        		var pt = new createjs.Point(this.stage.mouseX, this.stage.mouseY);
+                var midPoint = new createjs.Point(this.oldX + pt.x>>1, this.oldY+pt.y>>1);
+                this.currentDrawShape.graphics.moveTo(midPoint.x, midPoint.y);
+                this.currentDrawShape.graphics.curveTo(this.oldX, this.oldY, this.oldMidX, this.oldMidY);
 
-            this.oldX = pt.x;
-            this.oldY = pt.y;
+                this.oldX = pt.x;
+                this.oldY = pt.y;
 
-            this.oldMidX = midPoint.x;
-            this.oldMidY = midPoint.y;
+                this.oldMidX = midPoint.x;
+                this.oldMidY = midPoint.y;
 
-            this.stage.update();
+                this.stage.update();
+        	}
+        	else
+        	{
+        		var pt = new createjs.Point(this.stage.mouseX, this.stage.mouseY);
+                var midPoint = new createjs.Point(this.oldX + pt.x>>1, this.oldY+pt.y>>1);
+                this.currentEraserShape.graphics.moveTo(midPoint.x, midPoint.y);
+                this.currentEraserShape.graphics.curveTo(this.oldX, this.oldY, this.oldMidX, this.oldMidY);
+
+                this.oldX = pt.x;
+                this.oldY = pt.y;
+
+                this.oldMidX = midPoint.x;
+                this.oldMidY = midPoint.y;
+
+                this.stage.update();
+        	}
         }
     },
 
@@ -351,8 +392,7 @@ var Kanban = new Class
     addEraser: function(eraser)
     {
 		$(eraser).addEvent("click", function(){
-			this.context.globalCompositeOperation  = 'destination-out';
-			this.thickness = 20;
+			this.draw = false;
 		}.bind(this));
     }
 
