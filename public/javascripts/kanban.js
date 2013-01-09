@@ -394,7 +394,13 @@ var Kanban = new Class
 		$(eraser).addEvent("click", function(){
 			this.draw = false;
 		}.bind(this));
+    },
+    
+    addPen: function(pen)
+    {
+    	$(pen).addEvent("click", function(){
+			this.draw = true;
+		}.bind(this));
     }
-
 
 });

@@ -1,10 +1,14 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/*
+     main kanban style 
+*/
+
 @import "compass/css3";
 @import "compass/layout";
 @import "animate";
+
+#mycanvas {
+    cursor: crosshair;
+}
 
 #board {
     position: relative;
@@ -19,10 +23,11 @@
 #board_control {
     position: absolute;
     margin-top: (image-height("SB690_box_full.jpg")+-100);
-    margin-left: image-width("SB690_box_full.jpg")/1.5;
-    background-image: image-url("images-16.jpeg");
+    margin-left: image-width("SB690_box_full.jpg")/2+50;
     a {
-        &#post_stack {
+        float:right;
+        &#post_stack_yellow {
+            background-image: image-url("297352.jpg");
             display: block;
             height: 50px;
             width: 50px;
@@ -30,7 +35,33 @@
             	display: none;
         	}
         }
-
+        &#post_stack_pink {
+            background-image: image-url("51tj3dkukJL._SL75_SS50_.jpg");
+            display: block;
+            height: 50px;
+            width: 50px;
+            span {
+                display: none;
+            }
+        }
+        &#black_pen {
+            background-image: image-url("rBEDik_xR_IIAAAAAADkfYPLXFkAADluQOmzsYAAOSV253.jpg");
+            display: block;
+            height: 50px;
+            width: 50px;
+            span {
+                display: none;
+            }
+        }
+        &#eraser {
+            background-image: image-url("41b20q-NztL._SL75_SS50_.jpg");
+            display: block;
+            height: 50px;
+            width: 50px;
+            span {
+                display: none;
+            }
+        }
     }
 }
 

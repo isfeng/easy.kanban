@@ -3,8 +3,10 @@
     <div id="board">
         <div id="space"><canvas id="mycanvas"></canvas></div>
 
-        <div id="board_control">
-            <a id="post_stack" href="javascript:"><span>new post</span></a>
+        <div id="board_control" >
+            <a id="post_stack_yellow" href="javascript:"><span>yellow post</span></a>
+            <a id="post_stack_pink" href="javascript:"><span>pink post</span></a>
+            <a id="black_pen" href="javascript:"><span>pen</span></a>
             <a id="eraser" href="javascript:"><span>eraser</span></a>
         </div>
     </div>
@@ -18,7 +20,9 @@
     	#{if offline}KanbanApp.offline=true;#{/if}
         var kanban = new Kanban('space','${id}');
         kanban.load();//load notes
-        kanban.addStack('post_stack');
+        kanban.addStack('post_stack_yellow');
+        kanban.addStack('post_stack_pink');
+        kanban.addPen('black_pen');
 		kanban.addEraser('eraser');
     });
 
