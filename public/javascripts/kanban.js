@@ -261,20 +261,43 @@ var Kanban = new Class
 		this.stage.autoClear = false;
 
 		var kid = this.kid;
-		var req = new Request({
+		var req = new Request.JSON({
 			url : '/kanbans/' + kid + '/background',
 			method : 'get',
 			onRequest : function() {
 //				console.log('load background');
 			},
-			onSuccess : function(url) {
+			onSuccess : function(json) {
+				console.log(json);
 				var image = new Image();
-				image.src = url;
+				image.src = json.background;
 				image.onload = function() {
 					var bm = new createjs.Bitmap(image);
 					this.stage.addChild(bm);
 					this.stage.update();
 				}.bind(this);
+				
+				var value_stream = json.stream;
+				var space_width = $('space').getSize().x;
+				console.log(space_width);
+		    	var value_size = value_stream.length;
+		    	console.log(value_size);
+		    	var value_width = space_width/value_size;
+		    	console.log(value_width);
+		    	var current_x =0;
+		    	value_stream.each(function(el){
+		    		console.log(current_x);
+		        	//display text
+		    		var value_center = (current_x + (current_x+value_width))/2;
+		    		console.log(value_center);
+		    		current_x+=value_width;
+		    		var a_value = new createjs.Text(el.value, 'bold 36px Arial');
+		    		a_value.x = value_center;
+		    		a_value.y = 25;
+		    		this.stage.addChild(a_value);
+		    		this.stage.update();
+		        }.bind(this));
+				
 			}.bind(this),
 			onFailure : function() {
 			}
@@ -329,7 +352,7 @@ var Kanban = new Class
 		this.stage.update();
 		createjs.Ticker.addListener(this);
 	},
-
+	
 	tick: function()
 	{
         if (this.isMouseDown)

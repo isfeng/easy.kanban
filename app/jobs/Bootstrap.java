@@ -25,7 +25,10 @@ public class Bootstrap extends Job<Void>
 		{
 			Logger.debug("test mode", "");
 			if (Kanban.count() == 0)
+			{
+				Fixtures.delete();
 				Fixtures.loadModels("data.yml");
+			}
 		}
 		
 	}
