@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import models.Kanban;
+import models.StickyNote;
 import models.TextNote;
 import models.User;
 import models.ValueStream;
@@ -78,6 +79,8 @@ public class KanbanController extends Controller
 	public static void delete(long id)
 	{
 		Kanban k = Kanban.findById(id);
+		TextNote.delete("kanban", k);
+		ValueStream.delete("kanban=?", k);
 		k.delete();
 		renderJSON("OK");
 	}

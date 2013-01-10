@@ -1,12 +1,12 @@
 #{extends 'main.html' /}
 
-<div class="page-header">
-	<h2>
-		<img src="${user.avatarUrl}" width="40px" height="40px" />Welcome ${user.displayName}
-	</h2>
+<div class="row">
+    <h4>
+		Welcome ${user.displayName}
+	</h4>
 </div>
-<div class="clearfix">
-	<h2>User details</h2>
+<div class="row">
+	<h3>User details</h3>
 	<ul>
 		<li>User id: ${user.id.id}</li>
 		<li>Logged in from: ${user.id.provider}</li>
@@ -14,10 +14,24 @@
 	</ul>
 </div>
 
+<div class="row">
+<h3>Kanban List</h3>
 <ul>
 #{list items:kanbans, as:'kanban'}
-    <li>${kanban.name} -> ${kanban.goal}  <a href="/kanbans/${kanban.id}">start kanban</a></li>
+    <li><a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a> <input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/></li>
 #{/list}
 </ul>
+</div>
 
+<div class="row">
 <a href="/kanbans/new"><span>new kanban</span></a>
+</div>
+
+<script type="text/javascript">
+
+    function deleteKanban(kid)
+    {
+        new Delete('/kanbans').action(kid);
+    }
+    
+</script>

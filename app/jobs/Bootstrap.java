@@ -1,7 +1,6 @@
 package jobs;
 
 import models.Kanban;
-import models.User;
 import play.Logger;
 import play.Play;
 import play.jobs.Job;

@@ -1,9 +1,5 @@
 package controllers;
 
-import java.util.Collection;
-
-import controllers.securesocial.SecureSocial;
-
 import play.libs.OAuth;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -16,6 +12,7 @@ import securesocial.provider.ProviderType;
 import securesocial.provider.SocialUser;
 import securesocial.provider.UserId;
 import securesocial.provider.UserService;
+import controllers.securesocial.SecureSocial;
 
 public class KanbanSecure extends Controller
 {

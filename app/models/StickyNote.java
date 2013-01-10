@@ -1,11 +1,11 @@
 package models;
 
-import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
 import play.db.jpa.Model;
 
-@Entity
+@MappedSuperclass
 public class StickyNote extends Model
 {
 	public int x;

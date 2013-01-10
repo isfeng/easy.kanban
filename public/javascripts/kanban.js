@@ -24,6 +24,25 @@ WebFontConfig =
 	}
 })();
 
+var Delete = new Class
+({
+	initialize:function(route)
+	{
+		this.route = route;
+	},
+
+
+	action: function(id)
+	{
+		var f = new Element('form', {
+		    action: this.route+'/'+id+'?x-http-method-override=DELETE',
+		    method: 'POST',
+		    'accept-charset': 'utf-8',
+		    enctype: 'application/x-www-form-urlencoded'
+		});
+		f.submit();
+	}
+});
 
 Mooml.register('text_note_tmpl', function() {
     div(
@@ -38,7 +57,7 @@ Mooml.register('text_note_tmpl', function() {
 
 Mooml.register('post_tmpl', function(note) {
     div({'class':'note', 'nid':note.nid},
-        h6(note.title),
+        h5(note.title),
         p(note.note)
     );
 });
@@ -291,9 +310,9 @@ var Kanban = new Class
 		    		var value_center = (current_x + (current_x+value_width))/2;
 		    		console.log(value_center);
 		    		current_x+=value_width;
-		    		var a_value = new createjs.Text(el.value, 'bold 36px Arial');
+		    		var a_value = new createjs.Text(el.value, 'bold 36px Shadows Into Light');
 		    		a_value.x = value_center;
-		    		a_value.y = 25;
+		    		a_value.y = 10;
 		    		this.stage.addChild(a_value);
 		    		this.stage.update();
 		        }.bind(this));

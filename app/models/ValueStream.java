@@ -9,7 +9,8 @@ import play.db.jpa.Model;
 public class ValueStream extends Model
 {
 	public String value;
-	public int _order;
+	public int start;
+	public int end;
 	
 	@ManyToOne
 	public Kanban kanban;
