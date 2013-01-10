@@ -295,7 +295,7 @@ var Kanban = new Class
 					this.stage.addChild(bm);
 					this.stage.update();
 				}.bind(this);
-				
+
 				var value_stream = json.stream;
 				var space_width = $('space').getSize().x;
 				console.log(space_width);
@@ -303,20 +303,32 @@ var Kanban = new Class
 		    	console.log(value_size);
 		    	var value_width = space_width/value_size;
 		    	console.log(value_width);
-		    	var current_x =0;
+		    	var current_x = 0;
 		    	value_stream.each(function(el){
 		    		console.log(current_x);
 		        	//display text
 		    		var value_center = (current_x + (current_x+value_width))/2;
 		    		console.log(value_center);
-		    		current_x+=value_width;
 		    		var a_value = new createjs.Text(el.value, 'bold 36px Shadows Into Light');
 		    		a_value.x = value_center;
 		    		a_value.y = 10;
 		    		this.stage.addChild(a_value);
+
+		    		//draw line
+		    		if(current_x!=0)
+		    		{
+			    		var s = new createjs.Shape();
+			    		var g = s.graphics;
+			    		g.setStrokeStyle(2, 'round', 'round');
+			    		g.beginStroke("GRAY");
+			    		g.moveTo(current_x, 50);
+			    		g.lineTo(current_x, $('space').getSize().y-20);
+			    		this.stage.addChild(s);
+		    		}
 		    		this.stage.update();
+		    		current_x+=value_width;
 		        }.bind(this));
-				
+
 			}.bind(this),
 			onFailure : function() {
 			}
@@ -371,7 +383,7 @@ var Kanban = new Class
 		this.stage.update();
 		createjs.Ticker.addListener(this);
 	},
-	
+
 	tick: function()
 	{
         if (this.isMouseDown)
