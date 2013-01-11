@@ -13,10 +13,18 @@
 #board {
     position: relative;
     background-image: image-url("SB690_box_full.jpg");
-    height: image-height("SB690_box_full.jpg")+-25 ;
+    height: image-height("SB690_box_full.jpg");
     width: image-width("SB690_box_full.jpg");
     #space {
-        @include stretch(50px, 80px, 65px, 65px);
+        @include stretch(50px, 80px, 85px, 65px);
+    }
+    div.trashcan {
+        left: 50px; 
+        top: 600px; 
+        position: absolute;
+        background-image: image-url("trash_recyclebin_empty_closed.png");
+        height: image-height("trash_recyclebin_empty_closed.png");
+        width: image-width("trash_recyclebin_empty_closed.png");
     }
 }
 
@@ -71,7 +79,6 @@
     margin: auto;
     width: 150px;
     background: yellow;
-    border: 1px solid gray;
     h5 {
         font-family: 'Shadows Into Light', cursive;
         font-weight: bold;

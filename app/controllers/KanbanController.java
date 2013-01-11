@@ -123,7 +123,7 @@ public class KanbanController extends Controller
 		Kanban k = Kanban.findById(id);
 		k.background = dataURL;
 		k.save();
-		renderJSON("OK");
+		renderJSON(new String("OK"));
 	}
 
 

@@ -21,7 +21,7 @@ public class Application extends Controller
 	public static void tryit()
 	{
 		Kanban tryit = Kanban.find("byName", "10K").first();
-		renderArgs.put("online", false);
+		renderArgs.put("offline", true);
 		renderArgs.put("id", tryit.id);
 		render("KanbanController/show.html");
 	}
