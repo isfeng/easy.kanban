@@ -4,6 +4,7 @@
     <h4>
 		Welcome ${user.displayName}
 	</h4>
+	<a href="@{securesocial.SecureSocial.logout}">logout</>
 </div>
 <div class="row">
 	<h3>User details</h3>
@@ -17,8 +18,12 @@
 <div class="row">
 <h3>Kanban List</h3>
 <ul>
-#{list items:kanbans, as:'kanban'}
-    <li><a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a> <input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/></li>
+#{list items:kanbans.kanban, as:'kanban'}
+    <li>
+    	<a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a>
+    	<a href="/kanbans/${kanban.id}/share" class="small button">Share ${kanban.name}</a>
+    	<input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/>
+    </li>
 #{/list}
 </ul>
 </div>
@@ -33,5 +38,5 @@
     {
         new Delete('/kanbans').action(kid);
     }
-    
+
 </script>

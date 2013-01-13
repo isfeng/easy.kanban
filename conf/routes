@@ -15,6 +15,8 @@ DELETE	/kanbans/{id}                           KanbanController.delete
 GET     /kanbans/{id}/notes                     KanbanController.notes
 GET     /kanbans/{id}/edit                      KanbanController._edit
 POST    /kanbans/{id}/edit                      KanbanController.update
+GET     /kanbans/{id}/share                     KanbanController._share
+POST    /kanbans/{id}/share                     KanbanController.share
 GET     /kanbans/{id}/background                KanbanController.getBackground
 POST    /kanbans/{id}/background                KanbanController.setBackground
 

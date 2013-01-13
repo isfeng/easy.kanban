@@ -31,10 +31,9 @@ WebFontConfig = {
 
 var Delete = new Class({
 
-	initialize : function(route, options)
+	initialize : function(route)
 	{
 		this.route = route;
-		this.setOptions(options);
 	},
 
 	action : function(id)

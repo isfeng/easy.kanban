@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import models.Kanban;
-import models.StickyNote;
 import models.TextNote;
 import models.User;
+import models.UserKanban;
 import models.ValueStream;
 import play.data.validation.Required;
 import play.mvc.Controller;
@@ -39,8 +39,10 @@ public class KanbanController extends Controller
 		Kanban k = new Kanban();
 		k.name = name;
 		k.goal = goal;
-		k.user = _user;
 		k.save();
+
+		UserKanban uk = new UserKanban(_user, k);
+		uk.save();
 
 		if (values != null && !values.equals(""))
 		{
@@ -79,8 +81,11 @@ public class KanbanController extends Controller
 	public static void delete(long id)
 	{
 		Kanban k = Kanban.findById(id);
+
 		TextNote.delete("kanban", k);
 		ValueStream.delete("kanban=?", k);
+		UserKanban.delete("kanban", k);
+
 		k.delete();
 		index();
 	}
@@ -90,7 +95,7 @@ public class KanbanController extends Controller
 	{
 		SocialUser socialUser = SecureSocial.getCurrentUser();
 		User user = User.find("byEmail", socialUser.email).first();
-		List<Kanban> kanbans = Kanban.find("byUser", user).fetch();
+		List<UserKanban> kanbans = UserKanban.find("byUser", user).fetch();
 		renderArgs.put("kanbans", kanbans);
 		render();
 	}
@@ -134,6 +139,29 @@ public class KanbanController extends Controller
 
 
 	public static void _update(long id)
+	{
+		Kanban kanban = Kanban.findById(id);
+		render(kanban);
+	}
+
+
+	public static void share(long id, String email)
+	{
+		User u = User.find("byEmail", email).first();
+		Kanban k = Kanban.findById(id);
+
+		UserKanban uk = UserKanban.find("byUserAndKanban", u, k).first();
+		if (uk == null)
+		{
+			UserKanban share = new UserKanban(u, k);
+			share.save();
+		}
+
+		index();
+	}
+
+
+	public static void _share(long id)
 	{
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);

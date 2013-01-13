@@ -2,19 +2,13 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-
-import play.db.jpa.Model;
 
 @Entity
-public class Kanban extends Model
+public class Kanban extends BaseModel
 {
 	public String goal;
 	public String name;
 	@Lob
 	public String background = "";
-
-	@ManyToOne
-	public User user;
 
 }

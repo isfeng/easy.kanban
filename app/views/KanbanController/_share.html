@@ -1,0 +1,15 @@
+#{extends 'main.html' /}
+
+<div class="row">
+	<div class="twelve columns">
+		<form id="" action="/kanbans/${kanban.id}/share" method="POST">
+			<input type="hidden" name="id" value="${kanban.id}"/>
+			<fieldset>
+			    <legend>Share Kanban</legend>
+			    <label>Name: </label>
+			    <input type="text" name="email" placeholder="please type email" value=""/>
+			    <input type="submit" value="OK" class="small button"/>
+		    </fieldset>
+		</form>
+	</div>
+</div>
