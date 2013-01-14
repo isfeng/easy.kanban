@@ -8,8 +8,9 @@ import models.TextNote;
 import models.ValueStream;
 import play.mvc.Controller;
 import play.mvc.With;
+import controllers.securesocial.SecureSocial;
 
-@With(KanbanSecure.class)
+@With(SecureSocial.class)
 public class NoteController extends Controller
 {
 	private static int BOARD_WIDTH = 1153;
@@ -44,23 +45,26 @@ public class NoteController extends Controller
 		
 		List<ValueStream> vs = ValueStream.find("byKanban", stickynote.kanban).fetch();
 		int valueSize = vs.size();
-		int valueWidth = NoteController.BOARD_WIDTH / valueSize;
-		
-		int current_x = 0;
-		for (int i = 0; i < vs.size(); i++)
+		if (valueSize > 0)
 		{
-			ValueStream valueStream = vs.get(i);
-			valueStream.startx = current_x;
-			valueStream.endx = current_x + valueWidth;
-			current_x += valueWidth;
-		}
-		
-		for (ValueStream valueStream : vs)
-		{
-			if (x >= valueStream.startx && x < valueStream.endx)
+			int valueWidth = NoteController.BOARD_WIDTH / valueSize;
+			
+			int current_x = 0;
+			for (int i = 0; i < vs.size(); i++)
 			{
-				stickynote.value = valueStream;
-				break;
+				ValueStream valueStream = vs.get(i);
+				valueStream.startx = current_x;
+				valueStream.endx = current_x + valueWidth;
+				current_x += valueWidth;
+			}
+			
+			for (ValueStream valueStream : vs)
+			{
+				if (x >= valueStream.startx && x < valueStream.endx)
+				{
+					stickynote.value = valueStream;
+					break;
+				}
 			}
 		}
 		
