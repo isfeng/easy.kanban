@@ -1,0 +1,13 @@
+/*
+     customer home page, before login
+*/
+/* line 5, ../../sass/index.scss */
+body {
+  background-image: url('/public/images/1357234889_49924.jpg?1358220742');
+}
+
+/* line 9, ../../sass/index.scss */
+h1 {
+  margin: 2em;
+  font-family: 'Shadows Into Bold', cursive;
+}
