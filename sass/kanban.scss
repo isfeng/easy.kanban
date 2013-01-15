@@ -12,20 +12,14 @@
 
 #board {
     position: relative;
-    //margin: 50px;
-    //background-image: image-url("SB690_box_full.jpg"); 
-    //height: image-height("SB690_box_full.jpg");
-    //width: image-width("SB690_box_full.jpg");
-    @include border-image(image-url("trash_recyclebin_empty_closed.png") 10 10 10 10 round round);
-    border-width: 20px;
+	@include border-image(image-url("chain.png") 23 22 22 26 round round);
+	border-width:20px;
     #space {
-        border: 1px solid red;
-        @include box-sizing(space);
-        @include stretch();
+		@include stretch();
     }
     div.trashcan {
-        left: 50px; 
-        top: 600px; 
+        left: 50px;
+        top: 600px;
         position: absolute;
         background-image: image-url("trash_recyclebin_empty_closed.png");
         height: image-height("trash_recyclebin_empty_closed.png");

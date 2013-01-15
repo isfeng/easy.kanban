@@ -210,7 +210,8 @@ var Kanban = new Class({
 
 	options:{
 		width: 0,
-		height: 0
+		height: 0,
+		board:''
 	},
 
 	initialize : function(container, kid, options)
@@ -218,8 +219,8 @@ var Kanban = new Class({
 		this.container = container;
 		this.kid = kid;
 		this.setOptions(options);
-		
-		$(container).setStyles({width: this.options.width, height:this.options.height});
+
+		$(this.options.board).setStyles({width: this.options.width, height:this.options.height});
 		this.canvas = document.getElementById("mycanvas");
 		this.canvas.width = $(container).getSize().x;
 		this.canvas.height = $(container).getSize().y;
@@ -246,7 +247,31 @@ var Kanban = new Class({
 				}
 				else
 				{
-					_updatePos(element);
+//					_updatePos(element);
+					var req = new Request.JSON({
+						url : '/notes/pos',
+						method : 'post',
+						data : {
+							'id' : element.get('nid'),
+							'x' : element.getPosition(this.container).x,
+							'y' : element.getPosition(this.container).y
+						},
+						onRequest : function()
+						{
+							console.log('_updatePos onRequest');
+						},
+						onSuccess : function()
+						{
+							console.log('_updatePos onSuccess');
+						},
+						onFailure : function()
+						{
+							console.log('_updatePos onFailure');
+						}
+					});
+
+					if (!KanbanApp.offline)
+						req.send();
 				}
 			}.bind(this),
 
@@ -340,7 +365,7 @@ var Kanban = new Class({
 				}.bind(this);
 
 				var value_stream = json.stream;
-				var space_width = $(container).getSize().x;
+				var space_width = $(this.container).getSize().x;
 				console.log(space_width);
 				var value_size = value_stream.length;
 				console.log(value_size);
@@ -366,7 +391,7 @@ var Kanban = new Class({
 						g.setStrokeStyle(2, 'round', 'round');
 						g.beginStroke("GRAY");
 						g.moveTo(current_x, 50);
-						g.lineTo(current_x, $(container).getSize().y - 20);
+						g.lineTo(current_x, $(this.container).getSize().y - 20);
 						this.stage.addChild(s);
 					}
 					this.stage.update();
