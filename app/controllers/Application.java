@@ -7,7 +7,7 @@ import controllers.securesocial.SecureSocial;
 
 public class Application extends Controller
 {
-
+	
 	public static void welcome()
 	{
 		SocialUser user = SecureSocial.getCurrentUser();
@@ -16,8 +16,8 @@ public class Application extends Controller
 		else
 			KanbanController.index();
 	}
-
-
+	
+	
 	public static void tryit()
 	{
 		Kanban tryit = Kanban.find("byName", "Kanban Development Board").first();
@@ -29,6 +29,12 @@ public class Application extends Controller
 		
 		renderHtml("");
 	}
-
-
+	
+	
+	public static void sendgrid()
+	{
+		render();
+	}
+	
+	
 }

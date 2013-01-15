@@ -25,7 +25,10 @@ POST	/notes/pos								NoteController.updatePosition
 DELETE	/notes/{id}								NoteController.delete
 
 
+# test route
 GET     /test                                	Application.test
+GET     /sendgrid                                   Application.sendgrid
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
