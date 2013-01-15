@@ -208,17 +208,21 @@ var Kanban = new Class({
 
 	Implements : [ Options, Events ],
 
-	options : {},
+	options:{
+		width: 0,
+		height: 0
+	},
 
 	initialize : function(container, kid, options)
 	{
 		this.container = container;
 		this.kid = kid;
 		this.setOptions(options);
-
+		
+		$(container).setStyles({width: this.options.width, height:this.options.height});
 		this.canvas = document.getElementById("mycanvas");
-		this.canvas.width = $('space').getSize().x;
-		this.canvas.height = $('space').getSize().y;
+		this.canvas.width = $(container).getSize().x;
+		this.canvas.height = $(container).getSize().y;
 		this.context = this.canvas.getContext('2d');
 
 		this.thickness = 2;
@@ -336,7 +340,7 @@ var Kanban = new Class({
 				}.bind(this);
 
 				var value_stream = json.stream;
-				var space_width = $('space').getSize().x;
+				var space_width = $(container).getSize().x;
 				console.log(space_width);
 				var value_size = value_stream.length;
 				console.log(value_size);
@@ -362,7 +366,7 @@ var Kanban = new Class({
 						g.setStrokeStyle(2, 'round', 'round');
 						g.beginStroke("GRAY");
 						g.moveTo(current_x, 50);
-						g.lineTo(current_x, $('space').getSize().y - 20);
+						g.lineTo(current_x, $(container).getSize().y - 20);
 						this.stage.addChild(s);
 					}
 					this.stage.update();
@@ -516,8 +520,8 @@ function _updatePos(el)
 		method : 'post',
 		data : {
 			'id' : el.get('nid'),
-			'x' : el.getPosition('space').x,
-			'y' : el.getPosition('space').y
+			'x' : el.getPosition(container).x,
+			'y' : el.getPosition(container).y
 		},
 		onRequest : function()
 		{

@@ -12,11 +12,16 @@
 
 #board {
     position: relative;
-    background-image: image-url("SB690_box_full.jpg");
-    height: image-height("SB690_box_full.jpg");
-    width: image-width("SB690_box_full.jpg");
+    //margin: 50px;
+    //background-image: image-url("SB690_box_full.jpg"); 
+    //height: image-height("SB690_box_full.jpg");
+    //width: image-width("SB690_box_full.jpg");
+    @include border-image(image-url("trash_recyclebin_empty_closed.png") 10 10 10 10 round round);
+    border-width: 20px;
     #space {
-        @include stretch(50px, 80px, 85px, 65px);
+        border: 1px solid red;
+        @include box-sizing(space);
+        @include stretch();
     }
     div.trashcan {
         left: 50px; 

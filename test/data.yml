@@ -1,13 +1,11 @@
-# you describe your data using the YAML notation here
-# and then load them using Fixtures.load("data.yml")
+Board(board1):
+  width: 1366
+  height: 768
 
-# User(bob):
-#   email: bob@gmail.com
-#   password: secret
-#   fullname: Bob
 Kanban(kanban1):
   name: 10K
   goal: 10K
+  board: board1
 
 TextNote(note1):
   kanban: kanban1
@@ -16,6 +14,3 @@ TextNote(note1):
   title: this is a title
   note: this is some note
   
-User(tryit):
-  email: tryit@easykanban.com
-  name: tryit

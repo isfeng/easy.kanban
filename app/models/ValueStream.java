@@ -9,6 +9,7 @@ public class ValueStream extends BaseModel
 	public String value;
 	public int startx;
 	public int endx;
+	public int _order;
 
 	@ManyToOne
 	public Kanban kanban;
