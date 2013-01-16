@@ -100,16 +100,17 @@
 }
 /* line 82, ../../sass/kanban.scss */
 .note h5 {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Shadows Into Bold', cursive;
   font-weight: bold;
 }
 /* line 86, ../../sass/kanban.scss */
 .note p {
   font-family: 'Shadows Into Light', cursive;
   margin: 5px 1px 5px 1px;
+  font-weight: bold;
 }
 
-/* line 92, ../../sass/kanban.scss */
+/* line 94, ../../sass/kanban.scss */
 #text_note_form {
   width: 95%;
 }

@@ -1,12 +1,16 @@
 /*
      customer home page, before login
 */
+$zocial-font-size: 12px;
+@import "zocial";
+@include zocial;
 
 body{
     background-image: image-url("1357234889_49924.jpg");
 }
 
-h1{
+#main{
     margin: 2em;
     font-family: 'Shadows Into Bold', cursive;
 }
+

@@ -32,7 +32,7 @@
   font-weight: normal;
   line-height: 18px;
   background-color: #FFFFFF;
-  border: 1px solid #eaeefa;
+  border: 1px solid #EAEEFA;
   border: 1px solid rgba(234, 238, 250, 0.6);
   z-index: 99999;
   -webkit-border-radius: 6px;
@@ -48,7 +48,7 @@
 .simple-modal .simple-modal-header {
   padding: 5px 15px;
   margin: 0;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #EEEEEE;
 }
 /* line 41, ../../sass/simple-modal.scss */
 .simple-modal .simple-modal-header h1 {
@@ -100,7 +100,7 @@
   display: block;
   background-color: #F5F5F5;
   padding: 14px 15px 15px;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #EEEEEE;
   zoom: 1;
   margin-bottom: 0;
   text-align: center;
@@ -145,7 +145,7 @@
 }
 /* line 108, ../../sass/simple-modal.scss */
 .simple-modal .simple-modal-footer a.btn.primary:hover {
-  border: 1px solid #444444;
+  border: 1px solid #444;
   background-color: #444;
 }
 /* line 113, ../../sass/simple-modal.scss */
