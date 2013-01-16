@@ -11,11 +11,13 @@
 }
 
 #board {
+    margin: 6px;
     position: relative;
-	@include border-image(image-url("chain.png") 23 22 22 26 round round);
+	@include border-image(image-url("border.png") 25 25 25 25 round round);
 	border-width:20px;
     #space {
 		@include stretch();
+		 background-image: image-url("textures/lined_paper.png");
     }
     div.trashcan {
         left: 50px;
