@@ -24,16 +24,8 @@ public class Application extends Controller
 		if (tryit == null)
 			tryit = Kanban.find("byName", "10K").first();
 		renderArgs.put("offline", true);
-		renderArgs.put("id", tryit.id);
+		renderArgs.put("kanban", tryit);
 		render("KanbanController/show.html");
-		
-		renderHtml("");
-	}
-	
-	
-	public static void sendgrid()
-	{
-		render();
 	}
 	
 	

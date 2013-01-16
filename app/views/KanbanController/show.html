@@ -4,14 +4,15 @@
     <div id="board">
         <div id="space">
             <canvas id="mycanvas"></canvas>
-            <div class="trashcan"></div>
         </div>
+        
         <div id="board_control" >
             <a id="post_stack_yellow" href="javascript:"><span>yellow post</span></a>
             <a id="post_stack_pink" href="javascript:"><span>pink post</span></a>
             <a id="black_pen" href="javascript:"><span>pen</span></a>
             <a id="eraser" href="javascript:"><span>eraser</span></a>
         </div>
+        <div id="trashcan"></div>
     </div>
 </div>
 
@@ -22,8 +23,8 @@
     window.addEvent('domready', function()
     {
     	#{if offline}KanbanApp.offline=true;#{/if}
-        var kanban = new Kanban('space','${id}',{board:'board', width: 1920, height: 1080});
-        kanban.load();//load notes & back;
+        var kanban = new Kanban('space','${kanban.id}',{board:'board', width: ${kanban.board.width}, height: ${kanban.board.height}});
+        kanban.load();
         kanban.addStack('post_stack_yellow');
         kanban.addStack('post_stack_pink');
         kanban.addPen('black_pen');

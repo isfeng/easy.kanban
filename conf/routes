@@ -27,7 +27,7 @@ DELETE	/notes/{id}								NoteController.delete
 
 # test route
 GET     /test                                	Application.test
-GET     /sendgrid                                   Application.sendgrid
+# GET     /sendgrid                                   Application.sendgrid
 
 
 # Ignore favicon requests

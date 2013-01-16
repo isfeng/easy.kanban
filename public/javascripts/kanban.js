@@ -235,7 +235,7 @@ var Kanban = new Class({
 		var el = textNote.inject($(this.container));
 		new Drag.Move(el, {
 			container : this.container,
-			droppables : '.trashcan',
+			droppables : '#trashcan',
 			precalculate : true,
 			onDrop : function(element, droppable, event)
 			{
