@@ -643,6 +643,11 @@ body {
 
 /* line 12, ../../sass/index.scss */
 #main {
-  margin: 2em;
+  margin: 100px;
   font-family: 'Shadows Into Bold', cursive;
+}
+/* line 15, ../../sass/index.scss */
+#main ul li {
+  margin-left: 0px;
+  display: inline;
 }

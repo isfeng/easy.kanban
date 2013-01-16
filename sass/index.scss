@@ -10,7 +10,11 @@ body{
 }
 
 #main{
-    margin: 2em;
+    margin: 100px;
     font-family: 'Shadows Into Bold', cursive;
+    ul li{
+        margin-left: 0px;
+        display: inline;
+    }
 }
 
