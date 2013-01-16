@@ -23,7 +23,7 @@
 
 #trashcan {
         position: fixed;
-        top: 90%;
+        top: 85%;
         left: 250px;
         background-image: image-url("trash_recyclebin_empty_closed.png");
         height: image-height("trash_recyclebin_empty_closed.png");
@@ -33,7 +33,7 @@
 #board_control {
     position: fixed;
     z-index: 101;
-    top: 90%;
+    top: 85%;
     a {
         display: block;
         float:right;
@@ -87,7 +87,7 @@
         font-family: 'Shadows Into Light', cursive;
         margin: 5px 1px 5px 1px;
                 font-weight: bold;
-        
+
     }
 }
 

@@ -2,8 +2,6 @@
      customer home page, before login
 */
 $zocial-font-size: 12px;
-@import "zocial";
-@include zocial;
 
 body{
     background-image: image-url("1357234889_49924.jpg");
@@ -11,7 +9,9 @@ body{
 
 #main{
     margin: 100px;
-    font-family: 'Shadows Into Bold', cursive;
+    h1{
+    	font-family: 'Shadows Into Bold', cursive;
+    }
     ul li{
         margin-left: 0px;
         display: inline;

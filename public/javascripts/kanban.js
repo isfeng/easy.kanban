@@ -236,7 +236,7 @@ var Kanban = new Class({
 		new Drag.Move(el, {
 			container : this.container,
 			droppables : '#trashcan',
-			precalculate : true,
+			precalculate : false,
 			onDrop : function(element, droppable, event)
 			{
 				/* only trashcan droppable */
