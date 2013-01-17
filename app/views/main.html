@@ -22,6 +22,14 @@
     <![endif]-->
   </head>
   <body>
+    <div id="site_menu">
+        <ul>
+            <li><a href="/kanbans"><span>Home</span></a></li>
+            #{if user!=null}
+            <li><a href="@{securesocial.SecureSocial.logout()}"><span>Logout</span></a></li>
+            #{/if}
+        </ul>
+    </div>
     #{doLayout /}
   </body>
 </html>

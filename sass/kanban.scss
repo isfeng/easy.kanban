@@ -6,12 +6,21 @@
 @import "compass/layout";
 @import "animate";
 
-#mycanvas {
-    cursor: crosshair;
+#site_menu {
+    margin-left: 5px;
+    ul {
+        margin: 0px;
+        li{
+            display: inline;
+        }
+    }
+}
+
+#kanban{
+    margin: 5px;
 }
 
 #board {
-    margin: 6px;
     position: relative;
 	@include border-image(image-url("border.png") 25 25 25 25 round round);
 	border-width:20px;
@@ -23,7 +32,7 @@
 
 #trashcan {
         position: fixed;
-        top: 85%;
+        bottom: 25px;
         left: 250px;
         background-image: image-url("trash_recyclebin_empty_closed.png");
         height: image-height("trash_recyclebin_empty_closed.png");
@@ -33,7 +42,7 @@
 #board_control {
     position: fixed;
     z-index: 101;
-    top: 85%;
+    bottom: 25px;
     a {
         display: block;
         float:right;

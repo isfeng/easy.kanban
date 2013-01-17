@@ -15,13 +15,7 @@ WebFontConfig = {
 	s.parentNode.insertBefore(wf, s);
 })();
 
-(function()
-{
-	this.KanbanApp = {
-		offline : false
-	}
-})();
-
+// 
 (function()
 {
 	this.KanbanApp = {
@@ -389,7 +383,7 @@ var Kanban = new Class({
 						var s = new createjs.Shape();
 						var g = s.graphics;
 						g.setStrokeStyle(2, 'round', 'round');
-						g.beginStroke("GRAY");
+						g.beginStroke("#EBECE4");
 						g.moveTo(current_x, 50);
 						g.lineTo(current_x, $(this.container).getSize().y - 20);
 						this.stage.addChild(s);
@@ -407,8 +401,13 @@ var Kanban = new Class({
 		if (!KanbanApp.offline)
 			req.send();
 
-		this.stage.onMouseDown = function()
+		this.stage.onMouseDown = function(evt)
 		{
+			evt.nativeEvent.preventDefault();
+			evt.nativeEvent.stopPropagation();
+			evt.nativeEvent.target.style.cursor = 'pointer';
+			//$(evt.nativeEvent.target).setStyle('cursor',  'url(/public/images/redarrow.cur), default');
+			
 			this.isMouseDown = true;
 			if (this.draw)
 			{
@@ -443,12 +442,16 @@ var Kanban = new Class({
 			}
 		}.bind(this);
 
-		this.stage.onMouseUp = function()
-		{
+		this.stage.onMouseUp = function(evt)	 {
 			this.isMouseDown = false;
 			this.saveBackground();
+			evt.nativeEvent.target.style.cursor = 'default';
 		}.bind(this);
 
+		this.stage.onMouseMove = function(evt)	{
+
+		}.bind(this);
+		
 		// createjs.Touch.enable(this.stage);
 
 		this.stage.update();
