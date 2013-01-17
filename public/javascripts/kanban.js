@@ -15,7 +15,7 @@ WebFontConfig = {
 	s.parentNode.insertBefore(wf, s);
 })();
 
-// 
+//
 (function()
 {
 	this.KanbanApp = {
@@ -407,7 +407,7 @@ var Kanban = new Class({
 			evt.nativeEvent.stopPropagation();
 			evt.nativeEvent.target.style.cursor = 'pointer';
 			//$(evt.nativeEvent.target).setStyle('cursor',  'url(/public/images/redarrow.cur), default');
-			
+
 			this.isMouseDown = true;
 			if (this.draw)
 			{
@@ -445,13 +445,13 @@ var Kanban = new Class({
 		this.stage.onMouseUp = function(evt)	 {
 			this.isMouseDown = false;
 			this.saveBackground();
-			evt.nativeEvent.target.style.cursor = 'default';
+			//evt.nativeEvent.target.style.cursor = 'default';
 		}.bind(this);
 
 		this.stage.onMouseMove = function(evt)	{
 
 		}.bind(this);
-		
+
 		// createjs.Touch.enable(this.stage);
 
 		this.stage.update();

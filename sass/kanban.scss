@@ -7,7 +7,10 @@
 @import "animate";
 
 #site_menu {
-    margin-left: 5px;
+	@include background(linear-gradient(top left, #666, #FFF));
+	@include border-top-left-radius(25px);
+	height: 25px;
+    padding-left: 25px;
     ul {
         margin: 0px;
         li{
@@ -17,7 +20,7 @@
 }
 
 #kanban{
-    margin: 5px;
+    margin: 5px 5px 5px 5px;
 }
 
 #board {
