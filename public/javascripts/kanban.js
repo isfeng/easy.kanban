@@ -227,6 +227,7 @@ var Kanban = new Class({
 	stickText : function(textNote, x, y)
 	{
 		var el = textNote.inject($(this.container));
+		
 		new Drag.Move(el, {
 			container : this.container,
 			droppables : '#trashcan',
@@ -280,10 +281,15 @@ var Kanban = new Class({
 			}
 		})
 
-		el.setPosition({
-			'x' : x,
-			'y' : y
-		});
+//		el.setPosition({
+//			'x' : x,
+//			'y' : y
+//		});
+		el.position(); 
+//		$(el).setStyles({
+//	          top: window.getCoordinates().width /2 ,
+//	          left: window.getCoordinates().width /2 
+//	    });
 	},
 
 	stickDraw : function()

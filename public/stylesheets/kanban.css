@@ -32,11 +32,11 @@
 /* line 26, ../../sass/kanban.scss */
 #board {
   position: relative;
-  -moz-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
-  -webkit-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
-  -webkit-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
-  -o-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
-  border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
+  -moz-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
+  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
+  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
+  -o-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
+  border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
   border-width: 20px;
 }
 /* line 30, ../../sass/kanban.scss */
@@ -46,7 +46,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('/public/images/textures/lined_paper.png?1358345144');
+  background-image: url('/public/images/textures/lined_paper.png?1358297570');
 }
 
 /* line 36, ../../sass/kanban.scss */
@@ -54,7 +54,7 @@
   position: fixed;
   bottom: 25px;
   left: 250px;
-  background-image: url('/public/images/trash_recyclebin_empty_closed.png?1357913299');
+  background-image: url('/public/images/trash_recyclebin_empty_closed.png?1357872516');
   height: 48px;
   width: 48px;
 }
@@ -72,7 +72,7 @@
 }
 /* line 52, ../../sass/kanban.scss */
 #board_control a#post_stack_yellow {
-  background-image: url('/public/images/297352.jpg?1357737744');
+  background-image: url('/public/images/297352.jpg?1357714271');
   height: 50px;
   width: 50px;
 }
@@ -82,7 +82,7 @@
 }
 /* line 60, ../../sass/kanban.scss */
 #board_control a#post_stack_pink {
-  background-image: url('/public/images/51tj3dkukJL._SL75_SS50_.jpg?1357737744');
+  background-image: url('/public/images/51tj3dkukJL._SL75_SS50_.jpg?1357714278');
   height: 50px;
   width: 50px;
 }
@@ -92,7 +92,7 @@
 }
 /* line 68, ../../sass/kanban.scss */
 #board_control a#black_pen {
-  background-image: url('/public/images/rBEDik_xR_IIAAAAAADkfYPLXFkAADluQOmzsYAAOSV253.jpg?1357737744');
+  background-image: url('/public/images/rBEDik_xR_IIAAAAAADkfYPLXFkAADluQOmzsYAAOSV253.jpg?1357714091');
   height: 50px;
   width: 50px;
 }
@@ -102,7 +102,7 @@
 }
 /* line 76, ../../sass/kanban.scss */
 #board_control a#eraser {
-  background-image: url('/public/images/41b20q-NztL._SL75_SS50_.jpg?1357737744');
+  background-image: url('/public/images/41b20q-NztL._SL75_SS50_.jpg?1357715531');
   height: 50px;
   width: 50px;
 }
@@ -122,12 +122,12 @@
 }
 /* line 94, ../../sass/kanban.scss */
 .note h5 {
-  font-family: "Shadows Into Bold", cursive;
+  font-family: 'Shadows Into Bold', cursive;
   font-weight: bold;
 }
 /* line 98, ../../sass/kanban.scss */
 .note p {
-  font-family: "Shadows Into Light", cursive;
+  font-family: 'Shadows Into Light', cursive;
   margin: 5px 1px 5px 1px;
   font-weight: bold;
 }
