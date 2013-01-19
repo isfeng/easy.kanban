@@ -6,6 +6,16 @@
 @import "compass/layout";
 @import "animate";
 
+body {
+	overflow:hidden;
+    height: 100%;
+}
+
+html {
+	overflow:hidden;
+    height: 100%;
+}
+
 #site_menu {
 	@include background(linear-gradient(top left, #666, #FFF));
 	@include border-top-left-radius(25px);
@@ -21,6 +31,9 @@
 
 #kanban{
     margin: 5px 5px 5px 5px;
+    width: 99%;
+    height: 95%;
+    overflow:hidden;
 }
 
 #board {
@@ -29,7 +42,7 @@
 	border-width:20px;
     #space {
 		@include stretch();
-		 background-image: image-url("textures/lined_paper.png");
+		background-image: image-url("textures/lined_paper.png");
     }
 }
 
