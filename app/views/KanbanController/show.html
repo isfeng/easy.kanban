@@ -5,10 +5,10 @@
         <div id="space"><canvas id="mycanvas"></canvas></div>
         <div id="board_control" >
         	<ul>
-        	<li id="globalmove" class="foundicon-globe"><span>move</span></li>
         	<li id="post_stack_yellow" class="foundicon-add-doc"><span>yellow post</span></li>
         	<li id="black_pen" class="foundicon-graph"><span>pen</span></li>
         	<li id="eraser" class="foundicon-remove"><span>eraser</span></li>
+            <li id="globalmove" class="foundicon-globe"><span>move</span></li>
             <li id="trashcan" class="foundicon-trash"></li>
         	</ul>
         </div>
@@ -27,12 +27,9 @@
         kanban.addStack('post_stack_yellow');
         kanban.addPen('black_pen');
 		kanban.addEraser('eraser');
+        kanban.addMover('globalmove');
 
-		var myDragScroller = new Drag('kanban', {
-		    style: false,
-		    invert: true,
-		    modifiers: {x: 'scrollLeft', y: 'scrollTop'}
-		});
+		
 
     });
 

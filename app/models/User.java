@@ -13,4 +13,5 @@ public class User extends BaseModel
 	public String name;
 	public String socialID;
 	public ProviderType providerType;
+	public int kanban_limit;
 }

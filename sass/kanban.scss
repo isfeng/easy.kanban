@@ -55,11 +55,19 @@ body {
     position: fixed;
     z-index: 101;
     bottom: 5px;
+
     ul li {
         display: inline;
         font-size: 3em;
-        #trashcan {
-            
+        &:hover {
+            cursor: pointer;
+            color: blue;
+        }
+        &#trashcan {
+            &:hover {
+                cursor: move !important;
+                color: black;
+            }
         }
         &#post_stack_yellow {
             
@@ -76,7 +84,7 @@ body {
         span {
             display: none;
         }
-    }   
+    }    
 }
 
 .note {

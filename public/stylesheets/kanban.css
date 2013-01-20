@@ -76,17 +76,27 @@ body {
   z-index: 101;
   bottom: 5px;
 }
-/* line 58, ../../sass/kanban.scss */
+/* line 59, ../../sass/kanban.scss */
 #board_control ul li {
   display: inline;
   font-size: 3em;
 }
-/* line 76, ../../sass/kanban.scss */
+/* line 62, ../../sass/kanban.scss */
+#board_control ul li:hover {
+  cursor: pointer;
+  color: blue;
+}
+/* line 67, ../../sass/kanban.scss */
+#board_control ul li#trashcan:hover {
+  cursor: move !important;
+  color: black;
+}
+/* line 84, ../../sass/kanban.scss */
 #board_control ul li span {
   display: none;
 }
 
-/* line 82, ../../sass/kanban.scss */
+/* line 90, ../../sass/kanban.scss */
 .note {
   z-index: 999;
   cursor: move;
@@ -95,24 +105,24 @@ body {
   width: 150px;
   background: yellow;
 }
-/* line 89, ../../sass/kanban.scss */
+/* line 97, ../../sass/kanban.scss */
 .note h5 {
   font-family: "Shadows Into Bold", cursive;
   font-weight: bold;
 }
-/* line 93, ../../sass/kanban.scss */
+/* line 101, ../../sass/kanban.scss */
 .note p {
   font-family: "Shadows Into Light", cursive;
   margin: 5px 1px 5px 1px;
   font-weight: bold;
 }
 
-/* line 101, ../../sass/kanban.scss */
+/* line 109, ../../sass/kanban.scss */
 #text_note_form {
   width: 95%;
 }
 
-/* line 111, ../../sass/kanban.scss */
+/* line 119, ../../sass/kanban.scss */
 #site_footer {
   height: 20px;
   width: 100%;

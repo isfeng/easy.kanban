@@ -201,6 +201,9 @@ var PostStack = new Class({
 var Kanban = new Class({
 
 	Implements : [ Options, Events ],
+	
+	current_action: 'drag', //draw, erase, drag
+	thickness: 2,
 
 	options:{
 		width: 0,
@@ -220,8 +223,11 @@ var Kanban = new Class({
 		this.canvas.height = $(container).getSize().y;
 		this.context = this.canvas.getContext('2d');
 
-		this.thickness = 2;
-		this.draw = true;
+		this.dragScroller = new Drag('kanban', {
+		    style: false,
+		    invert: true,
+		    modifiers: {x: 'scrollLeft', y: 'scrollTop'}
+		});
 	},
 
 	stickText : function(textNote, x, y)
@@ -278,7 +284,17 @@ var Kanban = new Class({
 			onLeave : function(element, droppable)
 			{
 				console.log(element, 'left', droppable);
-			}
+			},
+
+			onBeforeStart: function()
+			{
+				this.dragScroller.detach();
+			}.bind(this),
+
+			onComplete: function()
+			{
+				this.dragScroller.attach();
+			}.bind(this)
 		})
 
 //		el.setPosition({
@@ -313,8 +329,7 @@ var Kanban = new Class({
 			},
 			onSuccess : function(json)
 			{
-				json.each(function(el)
-				{
+				json.each(function(el){
 					this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y);
 				}.bind(this));
 			}.bind(this),
@@ -409,15 +424,18 @@ var Kanban = new Class({
 
 		this.stage.onMouseDown = function(evt)
 		{
-			return false;
-			evt.nativeEvent.preventDefault();
-			evt.nativeEvent.stopPropagation();
-			evt.nativeEvent.target.style.cursor = 'pointer';
+			
+			
+			
 			//$(evt.nativeEvent.target).setStyle('cursor',  'url(/public/images/redarrow.cur), default');
 
 			this.isMouseDown = true;
-			if (this.draw)
+			console.log(this.current_action);
+			if (this.current_action=='draw')
 			{
+				evt.nativeEvent.preventDefault();
+				evt.nativeEvent.stopPropagation();
+				evt.nativeEvent.target.style.cursor = 'pointer';
 				var s = new createjs.Shape();
 				this.oldX = this.stage.mouseX;
 				this.oldY = this.stage.mouseY;
@@ -431,8 +449,11 @@ var Kanban = new Class({
 				this.stage.addChild(s);
 				this.currentDrawShape = s;
 			}
-			else
+			else if (this.current_action=='erase')
 			{
+				evt.nativeEvent.preventDefault();
+				evt.nativeEvent.stopPropagation();
+				evt.nativeEvent.target.style.cursor = 'pointer';
 				var s = new createjs.Shape();
 				this.oldX = this.stage.mouseX;
 				this.oldY = this.stage.mouseY;
@@ -447,15 +468,20 @@ var Kanban = new Class({
 				s.compositeOperation = "destination-out";
 				this.currentEraserShape = s;
 			}
+			else if (this.current_action=='drag')
+			{
+				evt.nativeEvent.target.style.cursor = 'move';
+				return false;
+			}
 		}.bind(this);
 
-		this.stage.onMouseUp = function(evt)	 {
+		this.stage.onMouseUp = function(evt) {
 			this.isMouseDown = false;
 			this.saveBackground();
 			//evt.nativeEvent.target.style.cursor = 'default';
 		}.bind(this);
 
-		this.stage.onMouseMove = function(evt)	{
+		this.stage.onMouseMove = function(evt) {
 
 		}.bind(this);
 
@@ -469,7 +495,7 @@ var Kanban = new Class({
 	{
 		if (this.isMouseDown)
 		{
-			if (this.draw)
+			if (this.current_action=='draw')
 			{
 				var pt = new createjs.Point(this.stage.mouseX, this.stage.mouseY);
 				var midPoint = new createjs.Point(this.oldX + pt.x >> 1, this.oldY + pt.y >> 1);
@@ -484,7 +510,7 @@ var Kanban = new Class({
 
 				this.stage.update();
 			}
-			else
+			else if (this.current_action=='erase')
 			{
 				var pt = new createjs.Point(this.stage.mouseX, this.stage.mouseY);
 				var midPoint = new createjs.Point(this.oldX + pt.x >> 1, this.oldY + pt.y >> 1);
@@ -532,17 +558,28 @@ var Kanban = new Class({
 
 	addEraser : function(eraser)
 	{
-		$(eraser).addEvent("click", function()
-		{
-			this.draw = false;
+		$(eraser).addEvent("click", function(){
+			this.current_action = 'erase';
+			this.dragScroller.detach();
+			$('kanban').setStyle('cursor', 'pointer');
 		}.bind(this));
 	},
 
 	addPen : function(pen)
 	{
-		$(pen).addEvent("click", function()
-		{
-			this.draw = true;
+		$(pen).addEvent("click", function(){
+			this.current_action = 'draw';
+			this.dragScroller.detach();
+			$('kanban').setStyle('cursor', 'pointer');
+		}.bind(this));
+	},
+
+	addMover : function(mover)
+	{
+		$(mover).addEvent("click", function(){
+			this.current_action = 'drag';
+			this.dragScroller.attach();
+			$('kanban').setStyle('cursor', 'move');
 		}.bind(this));
 	}
 
