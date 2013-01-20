@@ -17,14 +17,19 @@ html {
 }
 
 #site_menu {
-	@include background(linear-gradient(top left, #666, #FFF));
+	@include background(linear-gradient(top left, #C1CDCD, #FFF));
 	@include border-top-left-radius(25px);
-	height: 25px;
+	height: 35px;
     padding-left: 25px;
+    margin: 1px 5px 0 5px;
+    width: 99%;
     ul {
         margin: 0px;
         li{
             display: inline;
+            a {
+            	font-size: 1.5em;
+            }
         }
     }
 }
@@ -32,8 +37,9 @@ html {
 #kanban{
     margin: 5px 5px 5px 5px;
     width: 99%;
-    height: 95%;
+    height: 94%;
     overflow:hidden;
+    cursor: move;
 }
 
 #board {
@@ -47,12 +53,10 @@ html {
 }
 
 #trashcan {
-        position: fixed;
-        bottom: 25px;
-        left: 250px;
-        background-image: image-url("trash_recyclebin_empty_closed.png");
-        height: image-height("trash_recyclebin_empty_closed.png");
-        width: image-width("trash_recyclebin_empty_closed.png");
+    position: fixed;
+    bottom: 25px;
+    left: 250px;
+    font-size: 3em;
 }
 
 #board_control {

@@ -1,14 +1,14 @@
 #{extends 'main.html' /}
 
 <div class="row">
-    <h4>
-		Welcome ${user.displayName} <a href="@{securesocial.SecureSocial.logout}">logout</a>
+    <h4 class="foundicon-smiley">
+		Welcome ${user.displayName}
 	</h4>
 </div>
 <div class="row">
 	<h3>User details</h3>
 	<ul>
-		<li>User id: ${user.id.id}</li>
+		<li class="foundicon-smiley">User id: ${user.id.id}</li>
 		<li>Logged in from: ${user.id.provider}</li>
 		<li>Email: ${user.email}</li>
 	</ul>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="@{'/public/stylesheets/app.css'}" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="@{'/public/stylesheets/kanban.css'}" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="@{'/public/stylesheets/simple-modal.css'}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="@{'/public/stylesheets/foundation_icons_general/general_foundicons.css'}" type="text/css" media="screen, projection">
     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
     <script src="@{'/public/javascripts/mootools-core.js'}" type="text/javascript" charset="UTF-8"></script>
     <script src="@{'/public/javascripts/mootools-more.js'}" type="text/javascript" charset="UTF-8"></script>
@@ -24,20 +25,21 @@
   <body>
     <div id="site_menu">
         <ul>
-            <li><a href="/kanbans"><span>Home</span></a></li>
+            <li id="home"><a class="foundicon-home" href="/kanbans"><span>Home</span></a></li>
+            <li><a class="foundicon-settings" href="/settings"><span>Settings</span></a></li>
             #{if user!=null}
-            <li><a href="@{securesocial.SecureSocial.logout()}"><span>Logout</span></a></li>
+            <li id="logout" style="float:right;" class="foundicon-right-arrow"><a href="@{securesocial.SecureSocial.logout()}"><span>Sign out</span></a></li>
             #{/if}
         </ul>
     </div>
     #{doLayout /}
-    
+
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-37754878-1']);
       _gaq.push(['_setDomainName', 'easykanban.com']);
       _gaq.push(['_trackPageview']);
-    
+
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
