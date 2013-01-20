@@ -1,57 +1,56 @@
 /*
      main kanban style
 */
-/* line 9, ../../sass/kanban.scss */
+/* line 10, ../../sass/kanban.scss */
+html {
+  height: 100%;
+}
+
+/* line 13, ../../sass/kanban.scss */
 body {
   overflow: hidden;
   height: 100%;
 }
 
-/* line 14, ../../sass/kanban.scss */
-html {
-  overflow: hidden;
-  height: 100%;
-}
-
-/* line 19, ../../sass/kanban.scss */
+/* line 18, ../../sass/kanban.scss */
 #site_menu {
-  background: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, #c1cdcd), color-stop(100%, #ffffff));
-  background: -webkit-linear-gradient(top left, #c1cdcd, #ffffff);
-  background: -moz-linear-gradient(top left, #c1cdcd, #ffffff);
-  background: -o-linear-gradient(top left, #c1cdcd, #ffffff);
-  background: -ms-linear-gradient(top left, #c1cdcd, #ffffff);
-  background: linear-gradient(top left, #c1cdcd, #ffffff);
-  -moz-border-radius-topleft: 25px;
-  -webkit-border-top-left-radius: 25px;
-  border-top-left-radius: 25px;
+  background: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(0%, #c1cdcd), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: -moz-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: -o-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: -ms-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: linear-gradient(right left, #c1cdcd, #ffffff);
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-top-left-radius: 15px;
+  border-top-left-radius: 15px;
   height: 35px;
   padding-left: 25px;
   margin: 1px 5px 0 5px;
   width: 99%;
 }
-/* line 26, ../../sass/kanban.scss */
+/* line 25, ../../sass/kanban.scss */
 #site_menu ul {
   margin: 0px;
 }
-/* line 28, ../../sass/kanban.scss */
+/* line 27, ../../sass/kanban.scss */
 #site_menu ul li {
   display: inline;
 }
-/* line 30, ../../sass/kanban.scss */
+/* line 29, ../../sass/kanban.scss */
 #site_menu ul li a {
   font-size: 1.5em;
 }
 
-/* line 37, ../../sass/kanban.scss */
+/* line 36, ../../sass/kanban.scss */
 #kanban {
   margin: 5px 5px 5px 5px;
   width: 99%;
-  height: 94%;
+  height: 90%;
   overflow: hidden;
   cursor: move;
 }
 
-/* line 45, ../../sass/kanban.scss */
+/* line 44, ../../sass/kanban.scss */
 #board {
   position: relative;
   -moz-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
@@ -61,7 +60,7 @@ html {
   border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
   border-width: 20px;
 }
-/* line 49, ../../sass/kanban.scss */
+/* line 48, ../../sass/kanban.scss */
 #board #space {
   position: absolute;
   top: 0;
@@ -71,67 +70,23 @@ html {
   background-image: url('/public/images/textures/lined_paper.png?1358345144');
 }
 
-/* line 55, ../../sass/kanban.scss */
-#trashcan {
-  position: fixed;
-  bottom: 25px;
-  left: 250px;
-  font-size: 3em;
-}
-
-/* line 62, ../../sass/kanban.scss */
+/* line 54, ../../sass/kanban.scss */
 #board_control {
   position: fixed;
   z-index: 101;
-  bottom: 25px;
+  bottom: 5px;
 }
-/* line 66, ../../sass/kanban.scss */
-#board_control a {
-  display: block;
-  float: right;
+/* line 58, ../../sass/kanban.scss */
+#board_control ul li {
+  display: inline;
+  font-size: 3em;
 }
-/* line 69, ../../sass/kanban.scss */
-#board_control a#post_stack_yellow {
-  background-image: url('/public/images/297352.jpg?1357737744');
-  height: 50px;
-  width: 50px;
-}
-/* line 73, ../../sass/kanban.scss */
-#board_control a#post_stack_yellow span {
-  display: none;
-}
-/* line 77, ../../sass/kanban.scss */
-#board_control a#post_stack_pink {
-  background-image: url('/public/images/51tj3dkukJL._SL75_SS50_.jpg?1357737744');
-  height: 50px;
-  width: 50px;
-}
-/* line 81, ../../sass/kanban.scss */
-#board_control a#post_stack_pink span {
-  display: none;
-}
-/* line 85, ../../sass/kanban.scss */
-#board_control a#black_pen {
-  background-image: url('/public/images/rBEDik_xR_IIAAAAAADkfYPLXFkAADluQOmzsYAAOSV253.jpg?1357737744');
-  height: 50px;
-  width: 50px;
-}
-/* line 89, ../../sass/kanban.scss */
-#board_control a#black_pen span {
-  display: none;
-}
-/* line 93, ../../sass/kanban.scss */
-#board_control a#eraser {
-  background-image: url('/public/images/41b20q-NztL._SL75_SS50_.jpg?1357737744');
-  height: 50px;
-  width: 50px;
-}
-/* line 97, ../../sass/kanban.scss */
-#board_control a#eraser span {
+/* line 76, ../../sass/kanban.scss */
+#board_control ul li span {
   display: none;
 }
 
-/* line 104, ../../sass/kanban.scss */
+/* line 82, ../../sass/kanban.scss */
 .note {
   z-index: 999;
   cursor: move;
@@ -140,19 +95,36 @@ html {
   width: 150px;
   background: yellow;
 }
-/* line 111, ../../sass/kanban.scss */
+/* line 89, ../../sass/kanban.scss */
 .note h5 {
   font-family: "Shadows Into Bold", cursive;
   font-weight: bold;
 }
-/* line 115, ../../sass/kanban.scss */
+/* line 93, ../../sass/kanban.scss */
 .note p {
   font-family: "Shadows Into Light", cursive;
   margin: 5px 1px 5px 1px;
   font-weight: bold;
 }
 
-/* line 123, ../../sass/kanban.scss */
+/* line 101, ../../sass/kanban.scss */
 #text_note_form {
   width: 95%;
+}
+
+/* line 111, ../../sass/kanban.scss */
+#site_footer {
+  height: 20px;
+  width: 100%;
+  text-align: center;
+  margin-left: 5px;
+  background: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(0%, #c1cdcd), color-stop(100%, #ffffff));
+  background: -webkit-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: -moz-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: -o-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: -ms-linear-gradient(right left, #c1cdcd, #ffffff);
+  background: linear-gradient(right left, #c1cdcd, #ffffff);
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }

@@ -6,19 +6,18 @@
 @import "compass/layout";
 @import "animate";
 
+
+html {
+    height: 100%;
+}
 body {
 	overflow:hidden;
     height: 100%;
 }
 
-html {
-	overflow:hidden;
-    height: 100%;
-}
-
 #site_menu {
-	@include background(linear-gradient(top left, #C1CDCD, #FFF));
-	@include border-top-left-radius(25px);
+	@include background(linear-gradient(right left, #C1CDCD, #FFF));
+	@include border-top-left-radius(15px);
 	height: 35px;
     padding-left: 25px;
     margin: 1px 5px 0 5px;
@@ -37,7 +36,7 @@ html {
 #kanban{
     margin: 5px 5px 5px 5px;
     width: 99%;
-    height: 94%;
+    height: 90%;
     overflow:hidden;
     cursor: move;
 }
@@ -52,53 +51,32 @@ html {
     }
 }
 
-#trashcan {
-    position: fixed;
-    bottom: 25px;
-    left: 250px;
-    font-size: 3em;
-}
-
 #board_control {
     position: fixed;
     z-index: 101;
-    bottom: 25px;
-    a {
-        display: block;
-        float:right;
-        &#post_stack_yellow {
-            background-image: image-url("297352.jpg");
-            height: 50px;
-            width: 50px;
-            span {
-            	display: none;
-        	}
+    bottom: 5px;
+    ul li {
+        display: inline;
+        font-size: 3em;
+        #trashcan {
+            
         }
-        &#post_stack_pink {
-            background-image: image-url("51tj3dkukJL._SL75_SS50_.jpg");
-            height: 50px;
-            width: 50px;
-            span {
-                display: none;
-            }
+        &#post_stack_yellow {
+            
+        }
+        &#globalmove {
+            
         }
         &#black_pen {
-            background-image: image-url("rBEDik_xR_IIAAAAAADkfYPLXFkAADluQOmzsYAAOSV253.jpg");
-            height: 50px;
-            width: 50px;
-            span {
-                display: none;
-            }
+            
         }
         &#eraser {
-            background-image: image-url("41b20q-NztL._SL75_SS50_.jpg");
-            height: 50px;
-            width: 50px;
-            span {
-                display: none;
-            }
+            
         }
-    }
+        span {
+            display: none;
+        }
+    }   
 }
 
 .note {
@@ -130,3 +108,11 @@ html {
     }
 }
 
+#site_footer {
+	height: 20px;
+	width: 100%;
+	text-align: center;
+	margin-left: 5px;
+	@include background(linear-gradient(right left, #C1CDCD, #FFF));
+	@include border-bottom-left-radius(15px);
+}

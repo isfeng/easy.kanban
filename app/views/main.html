@@ -25,14 +25,19 @@
   <body>
     <div id="site_menu">
         <ul>
-            <li id="home"><a class="foundicon-home" href="/kanbans"><span>Home</span></a></li>
-            <li><a class="foundicon-settings" href="/settings"><span>Settings</span></a></li>
+            <li id="home"><a class="foundicon-home" href="/kanbans"><span>#{if user!=null}Home#{/if}#{elseif user==null}Sign in#{/elseif}</span></a></li>
             #{if user!=null}
-            <li id="logout" style="float:right;" class="foundicon-right-arrow"><a href="@{securesocial.SecureSocial.logout()}"><span>Sign out</span></a></li>
+            <li><a class="foundicon-settings" href="/settings"><span>Settings</span></a></li>
+            <li id="logout" style="float:right;" ><a class="foundicon-right-arrow" href="@{securesocial.SecureSocial.logout()}"><span>Sign out</span></a></li>
             #{/if}
         </ul>
     </div>
+
     #{doLayout /}
+
+	<div id="site_footer">
+		copy right 2013
+	</div>
 
     <script type="text/javascript">
       var _gaq = _gaq || [];

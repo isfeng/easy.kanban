@@ -4,12 +4,14 @@
     <div id="board">
         <div id="space"><canvas id="mycanvas"></canvas></div>
         <div id="board_control" >
-            <a id="post_stack_yellow" href="javascript:"><span>yellow post</span></a>
-            <a id="post_stack_pink" href="javascript:"><span>pink post</span></a>
-            <a id="black_pen" href="javascript:"><span>pen</span></a>
-            <a id="eraser" href="javascript:"><span>eraser</span></a>
+        	<ul>
+        	<li id="globalmove" class="foundicon-globe"><span>move</span></li>
+        	<li id="post_stack_yellow" class="foundicon-add-doc"><span>yellow post</span></li>
+        	<li id="black_pen" class="foundicon-graph"><span>pen</span></li>
+        	<li id="eraser" class="foundicon-remove"><span>eraser</span></li>
+            <li id="trashcan" class="foundicon-trash"></li>
+        	</ul>
         </div>
-        <div id="trashcan" class="foundation-trashcan"></div>
     </div>
 </div>
 
@@ -23,7 +25,6 @@
         var kanban = new Kanban('space','${kanban.id}',{board:'board', width: ${kanban.board.width}, height: ${kanban.board.height}});
         kanban.load();
         kanban.addStack('post_stack_yellow');
-        kanban.addStack('post_stack_pink');
         kanban.addPen('black_pen');
 		kanban.addEraser('eraser');
 
