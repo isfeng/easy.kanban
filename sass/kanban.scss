@@ -24,12 +24,14 @@ body {
     width: 99%;
     ul {
         margin: 0px;
-        li{
-            display: inline;
-            a {
-            	font-size: 1.5em;
-            }
+        li a {
+          	font-size: 1.5em;
         }
+    }
+    h2 {
+        font-size: 2.5em;
+        color: #8B8378;
+        display: inline;
     }
 }
 
@@ -91,18 +93,20 @@ body {
     z-index: 999;
     cursor: move;
     word-wrap: break-word;
-    margin: auto;
     width: 150px;
-    background: yellow;
+    height: 150px;
+    background: #fefabc;
+    overflow:hidden;
+    @include box-shadow(4px 4px 6px #333); 
     h5 {
         font-family: 'Shadows Into Bold', cursive;
         font-weight: bold;
+        margin:0;
     }
     p {
         font-family: 'Shadows Into Light', cursive;
         margin: 5px 1px 5px 1px;
-                font-weight: bold;
-
+        font-weight: bold;
     }
 }
 
@@ -123,4 +127,9 @@ body {
 	margin-left: 5px;
 	@include background(linear-gradient(right left, #C1CDCD, #FFF));
 	@include border-bottom-left-radius(15px);
+}
+
+.current_tool{
+    font-size: 4em !important;
+    color: blue;
 }

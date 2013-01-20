@@ -51,9 +51,11 @@ Mooml.register('text_note_tmpl', function()
 		'id' : 'text_note_form'
 	}, label('Title'), input({
 		'type' : 'text',
-		'id' : 'text_note_title'
+		'id' : 'text_note_title',
+		'maxlength': 8
 	}), label('Note'), textarea({
-		'id' : 'text_note_area'
+		'id' : 'text_note_area',
+		'maxlength': 140
 	})));
 });
 
@@ -190,7 +192,7 @@ var PostStack = new Class({
 		var stickyNote = new StickyNote(this.kanban.kid, {
 			onTextOk : function(el)
 			{
-				this.kanban.stickText(el, 0, 0);
+				this.kanban.stickText(el, 0, 0, true);
 			}.bind(this)
 		});
 		stickyNote.showTextForm();
@@ -201,7 +203,7 @@ var PostStack = new Class({
 var Kanban = new Class({
 
 	Implements : [ Options, Events ],
-	
+
 	current_action: 'drag', //draw, erase, drag
 	thickness: 2,
 
@@ -230,7 +232,7 @@ var Kanban = new Class({
 		});
 	},
 
-	stickText : function(textNote, x, y)
+	stickText : function(textNote, x, y, _center)
 	{
 		var el = textNote.inject($(this.container));
 
@@ -240,6 +242,7 @@ var Kanban = new Class({
 			precalculate : false,
 			onDrop : function(element, droppable, event)
 			{
+				console.log(element.getPosition(this.container));
 				/* only trashcan droppable */
 				if (droppable)
 				{
@@ -297,15 +300,15 @@ var Kanban = new Class({
 			}.bind(this)
 		})
 
-//		el.setPosition({
-//			'x' : x,
-//			'y' : y
-//		});
-		el.position();
-//		$(el).setStyles({
-//	          top: window.getCoordinates().width /2 ,
-//	          left: window.getCoordinates().width /2
-//	    });
+		if(_center)
+			el.position();
+		else
+		{
+			el.setPosition({
+				'x' : x,
+				'y' : y
+			});
+		}
 	},
 
 	stickDraw : function()
@@ -404,7 +407,7 @@ var Kanban = new Class({
 						var s = new createjs.Shape();
 						var g = s.graphics;
 						g.setStrokeStyle(2, 'round', 'round');
-						g.beginStroke("#EBECE4");
+						g.beginStroke("#8B8378");
 						g.moveTo(current_x, 50);
 						g.lineTo(current_x, $(this.container).getSize().y - 20);
 						this.stage.addChild(s);
@@ -424,9 +427,9 @@ var Kanban = new Class({
 
 		this.stage.onMouseDown = function(evt)
 		{
-			
-			
-			
+
+
+
 			//$(evt.nativeEvent.target).setStyle('cursor',  'url(/public/images/redarrow.cur), default');
 
 			this.isMouseDown = true;
@@ -477,7 +480,8 @@ var Kanban = new Class({
 
 		this.stage.onMouseUp = function(evt) {
 			this.isMouseDown = false;
-			this.saveBackground();
+			if(this.current_action=='draw'||this.current_action=='erase')
+				this.saveBackground();
 			//evt.nativeEvent.target.style.cursor = 'default';
 		}.bind(this);
 
@@ -562,6 +566,7 @@ var Kanban = new Class({
 			this.current_action = 'erase';
 			this.dragScroller.detach();
 			$('kanban').setStyle('cursor', 'pointer');
+			this.activateTool(eraser);
 		}.bind(this));
 	},
 
@@ -571,6 +576,7 @@ var Kanban = new Class({
 			this.current_action = 'draw';
 			this.dragScroller.detach();
 			$('kanban').setStyle('cursor', 'pointer');
+			this.activateTool(pen);
 		}.bind(this));
 	},
 
@@ -580,7 +586,17 @@ var Kanban = new Class({
 			this.current_action = 'drag';
 			this.dragScroller.attach();
 			$('kanban').setStyle('cursor', 'move');
+			this.activateTool(mover);
 		}.bind(this));
+	},
+
+	activateTool: function(el)
+	{
+
+		$('globalmove').removeClass('current_tool');
+		$('black_pen').removeClass('current_tool');
+		$('eraser').removeClass('current_tool');
+		$(el).addClass('current_tool');
 	}
 
 });

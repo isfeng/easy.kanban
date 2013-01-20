@@ -24,11 +24,12 @@
   </head>
   <body>
     <div id="site_menu">
-        <ul>
+        <h2 id="logo"><span>看板-</span></h2>
+        <ul class="inline-list right">
             <li id="home"><a class="foundicon-home" href="/kanbans"><span>#{if user!=null}Home#{/if}#{elseif user==null}Sign in#{/elseif}</span></a></li>
             #{if user!=null}
             <li><a class="foundicon-settings" href="/settings"><span>Settings</span></a></li>
-            <li id="logout" style="float:right;" ><a class="foundicon-right-arrow" href="@{securesocial.SecureSocial.logout()}"><span>Sign out</span></a></li>
+            <li id="logout"><a class="foundicon-right-arrow" href="@{securesocial.SecureSocial.logout()}"><span>Sign out</span></a></li>
             #{/if}
         </ul>
     </div>
