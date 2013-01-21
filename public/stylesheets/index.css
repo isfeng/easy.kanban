@@ -1,20 +1,20 @@
 /*
      customer home page, before login
 */
-/* line 6, ../../sass/index.scss */
+/* line 5, ../../sass/index.scss */
 body {
   background-image: url('/public/images/1357234889_49924.jpg?1358220742');
 }
 
-/* line 10, ../../sass/index.scss */
+/* line 9, ../../sass/index.scss */
 #main {
   margin: 100px;
 }
-/* line 12, ../../sass/index.scss */
+/* line 11, ../../sass/index.scss */
 #main h1 {
   font-family: 'Shadows Into Bold', cursive;
 }
-/* line 15, ../../sass/index.scss */
+/* line 14, ../../sass/index.scss */
 #main ul li {
   margin-left: 0px;
   list-style-type: none;

@@ -52,7 +52,7 @@ Mooml.register('text_note_tmpl', function()
 	}, label('Title'), input({
 		'type' : 'text',
 		'id' : 'text_note_title',
-		'maxlength': 8
+		'maxlength': 24
 	}), label('Note'), textarea({
 		'id' : 'text_note_area',
 		'maxlength': 140
@@ -178,11 +178,11 @@ var PostStack = new Class({
 	},
 
 	/* add edit event */
-	initialize : function(kanban, stack)
+	initialize : function(kanban, stack, color)
 	{
 		this.kanban = kanban;
-		$(stack).addEvent("click", function()
-		{
+		this.color = color;
+		$(stack).addEvent("click", function(){
 			this.pull();
 		}.bind(this));
 	},
@@ -190,9 +190,8 @@ var PostStack = new Class({
 	pull : function()
 	{
 		var stickyNote = new StickyNote(this.kanban.kid, {
-			onTextOk : function(el)
-			{
-				this.kanban.stickText(el, 0, 0, true);
+			onTextOk : function(el)	{
+				this.kanban.stickText(el, 0, 0, this.color, true);
 			}.bind(this)
 		});
 		stickyNote.showTextForm();
@@ -232,7 +231,7 @@ var Kanban = new Class({
 		});
 	},
 
-	stickText : function(textNote, x, y, _center)
+	stickText : function(textNote, x, y, color, _center)
 	{
 		var el = textNote.inject($(this.container));
 
@@ -258,7 +257,8 @@ var Kanban = new Class({
 						data : {
 							'id' : element.get('nid'),
 							'x' : element.getPosition(this.container).x,
-							'y' : element.getPosition(this.container).y
+							'y' : element.getPosition(this.container).y,
+							'color': color
 						},
 						onRequest : function()
 						{
@@ -300,6 +300,9 @@ var Kanban = new Class({
 			}.bind(this)
 		})
 
+		console.log(color);
+		el.setStyle('background-color', color);
+
 		if(_center)
 			el.position();
 		else
@@ -309,6 +312,7 @@ var Kanban = new Class({
 				'y' : y
 			});
 		}
+
 	},
 
 	stickDraw : function()
@@ -333,7 +337,7 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
-					this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y);
+					this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color);
 				}.bind(this));
 			}.bind(this),
 			onFailure : function()
@@ -347,9 +351,9 @@ var Kanban = new Class({
 		this._loadBackground();
 	},
 
-	addStack : function(stack)
+	addStack : function(stack, color)
 	{
-		var postStack = new PostStack(this, stack);
+		var postStack = new PostStack(this, stack, color);
 	},
 
 	_loadNotes : function()

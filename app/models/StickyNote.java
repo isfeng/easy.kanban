@@ -8,12 +8,12 @@ public class StickyNote extends BaseModel
 {
 	public int x;
 	public int y;
+	public String color;
 
 	@ManyToOne
 	public Kanban kanban;
 	@ManyToOne
 	public ValueStream value;
-
 
 
 	public StickyNote(Kanban kanban, int x, int y)

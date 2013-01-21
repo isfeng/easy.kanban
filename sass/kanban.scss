@@ -38,7 +38,7 @@ body {
 #kanban{
     margin: 5px 5px 5px 5px;
     width: 99%;
-    height: 90%;
+    height: 93%;
     overflow:hidden;
     cursor: move;
 }
@@ -57,7 +57,6 @@ body {
     position: fixed;
     z-index: 101;
     bottom: 5px;
-
     ul li {
         display: inline;
         font-size: 3em;
@@ -66,22 +65,19 @@ body {
             color: blue;
         }
         &#trashcan {
+            margin-left: 20px;
             &:hover {
                 cursor: move !important;
                 color: black;
             }
         }
-        &#post_stack_yellow {
-            
+        &#post_stack_yellow {        
         }
-        &#globalmove {
-            
+        &#globalmove {           
         }
-        &#black_pen {
-            
+        &#black_pen {           
         }
-        &#eraser {
-            
+        &#eraser {           
         }
         span {
             display: none;
@@ -95,7 +91,8 @@ body {
     word-wrap: break-word;
     width: 150px;
     height: 150px;
-    background: #fefabc;
+    //background: #fefabc;
+    padding: 2px;
     overflow:hidden;
     @include box-shadow(4px 4px 6px #333); 
     h5 {
@@ -105,7 +102,7 @@ body {
     }
     p {
         font-family: 'Shadows Into Light', cursive;
-        margin: 5px 1px 5px 1px;
+        //margin: 5px 1px 5px 1px;
         font-weight: bold;
     }
 }
@@ -113,10 +110,8 @@ body {
 #text_note_form {
     width: 95%;
     #text_note_title{
-
     }
     #text_note_area{
-
     }
 }
 
@@ -132,4 +127,10 @@ body {
 .current_tool{
     font-size: 4em !important;
     color: blue;
+}
+#post_stack_yellow {
+    color: #CDCD00 !important;
+}
+#post_stack_pink {
+    color: pink !important;
 }

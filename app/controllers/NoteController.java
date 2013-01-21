@@ -36,11 +36,12 @@ public class NoteController extends Controller
 	}
 	
 	
-	public static void updatePosition(long id, int x, int y)
+	public static void updatePosition(long id, int x, int y, String color)
 	{
 		TextNote stickynote = TextNote.findById(id);
 		stickynote.x = x;
 		stickynote.y = y;
+		stickynote.color = color;
 		
 		
 		List<ValueStream> vs = ValueStream.find("byKanban", stickynote.kanban).fetch();
