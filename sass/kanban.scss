@@ -62,22 +62,35 @@ body {
         font-size: 3em;
         &:hover {
             cursor: pointer;
-            color: blue;
+            color: blak;
         }
         &#trashcan {
             margin-left: 20px;
+            color: gray;     
             &:hover {
-                cursor: move !important;
+                color: gray;
+                cursor: default;
+            }
+        }
+        &#post_stack_yellow {
+        }
+        &#globalmove {
+            color: gray;
+            &:hover {
                 color: black;
             }
         }
-        &#post_stack_yellow {        
+        &#black_pen {
+            color: gray;
+            &:hover {
+                color: black;
+            }
         }
-        &#globalmove {           
-        }
-        &#black_pen {           
-        }
-        &#eraser {           
+        &#eraser {
+            color: gray;     
+            &:hover {
+                color: black;
+            }
         }
         span {
             display: none;
@@ -126,7 +139,7 @@ body {
 
 .current_tool{
     font-size: 4em !important;
-    color: blue;
+    color: black !important;
 }
 #post_stack_yellow {
     color: #CDCD00 !important;
