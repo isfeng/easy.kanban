@@ -29,7 +29,7 @@ public class KanbanController extends Controller
 	}
 	
 	
-	public static void create(@Required String name, @Required String goal, String values)
+	public static void create(@Required String name, @Required String goal, @Required int workflow, String workflow_customize, @Required int size)
 	{
 		if (validation.hasErrors())
 		{
@@ -42,15 +42,57 @@ public class KanbanController extends Controller
 		User _user = User.find("bySocialID", socialUser.id.id).first();
 		
 		
+		Board b = null;
+		switch (size)
+		{
+			case 1:
+				b = Board.getDefaultBoard("SMALL");
+				break;
+			case 2:
+				b = Board.getDefaultBoard("MEDIUM");
+				break;
+			case 3:
+				b = Board.getDefaultBoard("LARGE");
+				break;
+			default:
+				error();
+				break;
+		}
+		
 		Kanban k = new Kanban();
 		k.name = name;
 		k.goal = goal;
-		k.board = Board.getDefaultBoard();
+		k.board = b;
 		k.save();
 		
 		UserKanban uk = new UserKanban(_user, k);
 		uk.save();
 		
+		switch (workflow)
+		{
+			case 1:
+				createWorkflow("Todo,Done", k);
+				break;
+			case 2:
+				createWorkflow("Todo,In Progress, Done", k);
+				break;
+			case 3:
+				createWorkflow(name, k);
+				break;
+			case 4:
+				createWorkflow(workflow_customize, k);
+				break;
+			default:
+				error();
+				break;
+		}
+		
+		index();
+	}
+	
+	
+	private static void createWorkflow(String values, Kanban k)
+	{
 		if (values != null && !values.equals(""))
 		{
 			String valuearr[] = values.split(",");
@@ -60,8 +102,6 @@ public class KanbanController extends Controller
 				value.save();
 			}
 		}
-		
-		index();
 	}
 	
 	

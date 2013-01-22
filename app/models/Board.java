@@ -10,8 +10,8 @@ public class Board extends BaseModel
 	public String name;
 	
 	
-	public static Board getDefaultBoard()
+	public static Board getDefaultBoard(String size)
 	{
-		return Board.find("byName", "default").first();
+		return Board.find("byName", size).first();
 	}
 }

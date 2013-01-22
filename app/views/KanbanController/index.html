@@ -1,34 +1,20 @@
 #{extends 'main.html' /}
 
 <div class="row">
-    <h4 class="foundicon-smiley">
-		Welcome ${user.displayName}
-	</h4>
-</div>
-<div class="row">
-	<h3>User details</h3>
-	<ul>
-		<li class="foundicon-smiley">User id: ${user.id.id}</li>
-		<li>Logged in from: ${user.id.provider}</li>
-		<li>Email: ${user.email}</li>
-	</ul>
-</div>
-
-<div class="row">
-<h3>Kanban List</h3>
-<ul>
-#{list items:kanbans.kanban, as:'kanban'}
-    <li>
-    	<a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a>
-    	<a href="/kanbans/${kanban.id}/share" class="small button">Share ${kanban.name}</a>
-    	<input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/>
-    </li>
-#{/list}
-</ul>
+    <h3>Kanban List</h3>
+    <ul>
+    #{list items:kanbans.kanban, as:'kanban'}
+        <li>
+        	<a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a>
+        	<a href="/kanbans/${kanban.id}/share" class="small button">Share ${kanban.name}</a>
+        	<input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/>
+        </li>
+    #{/list}
+    </ul>
 </div>
 
 <div class="row">
-<a href="/kanbans/new"><span>new kanban</span></a>
+    <a href="/kanbans/new"><span>new kanban</span></a>
 </div>
 
 <script type="text/javascript">
