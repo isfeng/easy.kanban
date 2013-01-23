@@ -47,11 +47,11 @@ body {
 
 #board {
   position: relative;
-  -moz-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  -o-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
+  -moz-border-image: url('/public/images/border.png?1358908772') 25 25 25 25 round round;
+  -webkit-border-image: url('/public/images/border.png?1358908772') 25 25 25 25 round round;
+  -webkit-border-image: url('/public/images/border.png?1358908772') 25 25 25 25 round round;
+  -o-border-image: url('/public/images/border.png?1358908772') 25 25 25 25 round round;
+  border-image: url('/public/images/border.png?1358908772') 25 25 25 25 round round;
   border-width: 20px;
 }
 #board #space {
@@ -60,7 +60,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('/public/images/textures/lined_paper.png?1358297570');
+  background-image: url('/public/images/textures/lined_paper.png?1358908773');
 }
 
 #board_control {
@@ -119,12 +119,12 @@ body {
   box-shadow: 4px 4px 6px #333333;
 }
 .note h5 {
-  font-family: 'Shadows Into Bold', cursive;
+  font-family: "Shadows Into Bold", cursive;
   font-weight: bold;
   margin: 0;
 }
 .note p {
-  font-family: 'Shadows Into Light', cursive;
+  font-family: "Shadows Into Light", cursive;
   font-weight: bold;
 }
 
@@ -154,7 +154,7 @@ body {
 }
 
 #post_stack_yellow {
-  color: #CDCD00 !important;
+  color: #cdcd00 !important;
 }
 
 #post_stack_pink {

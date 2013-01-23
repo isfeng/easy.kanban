@@ -304,13 +304,12 @@ figure {
   right: 83.33333%;
 }
 
-img, object, embed {
-  max-width: 100%;
+img {
   height: auto;
 }
 
-object, embed {
-  height: 100%;
+img, object, embed {
+  max-width: 100%;
 }
 
 img {
@@ -356,33 +355,27 @@ that IE7/8 do not support :nth-child.
 }
 .block-grid.one-up {
   margin: 0;
-  margin: 0 -8px;
 }
 .block-grid.one-up > li {
   width: 100%;
   padding: 0 0 15px;
-  padding: 0 8px 8px;
 }
 .block-grid.two-up {
   margin: 0 -15px;
-  margin: 0 -8px;
 }
 .block-grid.two-up > li {
   width: 50%;
   padding: 0 15px 15px;
-  padding: 0 8px 8px;
 }
 .block-grid.two-up > li:nth-child(2n+1) {
   clear: both;
 }
 .block-grid.three-up {
   margin: 0 -12px;
-  margin: 0 -8px;
 }
 .block-grid.three-up > li {
   width: 33.33333%;
   padding: 0 12px 12px;
-  padding: 0 8px 8px;
 }
 .block-grid.three-up > li:nth-child(3n+1) {
   clear: both;
@@ -546,7 +539,7 @@ h6 {
 }
 
 hr {
-  border: solid #ddd;
+  border: solid #dddddd;
   border-width: 1px 0 0;
   clear: both;
   margin: 22px 0 21px;
@@ -637,7 +630,7 @@ blockquote, blockquote p {
 blockquote {
   margin: 0 0 17px;
   padding: 9px 20px 0 19px;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid #dddddd;
 }
 blockquote cite {
   display: block;
@@ -655,7 +648,7 @@ abbr, acronym {
   text-transform: uppercase;
   font-size: 90%;
   color: #222222;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
   cursor: help;
 }
 
@@ -702,7 +695,7 @@ abbr {
 
   /* Don't show links for images, or javascript/internal links */
   pre, blockquote {
-    border: 1px solid #999;
+    border: 1px solid #999999;
     page-break-inside: avoid;
   }
 
@@ -876,13 +869,13 @@ select {
 
 /* Fieldsets */
 fieldset {
-  border: solid 1px #ddd;
+  border: solid 1px #dddddd;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   border-radius: 3px;
-  padding: 12px 12px 0;
+  padding: 12px;
   margin: 18px 0;
 }
 fieldset legend {
@@ -894,9 +887,13 @@ fieldset legend {
 }
 
 /* Errors */
-.error input, input.error, .error textarea, textarea.error {
+.error input, input.error, .error textarea, textarea.error, .error input:focus, input.error:focus, .error textarea:focus, textarea.error:focus {
   border-color: #c60f13;
   background-color: rgba(198, 15, 19, 0.1);
+}
+
+.error input:focus, input.error:focus, .error textarea:focus, textarea.error:focus {
+  outline-color: #f5797c;
 }
 
 .error label, label.error {
@@ -918,11 +915,6 @@ fieldset legend {
   -moz-border-radius-bottomright: 2px;
   -webkit-border-bottom-right-radius: 2px;
   border-bottom-right-radius: 2px;
-}
-
-.error textarea:focus, textarea.error:focus {
-  background: #fafafa;
-  border-color: #b3b3b3;
 }
 
 /* Custom Forms ---------------------- */
@@ -1125,12 +1117,12 @@ form.custom .custom.disabled {
 /* Correct FF custom dropdown height */
 @-moz-document url-prefix() {
   form.custom div.custom.dropdown a.selector {
-    height: 30px;
+    height: 28px;
   }
 }
 
 .lt-ie9 form.custom div.custom.dropdown a.selector {
-  height: 30px;
+  height: 28px;
 }
 
 /* Normal Buttons ---------------------- */
@@ -1254,7 +1246,7 @@ form.custom .custom.disabled {
   -moz-box-shadow: none;
   box-shadow: none;
 }
-.button.disabled :hover, .button[disabled] :hover {
+.button.disabled:hover, .button[disabled]:hover {
   background: #2ba6cb;
 }
 .button.disabled.success, .button[disabled].success {
@@ -1395,13 +1387,21 @@ input[type=submit].button, button.button {
   white-space: nowrap;
   list-style: none;
 }
-.button.dropdown > ul li a {
+.button.dropdown > ul li a, .button.dropdown > ul li button {
   display: block;
   color: #555;
   font-size: 13px;
   font-weight: normal;
   padding: 6px 14px;
   text-align: left;
+}
+.button.dropdown > ul li button {
+  width: 100%;
+  border: inherit;
+  background: inherit;
+  font-family: inherit;
+  margin: inherit;
+  -webkit-font-smoothing: antialiased;
 }
 .button.dropdown > ul li:hover, .button.dropdown > ul li:focus {
   background-color: #e3f4f9;
@@ -1460,6 +1460,9 @@ input[type=submit].button, button.button {
 }
 .button.dropdown.split > a:hover, .button.dropdown.split > a:focus {
   background-color: #2284a1;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
 }
 .button.dropdown.split.large > a {
   padding: 15px 75px 16px 30px;
@@ -1603,14 +1606,14 @@ ul.button-group li {
 ul.button-group li:first-child {
   margin-left: 0;
 }
-ul.button-group.radius li a.button, ul.button-group.radius li a.button.radius, ul.button-group.radius li a.button-rounded, ul.button-group.radius li input[type="submit"].button, ul.button-group.radius li input[type="submit"].button.radius, ul.button-group.radius li input[type="submit"].button-rounded {
+ul.button-group.radius li .button, ul.button-group.radius li .button.radius, ul.button-group.radius li .button-rounded {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   -ms-border-radius: 0px;
   -o-border-radius: 0px;
   border-radius: 0px;
 }
-ul.button-group.radius li:first-child a.button, ul.button-group.radius li:first-child a.button.radius, ul.button-group.radius li:first-child input[type="submit"].button, ul.button-group.radius li:first-child input[type="submit"].button.radius {
+ul.button-group.radius li:first-child .button, ul.button-group.radius li:first-child .button.radius {
   -moz-border-radius-topleft: 3px;
   -webkit-border-top-left-radius: 3px;
   border-top-left-radius: 3px;
@@ -1618,7 +1621,7 @@ ul.button-group.radius li:first-child a.button, ul.button-group.radius li:first-
   -webkit-border-bottom-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-ul.button-group.radius li:first-child a.button.rounded, ul.button-group.radius li:first-child input[type="submit"].button.rounded {
+ul.button-group.radius li:first-child .button.rounded {
   -moz-border-radius-topleft: 1000px;
   -webkit-border-top-left-radius: 1000px;
   border-top-left-radius: 1000px;
@@ -1626,7 +1629,7 @@ ul.button-group.radius li:first-child a.button.rounded, ul.button-group.radius l
   -webkit-border-bottom-left-radius: 1000px;
   border-bottom-left-radius: 1000px;
 }
-ul.button-group.radius li:last-child a.button, ul.button-group.radius li:last-child a.button.radius, ul.button-group.radius li:last-child input[type="submit"].button, ul.button-group.radius li:last-child input[type="submit"].button.radius {
+ul.button-group.radius li:last-child .button, ul.button-group.radius li:last-child .button.radius {
   -moz-border-radius-topright: 3px;
   -webkit-border-top-right-radius: 3px;
   border-top-right-radius: 3px;
@@ -1634,7 +1637,7 @@ ul.button-group.radius li:last-child a.button, ul.button-group.radius li:last-ch
   -webkit-border-bottom-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-ul.button-group.radius li:last-child a.button.rounded, ul.button-group.radius li:last-child input[type="submit"].button.rounded {
+ul.button-group.radius li:last-child .button.rounded {
   -moz-border-radius-topright: 1000px;
   -webkit-border-top-right-radius: 1000px;
   border-top-right-radius: 1000px;
@@ -1814,7 +1817,7 @@ div.button-bar ul.button-group:last-child {
   color: #fff;
 }
 .tabs.pill.contained {
-  border-bottom: solid 1px #eee;
+  border-bottom: solid 1px #eeeeee;
   margin-bottom: 0;
 }
 .tabs.pill.two-up dd, .tabs.pill.two-up li, .tabs.pill.three-up dd, .tabs.pill.three-up li, .tabs.pill.four-up dd, .tabs.pill.four-up li, .tabs.pill.five-up dd, .tabs.pill.five-up li {
@@ -1828,13 +1831,13 @@ div.button-bar ul.button-group:last-child {
 .tabs.two-up dt, .tabs.two-up dd, .tabs.two-up li {
   width: 50%;
 }
-.tabs.three-up dt, .tabs.three-up dd, .tabs.two-up li {
+.tabs.three-up dt, .tabs.three-up dd, .tabs.three-up li {
   width: 33.33%;
 }
-.tabs.four-up dt, .tabs.four-up dd, .tabs.two-up li {
+.tabs.four-up dt, .tabs.four-up dd, .tabs.four-up li {
   width: 25%;
 }
-.tabs.five-up dt, .tabs.five-up dd, .tabs.two-up li {
+.tabs.five-up dt, .tabs.five-up dd, .tabs.five-up li {
   width: 20%;
 }
 
@@ -2023,7 +2026,7 @@ div.alert-box a.close:hover, div.alert-box a.close:focus {
   border-color: transparent transparent rgba(0, 0, 0, 0.85) transparent !important;
   top: -10px !important;
 }
-.tooltip.tip-top > .nub {
+.tooltip.tip-top > .nub, .tooltip.tip-centered-top > .nub {
   border-color: black transparent transparent transparent;
   border-color: rgba(0, 0, 0, 0.85) transparent transparent transparent;
   top: auto;
@@ -2270,6 +2273,14 @@ ul.pagination li.current a:hover, ul.pagination li.current a:focus {
   background: #2ba6cb;
 }
 
+div.pagination-centered {
+  text-align: center;
+}
+div.pagination-centered ul > li {
+  float: none;
+  display: inline-block;
+}
+
 /* Breadcrums ---------------------- */
 ul.breadcrumbs {
   display: block;
@@ -2363,7 +2374,7 @@ ul.inline-list > li > *, ul.link-list > li > * {
 }
 .th img {
   display: block;
-  border: solid 4px #fff;
+  border: solid 4px white;
   -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
@@ -2421,7 +2432,7 @@ table {
   -o-border-radius: 3px;
   border-radius: 3px;
   margin: 0 0 18px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
 }
 
 table thead, table tfoot {
@@ -2475,7 +2486,7 @@ table tbody tr td {
 ul.vcard {
   display: inline-block;
   margin: 0 0 12px 0;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   padding: 10px;
 }
 ul.vcard li {
@@ -2636,12 +2647,21 @@ div.progress.round .meter {
   z-index: 99;
 }
 
+/* Add .sticky class for using top bar as a sticky navigation when scrolling passed it. Add the class .sticky to a top bar using .contain-to-grid but leave off .fixed, javascript will take care of that */
+.sticky {
+  float: left;
+  overflow: hidden;
+}
+.sticky.fixed {
+  float: none;
+}
+
 /* <nav> */
 .top-bar {
   background: #222222;
-  height: 45px;
+  min-height: 45px;
   line-height: 45px;
-  margin: 0 0 30px;
+  margin: 0 0 30px 0;
   padding: 0;
   width: 100%;
   position: relative;
@@ -2684,6 +2704,7 @@ div.progress.round .meter {
   /* Dividers between navigation */
   /* Put a button in an <li> but give is a class */
   /* Put a search bar or text input in the bar */
+  /* Put login bar in the top bar */
   /* Hide the triangle for breakpoint menu */
   /* li.has-dropdown */
 }
@@ -2740,6 +2761,8 @@ div.progress.round .meter {
   font-size: 13px;
   margin-top: -1px;
   height: 22.5px;
+  margin-bottom: 0;
+  width: 130px;
 }
 .top-bar ul > li.search form input[type=text] + .button {
   border-left: none;
@@ -2759,6 +2782,65 @@ div.progress.round .meter {
   margin-bottom: 0;
 }
 .top-bar ul > li.search:hover, .top-bar ul > li.search:focus {
+  background: #222222;
+}
+.top-bar ul > li.login {
+  padding: 0 15px;
+}
+.top-bar ul > li.login form {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  width: 300px;
+}
+.top-bar ul > li.login form input {
+  float: left;
+  width: auto;
+  font-size: 13px;
+  margin-top: -1px;
+  height: 22.5px;
+  margin-bottom: 0;
+}
+.top-bar ul > li.login form input[type=text] {
+  -moz-border-radius-topright: 0;
+  -webkit-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 120px;
+}
+.top-bar ul > li.login form input[type=password] {
+  margin-bottom: 0;
+  -moz-border-radius-topleft: 0;
+  -webkit-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  width: 120px;
+}
+.top-bar ul > li.login form input[type=password] + .button {
+  border-left: none;
+  -moz-border-radius-topleft: 0;
+  -webkit-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+  -moz-border-radius-topright: 2px;
+  -webkit-border-top-right-radius: 2px;
+  border-top-right-radius: 2px;
+  -moz-border-radius-bottomright: 2px;
+  -webkit-border-bottom-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  float: left;
+  font-size: 12px;
+  margin-top: -1px;
+  padding: 5px 12px 4px;
+  width: 60px;
+}
+.top-bar ul > li.login:hover, .top-bar ul > li.login:focus {
   background: #222222;
 }
 .top-bar ul > li.toggle-topbar {
@@ -2870,7 +2952,7 @@ div.progress.round .meter {
 }
 .top-bar ul.right .has-dropdown .dropdown {
   left: auto;
-  right: -1px;
+  right: 0px;
 }
 .top-bar ul.right .has-dropdown .dropdown li.has-dropdown > .dropdown {
   right: 100%;
@@ -2909,15 +2991,22 @@ div.progress.round .meter {
   line-height: 30px;
   margin-top: 7px;
 }
-.lt-ie9 .top-bar ul li a:hover, .lt-ie9 .top-bar ul li a:focus {
-  color: #cccccc;
-}
 .lt-ie9 .top-bar ul li a img {
   margin-top: -5px;
   vertical-align: middle;
 }
-.lt-ie9 .top-bar ul li a.active {
-  background: #151515;
+
+.lt-ie9 .top-bar section > ul > li a:hover, .lt-ie9 .top-bar section > ul > li a:focus {
+  color: #cccccc;
+}
+.lt-ie9 .top-bar section > ul > li:hover, .lt-ie9 .top-bar section > ul > li:focus {
+  background: black;
+}
+.lt-ie9 .top-bar section > ul > li.search:hover, .lt-ie9 .top-bar section > ul > li.search:focus, .lt-ie9 .top-bar section > ul > li.has-button:hover, .lt-ie9 .top-bar section > ul > li.has-button:focus {
+  background: none;
+}
+.lt-ie9 .top-bar section > ul > li.active {
+  background: black;
   color: #d9d9d9;
 }
 
@@ -3011,7 +3100,7 @@ div.progress.round .meter {
   padding-right: 55px;
 }
 .nav-bar > li.has-flyout.is-touch > a.flyout-toggle {
-  border-left: 1px dashed #666;
+  border-left: 1px dashed #666666;
 }
 .nav-bar > li > a:first-child {
   position: relative;
@@ -3108,7 +3197,7 @@ ul.flyout, .nav-bar li ul {
   list-style: none;
 }
 ul.flyout li, .nav-bar li ul li {
-  border-left: solid 3px #CCC;
+  border-left: solid 3px #cccccc;
 }
 ul.flyout li a, .nav-bar li ul li a {
   background: #f2f2f2;
