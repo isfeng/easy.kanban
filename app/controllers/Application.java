@@ -31,10 +31,5 @@ public class Application extends Controller
 		render("KanbanController/show.html");
 	}
 	
-	public static void testwelcome()
-	{
-		render();
-	}
-	
 	
 }
