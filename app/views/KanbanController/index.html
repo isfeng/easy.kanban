@@ -5,7 +5,7 @@
     <ul>
     #{list items:kanbans.kanban, as:'kanban'}
         <li>
-        	<a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a>
+        	<a href="/kanbans/${kanban.id}" class="small button">${kanban.name}</a>
         	<a href="/kanbans/${kanban.id}/share" class="small button">Share ${kanban.name}</a>
         	<input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/>
         </li>
