@@ -388,11 +388,11 @@ var Kanban = new Class({
 
 				var value_stream = json.stream;
 				var space_width = $(this.container).getSize().x;
-				console.log(space_width);
+				//console.log(space_width);
 				var value_size = value_stream.length;
-				console.log(value_size);
+				//console.log(value_size);
 				var value_width = space_width / value_size;
-				console.log(value_width);
+				//console.log(value_width);
 				var current_x = 0;
 				value_stream.each(function(el)
 				{
@@ -403,6 +403,7 @@ var Kanban = new Class({
 					var a_value = new createjs.Text(el.value, 'bold 36px Shadows Into Light');
 					a_value.x = value_center;
 					a_value.y = 10;
+					a_value.textAlign = "center";
 					this.stage.addChild(a_value);
 
 					// draw line
