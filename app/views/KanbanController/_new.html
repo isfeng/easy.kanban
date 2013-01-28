@@ -1,5 +1,10 @@
 #{extends 'main.html' /}
 
+
+<div class="row">
+	<h3 class="subheader">Choose Kanban Template:</h3>
+</div>
+
 <div class="row">
 	#{ifErrors}
 		#{errors}
@@ -9,35 +14,32 @@
 	   	#{/errors}
 	#{/ifErrors}
 </div>
-<div class="row">
-	<label>Choose Kanban Template:</label>
-</div>
 
-<div class="row">
+<div class="row template">
 	<div class="four columns">
 		<div class="row">
-			<a href="javascript:flow('Todo,In Progress,Done');"><img src="/public/images/tiny01.png"></a>
+			<a class="template" href="javascript:flow('Todo,In Progress,Done');"><img src="/public/images/tiny01.png"></a>
 		</div>
 		<div class="row">
-			<a href="javascript:flow('Todo,Done');"><img src="/public/images/tiny02.png"></a>
+			<a class="template" href="javascript:flow('Todo,Done');"><img src="/public/images/tiny02.png"></a>
 		</div>
 	</div>
 	<div class="eight columns">
-		<a href="javascript:flow('Backlog,Development,Test,Deploy,Done');"><img src="/public/images/small.png"></a>
+		<a class="template" href="javascript:flow('Backlog,Development,Test,Deploy,Done');"><img src="/public/images/small.png"></a>
 	</div>
 </div>
 
-<div class="row">
+<div class="row template">
 	<div class="four columns">
 		<div class="row">
-			<a href="javascript:flow('留言板');"><img src="/public/images/tiny03.png"></a>
+			<a class="template" href="javascript:flow('留言板');"><img src="/public/images/tiny03.png"></a>
 		</div>
 		<div class="row">
-			<a href="javascript:flow('Message Board');"><img src="/public/images/tiny04.png"></a>
+			<a class="template" href="javascript:flow('Message Board');"><img src="/public/images/tiny04.png"></a>
 		</div>
 	</div>
 	<div class="eight columns">
-		<a href="javascript:flow('Requirements,Design,Implementation,Verification,Maintenance');"><img src="/public/images/small02.png"></a>
+		<a class="template" href="javascript:flow('Requirements,Design,Implementation,Verification,Maintenance');"><img src="/public/images/small02.png"></a>
 	</div>
 </div>
 

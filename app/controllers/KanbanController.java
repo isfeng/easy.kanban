@@ -91,7 +91,7 @@ public class KanbanController extends Controller
 //				break;
 //		}
 		
-		index();
+		show(k.id);
 	}
 	
 	

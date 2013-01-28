@@ -23,22 +23,72 @@
     <![endif]-->
   </head>
   <body>
-    <div id="site_menu">
-        <h2 id="logo"><span>看板-</span></h2>
-        <ul class="inline-list right">
-            <li id="home"><a class="foundicon-home" href="/kanbans"><span>#{if user!=null}Home#{/if}#{elseif user==null}Sign in#{/elseif}</span></a></li>
-            #{if user!=null}
-            <li><a class="foundicon-settings" href="/settings"><span>Settings</span></a></li>
-            <li id="logout"><a class="foundicon-right-arrow" href="@{securesocial.SecureSocial.logout()}"><span>Sign out</span></a></li>
-            #{/if}
+    <div class="">
+      <nav class="top-bar">
+        <ul>
+          <li class="name"><h1><a href="/">看板#{if kanban} - ${kanban.name}#{/if}</a></h1></li>
         </ul>
+        <section>
+          <ul class="right">
+            <li class="toggle-topbar"><a href="#"></a></li>
+            <li><a href="/kanbans">Home</a></li>
+            <li class="toggle-topbar"><a href="#"></a></li>
+            <li><a href="/settings">Setting</a></li>
+            <li class="toggle-topbar"><a href="#"></a></li>
+            <li><a href="@{securesocial.SecureSocial.logout}">Sign out</a></li>
+          </ul>
+        </section>
+      </nav>
     </div>
+    
+
 
     #{doLayout /}
 
-	<div id="site_footer">
-		Copyright © 2013 OT Team Inc. 保留一切權利。
-	</div>
+<footer class="row">
+      <section class="five columns">
+        <h6><strong>Made by ZURB</strong></h6>
+        <p>Foundation is made by <a href="http://www.zurb.com/">ZURB</a>, a product design company in Campbell, California. We've put more than 14 years of experience building web products, services and websites into this framework. <a href="../about.php">Foundation Info and Goodies &rarr;</a></p>
+      </section>
+
+      <section class="three columns">
+        <h6><strong>Using Foundation?</strong></h6>
+        <p>Let us know how you're using Foundation and we might feature you as an example! <a href="mailto:foundation@zurb.com?subject=I'm%20using%20Foundation">Get in touch &rarr;</a></p>
+      </section>
+
+      <section class="four columns">
+        <h6><strong>Need some help?</strong></h6>
+        <p>For answers or help visit the <a href="support.php">Support page</a>.</p>
+        <ul class="inline-list">
+          <li>
+            <a href="http://www.facebook.com/ZURB" target="_blank"><span class="glyph social">d</span></a>
+          </li>
+          <li>
+            <a href="https://plusone.google.com/_/+1/confirm?url=http://foundation.zurb.com&title=Foundation%20from%20ZURB" target="_blank"><span class="glyph social">l</span></a>
+          </li>
+          <li>
+            <a href="http://www.twitter.com/foundationzurb" target="_blank"><span class="glyph social">e</span></a>
+          </li>
+        </ul>
+      </section>
+    </footer>
+
+    <div id="copyright">
+      <div class="row">
+        <div class="four columns">
+          <p>Site content &copy; 2013 ZURB, inc.</p>
+        </div>
+        <div class="eight columns">
+          <ul class="inline-list right">
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="../download.php">Download</a></li>
+            <li><a href="index.php">Documentation</a></li>
+            <li><a href="../about.php">About</a></li>
+            <li><a href="http://feeds.feedburner.com/zurb/blog">Subscribe to the ZURBlog</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <script type="text/javascript">
       var _gaq = _gaq || [];

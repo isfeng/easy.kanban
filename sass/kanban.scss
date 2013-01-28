@@ -4,8 +4,6 @@
 
 @import "compass/css3";
 @import "compass/layout";
-@import "animate";
-
 
 html {
     height: 100%;
@@ -128,11 +126,12 @@ body {
     }
 }
 
-#site_footer {
-	height: 20px;
-	width: 100%;
+.footer {
+	height: 100px;
+	width: 99%;
 	text-align: center;
 	margin-left: 5px;
+    margin-top: 50px;
 	@include background(linear-gradient(right left, #C1CDCD, #FFF));
 	@include border-bottom-left-radius(15px);
 }
@@ -150,14 +149,21 @@ body {
     color: pink !important;
 }
 
-#preview {
-
-}
-
-.formul li{
+.form ul li{
     list-style-type: none;;
 }
 
-#site_footer{
-    display: none;;    
+a.template img{
+    border:none;
 }
+
+a.template:hover img{
+    @include rotate(3deg);
+    @include single-transition();
+}
+
+#copyright { background: #3f3f3f; color: #fff; padding: 11px 0; margin-top: 30px; }
+
+#copyright p, #copyright ul.inline-list { margin-bottom: 0; }
+
+#copyright a { color: #fff; }
