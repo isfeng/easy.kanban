@@ -1,41 +1,96 @@
 #{extends 'main.html' /}
 
-<form id="" action="/kanbans" method="POST" class="custom">
-	<div class="row">
-		<div class="eight columns centered">
-			<fieldset>
-			    <legend>Create New Kanban</legend>
-			    
-			    #{ifErrors}
- 					#{errors}
-				    <div class="alert-box alert round">
- 						${error}<a href="" class="close">&times;</a>
-					</div>
-				   	#{/errors}
-				#{/ifErrors}
-				
-				<label>Title:</label>
-			    <input type="text" name="name" placeholder="kanban name" required/>
-			    
-			    <label>Goal:</label>
-			    <textarea name="goal" maxlength="140" rows="3" placeholder=""></textarea>
-			    
-			    <label>Workflow:</label>
-			    <label><input name="workflow" type="radio" value="1" CHECKED/> Todo -> Done </label>
-			    <label><input name="workflow" type="radio" value="2"/> Todo -> In Progress -> Done </label>
-			    <label><input name="workflow" type="radio" value="3"/> Show [Title] </label>
-			    <label><input name="workflow" type="radio" value="4"/> Customize <input type="text" name="workflow_customize" value=""/></label>
 
-			    <label>Size:</label>
-	  			<select name="size">
-				  <option value="1">Small</option>
-				  <option value="2" selected>Medium</option>
-				  <option value="3">Large</option>
-				</select>
+<div class="row">
+	<h3 class="subheader">Choose Kanban Template:</h3>
+</div>
 
-				<input type="submit" class="tiny radius button" value="OK"/>
-				
-		    </fieldset>
+<div class="row">
+	#{ifErrors}
+		#{errors}
+	    <div class="alert-box alert round">
+				${error}<a href="" class="close">&times;</a>
+		</div>
+	   	#{/errors}
+	#{/ifErrors}
+</div>
+
+<div class="row template">
+	<div class="four columns">
+		<div class="row">
+			<a class="template" href="javascript:flow('Todo,In Progress,Done');"><img src="/public/images/tiny01.png"></a>
+		</div>
+		<div class="row">
+			<a class="template" href="javascript:flow('Todo,Done');"><img src="/public/images/tiny02.png"></a>
 		</div>
 	</div>
-</form>
+	<div class="eight columns">
+		<a class="template" href="javascript:flow('Backlog,Development,Test,Deploy,Done');"><img src="/public/images/small.png"></a>
+	</div>
+</div>
+
+<div class="row template">
+	<div class="four columns">
+		<div class="row">
+			<a class="template" href="javascript:flow('留言板');"><img src="/public/images/tiny03.png"></a>
+		</div>
+		<div class="row">
+			<a class="template" href="javascript:flow('Message Board');"><img src="/public/images/tiny04.png"></a>
+		</div>
+	</div>
+	<div class="eight columns">
+		<a class="template" href="javascript:flow('Requirements,Design,Implementation,Verification,Maintenance');"><img src="/public/images/small02.png"></a>
+	</div>
+</div>
+
+<div style="display:none">
+	<form id="kform" action="/kanbans" method="POST" class="custom">
+		<input type="text" name="workflow_customize" id="workflow_customize" value=""/>
+		<input type="text" name="size" id="size" value=""/>
+		<input type="text" name="name" id="name" value=""/>
+	</form>
+</div>
+
+<script type="text/javascript">
+	Mooml.register('kanban_create_tmpl', function()
+	{
+		label(
+			input({
+				'type': 'text',
+				'id': 'kname',
+				'placeholder': '- Input Kanban Name Here -'
+			})
+		);
+	});
+
+	function flow(f)
+	{
+		var sm = new SimpleModal();
+		sm.addButton("Large", "btn primary", function(){
+			$('name').set('value', $('kname').value);
+			$('size').set('value', 3);
+			$('workflow_customize').set('value', f);
+			$('kform').submit();
+			this.hide();
+		});
+		sm.addButton("Medium", "btn primary", function(){
+			$('name').set('value', $('kname').value);
+			$('size').set('value', 2);
+			$('workflow_customize').set('value', f);
+			$('kform').submit();
+			this.hide();
+		}); 
+		sm.addButton("Small", "btn primary", function(){
+			$('name').set('value', $('kname').value);
+			$('size').set('value', 1);
+			$('workflow_customize').set('value', f);
+			$('kform').submit();
+			this.hide();
+		}); 
+		sm.show({
+	        "model":"modal",
+	        "title": "Kanban Name and Size",
+	        "contents": Mooml.render('kanban_create_tmpl').get('html')
+	    }); 
+	}
+</script>

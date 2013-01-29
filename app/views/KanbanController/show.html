@@ -1,5 +1,7 @@
 #{extends 'main.html' /}
-
+<style type="text/css">
+footer, #copyright{display: none;}
+</style>
 <div id="kanban">
     <div id="board">
         <div id="space"><canvas id="mycanvas"></canvas></div>
@@ -30,6 +32,12 @@
         kanban.addPen('black_pen');
 		kanban.addEraser('eraser');
         kanban.addMover('globalmove');
+
+        window.addEvent('resize', function(){
+            console.log($(document.body).getStyle('height'));
+            var reheight = $(document.body).getStyle('height').toInt()-5;
+            $('kanban').setStyle('height', reheight+'px');
+        });
     });
 
 </script>

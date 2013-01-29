@@ -3,11 +3,11 @@
 <div class="row">
     <h3>Kanban List</h3>
     <ul>
-    #{list items:kanbans.kanban, as:'kanban'}
+    #{list items:kanbans.kanban, as:'k'}
         <li>
-        	<a href="/kanbans/${kanban.id}" class="small button">${kanban.goal}</a>
-        	<a href="/kanbans/${kanban.id}/share" class="small button">Share ${kanban.name}</a>
-        	<input type="button"  class="small button" value="delete ${kanban.name}" onclick="deleteKanban(${kanban.id})"/>
+        	<a href="/kanbans/${k.id}" class="small button">${k.name}</a>
+        	<a href="/kanbans/${k.id}/share" class="small button">Share ${k.name}</a>
+        	<input type="button"  class="small button" value="delete ${k.name}" onclick="deleteKanban(${k.id})"/>
         </li>
     #{/list}
     </ul>

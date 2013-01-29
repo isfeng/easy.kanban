@@ -1,6 +1,6 @@
 Board(default_board_small):
   width: 1280
-  height: 800
+  height: 720
   name: SMALL
 Board(default_board_medium):
   width: 1920

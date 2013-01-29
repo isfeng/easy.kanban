@@ -29,7 +29,7 @@ public class KanbanController extends Controller
 	}
 	
 	
-	public static void create(@Required String name, @Required String goal, @Required int workflow, String workflow_customize, @Required int size)
+	public static void create(@Required String name, String goal, @Required int workflow, String workflow_customize, @Required int size)
 	{
 		if (validation.hasErrors())
 		{
@@ -54,6 +54,9 @@ public class KanbanController extends Controller
 			case 3:
 				b = Board.getDefaultBoard("LARGE");
 				break;
+			case 4:
+				b = Board.getDefaultBoard("TINY");
+				break;
 			default:
 				error();
 				break;
@@ -61,33 +64,34 @@ public class KanbanController extends Controller
 		
 		Kanban k = new Kanban();
 		k.name = name;
-		k.goal = goal;
+		//k.goal = goal;
 		k.board = b;
 		k.save();
 		
 		UserKanban uk = new UserKanban(_user, k);
 		uk.save();
+
+		createWorkflow(workflow_customize, k);
+//		switch (workflow)
+//		{
+//			case 1:
+//				createWorkflow("Todo,Done", k);
+//				break;
+//			case 2:
+//				createWorkflow("Todo,In Progress, Done", k);
+//				break;
+//			case 3:
+//				createWorkflow(name, k);
+//				break;
+//			case 4:
+//				createWorkflow(workflow_customize, k);
+//				break;
+//			default:
+//				error();
+//				break;
+//		}
 		
-		switch (workflow)
-		{
-			case 1:
-				createWorkflow("Todo,Done", k);
-				break;
-			case 2:
-				createWorkflow("Todo,In Progress, Done", k);
-				break;
-			case 3:
-				createWorkflow(name, k);
-				break;
-			case 4:
-				createWorkflow(workflow_customize, k);
-				break;
-			default:
-				error();
-				break;
-		}
-		
-		index();
+		show(k.id);
 	}
 	
 	
