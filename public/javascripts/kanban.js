@@ -191,6 +191,7 @@ var PostStack = new Class({
 		var stickyNote = new StickyNote(this.kanban.kid, {
 			onTextOk : function(el)	{
 				this.kanban.stickText(el, 0, 0, this.color, true);
+				_updatePos(el, this.color, this.kanban.container);
 			}.bind(this)
 		});
 		stickyNote.showTextForm();
@@ -287,7 +288,7 @@ var Kanban = new Class({
 			});
 		}
 
-		_updatePos(el, color, this.position);
+		//_updatePos(el, color, this.position);
 
 	},
 
