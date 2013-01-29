@@ -22,11 +22,11 @@ body {
 /* line 23, ../../sass/kanban.scss */
 #board {
   position: relative;
-  -moz-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  -o-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
-  border-image: url('/public/images/border.png?1358295197') 25 25 25 25 round round;
+  -moz-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
+  -webkit-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
+  -webkit-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
+  -o-border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
+  border-image: url('/public/images/border.png?1358345144') 25 25 25 25 round round;
   border-width: 20px;
 }
 /* line 27, ../../sass/kanban.scss */
@@ -36,7 +36,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('/public/images/textures/lined_paper.png?1358297570');
+  background-image: url('/public/images/textures/lined_paper.png?1358345144');
 }
 
 /* line 33, ../../sass/kanban.scss */
@@ -103,65 +103,66 @@ body {
   height: 150px;
   padding: 2px;
   overflow: hidden;
-  border: 1px solid #FFFAFA;
+  border-top: 1px solid snow;
+  border-left: 1px solid snow;
   -webkit-box-shadow: 4px 4px 6px #333333;
   -moz-box-shadow: 4px 4px 6px #333333;
   box-shadow: 4px 4px 6px #333333;
 }
-/* line 89, ../../sass/kanban.scss */
+/* line 90, ../../sass/kanban.scss */
 .note h5 {
-  font-family: 'Schoolbell', cursive;
+  font-family: "Schoolbell", cursive;
   margin: 0;
 }
-/* line 94, ../../sass/kanban.scss */
+/* line 95, ../../sass/kanban.scss */
 .note p {
-  font-family: 'Schoolbell', cursive;
+  font-family: "Schoolbell", cursive;
   font-weight: bold;
 }
 
-/* line 102, ../../sass/kanban.scss */
+/* line 103, ../../sass/kanban.scss */
 #text_note_form {
   width: 95%;
 }
 
-/* line 110, ../../sass/kanban.scss */
+/* line 111, ../../sass/kanban.scss */
 .current_tool {
   font-size: 4em !important;
   color: black !important;
 }
 
-/* line 115, ../../sass/kanban.scss */
+/* line 116, ../../sass/kanban.scss */
 #post_stack_yellow {
-  color: #CDCD00 !important;
+  color: #cdcd00 !important;
 }
 
-/* line 119, ../../sass/kanban.scss */
+/* line 120, ../../sass/kanban.scss */
 #post_stack_pink {
   color: pink !important;
 }
 
-/* line 123, ../../sass/kanban.scss */
+/* line 124, ../../sass/kanban.scss */
 .form ul li {
   list-style-type: none;
 }
 
-/* line 127, ../../sass/kanban.scss */
+/* line 128, ../../sass/kanban.scss */
 #copyright {
   background: #3f3f3f;
   color: #fff;
   padding: 11px 0;
   margin-top: 30px;
 }
-/* line 129, ../../sass/kanban.scss */
+/* line 130, ../../sass/kanban.scss */
 #copyright p, #copyright ul.inline-list {
   margin-bottom: 0;
 }
-/* line 132, ../../sass/kanban.scss */
+/* line 133, ../../sass/kanban.scss */
 #copyright a {
   color: #fff;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg-3 {
   -webkit-transform: rotate(-3deg);
   -moz-transform: rotate(-3deg);
@@ -170,7 +171,7 @@ body {
   transform: rotate(-3deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg-3:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -184,7 +185,7 @@ img.deg-3:hover {
   transition: all 1s false;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg-2 {
   -webkit-transform: rotate(-2deg);
   -moz-transform: rotate(-2deg);
@@ -193,7 +194,7 @@ img.deg-3:hover {
   transform: rotate(-2deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg-2:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -207,7 +208,7 @@ img.deg-2:hover {
   transition: all 1s false;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg-1 {
   -webkit-transform: rotate(-1deg);
   -moz-transform: rotate(-1deg);
@@ -216,7 +217,7 @@ img.deg-2:hover {
   transform: rotate(-1deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg-1:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -230,7 +231,7 @@ img.deg-1:hover {
   transition: all 1s false;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg0 {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -239,7 +240,7 @@ img.deg-1:hover {
   transform: rotate(0deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg0:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -253,7 +254,7 @@ img.deg0:hover {
   transition: all 1s false;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg1 {
   -webkit-transform: rotate(1deg);
   -moz-transform: rotate(1deg);
@@ -262,7 +263,7 @@ img.deg0:hover {
   transform: rotate(1deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg1:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -276,7 +277,7 @@ img.deg1:hover {
   transition: all 1s false;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg2 {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
@@ -285,7 +286,7 @@ img.deg1:hover {
   transform: rotate(2deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg2:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -299,7 +300,7 @@ img.deg2:hover {
   transition: all 1s false;
 }
 
-/* line 138, ../../sass/kanban.scss */
+/* line 139, ../../sass/kanban.scss */
 .deg3 {
   -webkit-transform: rotate(3deg);
   -moz-transform: rotate(3deg);
@@ -308,7 +309,7 @@ img.deg2:hover {
   transform: rotate(3deg);
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 141, ../../sass/kanban.scss */
 img.deg3:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);

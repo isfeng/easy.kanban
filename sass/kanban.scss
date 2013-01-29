@@ -84,7 +84,8 @@ body {
     //background: #fefabc;
     padding: 2px;
     overflow:hidden;
-    border: 1px solid #FFFAFA;
+    border-top: 1px solid #FFFAFA;
+    border-left: 1px solid #FFFAFA;
     @include box-shadow(4px 4px 6px #333);
     h5 {
         font-family: 'Schoolbell', cursive;
