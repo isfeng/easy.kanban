@@ -23,29 +23,23 @@
     <![endif]-->
   </head>
   <body>
-    <div class="">
-      <nav class="top-bar">
-        <ul>
-          <li class="name"><h1><a href="/">看板#{if kanban} - ${kanban.name}#{/if}</a></h1></li>
+    <nav class="top-bar">
+      <ul>
+        <li class="name"><h1><a href="#">看板#{if kanban} - ${kanban.name}#{/if}</a></h1></li>
+      </ul>
+      <section>
+        <ul class="right">
+          <li class="toggle-topbar"><a href="#"></a></li>
+          <li><a href="/kanbans">Home</a></li>
+          <li class="toggle-topbar"><a href="#"></a></li>
+          <li><a href="/settings">Setting</a></li>
+          <li class="toggle-topbar"><a href="#"></a></li>
+          <li><a href="@{securesocial.SecureSocial.logout}">Sign out</a></li>
         </ul>
-        <section>
-          <ul class="right">
-            <li class="toggle-topbar"><a href="#"></a></li>
-            <li><a href="/kanbans">Home</a></li>
-            <li class="toggle-topbar"><a href="#"></a></li>
-            <li><a href="/settings">Setting</a></li>
-            <li class="toggle-topbar"><a href="#"></a></li>
-            <li><a href="@{securesocial.SecureSocial.logout}">Sign out</a></li>
-          </ul>
-        </section>
-      </nav>
-    </div>
-    
-
-
+      </section>
+    </nav>
     #{doLayout /}
-
-<footer class="row">
+    <footer class="row">
       <section class="five columns">
         <h6><strong>Made by ZURB</strong></h6>
         <p>Foundation is made by <a href="http://www.zurb.com/">ZURB</a>, a product design company in Campbell, California. We've put more than 14 years of experience building web products, services and websites into this framework. <a href="../about.php">Foundation Info and Goodies &rarr;</a></p>
@@ -76,15 +70,13 @@
     <div id="copyright">
       <div class="row">
         <div class="four columns">
-          <p>Site content &copy; 2013 ZURB, inc.</p>
+          <p>&copy; 2013 OT Team, inc.</p>
         </div>
         <div class="eight columns">
           <ul class="inline-list right">
             <li><a href="../index.php">Home</a></li>
-            <li><a href="../download.php">Download</a></li>
             <li><a href="index.php">Documentation</a></li>
             <li><a href="../about.php">About</a></li>
-            <li><a href="http://feeds.feedburner.com/zurb/blog">Subscribe to the ZURBlog</a></li>
           </ul>
         </div>
       </div>
