@@ -249,32 +249,7 @@ var Kanban = new Class({
 				}
 				else
 				{
-//					_updatePos(element);
-					var req = new Request.JSON({
-						url : '/notes/pos',
-						method : 'post',
-						data : {
-							'id' : element.get('nid'),
-							'x' : element.getPosition(this.container).x,
-							'y' : element.getPosition(this.container).y,
-							'color': color
-						},
-						onRequest : function()
-						{
-							console.log('_updatePos onRequest');
-						},
-						onSuccess : function()
-						{
-							console.log('_updatePos onSuccess');
-						},
-						onFailure : function()
-						{
-							console.log('_updatePos onFailure');
-						}
-					});
-
-					if (!KanbanApp.offline)
-						req.send();
+					_updatePos(element, color, this.position);
 				}
 			}.bind(this),
 
@@ -311,6 +286,8 @@ var Kanban = new Class({
 				'y' : y
 			});
 		}
+
+		_updatePos(el, color, this.position);
 
 	},
 
@@ -605,32 +582,33 @@ var Kanban = new Class({
 
 });
 
-function _updatePos(el)
+function _updatePos(element, color, container)
 {
 	var req = new Request.JSON({
-		url : '/notes/pos',
-		method : 'post',
-		data : {
-			'id' : el.get('nid'),
-			'x' : el.getPosition(container).x,
-			'y' : el.getPosition(container).y
-		},
-		onRequest : function()
-		{
-			console.log('_updatePos onRequest');
-		},
-		onSuccess : function()
-		{
-			console.log('_updatePos onSuccess');
-		},
-		onFailure : function()
-		{
-			console.log('_updatePos onFailure');
-		}
-	});
+	url : '/notes/pos',
+	method : 'post',
+	data : {
+		'id' : element.get('nid'),
+		'x' : element.getPosition(container).x,
+		'y' : element.getPosition(container).y,
+		'color': color
+	},
+	onRequest : function()
+	{
+		console.log('_updatePos onRequest');
+	},
+	onSuccess : function()
+	{
+		console.log('_updatePos onSuccess');
+	},
+	onFailure : function()
+	{
+		console.log('_updatePos onFailure');
+	}
+});
 
-	if (!KanbanApp.offline)
-		req.send();
+if (!KanbanApp.offline)
+	req.send();
 }
 
 function _deleteNote(el)
