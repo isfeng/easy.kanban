@@ -62,8 +62,10 @@ Mooml.register('text_note_tmpl', function()
 /* sticky form */
 Mooml.register('post_tmpl', function(note)
 {
+	var random = Number.random(-3, 3);
+	var rotatecls = 'deg' + random;
 	div({
-		'class' : 'xxx',
+		'class' : 'note ' + rotatecls,
 		'nid' : note.nid
 	}, h5(note.title), p(note.note));
 });

@@ -84,6 +84,7 @@ body {
     //background: #fefabc;
     padding: 2px;
     overflow:hidden;
+    border: 1px solid #FFFAFA;
     @include box-shadow(4px 4px 6px #333);
     h5 {
         font-family: 'Shadows Into Bold', cursive;
@@ -142,22 +143,7 @@ a.template:hover img{
     }
 }
 
-.deg1{
-    @include rotate(1deg);
-}
-.deg2{
-    @include rotate(2deg);
-}
-.degx {
-    @include rotate(3deg);
-}
-.deg-1{
-    @include rotate(-1deg);
-}
-.deg-2{
-    @include rotate(-2deg);
-}
-.deg-3{
-    @include rotate(-3deg);
+@for $i from -3 through 3 {
+  .deg#{$i} { @include rotate(#{$i}deg); }
 }
 
