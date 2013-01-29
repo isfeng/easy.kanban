@@ -33,11 +33,16 @@ footer, #copyright{display: none;}
 		kanban.addEraser('eraser');
         kanban.addMover('globalmove');
 
-        window.addEvent('resize', function(){
-            console.log($(document.body).getStyle('height'));
-            var reheight = $(document.body).getStyle('height').toInt()-5;
-            $('kanban').setStyle('height', reheight+'px');
-        });
+        resizeKanban();
+        window.addEvent('resize', resizeKanban);
+
     });
+
+    function resizeKanban()
+    {
+        console.log($(document.body).getStyle('height'));
+        var reheight = $(document.body).getStyle('height').toInt()-60;
+        $('kanban').setStyle('height', reheight+'px');
+    }
 
 </script>

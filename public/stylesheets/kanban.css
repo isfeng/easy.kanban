@@ -8,14 +8,13 @@ html {
 
 /* line 11, ../../sass/kanban.scss */
 body {
-  height: 92%;
+  height: 100%;
 }
 
 /* line 15, ../../sass/kanban.scss */
 #kanban {
   margin: -25px 5px 5px 5px;
   width: 99%;
-  height: 100%;
   overflow: hidden;
   cursor: move;
 }
