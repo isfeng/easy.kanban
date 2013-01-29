@@ -15,31 +15,31 @@
 	#{/ifErrors}
 </div>
 
-<div class="row template">
+<div class="row">
 	<div class="four columns">
 		<div class="row">
-			<a class="template" href="javascript:flow('Todo,In Progress,Done');"><img src="/public/images/tiny01.png"></a>
+			<a href="javascript:flow('Todo,In Progress,Done');"><img class="deg-3" src="/public/images/tiny01.png"></a>
 		</div>
 		<div class="row">
-			<a class="template" href="javascript:flow('Todo,Done');"><img src="/public/images/tiny02.png"></a>
+			<a href="javascript:flow('Todo,Done');"><img class="deg2" src="/public/images/tiny02.png"></a>
 		</div>
 	</div>
 	<div class="eight columns">
-		<a class="template" href="javascript:flow('Backlog,Development,Test,Deploy,Done');"><img src="/public/images/small.png"></a>
+		<a href="javascript:flow('Backlog,Development,Test,Deploy,Done');"><img class="deg-1" src="/public/images/small.png"></a>
 	</div>
 </div>
 
-<div class="row template">
+<div class="row">
+	<div class="eight columns">
+		<a href="javascript:flow('Requirements,Design,Implementation,Verification,Maintenance');"><img class="deg-1" src="/public/images/small02.png"></a>
+	</div>
 	<div class="four columns">
 		<div class="row">
-			<a class="template" href="javascript:flow('留言板');"><img src="/public/images/tiny03.png"></a>
+			<a href="javascript:flow('留言板');"><img class="deg1" src="/public/images/tiny03.png"></a>
 		</div>
 		<div class="row">
-			<a class="template" href="javascript:flow('Message Board');"><img src="/public/images/tiny04.png"></a>
+			<a href="javascript:flow('Message Board');"><img class="deg2" src="/public/images/tiny04.png"></a>
 		</div>
-	</div>
-	<div class="eight columns">
-		<a class="template" href="javascript:flow('Requirements,Design,Implementation,Verification,Maintenance');"><img src="/public/images/small02.png"></a>
 	</div>
 </div>
 
@@ -66,23 +66,30 @@
 	function flow(f)
 	{
 		var sm = new SimpleModal();
+		sm.addButton("Huge", "btn primary", function(){
+			$('name').set('value', $('kname').value);
+			$('size').set('value', 'HUGE');
+			$('workflow_customize').set('value', f);
+			$('kform').submit();
+			this.hide();
+		});
 		sm.addButton("Large", "btn primary", function(){
 			$('name').set('value', $('kname').value);
-			$('size').set('value', 3);
+			$('size').set('value', 'LARGE');
 			$('workflow_customize').set('value', f);
 			$('kform').submit();
 			this.hide();
 		});
 		sm.addButton("Medium", "btn primary", function(){
 			$('name').set('value', $('kname').value);
-			$('size').set('value', 2);
+			$('size').set('value', 'MEDIUM');
 			$('workflow_customize').set('value', f);
 			$('kform').submit();
 			this.hide();
 		}); 
 		sm.addButton("Small", "btn primary", function(){
 			$('name').set('value', $('kname').value);
-			$('size').set('value', 1);
+			$('size').set('value', 'SMALL');
 			$('workflow_customize').set('value', f);
 			$('kform').submit();
 			this.hide();

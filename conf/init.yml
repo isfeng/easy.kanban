@@ -1,3 +1,7 @@
+Board(default_board_tiny):
+  width: 800
+  height: 450
+  name: TINY
 Board(default_board_small):
   width: 1280
   height: 720
@@ -10,7 +14,11 @@ Board(default_board_large):
   width: 2560
   height: 1440
   name: LARGE
-  
+Board(default_board_huge):
+  width: 3840
+  height: 2160
+  name: HUGE
+
 Kanban(kanban1):
   name: 10K
   goal: 10K

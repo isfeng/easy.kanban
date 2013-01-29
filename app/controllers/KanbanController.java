@@ -29,7 +29,7 @@ public class KanbanController extends Controller
 	}
 	
 	
-	public static void create(@Required String name, String goal, @Required int workflow, String workflow_customize, @Required int size)
+	public static void create(@Required String name, String goal, @Required int workflow, String workflow_customize, @Required String size)
 	{
 		if (validation.hasErrors())
 		{
@@ -42,26 +42,8 @@ public class KanbanController extends Controller
 		User _user = User.find("bySocialID", socialUser.id.id).first();
 		
 		
-		Board b = null;
-		switch (size)
-		{
-			case 1:
-				b = Board.getDefaultBoard("SMALL");
-				break;
-			case 2:
-				b = Board.getDefaultBoard("MEDIUM");
-				break;
-			case 3:
-				b = Board.getDefaultBoard("LARGE");
-				break;
-			case 4:
-				b = Board.getDefaultBoard("TINY");
-				break;
-			default:
-				error();
-				break;
-		}
-		
+		Board b = Board.getDefaultBoard(size);
+				
 		Kanban k = new Kanban();
 		k.name = name;
 		//k.goal = goal;

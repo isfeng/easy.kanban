@@ -87,12 +87,12 @@ body {
     border: 1px solid #FFFAFA;
     @include box-shadow(4px 4px 6px #333);
     h5 {
-        font-family: 'Shadows Into Bold', cursive;
-        font-weight: bold;
+        font-family: 'Schoolbell', cursive;
+        //font-weight: bold;
         margin:0;
     }
     p {
-        font-family: 'Shadows Into Light', cursive;
+         font-family: 'Schoolbell', cursive;
         //margin: 5px 1px 5px 1px;
         font-weight: bold;
     }
@@ -124,15 +124,6 @@ body {
     list-style-type: none;;
 }
 
-a.template img{
-    border:none;
-}
-
-a.template:hover img{
-    @include rotate(3deg);
-    @include single-transition();
-}
-
 #copyright {
     background: #3f3f3f; color: #fff; padding: 11px 0; margin-top: 30px; 
     p, ul.inline-list {
@@ -144,6 +135,11 @@ a.template:hover img{
 }
 
 @for $i from -3 through 3 {
-  .deg#{$i} { @include rotate(#{$i}deg); }
+    .deg#{$i} { @include rotate(#{$i}deg); }
+    
+    img.deg#{$i}:hover {
+        @include rotate(0deg);
+        @include single-transition();
+    }
 }
 

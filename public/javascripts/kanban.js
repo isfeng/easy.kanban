@@ -1,19 +1,16 @@
 //google web font
 WebFontConfig = {
-	google : {
-		families : [ 'Shadows+Into+Light::latin' ]
-	}
-};
-
-(function()
-{
-	var wf = document.createElement('script');
-	wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-	wf.type = 'text/javascript';
-	wf.async = 'true';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(wf, s);
-})();
+    google: { families: [ 'Schoolbell::latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
 
 //
 (function()
@@ -402,7 +399,7 @@ var Kanban = new Class({
 					// display text
 					var value_center = (current_x + (current_x + value_width)) / 2;
 					console.log(value_center);
-					var a_value = new createjs.Text(el.value, 'bold 36px Shadows Into Light');
+					var a_value = new createjs.Text(el.value, 'bold 36px Schoolbell cursive');
 					a_value.x = value_center;
 					a_value.y = 10;
 					a_value.textAlign = "center";
