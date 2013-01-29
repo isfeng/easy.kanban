@@ -63,7 +63,7 @@ Mooml.register('text_note_tmpl', function()
 Mooml.register('post_tmpl', function(note)
 {
 	div({
-		'class' : 'note',
+		'class' : 'xxx',
 		'nid' : note.nid
 	}, h5(note.title), p(note.note));
 });
