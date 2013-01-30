@@ -250,7 +250,7 @@ var Kanban = new Class({
 				}
 				else
 				{
-					_updatePos(element, color, this.position);
+					_updatePos(element, color, this.container);
 				}
 			}.bind(this),
 
