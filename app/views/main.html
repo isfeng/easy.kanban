@@ -26,17 +26,18 @@
     <nav class="top-bar">
       <ul>
         <li class="name"><h1><a href="#">看板#{if kanban} - ${kanban.name}#{/if}</a></h1></li>
+        <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
       <section>
         <ul class="right">
-          <li class="toggle-topbar"><a href="#"></a></li>
+          <li class="divider"></li>
           <li><a href="/kanbans">Home</a></li>
-          <li class="toggle-topbar"><a href="#"></a></li>
+          <li class="divider"></li>
           <li style="display:none"><a href="/settings">Setting</a></li>
-          <li class="toggle-topbar"><a href="#"></a></li>
+          <li class="divider"></li>
           <li><a href="@{securesocial.SecureSocial.logout}">Sign out</a></li>
         </ul>
-      </section>
+      </section>  
     </nav>
 
     #{doLayout /}
