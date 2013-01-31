@@ -22,8 +22,9 @@ body {
 
 #board {
     position: relative;
-	@include border-image(image-url("border.png") 25 25 25 25 round round);
-	border-width:20px;
+    border: 20px solid transparent; 
+	@include border-image(image-url("border.png") 25 25 25 25  stretch stretch);
+    border-width: 20px;
     #space {
 		@include stretch();
 		background-image: image-url("textures/lined_paper.png");
@@ -144,3 +145,8 @@ body {
     }
 }
 
+#logo {
+    background: image-url("logo4.png") no-repeat; 
+    padding-left: 40px;
+    background-size: 50px;    
+}
