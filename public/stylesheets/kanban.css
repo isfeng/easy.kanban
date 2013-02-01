@@ -330,3 +330,8 @@ img.deg3:hover {
   padding-left: 40px;
   background-size: 50px;
 }
+
+/* line 155, ../../sass/kanban.scss */
+ul.grid_kanban li {
+  list-style: none;
+}

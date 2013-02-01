@@ -4,12 +4,19 @@
     <h3 class="subheader">Kanban List:</h3>
 </div>
 <div class="row">
-    <ul>
+    <ul class="grid_kanban">
+        <li>
+            <div class="alert-box secondary">
+              <h4>This is a secondary alert (div.alert-box.secondary).</h4>
+              <a href="" class="close">&times;</a>
+            </div>
+        </li> 
     #{list items:kanbans.kanban, as:'k'}
         <li>
-        	<a href="/kanbans/${k.id}" class="small button">${k.name}</a>
-        	<a href="/kanbans/${k.id}/share" class="small button">Share ${k.name}</a>
-        	<input type="button"  class="small button" value="delete ${k.name}" onclick="deleteKanban(${k.id})"/>
+        <div class="alert-box secondary">
+        	<h4><a href="/kanbans/${k.id}">${k.name}</a></h4>
+            <a href="javascript:deleteKanban(${k.id})" class="close">&times;</a>
+        </div>
         </li>
     #{/list}
     </ul>
