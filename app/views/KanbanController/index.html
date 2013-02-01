@@ -5,12 +5,6 @@
 </div>
 <div class="row">
     <ul class="grid_kanban">
-        <li>
-            <div class="alert-box secondary">
-              <h4>This is a secondary alert (div.alert-box.secondary).</h4>
-              <a href="" class="close">&times;</a>
-            </div>
-        </li> 
     #{list items:kanbans.kanban, as:'k'}
         <li>
         <div class="alert-box secondary">
@@ -19,12 +13,14 @@
         </div>
         </li>
     #{/list}
+        <li>
+            <div class="alert-box secondary">
+              <h4><a href="/kanbans/new">Create New Kanban</a></h4>
+            </div>
+        </li> 
     </ul>
 </div>
 
-<div class="row">
-    <a href="/kanbans/new"><span>new kanban</span></a>
-</div>
 
 <script type="text/javascript">
 
