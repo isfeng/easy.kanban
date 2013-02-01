@@ -1,18 +1,16 @@
-#{extends 'main.html' /}
-<style type="text/css">
-footer, #copyright{display: none;}
-</style>
+#{extends '_kanban.html' /}
+
 <div id="kanban">
     <div id="board">
         <div id="space"><canvas id="mycanvas"></canvas></div>
         <div id="board_control" >
         	<ul>
-        	<li id="post_stack_yellow" class="icon-edit"><span>yellow post</span></li>
-            <li id="post_stack_pink" class="icon-edit"><span>pink post</span></li>
-        	<li id="black_pen" class="icon-pencil"><span>pen</span></li>
-        	<li id="eraser" class="icon-check-empty"><span>eraser</span></li>
-            <li id="globalmove" class="icon-move"><span>move</span></li>
-            <li id="trashcan" class="icon-trash"></li>
+        	<li id="post_stack_yellow" class="icon-edit icon-2x"><span>yellow post</span></li>
+            <li id="post_stack_pink" class="icon-edit icon-2x"><span>pink post</span></li>
+        	<li id="black_pen" class="icon-pencil icon-2x"><span>pen</span></li>
+        	<li id="eraser" class="icon-check-empty icon-2x"><span>eraser</span></li>
+            <li id="globalmove" class="icon-move icon-2x"><span>move</span></li>
+            <li id="trashcan" class="icon-trash icon-3x"><span>trash</span></li>
         	</ul>
         </div>
     </div>

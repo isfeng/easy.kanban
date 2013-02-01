@@ -1,0 +1,16 @@
+<nav class="top-bar" id="header">
+  <ul>
+    <li class="name"><h1 id="logo"><a href="#">EasyKanban#{if kanban} - ${kanban.name}#{/if}</a></h1></li>
+    <li class="toggle-topbar"><a href="#"></a></li>
+  </ul>
+  <section>
+    <ul class="right">
+      <li class="divider"></li>
+      <li><a href="/kanbans"><i class="icon-home"></i>Home</a></li>
+      <li class="divider"></li>
+      <li style="display:none"><a href="/settings">Setting</a></li>
+      <li style="display:none" class="divider"></li>
+      <li><a href="@{securesocial.SecureSocial.logout}"><i class="icon-signout"></i>Sign out</a></li>
+    </ul>
+  </section>  
+</nav>
