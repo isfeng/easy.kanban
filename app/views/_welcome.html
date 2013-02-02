@@ -9,35 +9,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EasyKanban</title>
     <link rel="stylesheet" href="public/stylesheets/app.css">
+    <link rel="stylesheet" href="@{'/public/stylesheets/kanban.css'}" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="@{'/public/stylesheets/css/font-awesome.min.css'}" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="public/stylesheets/index.css">
     <script src="public/javascripts/foundation/modernizr.foundation.js"></script>
+    <link rel="icon" href="@{'/public/images/logo4.png'}" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Patrick+Hand' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=326031667505182";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-    
-    #{doLayout /}
-    
-    <script src="public/javascripts/foundation/jquery.js"></script>
-    <!-- Application Javascript, safe to override -->
-    <script src="public/javascripts/foundation/app.js"></script>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-37754878-1']);
-      _gaq.push(['_setDomainName', 'easykanban.com']);
-      _gaq.push(['_trackPageview']);
-    
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+  #{include '_nav.html' /}
+
+  #{doLayout /}
+  
+  #{include '_analytics.html' /}
+
 </body>
 </html>

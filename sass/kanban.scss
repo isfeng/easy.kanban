@@ -10,7 +10,9 @@ html {
     height: 100%;
 }
 body {
+    //font-family: 'Schoolbell', cursive;
     height: 100%;
+    @include background-image(linear-gradient(left top, #FEDFE1, #FFF)); 
 }
 
 #kanban{
@@ -30,6 +32,7 @@ body {
 		@include stretch();
 		background-image: image-url("textures/lined_paper.png");
     }
+    background-color: #FFF;
 }
 
 #board_control {
@@ -89,7 +92,7 @@ body {
     border-left: 1px solid #FFFAFA;
     @include box-shadow(4px 4px 6px #333);
     h5 {
-        font-family: 'Schoolbell', cursive;
+        //font-family: 'Schoolbell', cursive;
         //font-weight: bold;
         margin:0;
     }
@@ -174,4 +177,14 @@ ul.grid_kanban {
     li {
         list-style: none;
     }
+
+    a{
+        //font-family: 'Schoolbell', cursive;
+        color: #888e7e;
+        &:hover {
+            @include text-shadow(rgba(#888e7e, 0.2) 1px 1px 0, rgba(#888e7e, 0.2) 2px 2px 0, rgba(#888e7e, 0.2) 3px 3px 0);
+            @include single-transition();        
+        }
+    }
+    
 }

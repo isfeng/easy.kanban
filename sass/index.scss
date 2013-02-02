@@ -1,19 +1,30 @@
 /*
      customer home page, before login
 */
+@import "settings";
+@import "compass/css3";
 
 body{
-    background-image: image-url("1357234889_49924.jpg");
+    //background-image: image-url("1357234889_49924.jpg");
+    @include background-image(linear-gradient(left top, #FEDFE1, #FFF)); 
 }
 
-#main{
-    margin: 100px;
-    h1{
-    	font-family: 'Shadows Into Bold', cursive;
+#head{
+    background-color: $topBarBgColor;
+    color: white;
+    //height:60px; 
+    //line-height:50px;   
+    .name {
+        //font-size: 36px;
+        padding-top: 15px;
+        font-family: 'Schoolbell', cursive;
     }
-    ul li{
-        margin-left: 0px;
-        list-style-type: none;
-    }
+}
+
+#banner{
+    margin-top: -20px;
+    img{
+       @include box-shadow(rgba(blue, 0.4) 0 0 25px, rgba(green, 0.2) 0 0 3px 1px inset);
+    }    
 }
 
