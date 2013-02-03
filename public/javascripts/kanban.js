@@ -193,6 +193,7 @@ var Kanban = new Class({
 	thickness: 2,
 
 	options:{
+		isNew: false,
 		width: 0,
 		height: 0,
 		board:''
@@ -349,41 +350,45 @@ var Kanban = new Class({
 					this.stage.update();
 				}.bind(this);
 
-				var value_stream = json.stream;
-				var space_width = $(this.container).getSize().x;
-				//console.log(space_width);
-				var value_size = value_stream.length;
-				//console.log(value_size);
-				var value_width = space_width / value_size;
-				//console.log(value_width);
-				var current_x = 0;
-				value_stream.each(function(el)
+				if(this.options.isNew)
 				{
-					console.log(current_x);
-					// display text
-					var value_center = (current_x + (current_x + value_width)) / 2;
-					console.log(value_center);
-					var a_value = new createjs.Text(el.value, 'bold 36px Patrick Hand');
-					a_value.x = value_center;
-					a_value.y = 10;
-					a_value.textAlign = "center";
-					this.stage.addChild(a_value);
-
-					// draw line
-					if (current_x != 0)
+					var value_stream = json.stream;
+					var space_width = $(this.container).getSize().x;
+					//console.log(space_width);
+					var value_size = value_stream.length;
+					//console.log(value_size);
+					var value_width = space_width / value_size;
+					//console.log(value_width);
+					var current_x = 0;
+					value_stream.each(function(el)
 					{
-						var s = new createjs.Shape();
-						var g = s.graphics;
-						g.setStrokeStyle(2, 'round', 'round');
-						g.beginStroke("#8B8378");
-						g.moveTo(current_x, 60);
-						g.lineTo(current_x, $(this.container).getSize().y - 60);
-						this.stage.addChild(s);
-					}
-					this.stage.update();
-					current_x += value_width;
-				}.bind(this));
+						console.log(current_x);
+						// display text
+						var value_center = (current_x + (current_x + value_width)) / 2;
+						console.log(value_center);
+						var a_value = new createjs.Text(el.value, 'bold 36px Patrick Hand');
+						a_value.x = value_center;
+						a_value.y = 10;
+						a_value.textAlign = "center";
+						this.stage.addChild(a_value);
 
+						// draw line
+						if (current_x != 0)
+						{
+							var s = new createjs.Shape();
+							var g = s.graphics;
+							g.setStrokeStyle(2, 'round', 'round');
+							g.beginStroke("#8B8378");
+							g.moveTo(current_x, 60);
+							g.lineTo(current_x, $(this.container).getSize().y - 60);
+							this.stage.addChild(s);
+						}
+						this.stage.update();
+						current_x += value_width;
+					}.bind(this));
+
+					this.saveBackground();
+				}
 			}.bind(this),
 			onFailure : function()
 			{

@@ -22,9 +22,11 @@ import controllers.securesocial.SecureSocial;
 @With(SecureSocial.class)
 public class KanbanController extends Controller
 {
-	public static void show(long id)
+	public static void show(long id, boolean isNew)
 	{
 		renderArgs.put("kanban", Kanban.findById(id));
+		if(isNew)
+			renderArgs.put("isNew", isNew);
 		render();
 	}
 	
@@ -73,7 +75,7 @@ public class KanbanController extends Controller
 //				break;
 //		}
 		
-		show(k.id);
+		show(k.id, true);
 	}
 	
 	

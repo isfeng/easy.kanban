@@ -23,7 +23,7 @@
     window.addEvent('domready', function()
     {
     	#{if offline}KanbanApp.offline=true;#{/if}
-        var kanban = new Kanban('space','${kanban.id}',{board:'board', width: ${kanban.board.width}, height: ${kanban.board.height}});
+        var kanban = new Kanban('space','${kanban.id}',{#{if isNew}isNew: true,#{/if}board:'board', width: ${kanban.board.width}, height: ${kanban.board.height}});
         kanban.load();
         kanban.addStack('post_stack_yellow','#fefabc');
         kanban.addStack('post_stack_pink','pink');
