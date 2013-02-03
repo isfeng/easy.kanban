@@ -46,13 +46,14 @@ Mooml.register('text_note_tmpl', function()
 {
 	div(div({
 		'id' : 'text_note_form'
-	}, label('Title'), input({
-		'type' : 'text',
+	}, input({
+		'type' : 'hidden',
 		'id' : 'text_note_title',
-		'maxlength': 24
-	}), label('Note'), textarea({
+		'maxlength': 24,
+	}), textarea({
 		'id' : 'text_note_area',
-		'maxlength': 140
+		'maxlength': 140,
+		'rows':5
 	})));
 });
 
@@ -93,7 +94,7 @@ var StickyNote = new Class({
 		this.sm = new SimpleModal({
 			"btn_ok" : "post it"
 		});
-		this.sm.addButton("post it", "btn primary", function()
+		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onTextOK(this.kid, $('text_note_title').value, $('text_note_area').value);
 			this.fireEvent('textOk', this.post_text_el);
@@ -102,7 +103,7 @@ var StickyNote = new Class({
 		this.sm.addButton("Cancel", "btn secondary");
 		this.sm.show({
 			"model" : "modal",
-			"title" : "Title",
+			"title" : "Note",
 			"contents" : Mooml.render('text_note_tmpl').get('html')
 		});
 	},
