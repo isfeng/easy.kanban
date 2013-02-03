@@ -1,13 +1,41 @@
 #{extends '_welcome.html' /}
 #{set title:'Welcome' /}
 
+<div class="row" id="banner">
+	<div class="twelve columns centered">
+		<img src="/public/images/kanban_dev.png"/>
+	</div>
+</div>
 
-<div id="main">
-    <h1>Under Contruction</h1>
+<div class="row">
     <ul>
 	    <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.easykanban.com" data-text="I Like EasyKanban" data-hashtags="easykanban" >Tweet</a></li>
 	    <li class="fb-like" data-href="http://www.easykanban.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true"></li>
     </ul>
 </div>
 
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=326031667505182";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  
+
 <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<!-- Included JS Files (Compressed) -->
+<script src="/public/javascripts/foundation/jquery.js"></script>
+<script src="/public/javascripts/foundation/foundation.min.js"></script>
+
+<!-- Initialize JS Plugins -->
+<script src="/public/javascripts/foundation/app.js"></script>
+
+
+<script>
+$(window).load(function(){
+  //$("#featured").orbit();
+});
+</script> 

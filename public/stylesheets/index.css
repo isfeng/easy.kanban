@@ -1,21 +1,34 @@
 /*
      customer home page, before login
 */
-/* line 5, ../../sass/index.scss */
+/* line 7, ../../sass/index.scss */
 body {
-  background-image: url('/public/images/1357234889_49924.jpg?1358220742');
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, #fedfe1), color-stop(100%, #ffffff));
+  background-image: -webkit-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: -moz-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: -o-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: -ms-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: linear-gradient(left top, #fedfe1, #ffffff);
 }
 
-/* line 9, ../../sass/index.scss */
-#main {
-  margin: 100px;
+/* line 12, ../../sass/index.scss */
+#head {
+  background-color: #222222;
+  color: white;
 }
-/* line 11, ../../sass/index.scss */
-#main h1 {
-  font-family: 'Shadows Into Bold', cursive;
+/* line 17, ../../sass/index.scss */
+#head .name {
+  padding-top: 15px;
+  font-family: "Schoolbell", cursive;
 }
-/* line 14, ../../sass/index.scss */
-#main ul li {
-  margin-left: 0px;
-  list-style-type: none;
+
+/* line 24, ../../sass/index.scss */
+#banner {
+  margin-top: -20px;
+}
+/* line 26, ../../sass/index.scss */
+#banner img {
+  -webkit-box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
+  -moz-box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
+  box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
 }

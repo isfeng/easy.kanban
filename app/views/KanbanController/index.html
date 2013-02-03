@@ -1,24 +1,23 @@
 #{extends 'main.html' /}
 
 <div class="row">
-    <h3 class="subheader">Kanban List:</h3>
-</div>
-<div class="row">
-    <ul class="grid_kanban">
-    #{list items:kanbans.kanban, as:'k'}
-        <li>
-        <div class="alert-box secondary">
-        	<h4><a href="/kanbans/${k.id}">${k.name}</a></h4>
-            <a href="javascript:deleteKanban(${k.id})" class="close">&times;</a>
-        </div>
-        </li>
-    #{/list}
-        <li>
+    <div class="ten columns centered">
+        <ul class="grid_kanban">
+        #{list items:kanbans.kanban, as:'k'}
+            <li>
             <div class="alert-box secondary">
-              <h4><a href="/kanbans/new">Create New Kanban</a></h4>
+            	<h4><a href="/kanbans/${k.id}">${k.name}</a></h4>
+                <a href="javascript:deleteKanban(${k.id})" class="close">&times;</a>
             </div>
-        </li> 
-    </ul>
+            </li>
+        #{/list}
+            <li>
+                <div class="alert-box secondary">
+                  <h4><a href="/kanbans/new">Create New Kanban</a></h4>
+                </div>
+            </li> 
+        </ul>
+    </div>
 </div>
 
 

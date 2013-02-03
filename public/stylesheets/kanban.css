@@ -1,17 +1,23 @@
 /*
      main kanban style
 */
-/* line 8, ../../sass/kanban.scss */
+/* line 9, ../../sass/kanban.scss */
 html {
   height: 100%;
 }
 
-/* line 11, ../../sass/kanban.scss */
+/* line 12, ../../sass/kanban.scss */
 body {
   height: 100%;
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, #fedfe1), color-stop(100%, #ffffff));
+  background-image: -webkit-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: -moz-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: -o-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: -ms-linear-gradient(left top, #fedfe1, #ffffff);
+  background-image: linear-gradient(left top, #fedfe1, #ffffff);
 }
 
-/* line 15, ../../sass/kanban.scss */
+/* line 18, ../../sass/kanban.scss */
 #kanban {
   margin: -25px 5px 5px 5px;
   width: 99%;
@@ -19,83 +25,83 @@ body {
   cursor: move;
 }
 
-/* line 23, ../../sass/kanban.scss */
+/* line 26, ../../sass/kanban.scss */
 #board {
   position: relative;
   border: 20px solid transparent;
-  -moz-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  -webkit-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  -o-border-image: url('/public/images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  border-image: url('/public/images/border.png?1358295197') 25 25 25 25 stretch stretch;
+  -moz-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
+  -webkit-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
+  -webkit-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
+  -o-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
+  border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
   border-width: 20px;
+  background-color: #FFF;
 }
-/* line 28, ../../sass/kanban.scss */
+/* line 31, ../../sass/kanban.scss */
 #board #space {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('/public/images/textures/lined_paper.png?1358297570');
+  background-image: url('../images/textures/lined_paper.png?1358345144');
 }
 
-/* line 34, ../../sass/kanban.scss */
+/* line 38, ../../sass/kanban.scss */
 #board_control {
   position: fixed;
   z-index: 101;
   bottom: 5px;
 }
-/* line 38, ../../sass/kanban.scss */
+/* line 42, ../../sass/kanban.scss */
 #board_control ul li {
   display: inline;
-  font-size: 3em;
 }
-/* line 41, ../../sass/kanban.scss */
+/* line 44, ../../sass/kanban.scss */
 #board_control ul li:hover {
   cursor: pointer;
   color: blak;
 }
-/* line 45, ../../sass/kanban.scss */
+/* line 48, ../../sass/kanban.scss */
 #board_control ul li#trashcan {
   margin-left: 20px;
   color: gray;
 }
-/* line 48, ../../sass/kanban.scss */
+/* line 51, ../../sass/kanban.scss */
 #board_control ul li#trashcan:hover {
   color: gray;
   cursor: default;
 }
-/* line 55, ../../sass/kanban.scss */
+/* line 58, ../../sass/kanban.scss */
 #board_control ul li#globalmove {
   color: gray;
 }
-/* line 57, ../../sass/kanban.scss */
+/* line 60, ../../sass/kanban.scss */
 #board_control ul li#globalmove:hover {
   color: black;
 }
-/* line 61, ../../sass/kanban.scss */
+/* line 64, ../../sass/kanban.scss */
 #board_control ul li#black_pen {
   color: gray;
 }
-/* line 63, ../../sass/kanban.scss */
+/* line 66, ../../sass/kanban.scss */
 #board_control ul li#black_pen:hover {
   color: black;
 }
-/* line 67, ../../sass/kanban.scss */
+/* line 70, ../../sass/kanban.scss */
 #board_control ul li#eraser {
   color: gray;
 }
-/* line 69, ../../sass/kanban.scss */
+/* line 72, ../../sass/kanban.scss */
 #board_control ul li#eraser:hover {
   color: black;
 }
-/* line 73, ../../sass/kanban.scss */
+/* line 76, ../../sass/kanban.scss */
 #board_control ul li span {
   display: none;
 }
 
-/* line 79, ../../sass/kanban.scss */
+/* line 82, ../../sass/kanban.scss */
 .note {
   z-index: 999;
   cursor: move;
@@ -104,66 +110,87 @@ body {
   height: 150px;
   padding: 2px;
   overflow: hidden;
-  border-top: 1px solid #FFFAFA;
-  border-left: 1px solid #FFFAFA;
+  border-top: 1px solid snow;
+  border-left: 1px solid snow;
   -webkit-box-shadow: 4px 4px 6px #333333;
   -moz-box-shadow: 4px 4px 6px #333333;
   box-shadow: 4px 4px 6px #333333;
 }
-/* line 91, ../../sass/kanban.scss */
+/* line 94, ../../sass/kanban.scss */
 .note h5 {
-  font-family: 'Schoolbell', cursive;
   margin: 0;
 }
-/* line 96, ../../sass/kanban.scss */
+/* line 99, ../../sass/kanban.scss */
 .note p {
-  font-family: 'Schoolbell', cursive;
+  font-family: "Schoolbell", cursive;
   font-weight: bold;
 }
 
-/* line 104, ../../sass/kanban.scss */
+/* line 107, ../../sass/kanban.scss */
 #text_note_form {
   width: 95%;
 }
 
-/* line 112, ../../sass/kanban.scss */
+/* line 115, ../../sass/kanban.scss */
 .current_tool {
-  font-size: 4em !important;
+  font-size: 3em !important;
   color: black !important;
 }
 
-/* line 117, ../../sass/kanban.scss */
+/* line 120, ../../sass/kanban.scss */
 #post_stack_yellow {
-  color: #CDCD00 !important;
+  color: #cdcd00 !important;
 }
 
-/* line 121, ../../sass/kanban.scss */
+/* line 124, ../../sass/kanban.scss */
 #post_stack_pink {
   color: pink !important;
 }
 
-/* line 125, ../../sass/kanban.scss */
+/* line 128, ../../sass/kanban.scss */
 .form ul li {
   list-style-type: none;
 }
 
-/* line 129, ../../sass/kanban.scss */
+/* line 132, ../../sass/kanban.scss */
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+/* line 137, ../../sass/kanban.scss */
+#main {
+  padding-bottom: 100px;
+}
+
+/* line 142, ../../sass/kanban.scss */
+footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 45x;
+  /* Height of the footer */
+  background: #000;
+}
+
+/* line 150, ../../sass/kanban.scss */
 #copyright {
+  position: relative;
   background: #3f3f3f;
   color: #fff;
   padding: 11px 0;
   margin-top: 30px;
 }
-/* line 131, ../../sass/kanban.scss */
+/* line 153, ../../sass/kanban.scss */
 #copyright p, #copyright ul.inline-list {
   margin-bottom: 0;
 }
-/* line 134, ../../sass/kanban.scss */
+/* line 156, ../../sass/kanban.scss */
 #copyright a {
   color: #fff;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg-3 {
   -webkit-transform: rotate(-3deg);
   -moz-transform: rotate(-3deg);
@@ -172,7 +199,7 @@ body {
   transform: rotate(-3deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg-3:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -186,7 +213,7 @@ img.deg-3:hover {
   transition: all 1s false;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg-2 {
   -webkit-transform: rotate(-2deg);
   -moz-transform: rotate(-2deg);
@@ -195,7 +222,7 @@ img.deg-3:hover {
   transform: rotate(-2deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg-2:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -209,7 +236,7 @@ img.deg-2:hover {
   transition: all 1s false;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg-1 {
   -webkit-transform: rotate(-1deg);
   -moz-transform: rotate(-1deg);
@@ -218,7 +245,7 @@ img.deg-2:hover {
   transform: rotate(-1deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg-1:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -232,7 +259,7 @@ img.deg-1:hover {
   transition: all 1s false;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg0 {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -241,7 +268,7 @@ img.deg-1:hover {
   transform: rotate(0deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg0:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -255,7 +282,7 @@ img.deg0:hover {
   transition: all 1s false;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg1 {
   -webkit-transform: rotate(1deg);
   -moz-transform: rotate(1deg);
@@ -264,7 +291,7 @@ img.deg0:hover {
   transform: rotate(1deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg1:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -278,7 +305,7 @@ img.deg1:hover {
   transition: all 1s false;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg2 {
   -webkit-transform: rotate(2deg);
   -moz-transform: rotate(2deg);
@@ -287,7 +314,7 @@ img.deg1:hover {
   transform: rotate(2deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg2:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -301,7 +328,7 @@ img.deg2:hover {
   transition: all 1s false;
 }
 
-/* line 140, ../../sass/kanban.scss */
+/* line 162, ../../sass/kanban.scss */
 .deg3 {
   -webkit-transform: rotate(3deg);
   -moz-transform: rotate(3deg);
@@ -310,7 +337,7 @@ img.deg2:hover {
   transform: rotate(3deg);
 }
 
-/* line 142, ../../sass/kanban.scss */
+/* line 164, ../../sass/kanban.scss */
 img.deg3:hover {
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -324,14 +351,27 @@ img.deg3:hover {
   transition: all 1s false;
 }
 
-/* line 148, ../../sass/kanban.scss */
+/* line 170, ../../sass/kanban.scss */
 #logo {
-  background: url('/public/images/logo4.png?1359603585') no-repeat;
+  background: url('../images/logo4.png?1359637989') no-repeat;
   padding-left: 40px;
   background-size: 50px;
 }
 
-/* line 155, ../../sass/kanban.scss */
+/* line 177, ../../sass/kanban.scss */
 ul.grid_kanban li {
   list-style: none;
+}
+/* line 181, ../../sass/kanban.scss */
+ul.grid_kanban a {
+  color: #888e7e;
+}
+/* line 184, ../../sass/kanban.scss */
+ul.grid_kanban a:hover {
+  text-shadow: rgba(136, 142, 126, 0.2) 1px 1px 0, rgba(136, 142, 126, 0.2) 2px 2px 0, rgba(136, 142, 126, 0.2) 3px 3px 0;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -ms-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s false;
 }
