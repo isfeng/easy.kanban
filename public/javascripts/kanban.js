@@ -35,7 +35,7 @@ Mooml.register('text_note_tmpl', function()
 	}, input({
 		'type' : 'hidden',
 		'id' : 'text_note_title',
-		'maxlength': 24,
+		'maxlength': 24
 	}), textarea({
 		'id' : 'text_note_area',
 		'maxlength': 140,

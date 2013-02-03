@@ -24,7 +24,7 @@ body{
 #banner{
     margin-top: -20px;
     img{
-       @include box-shadow(rgba(blue, 0.4) 0 0 25px, rgba(green, 0.2) 0 0 3px 1px inset);
+       @include box-shadow(rgba(gray, 0.4) 0 0 25px, rgba(gray, 0.2) 0 0 3px 1px inset);
     }    
 }
 
