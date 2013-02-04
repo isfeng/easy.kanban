@@ -6,11 +6,14 @@
   <section>
     <ul class="right">
       <li class="divider"></li>
-      <li><a href="/kanbans"><i class="icon-home"></i>Home</a></li>
+      <li><a href="/"><i class="icon-home"></i>Home</a></li>
       <li class="divider"></li>
-      <li style="display:none"><a href="/settings">Setting</a></li>
-      <li style="display:none" class="divider"></li>
+      #{if user}
       <li><a href="@{securesocial.SecureSocial.logout}"><i class="icon-signout"></i>Sign out</a></li>
+      #{/if}
+      #{else}
+      <li><a href="@{securesocial.SecureSocial.login}"><i class="icon-signout"></i>Sign in</a></li>
+      #{/else}
     </ul>
   </section>  
 </nav>

@@ -29,11 +29,11 @@ body {
 #board {
   position: relative;
   border: 20px solid transparent;
-  -moz-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
-  -webkit-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
-  -webkit-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
-  -o-border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
-  border-image: url('../images/border.png?1358345144') 25 25 25 25 stretch stretch;
+  -moz-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
+  -webkit-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
+  -webkit-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
+  -o-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
+  border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
   border-width: 20px;
   background-color: #FFF;
 }
@@ -44,7 +44,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('../images/textures/lined_paper.png?1358345144');
+  background-image: url('../images/textures/lined_paper.png?1358297570');
 }
 
 /* line 38, ../../sass/kanban.scss */
@@ -110,8 +110,8 @@ body {
   height: 150px;
   padding: 2px;
   overflow: hidden;
-  border-top: 1px solid snow;
-  border-left: 1px solid snow;
+  border-top: 1px solid #FFFAFA;
+  border-left: 1px solid #FFFAFA;
   -webkit-box-shadow: 4px 4px 6px #333333;
   -moz-box-shadow: 4px 4px 6px #333333;
   box-shadow: 4px 4px 6px #333333;
@@ -122,7 +122,7 @@ body {
 }
 /* line 99, ../../sass/kanban.scss */
 .note p {
-  font-family: "Schoolbell", cursive;
+  font-family: 'Schoolbell', cursive;
   font-weight: bold;
 }
 
@@ -139,7 +139,7 @@ body {
 
 /* line 120, ../../sass/kanban.scss */
 #post_stack_yellow {
-  color: #cdcd00 !important;
+  color: #CDCD00 !important;
 }
 
 /* line 124, ../../sass/kanban.scss */
@@ -353,7 +353,7 @@ img.deg3:hover {
 
 /* line 170, ../../sass/kanban.scss */
 #logo {
-  background: url('../images/logo4.png?1359637989') no-repeat;
+  background: url('../images/logo4.png?1359603585') no-repeat;
   padding-left: 40px;
   background-size: 50px;
 }

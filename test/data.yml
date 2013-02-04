@@ -20,13 +20,6 @@ Board(default_board_huge):
   name: HUGE
 
 Kanban(kanban1):
-  name: 10K
-  goal: 10K
-  board: default_board_medium
-
-TextNote(note1):
-  kanban: kanban1
-  x: 100
-  y: 100
-  title: this is a title
-  note: this is some note
+  name: easykanban_development
+  goal: for try it
+  board: default_board_large

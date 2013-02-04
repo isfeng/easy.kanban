@@ -3,6 +3,9 @@
 */
 @import "settings";
 @import "compass/css3";
+@import "zocial";
+
+@include zocial;
 
 body{
     //background-image: image-url("1357234889_49924.jpg");
@@ -22,9 +25,21 @@ body{
 }
 
 #banner{
-    margin-top: -20px;
+    position: relative;
+    margin-top: -25px;
     img{
        @include box-shadow(rgba(gray, 0.4) 0 0 25px, rgba(gray, 0.2) 0 0 3px 1px inset);
-    }    
+    }
+    @include box-shadow(8px 8px 32px #333); 
+}
+
+#social{
+    position: absolute; 
+    bottom: 0;
+    right: 30px;
+    ul li{
+        list-style: none;
+        display: inline;
+    }
 }
 

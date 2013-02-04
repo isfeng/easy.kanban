@@ -23,12 +23,18 @@ public class Application extends Controller
 	
 	public static void tryit()
 	{
-		Kanban tryit = Kanban.find("byName", "Kanban Development Board").first();
-		if (tryit == null)
-			tryit = Kanban.find("byName", "10K").first();
-		renderArgs.put("offline", true);
-		renderArgs.put("kanban", tryit);
-		render("KanbanController/show.html");
+		Kanban tryit = Kanban.find("byName", "easykanban_development").first();
+		if(tryit != null)
+		{
+			renderArgs.put("offline", true);
+			renderArgs.put("kanban", tryit);
+			render("KanbanController/show.html");	
+		}
+		else
+		{
+			welcome();
+		}
+		
 	}
 	
 	

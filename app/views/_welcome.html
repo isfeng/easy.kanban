@@ -18,10 +18,17 @@
     <link href='http://fonts.googleapis.com/css?family=Joti+One' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  #{include '_nav.html' /}
+  <div id="container">
+    #{include '_nav.html' /}
 
-  #{doLayout /}
-  
+    <div id="main">
+    #{doLayout /}
+    </div>
+    
+    #{include '_footer.html' /}
+
+  </div>
+
   #{include '_analytics.html' /}
 
 </body>
