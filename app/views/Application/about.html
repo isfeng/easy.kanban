@@ -1,5 +1,5 @@
 #{extends '_welcome.html' /}
-#{set title:'Welcome' /}
+#{set title:'About' /}
 
 <div class="row" id="banner">
 	<div class="twelve columns">
@@ -24,28 +24,35 @@
 </div>
 
 <div class="row">
-  <div class="six columns">
+  <div class="four columns">
     <div class="panel radius">
-      <h5><i class="icon-pencil"></i>Pen &nbsp; <i class="icon-check-empty"></i>Eraser &nbsp; <i class="icon-edit"></i>Note.</h5>
-      <p>Beauty of simplicity.
-Write, draw and post notes on whatever you thought to Kanban. Use it as a traditional kanban to facilitate your projects, share messages with your friends or to simply start a personal project. It can never be this simple.</p>
+      <h5>Board Pen.</h5>
+      <p>It has an easy to override visual style, and is appropriately subdued.</p>
     </div>
   </div>
-  <div class="six columns">
+  <div class="four columns">
     <div class="panel radius">
-      <h5>Built-in Kanban Templates.</h5>
-      <p>Easy to adopt with templates
-A new way to use Kanban.  Allow you to create Kanban efficiently with built-in templates.</p>
+      <h5>Post it.</h5>
+      <p>It has an easy to override visual style, and is appropriately subdued.</p>
+    </div>
+  </div>
+  <div class="four columns">
+    <div class="panel radius">
+      <h5>Eraser.</h5>
+      <p>Content...</p>
     </div>
   </div>
 </div>
 
-<div class="row" style="display:none" id="testb">
-  <div class="alert-box alert" style="text-align:center">
-    You are using a web browser we don't support. Please download <a class="alert medium radius button" href="https://www.google.com/intl/zh-TW/chrome/">Google Chrome.</a>
-    <a href="" class="close">&times;</a>
-  </div>
-</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=326031667505182";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+  
 
 <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
@@ -56,20 +63,9 @@ A new way to use Kanban.  Allow you to create Kanban efficiently with built-in t
 <!-- Initialize JS Plugins -->
 <script src="/public/javascripts/foundation/app.js"></script>
 
+
 <script>
 $(window).load(function(){
   //$("#featured").orbit();
-  if(navigator.vendor!='Google Inc.')
-    $('#testb').fadeIn();
-  
 });
 </script> 
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=326031667505182";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>

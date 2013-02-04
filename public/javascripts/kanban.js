@@ -227,11 +227,11 @@ var Kanban = new Class({
 			precalculate : false,
 			onDrop : function(element, droppable, event)
 			{
-				console.log(element.getPosition(this.container));
+				// console.log(element.getPosition(this.container));
 				/* only trashcan droppable */
 				if (droppable)
 				{
-					console.log(element, 'dropped on', droppable, 'event', event);
+					// console.log(element, 'dropped on', droppable, 'event', event);
 					_deleteNote(element);
 				}
 				else
@@ -242,12 +242,12 @@ var Kanban = new Class({
 
 			onEnter : function(element, droppable)
 			{
-				console.log(element, 'entered', droppable);
+				// console.log(element, 'entered', droppable);
 			},
 
 			onLeave : function(element, droppable)
 			{
-				console.log(element, 'left', droppable);
+				// console.log(element, 'left', droppable);
 			},
 
 			onBeforeStart: function()
@@ -261,7 +261,7 @@ var Kanban = new Class({
 			}.bind(this)
 		})
 
-		console.log(color);
+		// console.log(color);
 		el.setStyle('background-color', color);
 
 		if(_center)
@@ -339,7 +339,7 @@ var Kanban = new Class({
 			},
 			onSuccess : function(json)
 			{
-				console.log(json);
+				// console.log(json);
 				var image = new Image();
 				image.src = json.background;
 				image.onload = function()
@@ -361,10 +361,10 @@ var Kanban = new Class({
 					var current_x = 0;
 					value_stream.each(function(el)
 					{
-						console.log(current_x);
+						// console.log(current_x);
 						// display text
 						var value_center = (current_x + (current_x + value_width)) / 2;
-						console.log(value_center);
+						// console.log(value_center);
 						var a_value = new createjs.Text(el.value, "normal normal bold 36px 'Patrick Hand'");
 						a_value.x = value_center;
 						a_value.y = 10;
@@ -405,7 +405,7 @@ var Kanban = new Class({
 			//$(evt.nativeEvent.target).setStyle('cursor',  'url(/public/images/redarrow.cur), default');
 
 			this.isMouseDown = true;
-			console.log(this.current_action);
+			// console.log(this.current_action);
 			if (this.current_action=='draw')
 			{
 				evt.nativeEvent.preventDefault();
@@ -535,8 +535,9 @@ var Kanban = new Class({
 	addEraser : function(eraser)
 	{
 		$(eraser).addEvent("click", function(){
+			if(this.current_action == 'drag')
+				this.dragScroller.detach();	
 			this.current_action = 'erase';
-			this.dragScroller.detach();
 			$('kanban').setStyle('cursor', 'pointer');
 			this.activateTool(eraser);
 		}.bind(this));
@@ -545,8 +546,9 @@ var Kanban = new Class({
 	addPen : function(pen)
 	{
 		$(pen).addEvent("click", function(){
+			if(this.current_action == 'drag')
+				this.dragScroller.detach();	
 			this.current_action = 'draw';
-			this.dragScroller.detach();
 			$('kanban').setStyle('cursor', 'pointer');
 			this.activateTool(pen);
 		}.bind(this));
@@ -555,10 +557,13 @@ var Kanban = new Class({
 	addMover : function(mover)
 	{
 		$(mover).addEvent("click", function(){
-			this.current_action = 'drag';
-			this.dragScroller.attach();
-			$('kanban').setStyle('cursor', 'move');
-			this.activateTool(mover);
+			if(this.current_action != 'drag')
+			{
+				this.current_action = 'drag';
+				this.dragScroller.attach();
+				$('kanban').setStyle('cursor', 'move');
+				this.activateTool(mover);
+			}			
 		}.bind(this));
 	},
 
@@ -586,15 +591,15 @@ function _updatePos(element, color, container)
 	},
 	onRequest : function()
 	{
-		console.log('_updatePos onRequest');
+		// console.log('_updatePos onRequest');
 	},
 	onSuccess : function()
 	{
-		console.log('_updatePos onSuccess');
+		// console.log('_updatePos onSuccess');
 	},
 	onFailure : function()
 	{
-		console.log('_updatePos onFailure');
+		// console.log('_updatePos onFailure');
 	}
 });
 
@@ -609,16 +614,16 @@ function _deleteNote(el)
 		method : 'post',
 		onComplete : function()
 		{
-			console.log('_deleteNote onComplete');
+			// console.log('_deleteNote onComplete');
 		},
 		onSuccess : function(json, txt)
 		{
-			console.log('_deleteNote onSuccess');
+			// console.log('_deleteNote onSuccess');
 			el.destroy();
 		},
 		onFailure : function()
 		{
-			console.log('_deleteNote onFailure ');
+			// console.log('_deleteNote onFailure ');
 		}
 	});
 

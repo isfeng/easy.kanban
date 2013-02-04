@@ -24,6 +24,7 @@ POST	/notes									NoteController.create
 POST	/notes/pos								NoteController.updatePosition
 DELETE	/notes/{id}								NoteController.delete
 
+GET     /about                                  Application.about
 
 # test route
 GET     /test                                	Application.test

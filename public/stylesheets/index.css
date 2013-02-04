@@ -7,17 +7,17 @@
   src: url('fonts/zocial/zocial-regular-webfont.eot?#iefix') format('eot'), url('fonts/zocial/zocial-regular-webfont.woff') format('woff'), url('fonts/zocial/zocial-regular-webfont.ttf') format('truetype'), url('fonts/zocial/zocial-regular-webfont.svg') format('svg');
 }
 
-/* line 14, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_fonts.sass */
+/* line 14, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_fonts.sass */
 .ff-zocial, .zocial > span:before {
   font-family: "Zocial", sans-serif;
 }
 
-/* line 45, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_fonts.sass */
+/* line 45, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_fonts.sass */
 .ff-georgia, .zocial {
   font-family: Georgia, Times, "Times New Roman", serif;
 }
 
-/* line 3, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 3, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial, .zocial > span {
   -webkit-border-radius: 0.2em;
   -moz-border-radius: 0.2em;
@@ -27,7 +27,7 @@
   position: relative;
 }
 
-/* line 8, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 8, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial {
   -webkit-box-shadow: inset 0 0.063em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.063em rgba(255, 255, 255, 0.6), 0 0.063em 0 rgba(255, 255, 255, 0.3);
   -moz-box-shadow: inset 0 0.063em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.063em rgba(255, 255, 255, 0.6), 0 0.063em 0 rgba(255, 255, 255, 0.3);
@@ -39,22 +39,22 @@
   color: white !important;
   cursor: pointer;
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.2em;
   outline: none;
   padding: 0;
   text-decoration: none !important;
 }
-/* line 24, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 24, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-/* line 29, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 29, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial.icon {
   width: 1.85em;
   overflow: hidden;
 }
-/* line 33, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 33, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial > span {
   position: relative;
   display: inline-block;
@@ -64,7 +64,7 @@
   padding-right: 0.825em;
   white-space: nowrap;
 }
-/* line 41, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 41, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial > span:before {
   -webkit-box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
   -moz-box-shadow: 0.075em 0 0 rgba(255, 255, 255, 0.25);
@@ -79,7 +79,7 @@
   text-align: center;
   width: 1.75em;
 }
-/* line 55, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 55, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial > span {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(49%, rgba(255, 255, 255, 0.05)), color-stop(51%, rgba(0, 0, 0, 0.05)), color-stop(100%, rgba(0, 0, 0, 0.1)));
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 51%, rgba(0, 0, 0, 0.1));
@@ -88,7 +88,7 @@
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 51%, rgba(0, 0, 0, 0.1));
   background: linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) 49%, rgba(0, 0, 0, 0.05) 51%, rgba(0, 0, 0, 0.1));
 }
-/* line 59, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 59, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial:hover > span, .zocial:focus > span {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.15)), color-stop(49%, rgba(255, 255, 255, 0.15)), color-stop(51%, rgba(0, 0, 0, 0.1)), color-stop(100%, rgba(0, 0, 0, 0.15)));
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15) 49%, rgba(0, 0, 0, 0.1) 51%, rgba(0, 0, 0, 0.15));
@@ -97,7 +97,7 @@
   background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15) 49%, rgba(0, 0, 0, 0.1) 51%, rgba(0, 0, 0, 0.15));
   background: linear-gradient(top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15) 49%, rgba(0, 0, 0, 0.1) 51%, rgba(0, 0, 0, 0.15));
 }
-/* line 63, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 63, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial:active > span {
   background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(255, 255, 255, 0.1)), color-stop(30%, rgba(255, 255, 255, 0)), color-stop(50%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
   background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1));
@@ -106,12 +106,12 @@
   background: -ms-linear-gradient(bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1));
   background: linear-gradient(bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1));
 }
-/* line 67, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
+/* line 67, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
 .zocial > span:before {
   content: "\0020";
 }
 
-/* line 9, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_adjustments.sass */
+/* line 9, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_adjustments.sass */
 .adjustment-1, .zocial.cloudapp, .zocial.dropbox, .zocial.github, .zocial.gmail, .zocial.instapaper, .zocial.openid, .zocial.plancast, .zocial.posterous, .zocial.twitter, .zocial.wikipedia {
   -webkit-box-shadow: inset 0 0.063em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.063em rgba(255, 255, 255, 0.6), 0 0.063em 0 rgba(255, 255, 255, 0.3);
   -moz-box-shadow: inset 0 0.063em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.063em rgba(255, 255, 255, 0.6), 0 0.063em 0 rgba(255, 255, 255, 0.3);
@@ -119,7 +119,7 @@
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* line 25, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_adjustments.sass */
+/* line 25, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_adjustments.sass */
 .adjustment-2, .zocial.dropbox:hover > span, .zocial.dropbox:focus > span, .zocial.github:hover > span, .zocial.github:focus > span, .zocial.gmail:hover > span, .zocial.gmail:focus > span, .zocial.instapaper:hover > span, .zocial.instapaper:focus > span, .zocial.openid:hover > span, .zocial.openid:focus > span, .zocial.plancast:hover > span, .zocial.plancast:focus > span, .zocial.posterous:hover > span, .zocial.posterous:focus > span, .zocial.twitter:focus > span, .zocial.wikipedia:hover > span, .zocial.wikipedia:focus > span {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.5)), color-stop(49%, rgba(255, 255, 255, 0.2)), color-stop(51%, rgba(0, 0, 0, 0.05)), color-stop(100%, rgba(0, 0, 0, 0.15)));
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 49%, rgba(0, 0, 0, 0.05) 51%, rgba(0, 0, 0, 0.15));
@@ -129,7 +129,7 @@
   background: linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 49%, rgba(0, 0, 0, 0.05) 51%, rgba(0, 0, 0, 0.15));
 }
 
-/* line 35, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_adjustments.sass */
+/* line 35, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_adjustments.sass */
 .adjustment-3, .zocial.dropbox:active > span, .zocial.github:active > span, .zocial.gmail:active > span, .zocial.instapaper:active > span, .zocial.openid:active > span, .zocial.plancast:active > span, .zocial.posterous:active > span, .zocial.twitter:active > span, .zocial.wikipedia:active > span {
   background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(30%, rgba(255, 255, 255, 0)), color-stop(50%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
   background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1));
@@ -139,201 +139,201 @@
   background: linear-gradient(bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.1));
 }
 
-/* line 58, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 58, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.amazon {
   background: #ffad1d;
   color: #030037 !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-/* line 62, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 62, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.amazon > span:before {
   content: "a";
 }
 
-/* line 66, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 66, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.android {
   background: #a4c639;
 }
-/* line 68, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 68, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.android > span:before {
   content: "&";
 }
 
-/* line 72, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 72, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.aol {
   background: red;
 }
-/* line 74, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 74, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.aol > span:before {
   content: '"';
 }
 
-/* line 78, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 78, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.appstore {
   background: #007dcb !important;
 }
-/* line 80, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 80, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.appstore > span:before {
   content: "^";
 }
 
-/* line 84, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 84, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.chrome {
   background: #006cd4;
 }
-/* line 86, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 86, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.chrome > span:before {
   content: "[";
 }
 
-/* line 90, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 90, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.cloudapp {
   background: white;
   color: #312c2a !important;
 }
-/* line 94, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 94, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.cloudapp > span:before {
   content: "c";
 }
 
-/* line 98, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 98, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.creativecommons {
   background: black;
 }
-/* line 100, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 100, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.creativecommons > span:before {
   content: "C";
 }
 
-/* line 104, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 104, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.disqus {
   background: #216892;
 }
-/* line 106, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 106, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.disqus > span:before {
   content: "Q";
 }
 
-/* line 110, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 110, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.dribbble {
   background: #ea4c89;
 }
-/* line 112, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 112, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.dribbble > span:before {
   content: "D";
 }
 
-/* line 116, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 116, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.dropbox {
   background: whitesmoke;
   color: #312c2a !important;
 }
-/* line 124, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 124, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.dropbox > span:before {
   content: "d";
   color: #4ea4e3;
 }
 
-/* line 129, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 129, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.eventasaurus {
   background: #8ccc33;
 }
-/* line 131, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 131, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.eventasaurus > span:before {
   content: "v";
 }
 
-/* line 135, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 135, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.eventbrite {
   background: #ff5616;
 }
-/* line 137, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 137, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.eventbrite > span:before {
   content: "|";
 }
 
-/* line 141, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 141, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.evernote {
   background: #6bb130;
   color: white !important;
 }
-/* line 144, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 144, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.evernote > span:before {
   content: "E";
 }
 
-/* line 148, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 148, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.facebook {
   background: #4863ae;
 }
-/* line 150, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 150, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.facebook > span:before {
   content: "f";
 }
 
-/* line 154, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 154, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.flattr {
   background: #8aba42;
 }
-/* line 156, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 156, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.flattr > span:before {
   content: "%";
 }
 
-/* line 160, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 160, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.forrst {
   background: #1e360d;
 }
-/* line 162, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 162, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.forrst > span:before {
   content: ":";
   color: #50894f;
 }
 
-/* line 167, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 167, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.foursquare {
   background: #44a8e0;
 }
-/* line 169, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 169, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.foursquare > span:before {
   content: "4";
 }
 
-/* line 173, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 173, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.github {
   color: #050505 !important;
   background: #fbfbfb;
 }
-/* line 181, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 181, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.github > span:before {
   content: "g";
 }
 
-/* line 185, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 185, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.gmail {
   background: #efefef;
   color: #222222 !important;
 }
-/* line 193, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 193, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.gmail > span:before {
   content: "m";
   color: red;
 }
 
-/* line 198, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 198, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.google {
   background: #4e6cf7;
 }
-/* line 200, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 200, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.google > span:before {
   content: "G";
 }
 
-/* line 204, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 204, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.googleplus {
   background: #282626;
 }
-/* line 206, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 206, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.googleplus:before {
   content: "";
   display: block;
@@ -360,278 +360,278 @@
   box-shadow: inset 0 0.063em 0 rgba(255, 255, 255, 0.4), inset 0 0 0.063em rgba(255, 255, 255, 0.6), 0 0.063em 0 rgba(255, 255, 255, 0.3);
   z-index: 0;
 }
-/* line 220, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 220, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.googleplus > span:before {
   content: "+";
 }
 
-/* line 224, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 224, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.gowalla {
   background: #ff720a;
 }
-/* line 226, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 226, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.gowalla > span:before {
   content: "@";
 }
 
-/* line 230, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 230, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.guest {
   background: #1b4d6d;
 }
-/* line 232, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 232, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.guest > span:before {
   content: "?";
 }
 
-/* line 236, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 236, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.html5 {
   background: #ff3617;
 }
-/* line 238, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 238, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.html5 > span:before {
   content: "5";
 }
 
-/* line 242, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 242, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.ie {
   background: #00a1d9;
 }
-/* line 244, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 244, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.ie > span:before {
   content: "6";
 }
 
-/* line 248, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 248, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.instapaper {
   color: #222222 !important;
   background: #eeeeee;
 }
-/* line 256, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 256, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.instapaper > span:before {
   content: "I";
 }
 
-/* line 260, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 260, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.intensedebate {
   background: #0099e1;
 }
-/* line 262, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 262, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.intensedebate > span:before {
   content: "{";
 }
 
-/* line 266, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 266, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.itunes {
   background: #222222;
 }
-/* line 268, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 268, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.itunes > span:before {
   content: "A";
 }
 
-/* line 272, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 272, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.lastfm {
   background: #dc1a23;
 }
-/* line 274, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 274, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.lastfm > span:before {
   content: "l";
 }
 
-/* line 278, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 278, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.linkedin {
   background: #0083a8;
 }
-/* line 280, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 280, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.linkedin > span:before {
   content: "L";
 }
 
-/* line 284, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 284, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.meetup {
   background: #ff0026;
 }
-/* line 286, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 286, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.meetup > span:before {
   content: "M";
 }
 
-/* line 290, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 290, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.openid {
   background: whitesmoke;
   color: #333333 !important;
 }
-/* line 298, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 298, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.openid > span:before {
   content: "o";
   color: #ff921d;
 }
 
-/* line 303, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 303, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.paypal {
   background: #ff921d;
   color: #032751 !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-/* line 307, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 307, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.paypal > span:before {
   content: "$";
 }
 
-/* line 311, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 311, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.plancast {
   background: #e7ebed;
   color: #333333 !important;
 }
-/* line 319, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 319, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.plancast > span:before {
   content: "P";
 }
 
-/* line 323, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 323, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.posterous {
   background: #ffd959;
   color: #bc7134 !important;
 }
-/* line 331, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 331, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.posterous > span:before {
   content: "~";
 }
 
-/* line 335, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 335, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.rss {
   background: #ff7f25;
 }
-/* line 337, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 337, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.rss > span:before {
   content: "R";
 }
 
-/* line 341, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 341, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.scribd {
   background: #231c1a;
 }
-/* line 343, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 343, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.scribd > span:before {
   content: "}";
   color: #00d5ea !important;
 }
 
-/* line 348, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 348, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.skype {
   background: #00a2ed;
 }
-/* line 350, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 350, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.skype > span:before {
   content: "S";
 }
 
-/* line 354, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 354, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.smashingmag {
   background: #ff4f27;
 }
-/* line 356, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 356, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.smashingmag > span:before {
   content: "*";
 }
 
-/* line 360, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 360, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.songkick {
   background: #ff0050;
 }
-/* line 362, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 362, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.songkick > span:before {
   content: "k";
 }
 
-/* line 366, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 366, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.soundcloud {
   background: orangered;
 }
-/* line 368, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 368, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.soundcloud > span:before {
   content: "s";
 }
 
-/* line 372, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 372, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.spotify {
   background: #60af00;
 }
-/* line 374, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 374, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.spotify > span:before {
   content: "=zocial-";
 }
 
-/* line 378, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 378, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.tumblr {
   background: #374a61;
 }
-/* line 380, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 380, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.tumblr > span:before {
   content: "t";
 }
 
-/* line 384, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 384, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.twitter {
   background: #e9f9ff;
   color: #3c6b9c !important;
 }
-/* line 392, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 392, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.twitter > span:before {
   content: "T";
 }
 
-/* line 396, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 396, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.vimeo {
   background: #00a2cd;
 }
-/* line 398, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 398, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.vimeo > span:before {
   content: "V";
 }
 
-/* line 402, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 402, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.wikipedia {
   background: white;
   color: black !important;
 }
-/* line 410, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 410, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.wikipedia > span:before {
   content: ",";
 }
 
-/* line 414, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 414, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.wordpress {
   background: #464646;
 }
-/* line 416, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 416, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.wordpress > span:before {
   content: "w";
 }
 
-/* line 420, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 420, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.yahoo {
   background: #a200c2;
 }
-/* line 422, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 422, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.yahoo > span:before {
   content: "Y";
 }
 
-/* line 426, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 426, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.yelp {
   background: #e60010;
 }
-/* line 428, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 428, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.yelp > span:before {
   content: "y";
 }
 
-/* line 432, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 432, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.youtube {
   background: red;
 }
-/* line 434, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
+/* line 434, C:/Ruby193/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_mixins.sass */
 .zocial.youtube > span:before {
   content: "U";
 }
@@ -654,7 +654,7 @@ body {
 /* line 20, ../../sass/index.scss */
 #head .name {
   padding-top: 15px;
-  font-family: 'Schoolbell', cursive;
+  font-family: "Schoolbell", cursive;
 }
 
 /* line 27, ../../sass/index.scss */
