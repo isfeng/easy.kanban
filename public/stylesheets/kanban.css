@@ -105,7 +105,6 @@ body {
 .note {
   z-index: 999;
   cursor: move;
-  word-wrap: break-word;
   width: 150px;
   height: 150px;
   padding: 2px;
@@ -115,16 +114,25 @@ body {
   -webkit-box-shadow: 4px 4px 6px #333333;
   -moz-box-shadow: 4px 4px 6px #333333;
   box-shadow: 4px 4px 6px #333333;
+  white-space: pre;
+  white-space: pre-wrap;
+  white-space: pre-line;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -hp-pre-wrap;
+  word-wrap: break-word;
 }
-/* line 94, ../../sass/kanban.scss */
+/* line 93, ../../sass/kanban.scss */
 .note h5 {
   font-family: 'Patrick Hand', cursive;
   margin: 0;
 }
-/* line 99, ../../sass/kanban.scss */
-.note p {
+/* line 98, ../../sass/kanban.scss */
+.note pre {
   font-family: 'Patrick Hand', cursive;
   font-weight: bold;
+  font-size: 1.5em;
 }
 
 /* line 107, ../../sass/kanban.scss */

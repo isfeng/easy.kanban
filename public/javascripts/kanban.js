@@ -51,7 +51,7 @@ Mooml.register('post_tmpl', function(note)
 	div({
 		'class' : 'note ' + rotatecls,
 		'nid' : note.nid
-	}, h5(note.title), p(note.note));
+	}, h5(note.title), pre(note.note));
 });
 
 var StickyNote = new Class({
@@ -77,9 +77,7 @@ var StickyNote = new Class({
 
 	showTextForm : function()
 	{
-		this.sm = new SimpleModal({
-			"btn_ok" : "post it"
-		});
+		this.sm = new SimpleModal({width:200});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onTextOK(this.kid, $('text_note_title').value, $('text_note_area').value);
@@ -88,8 +86,8 @@ var StickyNote = new Class({
 		}.bind(this));
 		this.sm.addButton("Cancel", "btn secondary");
 		this.sm.show({
-			"model" : "modal",
-			"title" : "Note",
+			"model": "modal",
+			"title": "Note",
 			"contents" : Mooml.render('text_note_tmpl').get('html')
 		});
 	},
@@ -367,7 +365,7 @@ var Kanban = new Class({
 						// display text
 						var value_center = (current_x + (current_x + value_width)) / 2;
 						console.log(value_center);
-						var a_value = new createjs.Text(el.value, "normal normal bold 36px 'Patrick+Hand'");
+						var a_value = new createjs.Text(el.value, "normal normal bold 36px 'Patrick Hand'");
 						a_value.x = value_center;
 						a_value.y = 10;
 						a_value.textAlign = "center";

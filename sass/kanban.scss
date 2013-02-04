@@ -4,7 +4,7 @@
 
 @import "compass/css3";
 @import "compass/layout";
-
+@import "compass/typography/text/force-wrap";
 
 html {
     height: 100%;
@@ -82,24 +82,24 @@ body {
 .note {
     z-index: 999;
     cursor: move;
-    word-wrap: break-word;
     width: 150px;
     height: 150px;
-    //background: #fefabc;
     padding: 2px;
     overflow:hidden;
     border-top: 1px solid #FFFAFA;
     border-left: 1px solid #FFFAFA;
     @include box-shadow(4px 4px 6px #333);
+    @include force-wrap;
     h5 {
         font-family: 'Patrick Hand', cursive;
         //font-weight: bold;
         margin:0;
     }
-    p {
-         font-family: 'Patrick Hand', cursive;
+    pre {
+        font-family: 'Patrick Hand', cursive;
         //margin: 5px 1px 5px 1px;
         font-weight: bold;
+        font-size: 1.5em;
     }
 }
 
