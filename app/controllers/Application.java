@@ -23,7 +23,7 @@ public class Application extends Controller
 	
 	public static void tryit()
 	{
-		Kanban tryit = Kanban.find("byName", "easykanban_development").first();
+		Kanban tryit = Kanban.find("byName", "tryit").first();
 		if(tryit != null)
 		{
 			renderArgs.put("offline", true);
@@ -34,7 +34,7 @@ public class Application extends Controller
 		{
 			welcome();
 		}
-		
+	
 	}
 	
 	

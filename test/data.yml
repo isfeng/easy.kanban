@@ -18,8 +18,3 @@ Board(default_board_huge):
   width: 3840
   height: 2160
   name: HUGE
-
-Kanban(kanban1):
-  name: easykanban_development
-  goal: for try it
-  board: default_board_large

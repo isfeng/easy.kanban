@@ -31,6 +31,7 @@ public class Bootstrap extends Job<Void>
 			}
 		}
 
+		/*
 		Kanban tryit = Kanban.find("byName", "easykanban_development").first();
 		String valuearr[] = new String[5];
 		valuearr[0] = "Idea";
@@ -44,6 +45,9 @@ public class Bootstrap extends Job<Void>
 			ValueStream value = new ValueStream(v, tryit);
 			value.save();
 		}
+		*/
+
+		// create [easykanban_development] for try it
 	
 	}
 	

@@ -367,7 +367,7 @@ var Kanban = new Class({
 						// display text
 						var value_center = (current_x + (current_x + value_width)) / 2;
 						console.log(value_center);
-						var a_value = new createjs.Text(el.value, 'bold 36px Patrick Hand');
+						var a_value = new createjs.Text(el.value, "normal normal bold 36px 'Patrick+Hand'");
 						a_value.x = value_center;
 						a_value.y = 10;
 						a_value.textAlign = "center";

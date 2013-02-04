@@ -118,11 +118,12 @@ body {
 }
 /* line 94, ../../sass/kanban.scss */
 .note h5 {
+  font-family: 'Patrick Hand', cursive;
   margin: 0;
 }
 /* line 99, ../../sass/kanban.scss */
 .note p {
-  font-family: 'Schoolbell', cursive;
+  font-family: 'Patrick Hand', cursive;
   font-weight: bold;
 }
 
