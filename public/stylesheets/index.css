@@ -12,9 +12,9 @@
   font-family: "Zocial", sans-serif;
 }
 
-/* line 25, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_fonts.sass */
-.ff-helvetica, .ff-arial, .zocial {
-  font-family: Clean, "Helvetica-Neue", Helvetica, Arial, sans-serif;
+/* line 45, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_fonts.sass */
+.ff-georgia, .zocial {
+  font-family: Georgia, Times, "Times New Roman", serif;
 }
 
 /* line 3, C:/RailsInstaller/Ruby1.9.3/lib/ruby/gems/1.9.1/gems/zocial-0.0.3/stylesheets/partials/_base.sass */
@@ -39,7 +39,7 @@
   color: white !important;
   cursor: pointer;
   display: inline-block;
-  font-size: 1.8em;
+  font-size: 1.5em;
   outline: none;
   padding: 0;
   text-decoration: none !important;
@@ -661,24 +661,25 @@ body {
 #banner {
   position: relative;
   margin-top: -25px;
+  margin-bottom: 10px;
   -webkit-box-shadow: 8px 8px 32px #333333;
   -moz-box-shadow: 8px 8px 32px #333333;
   box-shadow: 8px 8px 32px #333333;
 }
-/* line 30, ../../sass/index.scss */
+/* line 31, ../../sass/index.scss */
 #banner img {
   -webkit-box-shadow: rgba(128, 128, 128, 0.4) 0 0 25px, rgba(128, 128, 128, 0.2) 0 0 3px 1px inset;
   -moz-box-shadow: rgba(128, 128, 128, 0.4) 0 0 25px, rgba(128, 128, 128, 0.2) 0 0 3px 1px inset;
   box-shadow: rgba(128, 128, 128, 0.4) 0 0 25px, rgba(128, 128, 128, 0.2) 0 0 3px 1px inset;
 }
 
-/* line 36, ../../sass/index.scss */
+/* line 37, ../../sass/index.scss */
 #social {
   position: absolute;
   bottom: 0;
   right: 30px;
 }
-/* line 40, ../../sass/index.scss */
+/* line 41, ../../sass/index.scss */
 #social ul li {
   list-style: none;
   display: inline;

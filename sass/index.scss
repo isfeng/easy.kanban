@@ -27,6 +27,7 @@ body{
 #banner{
     position: relative;
     margin-top: -25px;
+    margin-bottom: 10px;
     img{
        @include box-shadow(rgba(gray, 0.4) 0 0 25px, rgba(gray, 0.2) 0 0 3px 1px inset);
     }
