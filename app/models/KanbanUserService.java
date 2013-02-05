@@ -49,7 +49,7 @@ public class KanbanUserService implements UserServiceDelegate
 	@Override
 	public void save(SocialUser user)
 	{
-		if (User.find("byEmail", user.email).first() == null)
+		if (User.find("bySocialID", user.id.id).first() == null)
 		{
 			User kanbanUser = new User();
 			kanbanUser.name = user.displayName;
