@@ -37,5 +37,9 @@ public class Application extends Controller
 	
 	}
 	
-	
+
+	public static void about()
+	{
+		render();
+	}
 }

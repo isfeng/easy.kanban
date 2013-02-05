@@ -29,11 +29,11 @@ body {
 #board {
   position: relative;
   border: 20px solid transparent;
-  -moz-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  -webkit-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  -webkit-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  -o-border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
-  border-image: url('../images/border.png?1358295197') 25 25 25 25 stretch stretch;
+  -moz-border-image: url('../images/border.png?1360025679') 25 25 25 25 stretch stretch;
+  -webkit-border-image: url('../images/border.png?1360025679') 25 25 25 25 stretch stretch;
+  -webkit-border-image: url('../images/border.png?1360025679') 25 25 25 25 stretch stretch;
+  -o-border-image: url('../images/border.png?1360025679') 25 25 25 25 stretch stretch;
+  border-image: url('../images/border.png?1360025679') 25 25 25 25 stretch stretch;
   border-width: 20px;
   background-color: #FFF;
 }
@@ -44,7 +44,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('../images/textures/lined_paper.png?1358297570');
+  background-image: url('../images/textures/lined_paper.png?1360025679');
 }
 
 /* line 38, ../../sass/kanban.scss */
@@ -362,7 +362,7 @@ img.deg3:hover {
 
 /* line 170, ../../sass/kanban.scss */
 #logo {
-  background: url('../images/logo4.png?1359603585') no-repeat;
+  background: url('../images/logo4.png?1360025679') no-repeat;
   padding-left: 40px;
   background-size: 50px;
 }

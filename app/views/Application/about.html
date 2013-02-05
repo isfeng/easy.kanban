@@ -1,60 +1,51 @@
 #{extends '_welcome.html' /}
 #{set title:'About' /}
 
-<div class="row" id="banner">
-	<div class="twelve columns">
-		<img src="/public/images/kanban_dev2.png"/>
-	</div>
-	<div id="social" style="">
-		<ul>
-		    <li><a class="zocial googleplus" href="/auth/googleopenid"><span>Sign in with Google</span></a></li>
-		    <li><a class="zocial facebook" href="/auth/facebook"><span>Sign in with Facebook</span></a></li>
-		    <li><a class="second radius small button" href="/tryit"><span>Try it</span></a></li>
-	    </ul>
-	</div>
-</div>
-
 <div class="row">
-	<div class="two columns offset-by-ten">
-	    <ul class="block-grid two-up">
-		    <li><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.easykanban.com" data-text="I Like EasyKanban" data-hashtags="easykanban" >Tweet</a></li>
-		    <li class="fb-like" data-href="http://www.easykanban.com" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true"></li>
-	    </ul>
-	</div>
-</div>
-
-<div class="row">
-  <div class="four columns">
-    <div class="panel radius">
-      <h5>Board Pen.</h5>
-      <p>It has an easy to override visual style, and is appropriately subdued.</p>
-    </div>
-  </div>
-  <div class="four columns">
-    <div class="panel radius">
-      <h5>Post it.</h5>
-      <p>It has an easy to override visual style, and is appropriately subdued.</p>
-    </div>
-  </div>
-  <div class="four columns">
-    <div class="panel radius">
-      <h5>Eraser.</h5>
-      <p>Content...</p>
-    </div>
-  </div>
-</div>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1&appId=326031667505182";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
   
+  <div class="two columns">
+    <ul class="side-nav">
+      <li><a href="#About">About</a></li>
+      <li><a href="#Kanban101">Personal Kanban 101</a></li>
+      <li><a href="#KanbanPractice">Kanban in Practice</a></li>
+      <li><a href="#Thanks">Thanks Open Source</a></li>
+    </ul>
+  </div>
 
-<script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  <div class="ten columns">
+    
+    <h5 id="About" class="about_section">About us</h5>
+    <p>This is a beta version. We'd appreciate for any feedback or bugs reporting.</p>
+    <ul>
+      <li><a href="http://about.me/yespeak" target="_blank">yespeak</a></li>
+      <li><a href="http://tw.linkedin.com/pub/miuccia-she/11/345/18b" target="_blank">miu</a></li>
+    </ul>
+
+    <h5 id="Kanban101" class="about_section">Personal Kanban 101</h5>
+    <iframe src="http://www.slideshare.net/slideshow/embed_code/2430897" width="597" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/ourfounder/personal-kanban-101" title="Personal Kanban 101" target="_blank">Personal Kanban 101</a> </strong> from <strong><a href="http://www.slideshare.net/ourfounder" target="_blank">Jim Benson</a></strong> </div>
+    
+    <h5 id="KanbanPractice" class="about_section">Kanban in practice</h5>
+    <iframe src="http://www.slideshare.net/slideshow/embed_code/3576466" width="597" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/marcusoftnet/kanbanboards" title="Kanbanboards" target="_blank">Kanbanboards</a> </strong> from <strong><a href="http://www.slideshare.net/marcusoftnet" target="_blank">Marcus Hammarberg</a></strong> </div>
+
+    <h5 id="Thanks" class="about_section">Thanks Open Source</h5>
+    <ul>
+      <li><a href="http://compass-style.org/" target="_blank">Compass</a></li>
+      <li><a href="https://github.com/schaloner/deadbolt" target="_blank">Deadbolt</a></li>    
+      <li><a href="http://www.createjs.com/#!/EaselJS" target="_blank">EASELJS</a></li>
+      <li><a href="http://foundation.zurb.com/" target="_blank">Foundation 3</a></li>
+      <li><a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font-Awesome</a></li>
+      <li><a href="https://www.google.com/webfonts" target="_blank">Google web fonts</a></li>
+      <li><a href="http://jquery.com/" target="_blank">jQuery</a></li>
+      <li><a href="https://github.com/eneko/mooml" target="_blank">mooml</a></li>
+      <li><a href="http://mootools.net/" target="_blank">mootools</a></li>
+      <li><a href="http://www.playframework.org/" target="_blank">Play framework</a></li>      
+      <li><a href="http://jaliss.github.com/securesocial/" target="_blank">SecureSocial</a></li>    
+      <li><a href="http://simplemodal.plasm.it/" target="_blank">SIMPLEMODAL</a></li>
+      <li><a href="http://zocialbuttons.com/" target="_blank">Zocial</a></li>    
+    </ul>
+
+  </div>
+</div>
 
 <!-- Included JS Files (Compressed) -->
 <script src="/public/javascripts/foundation/jquery.js"></script>
