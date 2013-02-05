@@ -3,6 +3,7 @@
 # ~~~~
 
 *       /auth       							module:securesocial
+*  		/  										module:press
 
 # Home page
 GET     /                                       Application.welcome
