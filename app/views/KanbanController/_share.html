@@ -1,13 +1,19 @@
 #{extends 'main.html' /}
 
+
 <div class="row">
-	<div class="twelve columns">
+	<div class="ten columns centered">
+		<h3 class="subheader">Share Kanban:</h3>
+	</div>
+</div>
+
+<div class="row">
+    <div class="ten columns centered">
 		<form id="" action="/kanbans/${kanban.id}/share" method="POST">
 			<input type="hidden" name="id" value="${kanban.id}"/>
 			<fieldset>
-			    <legend>Share Kanban</legend>
-			    <label>Name: </label>
-			    <input type="text" name="email" placeholder="please type email" value=""/>
+			    <legend>You are sharing kanban [${kanban.name}]</legend>
+			    <input type="text" name="email" placeholder=" - Add name or email - " value=""/>
 			    <input type="submit" value="OK" class="small button"/>
 		    </fieldset>
 		</form>

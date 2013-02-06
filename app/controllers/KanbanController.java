@@ -99,16 +99,11 @@ public class KanbanController extends Controller
 	 * @param name
 	 * @param goal
 	 */
-	public static void update(long id, String name, String goal)
+	public static void update(long id, String name)
 	{
-		SocialUser socialUser = SecureSocial.getCurrentUser();
-		User user = User.find("bySocialID", socialUser.id.id).first();
-		
 		Kanban k = Kanban.findById(id);
 		k.name = name;
-		k.goal = goal;
 		k.save();
-		
 		index();
 	}
 	
@@ -207,6 +202,13 @@ public class KanbanController extends Controller
 		render(kanban);
 	}
 	
+	
+	public static void _edit(long id)
+	{
+		Kanban kanban = Kanban.findById(id);
+		render(kanban);
+	}
+
 	
 	@Before(unless = { "create", "index", "_new" })
 	static void checkKanbanAccessRight(long id)
