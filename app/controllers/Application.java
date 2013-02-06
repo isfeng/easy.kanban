@@ -42,4 +42,10 @@ public class Application extends Controller
 	{
 		render();
 	}
+
+
+	public static void webmaster()
+	{
+		render("/Application/google6d1d349adf0fabd0.html");
+	}
 }

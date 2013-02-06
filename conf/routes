@@ -26,6 +26,7 @@ POST	/notes/pos								NoteController.updatePosition
 DELETE	/notes/{id}								NoteController.delete
 
 GET     /about                                  Application.about
+GET  	/google6d1d349adf0fabd0.html			Application.webmaster
 
 # test route
 GET     /test                                	Application.test
