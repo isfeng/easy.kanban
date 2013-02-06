@@ -7,7 +7,7 @@ import securesocial.provider.SocialUser;
 import controllers.securesocial.SecureSocial;
 import controllers.securesocial.SecureSocialPublic;
 
-@With( SecureSocialPublic.class )
+@With(SecureSocialPublic.class)
 public class Application extends Controller
 {
 	
@@ -24,26 +24,25 @@ public class Application extends Controller
 	public static void tryit()
 	{
 		Kanban tryit = Kanban.find("byName", "tryit").first();
-		if(tryit != null)
+		if (tryit != null)
 		{
 			renderArgs.put("offline", true);
 			renderArgs.put("kanban", tryit);
-			render("KanbanController/show.html");	
+			render("KanbanController/show.html");
 		}
 		else
 		{
 			welcome();
 		}
-	
 	}
 	
-
+	
 	public static void about()
 	{
 		render();
 	}
-
-
+	
+	
 	public static void webmaster()
 	{
 		render("/Application/google6d1d349adf0fabd0.html");

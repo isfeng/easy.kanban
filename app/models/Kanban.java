@@ -15,4 +15,6 @@ public class Kanban extends BaseModel
 	@OneToOne
 	public Board board;
 
+	public boolean _public;
+
 }

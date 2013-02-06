@@ -48,18 +48,28 @@
 		<input type="text" name="workflow_customize" id="workflow_customize" value=""/>
 		<input type="text" name="size" id="size" value=""/>
 		<input type="text" name="name" id="name" value=""/>
+		<input type="checkbox" name="_public" id="_public"/>
 	</form>
 </div>
 
 <script type="text/javascript">
 	Mooml.register('kanban_create_tmpl', function()
 	{
-		label(
+		div(
+			label(
 			input({
 				'type': 'text',
 				'id': 'kname',
 				'placeholder': '- Input Kanban Name Here -'
 			})
+			),
+			label(
+				input({
+					'type': 'checkbox',
+					'id': 'ispublic'					
+				}),
+				'Public'
+			)
 		);
 	});
 
@@ -70,6 +80,7 @@
 			$('name').set('value', $('kname').value);
 			$('size').set('value', 'HUGE');
 			$('workflow_customize').set('value', f);
+			$('_public').checked = $('ispublic').checked;
 			$('kform').submit();
 			this.hide();
 		});
@@ -77,6 +88,7 @@
 			$('name').set('value', $('kname').value);
 			$('size').set('value', 'LARGE');
 			$('workflow_customize').set('value', f);
+			$('_public').checked = $('ispublic').checked;
 			$('kform').submit();
 			this.hide();
 		});
@@ -84,6 +96,7 @@
 			$('name').set('value', $('kname').value);
 			$('size').set('value', 'MEDIUM');
 			$('workflow_customize').set('value', f);
+			$('_public').checked = $('ispublic').checked;
 			$('kform').submit();
 			this.hide();
 		}); 
@@ -91,6 +104,7 @@
 			$('name').set('value', $('kname').value);
 			$('size').set('value', 'SMALL');
 			$('workflow_customize').set('value', f);
+			$('_public').checked = $('ispublic').checked;
 			$('kform').submit();
 			this.hide();
 		}); 

@@ -31,7 +31,7 @@ public class KanbanController extends Controller
 	}
 	
 	
-	public static void create(@Required String name, String goal, @Required int workflow, String workflow_customize, @Required String size)
+	public static void create(@Required String name, String goal, @Required int workflow, String workflow_customize, @Required String size, boolean _public)
 	{
 		if (validation.hasErrors())
 		{
@@ -50,6 +50,8 @@ public class KanbanController extends Controller
 		k.name = name;
 		//k.goal = goal;
 		k.board = b;
+		if(_public)
+			k._public = true;
 		k.save();
 		
 		UserKanban uk = new UserKanban(_user, k);
@@ -213,13 +215,17 @@ public class KanbanController extends Controller
 	@Before(unless = { "create", "index", "_new" })
 	static void checkKanbanAccessRight(long id)
 	{
-		SocialUser suser = SecureSocial.getCurrentUser();
-		if (suser == null)
-			SecureSocial.login();
-		
-		UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
-		if (uk == null)
-			forbidden();
+		Kanban kanban = Kanban.findById(id);
+		if(!kanban._public)
+		{
+			SocialUser suser = SecureSocial.getCurrentUser();
+			if (suser == null)
+				SecureSocial.login();
+			
+			UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
+			if (uk == null)
+				forbidden();	
+		}
 	}
 	
 }

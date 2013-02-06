@@ -13,9 +13,7 @@ import controllers.securesocial.SecureSocial;
 @With(SecureSocial.class)
 public class NoteController extends Controller
 {
-	private static int BOARD_WIDTH = 1153;
-	
-	
+		
 	public static void create(long id, String title, String note)
 	{
 		Kanban k = Kanban.findById(id);
@@ -48,7 +46,7 @@ public class NoteController extends Controller
 		int valueSize = vs.size();
 		if (valueSize > 0)
 		{
-			int valueWidth = NoteController.BOARD_WIDTH / valueSize;
+			int valueWidth = stickynote.kanban.board.width / valueSize;
 			
 			int current_x = 0;
 			for (int i = 0; i < vs.size(); i++)
