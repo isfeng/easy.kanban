@@ -14,7 +14,6 @@ import controllers.deadbolt.RestrictedResourcesHandler;
 import controllers.securesocial.SecureSocial;
 import controllers.securesocial.SecureSocialPublic;
 
-@With(SecureSocialPublic.class)
 public class KanbanAccessHandler extends Controller implements DeadboltHandler
 {
 

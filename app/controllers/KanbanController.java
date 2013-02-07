@@ -20,7 +20,7 @@ import controllers.deadbolt.RestrictedResource;
 import controllers.securesocial.SecureSocial;
 import controllers.securesocial.SecureSocialPublic;
 
-@With(Deadbolt.class)
+@With({Deadbolt.class,SecureSocialPublic.class})
 public class KanbanController extends Controller
 {
 	public static void show(long id, boolean isNew)
@@ -231,7 +231,7 @@ public class KanbanController extends Controller
 	{
 		Kanban kanban = Kanban.findById(id);
 		if (kanban == null)
-			index();
+			Application.welcome();
 
 		if (!kanban._public)
 		{
