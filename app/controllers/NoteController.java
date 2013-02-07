@@ -10,9 +10,10 @@ import models.ValueStream;
 import play.mvc.Controller;
 import play.mvc.With;
 import securesocial.provider.SocialUser;
+import controllers.deadbolt.Deadbolt;
 import controllers.securesocial.SecureSocial;
 
-
+@With(Deadbolt.class)
 public class NoteController extends Controller
 {
 	

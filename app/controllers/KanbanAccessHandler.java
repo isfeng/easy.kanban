@@ -1,5 +1,8 @@
 package controllers;
 
+import org.apache.commons.lang.math.NumberUtils;
+
+import models.Kanban;
 import models.KanbanRoleHolder;
 import models.deadbolt.RoleHolder;
 import play.mvc.Controller;
@@ -20,6 +23,8 @@ public class KanbanAccessHandler extends Controller implements DeadboltHandler
 	{
 		try
 		{
+			long id = NumberUtils.toLong(params.get("id"));
+			Kanban k = Kanban.findById(id);
 			SecureSocial.DeadboltHelper.beforeRoleCheck();
 		}
 		catch (Throwable throwable)
@@ -27,7 +32,6 @@ public class KanbanAccessHandler extends Controller implements DeadboltHandler
 			throwable.printStackTrace();
 			throw new RuntimeException(throwable);
 		}
-		
 	}
 	
 	
