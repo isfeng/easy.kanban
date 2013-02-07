@@ -2,9 +2,7 @@
  
 # --- !Ups
 
-ALTER TABLE Kanban (
-    ADD COLUMN _public boolean NOT NULL
-);
+ALTER TABLE Kanban ADD COLUMN _public boolean;
  
 # --- !Downs
  
