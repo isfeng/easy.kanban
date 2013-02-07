@@ -30,8 +30,8 @@ public class KanbanController extends Controller
 			renderArgs.put("isNew", isNew);
 		render();
 	}
-	
-	
+
+
 	public static void create(@Required String name, String goal, @Required int workflow, String workflow_customize, @Required String size, boolean _public)
 	{
 		if (validation.hasErrors())
@@ -40,13 +40,13 @@ public class KanbanController extends Controller
 			validation.keep(); // keep the errors for the next request
 			_new();
 		}
-		
+
 		SocialUser socialUser = SecureSocial.getCurrentUser();
 		User _user = User.find("bySocialID", socialUser.id.id).first();
-		
-		
+
+
 		Board b = Board.getDefaultBoard(size);
-		
+
 		Kanban k = new Kanban();
 		k.name = name;
 		// k.goal = goal;
@@ -54,10 +54,10 @@ public class KanbanController extends Controller
 		if (_public)
 			k._public = true;
 		k.save();
-		
+
 		UserKanban uk = new UserKanban(_user, k);
 		uk.save();
-		
+
 		createWorkflow(workflow_customize, k);
 		// switch (workflow)
 		// {
@@ -77,11 +77,11 @@ public class KanbanController extends Controller
 		// error();
 		// break;
 		// }
-		
+
 		show(k.id, true);
 	}
-	
-	
+
+
 	private static void createWorkflow(String values, Kanban k)
 	{
 		if (values != null && !values.equals(""))
@@ -94,8 +94,8 @@ public class KanbanController extends Controller
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * cant update value stream currently
 	 * @param id
@@ -109,21 +109,21 @@ public class KanbanController extends Controller
 		k.save();
 		index();
 	}
-	
-	
+
+
 	public static void delete(long id)
 	{
 		Kanban k = Kanban.findById(id);
-		
+
 		TextNote.delete("kanban", k);
 		ValueStream.delete("kanban=?", k);
 		UserKanban.delete("kanban", k);
-		
+
 		k.delete();
 		index();
 	}
-	
-	
+
+
 	public static void index()
 	{
 		SocialUser socialUser = SecureSocial.getCurrentUser();
@@ -132,8 +132,8 @@ public class KanbanController extends Controller
 		renderArgs.put("kanbans", kanbans);
 		render();
 	}
-	
-	
+
+
 	public static void notes(long id)
 	{
 		List<TextNote> notes = TextNote.find("byKanban", Kanban.findById(id)).fetch();
@@ -144,8 +144,8 @@ public class KanbanController extends Controller
 		}
 		renderJSON(notes);
 	}
-	
-	
+
+
 	public static void getBackground(long id)
 	{
 		Kanban k = Kanban.findById(id);
@@ -159,8 +159,8 @@ public class KanbanController extends Controller
 		m.put("stream", vs);
 		renderJSON(m);
 	}
-	
-	
+
+
 	public static void setBackground(long id, String dataURL)
 	{
 		Kanban k = Kanban.findById(id);
@@ -168,51 +168,51 @@ public class KanbanController extends Controller
 		k.save();
 		renderJSON(new String("OK"));
 	}
-	
-	
+
+
 	public static void _new()
 	{
 		render();
 	}
-	
-	
+
+
 	public static void _update(long id)
 	{
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
-	
-	
+
+
 	public static void share(long id, String email)
 	{
 		User u = User.find("byEmail", email).first();
 		Kanban k = Kanban.findById(id);
-		
+
 		UserKanban uk = UserKanban.find("byUserAndKanban", u, k).first();
 		if (uk == null)
 		{
 			UserKanban share = new UserKanban(u, k);
 			share.save();
 		}
-		
+
 		index();
 	}
-	
-	
+
+
 	public static void _share(long id)
 	{
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
-	
-	
+
+
 	public static void _edit(long id)
 	{
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
-	
-	
+
+
 	// private static void checkAccess(long id)
 	// {
 	// Kanban kanban = Kanban.findById(id);
@@ -224,19 +224,23 @@ public class KanbanController extends Controller
 	// forbidden();
 	// }
 	// }
-	
-	
+
+
 	@Before(unless = { "create", "index", "_new" })
 	static void checkKanbanAccessRight(long id) throws Throwable
 	{
 		Kanban kanban = Kanban.findById(id);
 		if (kanban == null)
 			index();
-		
-		SocialUser suser = SecureSocial.getCurrentUser();
-		UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
-		if (uk == null)
-			forbidden();
+
+		if (!kanban._public)
+		{
+			SocialUser suser = SecureSocial.getCurrentUser();
+			UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
+			if (uk == null)
+				forbidden();
+		}
+
 	}
-	
+
 }
