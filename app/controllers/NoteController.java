@@ -5,17 +5,20 @@ import java.util.List;
 
 import models.Kanban;
 import models.TextNote;
+import models.UserKanban;
 import models.ValueStream;
 import play.mvc.Controller;
 import play.mvc.With;
+import securesocial.provider.SocialUser;
 import controllers.securesocial.SecureSocial;
 
-@With(SecureSocial.class)
+
 public class NoteController extends Controller
 {
-		
+	
 	public static void create(long id, String title, String note)
 	{
+		checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		TextNote stickynote = new TextNote(k, title, note);
 		stickynote.save();
@@ -26,6 +29,7 @@ public class NoteController extends Controller
 	public static void delete(long id)
 	{
 		TextNote tn = TextNote.findById(id);
+		checkAccess(tn.kanban.id);
 		tn.delete();
 		
 		HashMap<String, String> resp = new HashMap();
@@ -37,6 +41,7 @@ public class NoteController extends Controller
 	public static void updatePosition(long id, int x, int y, String color)
 	{
 		TextNote stickynote = TextNote.findById(id);
+		checkAccess(stickynote.kanban.id);
 		stickynote.x = x;
 		stickynote.y = y;
 		stickynote.color = color;
@@ -74,4 +79,16 @@ public class NoteController extends Controller
 		renderJSON(resp);
 	}
 	
+	
+	private static void checkAccess(long id)
+	{
+		Kanban kanban = Kanban.findById(id);
+		if (!kanban._public)
+		{
+			SocialUser suser = SecureSocial.getCurrentUser();
+			UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
+			if (uk == null)
+				forbidden();
+		}
+	}
 }

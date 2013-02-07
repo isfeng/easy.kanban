@@ -18,14 +18,16 @@ import controllers.deadbolt.Deadbolt;
 import controllers.deadbolt.Restrict;
 import controllers.deadbolt.RestrictedResource;
 import controllers.securesocial.SecureSocial;
+import controllers.securesocial.SecureSocialPublic;
 
-@With(SecureSocial.class)
+@With(SecureSocialPublic.class)
 public class KanbanController extends Controller
 {
 	public static void show(long id, boolean isNew)
 	{
+		// checkAccess(id);
 		renderArgs.put("kanban", Kanban.findById(id));
-		if(isNew)
+		if (isNew)
 			renderArgs.put("isNew", isNew);
 		render();
 	}
@@ -45,37 +47,37 @@ public class KanbanController extends Controller
 		
 		
 		Board b = Board.getDefaultBoard(size);
-				
+		
 		Kanban k = new Kanban();
 		k.name = name;
-		//k.goal = goal;
+		// k.goal = goal;
 		k.board = b;
-		if(_public)
+		if (_public)
 			k._public = true;
 		k.save();
 		
 		UserKanban uk = new UserKanban(_user, k);
 		uk.save();
-
+		
 		createWorkflow(workflow_customize, k);
-//		switch (workflow)
-//		{
-//			case 1:
-//				createWorkflow("Todo,Done", k);
-//				break;
-//			case 2:
-//				createWorkflow("Todo,In Progress, Done", k);
-//				break;
-//			case 3:
-//				createWorkflow(name, k);
-//				break;
-//			case 4:
-//				createWorkflow(workflow_customize, k);
-//				break;
-//			default:
-//				error();
-//				break;
-//		}
+		// switch (workflow)
+		// {
+		// case 1:
+		// createWorkflow("Todo,Done", k);
+		// break;
+		// case 2:
+		// createWorkflow("Todo,In Progress, Done", k);
+		// break;
+		// case 3:
+		// createWorkflow(name, k);
+		// break;
+		// case 4:
+		// createWorkflow(workflow_customize, k);
+		// break;
+		// default:
+		// error();
+		// break;
+		// }
 		
 		show(k.id, true);
 	}
@@ -103,6 +105,7 @@ public class KanbanController extends Controller
 	 */
 	public static void update(long id, String name)
 	{
+		// checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		k.name = name;
 		k.save();
@@ -112,6 +115,7 @@ public class KanbanController extends Controller
 	
 	public static void delete(long id)
 	{
+		// checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		
 		TextNote.delete("kanban", k);
@@ -135,6 +139,7 @@ public class KanbanController extends Controller
 	
 	public static void notes(long id)
 	{
+		// checkAccess(id);
 		List<TextNote> notes = TextNote.find("byKanban", Kanban.findById(id)).fetch();
 		for (TextNote textNote : notes)
 		{
@@ -147,6 +152,7 @@ public class KanbanController extends Controller
 	
 	public static void getBackground(long id)
 	{
+		// checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		List<ValueStream> vs = ValueStream.find("byKanban", k).fetch();
 		HashMap m = new HashMap();
@@ -162,6 +168,7 @@ public class KanbanController extends Controller
 	
 	public static void setBackground(long id, String dataURL)
 	{
+		// checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		k.background = dataURL;
 		k.save();
@@ -177,6 +184,7 @@ public class KanbanController extends Controller
 	
 	public static void _update(long id)
 	{
+		// checkAccess(id);
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
@@ -184,6 +192,7 @@ public class KanbanController extends Controller
 	
 	public static void share(long id, String email)
 	{
+		// checkAccess(id);
 		User u = User.find("byEmail", email).first();
 		Kanban k = Kanban.findById(id);
 		
@@ -200,6 +209,7 @@ public class KanbanController extends Controller
 	
 	public static void _share(long id)
 	{
+		// checkAccess(id);
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
@@ -207,24 +217,37 @@ public class KanbanController extends Controller
 	
 	public static void _edit(long id)
 	{
+		// checkAccess(id);
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
-
+	
+	
+	// private static void checkAccess(long id)
+	// {
+	// Kanban kanban = Kanban.findById(id);
+	// if (!kanban._public)
+	// {
+	// SocialUser suser = SecureSocial.getCurrentUser();
+	// UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
+	// if (uk == null)
+	// forbidden();
+	// }
+	// }
+	
 	
 	@Before(unless = { "create", "index", "_new" })
-	static void checkKanbanAccessRight(long id)
+	static void checkKanbanAccessRight(long id) throws Throwable
 	{
 		Kanban kanban = Kanban.findById(id);
-		if(!kanban._public)
+		if (!kanban._public)
 		{
-			SocialUser suser = SecureSocial.getCurrentUser();
-			if (suser == null)
-				SecureSocial.login();
+			SecureSocial.DeadboltHelper.beforeRoleCheck();
 			
+			SocialUser suser = SecureSocial.getCurrentUser();
 			UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
 			if (uk == null)
-				forbidden();	
+				forbidden();
 		}
 	}
 	
