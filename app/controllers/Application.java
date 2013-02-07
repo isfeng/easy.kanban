@@ -26,7 +26,7 @@ public class Application extends Controller
 		Kanban tryit = Kanban.find("byName", "tryit").first();
 		if (tryit != null)
 		{
-			renderArgs.put("offline", true);
+//			renderArgs.put("offline", true);
 			renderArgs.put("kanban", tryit);
 			render("KanbanController/show.html");
 		}
