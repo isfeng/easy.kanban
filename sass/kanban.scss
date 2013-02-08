@@ -39,6 +39,7 @@ body {
     position: fixed;
     z-index: 101;
     bottom: 5px;
+    width: 400px;
     ul li {
         display: inline;
         &:hover {
@@ -46,14 +47,12 @@ body {
             color: blak;
         }
         &#trashcan {
-            margin-left: 20px;
             color: gray;     
             &:hover {
                 color: gray;
                 cursor: default;
             }
-        }
-        &#post_stack_yellow {
+            padding: 50px 50px 10px 50px;
         }
         &#globalmove {
             color: gray;
