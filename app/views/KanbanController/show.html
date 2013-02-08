@@ -43,7 +43,7 @@
         var reheight = $(document.body).getStyle('height').toInt()-60;
         $('kanban').setStyle('height', reheight+'px');
 
-        console.log($('board_control').getPosition());
+        //console.log($('board_control').getPosition());
         if($('board_control').getPosition().y > ${kanban.board.height}-30)
             $('board_control').setPosition({y: ${kanban.board.height}-30});
     }
