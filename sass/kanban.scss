@@ -89,13 +89,15 @@ body {
     border-top: 1px solid #FFFAFA;
     border-left: 1px solid #FFFAFA;
     @include box-shadow(4px 4px 6px #333);
-    @include force-wrap;
+    //@include force-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
     h5 {
         font-family: 'Patrick Hand', cursive;
         //font-weight: bold;
         margin:0;
     }
-    pre {
+    p {
         font-family: 'Patrick Hand', cursive;
         //margin: 5px 1px 5px 1px;
         font-weight: bold;
