@@ -51,7 +51,7 @@ Mooml.register('post_tmpl', function(note)
 	div({
 		'class' : 'note ' + rotatecls,
 		'nid' : note.nid
-	}, h5(note.title), pre(note.note));
+	}, h5(note.title), p(note.note));
 });
 
 var StickyNote = new Class({
