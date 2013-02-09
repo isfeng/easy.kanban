@@ -561,12 +561,12 @@ var Kanban = new Class({
 	{
 		$(mover).addEvent("click", function(){
 			if(this.current_action != 'drag')
-			{
-				this.current_action = 'drag';
+			{		
 				this.dragScroller.attach();
-				$('kanban').setStyle('cursor', 'move');
-				this.activateTool(mover);
-			}			
+			}
+			this.current_action = 'drag';				
+			$('kanban').setStyle('cursor', 'move');
+			this.activateTool(mover);	
 		}.bind(this));
 	},
 
