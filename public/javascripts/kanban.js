@@ -215,6 +215,7 @@ var Kanban = new Class({
 		    invert: true,
 		    modifiers: {x: 'scrollLeft', y: 'scrollTop'}
 		});
+		this.z = 1;
 	},
 
 	stickText : function(textNote, x, y, color, _center)
@@ -253,6 +254,8 @@ var Kanban = new Class({
 			onBeforeStart: function()
 			{
 				this.dragScroller.detach();
+				this.z += 1;
+				el.setStyle('zIndex', this.z);
 			}.bind(this),
 
 			onComplete: function()
