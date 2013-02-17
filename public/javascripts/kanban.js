@@ -228,6 +228,7 @@ var Kanban = new Class({
 			precalculate : false,
 			onDrop : function(element, droppable, event)
 			{
+				// console.log('onDrop');
 				// console.log(element.getPosition(this.container));
 				/* only trashcan droppable */
 				if (droppable)
@@ -253,12 +254,23 @@ var Kanban = new Class({
 
 			onBeforeStart: function()
 			{
-				this.dragScroller.detach();
 				this.z += 1;
 				el.setStyle('zIndex', this.z);
+				this.dragScroller.detach();	
+			}.bind(this),
+			
+			onStart : function()
+			{
+							
+			}.bind(this),
+			
+			onComplete: function()
+			{
+				// console.log('onComplete');
+				this.dragScroller.attach();
 			}.bind(this),
 
-			onComplete: function()
+			onCancel : function()
 			{
 				this.dragScroller.attach();
 			}.bind(this)
@@ -561,10 +573,12 @@ var Kanban = new Class({
 	{
 		$(mover).addEvent("click", function(){
 			if(this.current_action != 'drag')
-				this.dragScroller.attach();			
+			{		
+				this.dragScroller.attach();
+			}
 			this.current_action = 'drag';				
 			$('kanban').setStyle('cursor', 'move');
-			this.activateTool(mover);				
+			this.activateTool(mover);	
 		}.bind(this));
 	},
 
