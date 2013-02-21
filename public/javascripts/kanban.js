@@ -133,7 +133,7 @@ var StickyNote = new Class({
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onUrlOK(this.kid, $('url_note_url').value);
-			console.log(this.post_url_el);
+			// console.log(this.post_url_el);
 			this.fireEvent('urlOk', this.post_url_el);
 			this.hide();
 		}.bind(this));
@@ -277,6 +277,7 @@ var PostStack = new Class({
 		var stickyNote = new StickyNote(this.kanban.kid, {
 			onTextOk : function(el)	{
 				this.kanban.stickText(el, 0, 0, this.options.color, true);
+				// console.log('this.kanban.container '+this.kanban.container);
 				_updatePos(el, this.options.color, this.kanban.container, 'text');
 			}.bind(this)
 		});
@@ -799,8 +800,9 @@ var Kanban = new Class({
 
 });
 
-function _updatePos(element, color, containe, type)
+function _updatePos(element, color, container, type)
 {
+	// console.log(element.getPosition('space'));
 	var req = new Request.JSON({
 		url : '/notes/pos',
 		method : 'post',
