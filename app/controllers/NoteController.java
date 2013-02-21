@@ -3,7 +3,9 @@ package controllers;
 import java.util.HashMap;
 import java.util.List;
 
+import models.DrawNote;
 import models.Kanban;
+import models.StickyNote;
 import models.TextNote;
 import models.UserKanban;
 import models.ValueStream;
@@ -15,7 +17,7 @@ import controllers.securesocial.SecureSocial;
 
 public class NoteController extends Controller
 {
-
+	
 	public static void create(long id, String title, String note)
 	{
 		checkAccess(id);
@@ -24,35 +26,55 @@ public class NoteController extends Controller
 		stickynote.save();
 		renderJSON(stickynote.id);
 	}
-
-
-	public static void delete(long id)
+	
+	
+	public static void postURL(long id, String url)
 	{
-		TextNote tn = TextNote.findById(id);
-		checkAccess(tn.kanban.id);
-		tn.delete();
-
+		checkAccess(id);
+		Kanban k = Kanban.findById(id);
+		DrawNote stickynote = new DrawNote(k, url);
+		stickynote.save();
+		renderJSON(stickynote.id);
+	}
+	
+	
+	public static void delete(long id, String type)
+	{
+		StickyNote stickynote = null;
+		if ("text".equals(type))
+			stickynote = TextNote.findById(id);
+		else
+			stickynote = DrawNote.findById(id);
+		
+		checkAccess(stickynote.kanban.id);
+		stickynote.delete();
+		
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
 		renderJSON(resp);
 	}
-
-
-	public static void updatePosition(long id, int x, int y, String color)
+	
+	
+	public static void updatePosition(long id, int x, int y, String color, String type)
 	{
-		TextNote stickynote = TextNote.findById(id);
+		StickyNote stickynote = null;
+		if ("text".equals(type))
+			stickynote = TextNote.findById(id);
+		else
+			stickynote = DrawNote.findById(id);
+		
 		checkAccess(stickynote.kanban.id);
 		stickynote.x = x;
 		stickynote.y = y;
 		stickynote.color = color;
-
-
+		
+		
 		List<ValueStream> vs = ValueStream.find("byKanban", stickynote.kanban).fetch();
 		int valueSize = vs.size();
 		if (valueSize > 0)
 		{
 			int valueWidth = stickynote.kanban.board.width / valueSize;
-
+			
 			int current_x = 0;
 			for (int i = 0; i < vs.size(); i++)
 			{
@@ -61,7 +83,7 @@ public class NoteController extends Controller
 				valueStream.endx = current_x + valueWidth;
 				current_x += valueWidth;
 			}
-
+			
 			for (ValueStream valueStream : vs)
 			{
 				if (x >= valueStream.startx && x < valueStream.endx)
@@ -71,15 +93,15 @@ public class NoteController extends Controller
 				}
 			}
 		}
-
+		
 		stickynote.save();
-
+		
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
 		renderJSON(resp);
 	}
-
-
+	
+	
 	private static void checkAccess(long id)
 	{
 		Kanban kanban = Kanban.findById(id);

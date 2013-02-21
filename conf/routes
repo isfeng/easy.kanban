@@ -20,8 +20,10 @@ GET     /kanbans/{id}/share                     KanbanController._share
 POST    /kanbans/{id}/share                     KanbanController.share
 GET     /kanbans/{id}/background                KanbanController.getBackground
 POST    /kanbans/{id}/background                KanbanController.setBackground
+# POST    /kanbans/{id}/images                	KanbanController.upload
 
 POST	/notes									NoteController.create
+POST	/notes/url								NoteController.postURL
 POST	/notes/pos								NoteController.updatePosition
 DELETE	/notes/{id}								NoteController.delete
 
