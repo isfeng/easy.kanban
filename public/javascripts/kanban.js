@@ -42,8 +42,33 @@ Mooml.register('text_note_tmpl', function()
 		'rows':5
 	})));
 });
+/* uploader form */
+Mooml.register('uploader_tmpl', function(param)
+{
+	div(
+		form({method:"POST", action:"/kanbans/"+param.kid+"/images", enctype:"multipart/form-data"},
+			div({"class":"formRow"},
+				input({type:"file",id:"url",name:"url[]"})
+			),
+			div({"class":"formRow"},
+				input({"type":"submit","name":"upload","value":"upload"})
+			)
+		)
+	);	
+});
+/* url form */
+Mooml.register('url_form_tmpl', function(param)
+{
+	div( 
+		input({
+			'type' : 'text',
+			'id' : 'url_note_url',
+			'maxlength': 255
+		})
+	);
+});
 
-/* sticky form */
+/* text post */
 Mooml.register('post_tmpl', function(note)
 {
 	var random = Number.random(-3, 3);
@@ -52,6 +77,16 @@ Mooml.register('post_tmpl', function(note)
 		'class' : 'note ' + rotatecls,
 		'nid' : note.nid
 	}, h5(note.title), p(note.note));
+});
+/* image post */
+Mooml.register('url_post_tmpl', function(note)
+{
+	var random = Number.random(-3, 3);
+	var rotatecls = 'deg' + random;
+	div({
+		'class' : 'imgnote ' + rotatecls,
+		'nid' : note.nid
+	}, img({src: note.url}));
 });
 
 var StickyNote = new Class({
@@ -91,6 +126,24 @@ var StickyNote = new Class({
 			"contents" : Mooml.render('text_note_tmpl').get('html')
 		});
 	},
+	
+	showUrlForm : function()
+	{
+		this.sm = new SimpleModal({width:450});
+		this.sm.addButton("Post It", "btn primary", function()
+		{
+			this._onUrlOK(this.kid, $('url_note_url').value);
+			console.log(this.post_url_el);
+			this.fireEvent('urlOk', this.post_url_el);
+			this.hide();
+		}.bind(this));
+		this.sm.addButton("Cancel", "btn secondary");
+		this.sm.show({
+			"model": "modal",
+			"title": "URL",
+			"contents" : Mooml.render('url_form_tmpl').get('html')
+		});
+	},
 
 	showDrawForm : function()
 	{
@@ -119,6 +172,13 @@ var StickyNote = new Class({
 			onSuccess : function(nid)
 			{
 				this.nid = nid;
+				this.title = title;
+				this.note = note;
+				this.post_text_el = Mooml.render('post_tmpl', {
+					'title' : title,
+					'note' : note,
+					'nid' : this.nid
+				});
 			}.bind(this),
 			onFailure : function()
 			{
@@ -128,18 +188,45 @@ var StickyNote = new Class({
 		if (!KanbanApp.offline)
 			req.send();
 
-		this.title = title;
-		this.note = note;
-		this.post_text_el = Mooml.render('post_tmpl', {
-			'title' : title,
-			'note' : note,
-			'nid' : this.nid
-		});
+		
 	},
 
 	_onDrawOK : function()
 	{
+		
+		
+	},
 
+	_onUrlOK : function(kid, imgurl)
+	{
+		var req = new Request.JSON({
+			url : '/notes/url',
+			method : 'post',
+			data : {
+				'id' : kid,
+				'url' : imgurl
+			},
+			async : false,
+			onRequest : function()
+			{
+			},
+			onSuccess : function(nid)
+			{
+				this.nid = nid;
+				this.url = imgurl;
+				this.post_url_el = Mooml.render('url_post_tmpl', {
+					'url' : imgurl,
+					'nid' : nid
+				});
+				// console.log(this.post_url_el);
+			}.bind(this),
+			onFailure : function()
+			{
+			}
+		});
+
+		if (!KanbanApp.offline)
+			req.send();
 	}
 
 });
@@ -153,21 +240,35 @@ StickyNote.buildNoteEl = function(nid, title, note)
 	});
 }
 
+StickyNote.buildUrlEl = function(nid, url)
+{
+	return Mooml.render('url_post_tmpl', {
+		'url' : url,
+		'nid' : nid
+	});
+}
+
 var PostStack = new Class({
 
 	Implements : [ Options, Events ],
 
 	options : {
-
+		type: 'text', //text, draw, url
+		color: '#fefabc'
 	},
 
 	/* add edit event */
-	initialize : function(kanban, stack, color)
+	initialize : function(kanban, stack, options)
 	{
+		if(options)
+			this.setOptions(options);
+
 		this.kanban = kanban;
-		this.color = color;
 		$(stack).addEvent("click", function(){
-			this.pull();
+			if(this.options.type=='text')
+				this.pull();
+			else if(this.options.type=='url')
+				this.pullUrl();
 		}.bind(this));
 	},
 
@@ -175,11 +276,22 @@ var PostStack = new Class({
 	{
 		var stickyNote = new StickyNote(this.kanban.kid, {
 			onTextOk : function(el)	{
-				this.kanban.stickText(el, 0, 0, this.color, true);
-				_updatePos(el, this.color, this.kanban.container);
+				this.kanban.stickText(el, 0, 0, this.options.color, true);
+				_updatePos(el, this.options.color, this.kanban.container, 'text');
 			}.bind(this)
 		});
 		stickyNote.showTextForm();
+	},
+
+	pullUrl : function()
+	{
+		var stickyNote = new StickyNote(this.kanban.kid, {
+			onUrlOk : function(el)	{
+				this.kanban.stickUrl(el, 0, 0, this.options.color, true);
+				_updatePos(el, this.options.color, this.kanban.container, 'url');
+			}.bind(this)
+		});
+		stickyNote.showUrlForm();
 	}
 
 });
@@ -218,6 +330,67 @@ var Kanban = new Class({
 		this.z = 1;
 	},
 
+	stickUrl : function(urlNote, x, y, color, _center)
+	{
+		var el = urlNote.inject($(this.container));
+
+		new Drag.Move(el, {
+			container : this.container,
+			droppables : '#trashcan',
+			precalculate : false,
+			onDrop : function(element, droppable, event)
+			{
+				if (droppable)
+					_deleteNote(element, 'url');
+				else
+					_updatePos(element, color, this.container, 'url');				
+			}.bind(this),
+
+			onEnter : function(element, droppable)
+			{
+				// console.log(element, 'entered', droppable);
+			},
+
+			onLeave : function(element, droppable)
+			{
+				// console.log(element, 'left', droppable);
+			},
+
+			onBeforeStart: function()
+			{
+				this.z += 1;
+				el.setStyle('zIndex', this.z);
+				this.dragScroller.detach();	
+			}.bind(this),
+			
+			onStart : function()
+			{
+							
+			}.bind(this),
+			
+			onComplete: function()
+			{
+				// console.log('onComplete');
+				this.dragScroller.attach();
+			}.bind(this),
+
+			onCancel : function()
+			{
+				this.dragScroller.attach();
+			}.bind(this)
+		})
+
+		if(_center)
+			el.position();
+		else
+		{
+			el.setPosition({
+				'x' : x,
+				'y' : y
+			});
+		}
+	},
+
 	stickText : function(textNote, x, y, color, _center)
 	{
 		var el = textNote.inject($(this.container));
@@ -234,11 +407,11 @@ var Kanban = new Class({
 				if (droppable)
 				{
 					// console.log(element, 'dropped on', droppable, 'event', event);
-					_deleteNote(element);
+					_deleteNote(element, 'text');
 				}
 				else
 				{
-					_updatePos(element, color, this.container);
+					_updatePos(element, color, this.container, 'text');
 				}
 			}.bind(this),
 
@@ -315,7 +488,11 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
-					this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color);
+					// console.log(el);
+					if(el.url)
+						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color);
+					else
+						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color);
 				}.bind(this));
 			}.bind(this),
 			onFailure : function()
@@ -331,7 +508,7 @@ var Kanban = new Class({
 
 	addStack : function(stack, color)
 	{
-		var postStack = new PostStack(this, stack, color);
+		var postStack = new PostStack(this, stack, {color: color, type: 'text'});
 	},
 
 	_loadNotes : function()
@@ -582,6 +759,35 @@ var Kanban = new Class({
 		}.bind(this));
 	},
 
+	addUploader : function(uploader)
+	{
+		var kid = this.kid;
+		$(uploader).addEvent("click", function(){
+			//show upload form
+			var sm = new SimpleModal({width:200});
+			sm.addButton("Cancel", "btn secondary");
+			sm.show({
+				"model": "modal",
+				"title": "Upload Image",
+				"contents" : Mooml.render('uploader_tmpl',{"kid": kid}).get('html')
+			});
+
+			var upload = new Form.Upload('url', {
+			    onComplete: function(){
+			        alert('Completed uploading the Files');
+			    }
+			});
+
+		});
+	},
+
+
+	addUrlStack : function(stack)
+	{
+		var postStack = new PostStack(this, stack, {color: 'black', type: 'url'});
+	},
+
+
 	activateTool: function(el)
 	{
 
@@ -593,40 +799,41 @@ var Kanban = new Class({
 
 });
 
-function _updatePos(element, color, container)
+function _updatePos(element, color, containe, type)
 {
 	var req = new Request.JSON({
-	url : '/notes/pos',
-	method : 'post',
-	data : {
-		'id' : element.get('nid'),
-		'x' : element.getPosition(container).x,
-		'y' : element.getPosition(container).y,
-		'color': color
-	},
-	onRequest : function()
-	{
-		// console.log('_updatePos onRequest');
-	},
-	onSuccess : function()
-	{
-		// console.log('_updatePos onSuccess');
-	},
-	onFailure : function()
-	{
-		// console.log('_updatePos onFailure');
-	}
-});
+		url : '/notes/pos',
+		method : 'post',
+		data : {
+			'id' : element.get('nid'),
+			'x' : element.getPosition(container).x,
+			'y' : element.getPosition(container).y,
+			'color': color,
+			'type': type
+		},
+		onRequest : function()
+		{
+			// console.log('_updatePos onRequest', 'text');
+		},
+		onSuccess : function()
+		{
+			// console.log('_updatePos onSuccess', 'text');
+		},
+		onFailure : function()
+		{
+			// console.log('_updatePos onFailure', 'text');
+		}
+	});
 
-if (!KanbanApp.offline)
-	req.send();
+	if (!KanbanApp.offline)
+		req.send();
 }
 
-function _deleteNote(el)
+function _deleteNote(el, type)
 {
 	var req = new Request.JSON({
-		url : '/notes/' + el.get('nid') + '?x-http-method-override=DELETE',
-		method : 'post',
+		url : '/notes/' + el.get('nid') + '?x-http-method-override=DELETE&type='+type,
+		method : 'post',		
 		onComplete : function()
 		{
 			// console.log('_deleteNote onComplete');
