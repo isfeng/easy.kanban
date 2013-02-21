@@ -60,10 +60,9 @@ body {
             z-index: 1;
             cursor: move;
             max-width: 320px;
-            max-height: 320px;
             border-top: 1px solid #FFFAFA;
             border-left: 1px solid #FFFAFA;
-            @include box-shadow(4px 4px 6px #333);            
+            @include box-shadow(8px 8px 12px #333);            
         }
     }
     background-color: #FFF;
