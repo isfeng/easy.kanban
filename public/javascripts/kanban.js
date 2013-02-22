@@ -335,9 +335,20 @@ var Kanban = new Class({
 		this.z = 1;
 	},
 
-	stickUrl : function(urlNote, x, y, color, _center)
+	stickUrl : function(urlNote, x, y, color, _center, idx)
 	{
 		var el = urlNote.inject($(this.container));
+		if(idx)
+		{
+			el.setStyle('zIndex', idx);
+			if(idx > this.z)
+				this.z = idx;
+		}
+		else
+		{
+			this.z++;
+			el.setStyle('zIndex', this.z);
+		}
 
 		new Drag.Move(el, {
 			container : this.container,
@@ -379,9 +390,10 @@ var Kanban = new Class({
 				this.dragScroller.attach();
 			}.bind(this),
 
-			onCancel : function()
+			onCancel : function(element)
 			{
 				this.dragScroller.attach();
+				_updatePos(element, color, this.container, 'url');
 			}.bind(this)
 		})
 
@@ -396,9 +408,21 @@ var Kanban = new Class({
 		}
 	},
 
-	stickText : function(textNote, x, y, color, _center)
+	stickText : function(textNote, x, y, color, _center, idx)
 	{
 		var el = textNote.inject($(this.container));
+		if(idx)
+		{			
+			el.setStyle('zIndex', idx);
+			if(idx > this.z)
+				this.z = idx;
+		}
+		else
+		{
+			this.z++;
+			el.setStyle('zIndex', this.z);
+		}
+
 
 		new Drag.Move(el, {
 			container : this.container,
@@ -448,9 +472,10 @@ var Kanban = new Class({
 				this.dragScroller.attach();
 			}.bind(this),
 
-			onCancel : function()
+			onCancel : function(element)
 			{
 				this.dragScroller.attach();
+				_updatePos(element, color, this.container, 'text');
 			}.bind(this)
 		})
 
@@ -493,11 +518,10 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
-					// console.log(el);
 					if(el.url)
-						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color);
+						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color, false, el['zindex']);
 					else
-						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color);
+						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex']);
 				}.bind(this));
 			}.bind(this),
 			onFailure : function()
