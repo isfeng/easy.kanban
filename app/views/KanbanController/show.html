@@ -11,12 +11,12 @@
         	<li id="black_pen" class="icon-pencil icon-2x"><span>pen</span></li>
         	<li id="eraser" class="icon-check-empty icon-2x"><span>eraser</span></li>
             <li id="globalmove" class="icon-move icon-2x"><span>move</span></li>
+            <li id="url_stack" class="icon-camera icon-2x"><span>move</span></li>
             <li id="trashcan" class="icon-trash icon-3x"><span>trash</span></li>
         	</ul>
         </div>
     </div>
 </div>
-
 
 
 <script type="text/javascript">
@@ -31,6 +31,8 @@
         kanban.addPen('black_pen');
 		kanban.addEraser('eraser');
         kanban.addMover('globalmove');
+        kanban.addUrlStack('url_stack');
+        // kanban.addUploader('uploader');
 
         resizeKanban();
         window.addEvent('resize', resizeKanban);
