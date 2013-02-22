@@ -112,11 +112,11 @@ var StickyNote = new Class({
 
 	showTextForm : function()
 	{
-		this.sm = new SimpleModal({width:200});
+		this.sm = new SimpleModal({width:200, offsetTop: 240});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onTextOK(this.kid, $('text_note_title').value, $('text_note_area').value);
-			this.fireEvent('textOk', this.post_text_el);
+			// this.fireEvent('textOk', this.post_text_el);
 			this.hide();
 		}.bind(this));
 		this.sm.addButton("Cancel", "btn secondary");
@@ -129,12 +129,12 @@ var StickyNote = new Class({
 	
 	showUrlForm : function()
 	{
-		this.sm = new SimpleModal({width:450});
+		this.sm = new SimpleModal({width:450, offsetTop: 240});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onUrlOK(this.kid, $('url_note_url').value);
 			// console.log(this.post_url_el);
-			this.fireEvent('urlOk', this.post_url_el);
+			// this.fireEvent('urlOk', this.post_url_el);
 			this.hide();
 		}.bind(this));
 		this.sm.addButton("Cancel", "btn secondary");
@@ -165,7 +165,7 @@ var StickyNote = new Class({
 				'title' : title,
 				'note' : note
 			},
-			async : false,
+			async : true,
 			onRequest : function()
 			{
 			},
@@ -179,6 +179,9 @@ var StickyNote = new Class({
 					'note' : note,
 					'nid' : this.nid
 				});
+
+				this.fireEvent('textOk', this.post_text_el);	
+
 			}.bind(this),
 			onFailure : function()
 			{
@@ -206,7 +209,7 @@ var StickyNote = new Class({
 				'id' : kid,
 				'url' : imgurl
 			},
-			async : false,
+			async : true,
 			onRequest : function()
 			{
 			},
@@ -218,6 +221,7 @@ var StickyNote = new Class({
 					'url' : imgurl,
 					'nid' : nid
 				});
+				this.fireEvent('urlOk', this.post_url_el);
 				// console.log(this.post_url_el);
 			}.bind(this),
 			onFailure : function()
@@ -765,7 +769,7 @@ var Kanban = new Class({
 		var kid = this.kid;
 		$(uploader).addEvent("click", function(){
 			//show upload form
-			var sm = new SimpleModal({width:200});
+			var sm = new SimpleModal({width:200, offsetTop: 240});
 			sm.addButton("Cancel", "btn secondary");
 			sm.show({
 				"model": "modal",
