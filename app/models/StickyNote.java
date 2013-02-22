@@ -9,6 +9,7 @@ public class StickyNote extends BaseModel
 	public int x;
 	public int y;
 	public String color;
+	public int zindex;
 
 	@ManyToOne
 	public Kanban kanban;
