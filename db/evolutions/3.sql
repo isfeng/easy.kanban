@@ -2,8 +2,8 @@
  
 # --- !Ups
 
-ALTER TABLE textnote ADD COLUMN zindex integer;
-ALTER TABLE drawnote ADD COLUMN zindex integer;
+ALTER TABLE textnote ADD COLUMN zindex integer DEFAULT 0;
+ALTER TABLE drawnote ADD COLUMN zindex integer DEFAULT 0;
  
 # --- !Downs
  
