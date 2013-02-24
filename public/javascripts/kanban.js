@@ -140,7 +140,7 @@ var StickyNote = new Class({
 		this.sm.addButton("Cancel", "btn secondary");
 		this.sm.show({
 			"model": "modal",
-			"title": "URL",
+			"title": "IMAGE URL",
 			"contents" : Mooml.render('url_form_tmpl').get('html')
 		});
 	},
@@ -572,6 +572,8 @@ var Kanban = new Class({
 
 				if(this.options.isNew)
 				{
+					if(this.context.setLineDash)
+						this.context.setLineDash([10,5]);
 					var value_stream = json.stream;
 					var space_width = $(this.container).getSize().x;
 					//console.log(space_width);
