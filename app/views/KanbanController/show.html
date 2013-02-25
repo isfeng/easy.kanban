@@ -8,10 +8,10 @@
         	<ul>
         	<li id="post_stack_yellow" class="icon-edit icon-2x"><span>yellow post</span></li>
             <li id="post_stack_pink" class="icon-edit icon-2x"><span>pink post</span></li>
-        	<li id="black_pen" class="icon-pencil icon-2x"><span>pen</span></li>
+        	<li id="url_stack" class="icon-camera icon-2x"><span>move</span></li>
+            <li id="black_pen" class="icon-pencil icon-2x"><span>pen</span></li>
         	<li id="eraser" class="icon-check-empty icon-2x"><span>eraser</span></li>
             <li id="globalmove" class="icon-move icon-2x"><span>move</span></li>
-            <li id="url_stack" class="icon-camera icon-2x"><span>move</span></li>
             </ul>
         </div>
     </div>
@@ -43,10 +43,6 @@
         //console.log($(document.body).getStyle('height'));
         var reheight = $(document.body).getStyle('height').toInt()-60;
         $('kanban').setStyle('height', reheight+'px');
-
-        //console.log($('board_control').getPosition());
-        if($('board_control').getPosition().y > ${kanban.board.height}-30)
-            $('board_control').setPosition({y: ${kanban.board.height}-30});
     }
 
 </script>
