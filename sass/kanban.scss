@@ -32,11 +32,10 @@ body {
 		@include stretch();
 		background-image: image-url("textures/lined_paper.png");
         .note {
-            z-index: 1;
             cursor: move;
             width: 150px;
             height: 150px;
-            padding: 2px;
+            padding: 1px 1px 1em 1px;
             overflow:hidden;
             border-top: 1px solid #FFFAFA;
             border-left: 1px solid #FFFAFA;
@@ -62,10 +61,21 @@ body {
             max-width: 320px;
             border-top: 1px solid #FFFAFA;
             border-left: 1px solid #FFFAFA;
+            padding: 1px 1px 1em 1px;
+            background-color: #FFFAFA;
             @include box-shadow(8px 8px 12px #333);            
         }
     }
     background-color: #FFF;
+}
+
+div.note_tool{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    .icon-remove{
+        cursor: pointer;
+    }
 }
 
 #board_control {

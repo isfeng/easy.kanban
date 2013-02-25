@@ -85,17 +85,9 @@
 			$('kform').submit();
 			this.hide();
 		});
-		sm.addButton("Medium", "btn primary", function(){
-			$('name').set('value', $('kname').value);
-			$('size').set('value', 'MEDIUM');
-			$('workflow_customize').set('value', f);
-			$('_public').checked = $('ispublic').checked;
-			$('kform').submit();
-			this.hide();
-		}); 
 		sm.addButton("Small", "btn primary", function(){
 			$('name').set('value', $('kname').value);
-			$('size').set('value', 'SMALL');
+			$('size').set('value', 'MEDIUM');
 			$('workflow_customize').set('value', f);
 			$('_public').checked = $('ispublic').checked;
 			$('kform').submit();
