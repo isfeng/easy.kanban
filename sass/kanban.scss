@@ -32,7 +32,6 @@ body {
 		@include stretch();
 		background-image: image-url("textures/lined_paper.png");
         .note {
-            z-index: 1;
             cursor: move;
             width: 150px;
             height: 150px;
@@ -54,6 +53,14 @@ body {
                 //margin: 5px 1px 5px 1px;
                 font-weight: bold;
                 font-size: 1.1em;
+            }
+            div.note_tool{
+                position: fixed;
+                right: 0;
+                bottom: 0;
+            }
+            .icon-remove{
+                cursor: pointer;
             }
         }
         .imgnote {

@@ -27,6 +27,17 @@ var Delete = new Class({
 	}
 });
 
+/*
+	html tempaltes
+	text_note_tmpl: text note form
+	uploader_tmpl: image uploader form
+	url_form_tmpl: post url form
+	
+	post_tmpl: post note
+	url_post_tmpl: image note
+
+*/
+
 /* input form */
 Mooml.register('text_note_tmpl', function()
 {
@@ -73,10 +84,13 @@ Mooml.register('post_tmpl', function(note)
 {
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
-	div({
-		'class' : 'note ' + rotatecls,
-		'nid' : note.nid
-	}, h5(note.title), p(note.note));
+	div({'class' : 'note ' + rotatecls,'nid' : note.nid,'id': 'nid'+note.nid}, 
+		h5(note.title), 
+		p(note.note),
+		div({'class': 'note_tool'},
+			i({'class':'icon-remove','onclick':"_deleteNote('nid"+note.nid+"','text')"})
+		)
+	);
 });
 /* image post */
 Mooml.register('url_post_tmpl', function(note)
@@ -548,7 +562,9 @@ var Kanban = new Class({
 	_loadBackground : function()
 	{
 		this.stage = new createjs.Stage(this.canvas);
-		this.stage.autoClear = false;
+		this.stage.autoClear = true;
+		if(this.context.setLineDash)
+			this.context.setLineDash([10,5]);
 
 		var kid = this.kid;
 		var req = new Request.JSON({
@@ -571,9 +587,7 @@ var Kanban = new Class({
 				}.bind(this);
 
 				if(this.options.isNew)
-				{
-					if(this.context.setLineDash)
-						this.context.setLineDash([10,5]);
+				{					
 					var value_stream = json.stream;
 					var space_width = $(this.container).getSize().x;
 					//console.log(space_width);
@@ -622,10 +636,6 @@ var Kanban = new Class({
 
 		this.stage.onMouseDown = function(evt)
 		{
-
-
-
-			//$(evt.nativeEvent.target).setStyle('cursor',  'url(/public/images/redarrow.cur), default');
 
 			this.isMouseDown = true;
 			// console.log(this.current_action);
@@ -865,7 +875,7 @@ function _updatePos(element, color, container, type)
 function _deleteNote(el, type)
 {
 	var req = new Request.JSON({
-		url : '/notes/' + el.get('nid') + '?x-http-method-override=DELETE&type='+type,
+		url : '/notes/' + $(el).get('nid') + '?x-http-method-override=DELETE&type='+type,
 		method : 'post',		
 		onComplete : function()
 		{
@@ -873,8 +883,7 @@ function _deleteNote(el, type)
 		},
 		onSuccess : function(json, txt)
 		{
-			// console.log('_deleteNote onSuccess');
-			el.destroy();
+			$(el).set('tween', {onComplete: function(){$(el).destroy();}}).fade(0);
 		},
 		onFailure : function()
 		{
@@ -885,5 +894,6 @@ function _deleteNote(el, type)
 	if (!KanbanApp.offline)
 		req.send();
 	else
-		el.destroy();
+		$(el).set('tween', {onComplete: function(){$(el).destroy();}}).fade(0);
+		
 }
