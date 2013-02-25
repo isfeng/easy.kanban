@@ -84,11 +84,11 @@ Mooml.register('post_tmpl', function(note)
 {
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
-	div({'class' : 'note ' + rotatecls,'nid' : note.nid,'id': 'nid'+note.nid}, 
+	div({'class' : 'note ' + rotatecls,'nid' : note.nid, 'id': 'nid'+note.nid},
 		h5(note.title), 
 		p(note.note),
 		div({'class': 'note_tool'},
-			i({'class':'icon-remove','onclick':"_deleteNote('nid"+note.nid+"','text')"})
+			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"})
 		)
 	);
 });
@@ -97,10 +97,12 @@ Mooml.register('url_post_tmpl', function(note)
 {
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
-	div({
-		'class' : 'imgnote ' + rotatecls,
-		'nid' : note.nid
-	}, img({src: note.url}));
+	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
+		img({src: note.url}),		
+		div({'class': 'note_tool'},
+			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"})
+		)
+	);
 });
 
 var StickyNote = new Class({
