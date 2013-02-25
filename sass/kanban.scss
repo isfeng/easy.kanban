@@ -35,7 +35,7 @@ body {
             cursor: move;
             width: 150px;
             height: 150px;
-            padding: 1px 1px 1em 1px;
+            padding: 1px 1px 12px 1px;
             overflow:hidden;
             border-top: 1px solid #FFFAFA;
             border-left: 1px solid #FFFAFA;
@@ -61,7 +61,7 @@ body {
             max-width: 320px;
             border-top: 1px solid #FFFAFA;
             border-left: 1px solid #FFFAFA;
-            padding: 1px 1px 1em 1px;
+            padding: 1px 1px 12px 1px;
             background-color: #FFFAFA;
             @include box-shadow(8px 8px 12px #333);            
         }
@@ -70,8 +70,8 @@ body {
 }
 
 div.note_tool{
-    position: fixed;
-    right: 0;
+    position: absolute;
+    z-index: 99999;
     bottom: 0;
     .icon-remove{
         cursor: pointer;
