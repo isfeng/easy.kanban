@@ -85,13 +85,17 @@ Mooml.register('post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'note ' + rotatecls,'nid' : note.nid, 'id': 'nid'+note.nid},
-		h5(note.title), 
+		h5({'id': 'drag'+note.nid},
+			i({'class':'icon-pushpin'})
+		),
 		p(note.note),
 		div({'class': 'note_tool'},
-			ul(
-				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"})),
-				li(i({'class':'icon-resize-full'}))
-			)			
+			ul({'class':'left'},
+				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"}))
+			),
+			ul({'class':'right'},
+				li(i({'class':'icon-resize-full','id': 'resize' + note.nid}))
+			)
 		)
 	);
 });
@@ -101,10 +105,17 @@ Mooml.register('url_post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
+		h5({'id': 'drag'+note.nid},
+			i({'class':'icon-pushpin'})
+		),
 		img({src: note.url}),		
 		div({'class': 'note_tool'},
-			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}),
-			i({'class':'icon-resize-full', 'style':'float:right'})
+			ul({'class':'left'},
+				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}))
+			),
+			ul({'class':'right'},
+				li(i({'class':'icon-resize-full','id': 'resize' + note.nid}))
+			)
 		)
 	);
 });
@@ -374,6 +385,7 @@ var Kanban = new Class({
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
+			handle: 'drag' + el.get('nid'),
 			onDrop : function(element, droppable, event)
 			{
 				if (droppable)
@@ -426,6 +438,21 @@ var Kanban = new Class({
 				'y' : y
 			});
 		}
+
+		el.makeResizable({
+			handle: 'resize' + el.get('nid'),
+			
+			onBeforeStart: function()
+			{
+				this.dragScroller.detach();	
+			}.bind(this),
+
+			onComplete: function()
+			{
+				// console.log('onComplete');
+				this.dragScroller.attach();
+			}.bind(this),
+		});
 	},
 
 	stickText : function(textNote, x, y, color, _center, idx)
@@ -448,6 +475,7 @@ var Kanban = new Class({
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
+			handle: 'drag' + el.get('nid'),
 			onDrop : function(element, droppable, event)
 			{
 				// console.log('onDrop');
@@ -500,7 +528,10 @@ var Kanban = new Class({
 		})
 
 		// console.log(color);
-		el.setStyle('background-color', color);
+		if (color=='pink')
+			el.addClass('pink');
+		else
+			el.addClass('yellow');
 
 		if(_center)
 			el.position();
@@ -512,7 +543,20 @@ var Kanban = new Class({
 			});
 		}
 
-		//_updatePos(el, color, this.position);
+		el.makeResizable({
+			handle: 'resize' + el.get('nid'),
+			
+			onBeforeStart: function()
+			{
+				this.dragScroller.detach();	
+			}.bind(this),
+
+			onComplete: function()
+			{
+				// console.log('onComplete');
+				this.dragScroller.attach();
+			}.bind(this),
+		});
 
 	},
 
