@@ -645,7 +645,7 @@ var Kanban = new Class({
 			{
 				evt.nativeEvent.preventDefault();
 				evt.nativeEvent.stopPropagation();
-				evt.nativeEvent.target.style.cursor = 'pointer';
+				// evt.nativeEvent.target.style.cursor = 'pointer';
 				var s = new createjs.Shape();
 				this.oldX = this.stage.mouseX;
 				this.oldY = this.stage.mouseY;
@@ -663,7 +663,7 @@ var Kanban = new Class({
 			{
 				evt.nativeEvent.preventDefault();
 				evt.nativeEvent.stopPropagation();
-				evt.nativeEvent.target.style.cursor = 'pointer';
+				// evt.nativeEvent.target.style.cursor = 'pointer';
 				var s = new createjs.Shape();
 				this.oldX = this.stage.mouseX;
 				this.oldY = this.stage.mouseY;
@@ -680,7 +680,7 @@ var Kanban = new Class({
 			}
 			else if (this.current_action=='drag')
 			{
-				evt.nativeEvent.target.style.cursor = 'move';
+				// evt.nativeEvent.target.style.cursor = 'move';
 				return false;
 			}
 		}.bind(this);
@@ -773,7 +773,7 @@ var Kanban = new Class({
 			if(this.current_action == 'drag')
 				this.dragScroller.detach();	
 			this.current_action = 'erase';
-			$('kanban').setStyle('cursor', 'pointer');
+			$('board').setStyle('cursor','pointer');
 			this.activateTool(eraser);
 		}.bind(this));
 	},
@@ -784,20 +784,20 @@ var Kanban = new Class({
 			if(this.current_action == 'drag')
 				this.dragScroller.detach();	
 			this.current_action = 'draw';
-			$('kanban').setStyle('cursor', 'pointer');
+			$('board').setStyle('cursor','pointer');
 			this.activateTool(pen);
 		}.bind(this));
 	},
 
 	addMover : function(mover)
 	{
-		$(mover).addEvent("click", function(){
+		$(mover).addEvent("click", function(evt){
 			if(this.current_action != 'drag')
 			{		
 				this.dragScroller.attach();
 			}
-			this.current_action = 'drag';				
-			$('kanban').setStyle('cursor', 'move');
+			this.current_action = 'drag';			
+			$('board').setStyle('cursor','move');
 			this.activateTool(mover);	
 		}.bind(this));
 	},
