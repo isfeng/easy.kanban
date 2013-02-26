@@ -73,8 +73,19 @@ div.note_tool{
     position: absolute;
     z-index: 99999;
     bottom: 0;
+    line-height: 1.2em;
+    ul{        
+        li{
+            display:inline;
+            float: right;
+            &:first-child{
+                float:left;
+            }
+        }
+    }
+    
     .icon-remove{
-        cursor: pointer;
+        cursor: pointer;       
     }
 }
 

@@ -88,7 +88,10 @@ Mooml.register('post_tmpl', function(note)
 		h5(note.title), 
 		p(note.note),
 		div({'class': 'note_tool'},
-			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"})
+			ul(
+				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"})),
+				li(i({'class':'icon-resize-full'}))
+			)			
 		)
 	);
 });
@@ -100,7 +103,8 @@ Mooml.register('url_post_tmpl', function(note)
 	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
 		img({src: note.url}),		
 		div({'class': 'note_tool'},
-			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"})
+			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}),
+			i({'class':'icon-resize-full', 'style':'float:right'})
 		)
 	);
 });
