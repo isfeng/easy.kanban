@@ -128,7 +128,7 @@ var StickyNote = new Class({
 
 	showTextForm : function()
 	{
-		this.sm = new SimpleModal({width:200, offsetTop: 120});
+		this.sm = new SimpleModal({width:200, offsetTop: 100, offsetLeft: 25});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onTextOK(this.kid, $('text_note_title').value, $('text_note_area').value);
@@ -145,7 +145,7 @@ var StickyNote = new Class({
 	
 	showUrlForm : function()
 	{
-		this.sm = new SimpleModal({width:450, offsetTop: 120});
+		this.sm = new SimpleModal({width:450, offsetTop: 100, offsetLeft: 25});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onUrlOK(this.kid, $('url_note_url').value);
@@ -807,7 +807,7 @@ var Kanban = new Class({
 		var kid = this.kid;
 		$(uploader).addEvent("click", function(){
 			//show upload form
-			var sm = new SimpleModal({width:200, offsetTop: 120});
+			var sm = new SimpleModal({width:200, offsetTop: 100});
 			sm.addButton("Cancel", "btn secondary");
 			sm.show({
 				"model": "modal",
