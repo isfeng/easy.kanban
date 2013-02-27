@@ -29,17 +29,17 @@ var Delete = new Class({
 
 /*
 	html tempaltes
-	text_note_tmpl: text note form
-	uploader_tmpl: image uploader form
+	text_form_tmpl: text note form
+	uploader_form_tmpl: image uploader form
 	url_form_tmpl: post url form
 	
-	post_tmpl: post note
+	text_post_tmpl: post note
 	url_post_tmpl: image note
 
 */
 
 /* input form */
-Mooml.register('text_note_tmpl', function()
+Mooml.register('text_form_tmpl', function()
 {
 	div(div({
 		'id' : 'text_note_form'
@@ -54,7 +54,7 @@ Mooml.register('text_note_tmpl', function()
 	})));
 });
 /* uploader form */
-Mooml.register('uploader_tmpl', function(param)
+Mooml.register('uploader_form_tmpl', function(param)
 {
 	div(
 		form({method:"POST", action:"/kanbans/"+param.kid+"/images", enctype:"multipart/form-data"},
@@ -80,15 +80,22 @@ Mooml.register('url_form_tmpl', function(param)
 });
 
 /* text post */
-Mooml.register('post_tmpl', function(note)
+Mooml.register('text_post_tmpl', function(note)
 {
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'note ' + rotatecls,'nid' : note.nid, 'id': 'nid'+note.nid},
-		h5(note.title), 
+		h5({'id': 'drag'+note.nid},
+			i({'class':'icon-pushpin'})
+		),
 		p(note.note),
 		div({'class': 'note_tool'},
-			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"})
+			ul({'class':'left'},
+				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"}))
+			),
+			ul({'class':'right'},
+				li(i({'class':'icon-resize-full','id': 'resize' + note.nid}))
+			)
 		)
 	);
 });
@@ -98,9 +105,14 @@ Mooml.register('url_post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
+		h5({'id': 'drag'+note.nid},
+			i({'class':'icon-pushpin'})
+		),
 		img({src: note.url}),		
 		div({'class': 'note_tool'},
-			i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"})
+			ul({'class':'left'},
+				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}))
+			)
 		)
 	);
 });
@@ -139,7 +151,7 @@ var StickyNote = new Class({
 		this.sm.show({
 			"model": "modal",
 			"title": "Note",
-			"contents" : Mooml.render('text_note_tmpl').get('html')
+			"contents" : Mooml.render('text_form_tmpl').get('html')
 		});
 	},
 	
@@ -190,7 +202,7 @@ var StickyNote = new Class({
 				this.nid = nid;
 				this.title = title;
 				this.note = note;
-				this.post_text_el = Mooml.render('post_tmpl', {
+				this.post_text_el = Mooml.render('text_post_tmpl', {
 					'title' : title,
 					'note' : note,
 					'nid' : this.nid
@@ -253,7 +265,7 @@ var StickyNote = new Class({
 
 StickyNote.buildNoteEl = function(nid, title, note)
 {
-	return Mooml.render('post_tmpl', {
+	return Mooml.render('text_post_tmpl', {
 		'title' : title,
 		'note' : note,
 		'nid' : nid
@@ -366,10 +378,17 @@ var Kanban = new Class({
 			el.setStyle('zIndex', this.z);
 		}
 
+		el.addEvent('click', function(){
+			this.z += 1;
+			el.setStyle('zIndex', this.z);
+			_updatePos(el, color, this.container, 'url');
+		}.bind(this));
+
 		new Drag.Move(el, {
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
+			handle: 'drag' + el.get('nid'),
 			onDrop : function(element, droppable, event)
 			{
 				if (droppable)
@@ -422,9 +441,10 @@ var Kanban = new Class({
 				'y' : y
 			});
 		}
+		
 	},
 
-	stickText : function(textNote, x, y, color, _center, idx)
+	stickText : function(textNote, x, y, color, _center, idx, width, height)
 	{
 		var el = textNote.inject($(this.container));
 		if(idx)
@@ -439,11 +459,17 @@ var Kanban = new Class({
 			el.setStyle('zIndex', this.z);
 		}
 
+		el.addEvent('click', function(){
+			this.z += 1;
+			el.setStyle('zIndex', this.z);
+			_updatePos(el, color, this.container, 'text');
+		}.bind(this));
 
 		new Drag.Move(el, {
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
+			handle: 'drag' + el.get('nid'),
 			onDrop : function(element, droppable, event)
 			{
 				// console.log('onDrop');
@@ -491,12 +517,15 @@ var Kanban = new Class({
 			onCancel : function(element)
 			{
 				this.dragScroller.attach();
-				_updatePos(element, color, this.container, 'text');
+				// _updatePos(element, color, this.container, 'text');
 			}.bind(this)
 		})
 
 		// console.log(color);
-		el.setStyle('background-color', color);
+		if (color=='pink')
+			el.addClass('pink');
+		else
+			el.addClass('yellow');
 
 		if(_center)
 			el.position();
@@ -508,7 +537,34 @@ var Kanban = new Class({
 			});
 		}
 
-		//_updatePos(el, color, this.position);
+		el.setStyles({
+			'width' : width||150,
+			'height' : height||150
+		});
+		
+		el.makeResizable({
+			handle: 'resize' + el.get('nid'),
+			
+			onBeforeStart: function()
+			{
+				// console.log('resize onBeforeStart')
+				this.dragScroller.detach();	
+			}.bind(this),
+
+			onComplete: function()
+			{
+				// console.log('resize onComplete');
+				_updatePos(el, color, this.container, 'text');
+				this.dragScroller.attach();
+			}.bind(this),
+
+			onCancel: function(){
+				// console.log('resize onCancel')
+				_updatePos(el, color, this.container, 'text');
+				this.dragScroller.attach();
+			}.bind(this),
+			
+		});
 
 	},
 
@@ -534,10 +590,11 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
+					// console.log(el);
 					if(el.url)
 						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color, false, el['zindex']);
 					else
-						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex']);
+						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex'], el.width, el.height);
 				}.bind(this));
 			}.bind(this),
 			onFailure : function()
@@ -645,7 +702,7 @@ var Kanban = new Class({
 			{
 				evt.nativeEvent.preventDefault();
 				evt.nativeEvent.stopPropagation();
-				evt.nativeEvent.target.style.cursor = 'pointer';
+				// evt.nativeEvent.target.style.cursor = 'pointer';
 				var s = new createjs.Shape();
 				this.oldX = this.stage.mouseX;
 				this.oldY = this.stage.mouseY;
@@ -663,7 +720,7 @@ var Kanban = new Class({
 			{
 				evt.nativeEvent.preventDefault();
 				evt.nativeEvent.stopPropagation();
-				evt.nativeEvent.target.style.cursor = 'pointer';
+				// evt.nativeEvent.target.style.cursor = 'pointer';
 				var s = new createjs.Shape();
 				this.oldX = this.stage.mouseX;
 				this.oldY = this.stage.mouseY;
@@ -680,7 +737,7 @@ var Kanban = new Class({
 			}
 			else if (this.current_action=='drag')
 			{
-				evt.nativeEvent.target.style.cursor = 'move';
+				// evt.nativeEvent.target.style.cursor = 'move';
 				return false;
 			}
 		}.bind(this);
@@ -773,7 +830,7 @@ var Kanban = new Class({
 			if(this.current_action == 'drag')
 				this.dragScroller.detach();	
 			this.current_action = 'erase';
-			$('kanban').setStyle('cursor', 'pointer');
+			$('board').setStyle('cursor','pointer');
 			this.activateTool(eraser);
 		}.bind(this));
 	},
@@ -784,20 +841,20 @@ var Kanban = new Class({
 			if(this.current_action == 'drag')
 				this.dragScroller.detach();	
 			this.current_action = 'draw';
-			$('kanban').setStyle('cursor', 'pointer');
+			$('board').setStyle('cursor','pointer');
 			this.activateTool(pen);
 		}.bind(this));
 	},
 
 	addMover : function(mover)
 	{
-		$(mover).addEvent("click", function(){
+		$(mover).addEvent("click", function(evt){
 			if(this.current_action != 'drag')
 			{		
 				this.dragScroller.attach();
 			}
-			this.current_action = 'drag';				
-			$('kanban').setStyle('cursor', 'move');
+			this.current_action = 'drag';			
+			$('board').setStyle('cursor','move');
 			this.activateTool(mover);	
 		}.bind(this));
 	},
@@ -812,7 +869,7 @@ var Kanban = new Class({
 			sm.show({
 				"model": "modal",
 				"title": "Upload Image",
-				"contents" : Mooml.render('uploader_tmpl',{"kid": kid}).get('html')
+				"contents" : Mooml.render('uploader_form_tmpl',{"kid": kid}).get('html')
 			});
 
 			var upload = new Form.Upload('url', {
@@ -852,6 +909,8 @@ function _updatePos(element, color, container, type)
 			'id' : element.get('nid'),
 			'x' : element.getPosition(container).x,
 			'y' : element.getPosition(container).y,
+			'width' : element.getCoordinates(container).width,
+			'height' : element.getCoordinates(container).height,
 			'color': color,
 			'type': type,
 			'zindex': element.getStyle('zIndex')

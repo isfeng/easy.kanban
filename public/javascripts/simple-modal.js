@@ -54,6 +54,7 @@ var SimpleModal = new Class({
     options: {
         onAppend:      Function, // callback inject in DOM
         offsetTop:     40,
+        offsetLeft:     null,
         overlayOpacity:.3,
         overlayColor:  "#000000",
         width:         400,
