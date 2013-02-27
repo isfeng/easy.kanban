@@ -381,7 +381,7 @@ var Kanban = new Class({
 		el.addEvent('click', function(){
 			this.z += 1;
 			el.setStyle('zIndex', this.z);
-			_updatePos(el, color, this.container, 'text');
+			_updatePos(el, color, this.container, 'url');
 		}.bind(this));
 
 		new Drag.Move(el, {
