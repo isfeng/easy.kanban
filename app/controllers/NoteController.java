@@ -55,7 +55,7 @@ public class NoteController extends Controller
 	}
 	
 	
-	public static void updatePosition(long id, int x, int y, String color, String type, int zindex)
+	public static void updatePosition(long id, int x, int y, int width, int height, String color, String type, int zindex)
 	{
 		StickyNote stickynote = null;
 		if ("text".equals(type))
@@ -68,6 +68,8 @@ public class NoteController extends Controller
 		stickynote.y = y;
 		stickynote.color = color;
 		stickynote.zindex = zindex;
+		stickynote.width = width;
+		stickynote.height = height;
 		
 		List<ValueStream> vs = ValueStream.find("byKanban", stickynote.kanban).fetch();
 		int valueSize = vs.size();
