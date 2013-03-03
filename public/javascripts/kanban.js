@@ -85,10 +85,9 @@ Mooml.register('text_post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'note ' + rotatecls,'nid' : note.nid, 'id': 'nid'+note.nid},
-		h5({'id': 'drag'+note.nid},
-			i({'class':'icon-pushpin'})
+		h5(			
 		),
-		p(note.note),
+		p({'id': 'drag'+note.nid},note.note),
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"}))
@@ -105,10 +104,9 @@ Mooml.register('url_post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
-		h5({'id': 'drag'+note.nid},
-			i({'class':'icon-pushpin'})
+		h5(
 		),
-		img({src: note.url}),		
+		img({'id': 'drag'+note.nid, src: note.url}),		
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}))
