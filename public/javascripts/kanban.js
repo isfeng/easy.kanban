@@ -462,7 +462,7 @@ var Kanban = new Class({
 			_updatePos(el, color, this.container, 'text');
 		}.bind(this));
 
-		new Drag.Move(el, {
+		el.makeDraggable({
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
@@ -563,6 +563,19 @@ var Kanban = new Class({
 			
 		});
 
+		el.getElement('p').makeEditable({
+			'onBeforeStart': function(){
+				console.log('onStartEdit');
+				el.retrieve('dragger').detach();
+				// this.dragScroller.detach();	
+			}.bind(this),
+			onComplete: function()
+			{
+				// console.log('resize onComplete');
+				_updatePos(el, color, this.container, 'text');
+				this.dragScroller.attach();
+			}.bind(this)
+		});
 	},
 
 	stickDraw : function()
