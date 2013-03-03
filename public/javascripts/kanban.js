@@ -431,9 +431,8 @@ var Kanban = new Class({
 				_updatePos(element, color, this.container, 'url');
 			}.bind(this)
 		})
-
 		if(_center)
-			el.position();
+			el.position({position:'upperLeft',relativeTo:'body',offset:{x:50,y:120}});
 		else
 		{
 			el.setPosition({
@@ -528,7 +527,7 @@ var Kanban = new Class({
 			el.addClass('yellow');
 
 		if(_center)
-			el.position();
+			el.position({position:'upperLeft',relativeTo:'body',offset:{x:50,y:120}});
 		else
 		{
 			el.setPosition({

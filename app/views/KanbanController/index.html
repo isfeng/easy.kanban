@@ -14,7 +14,7 @@
             <li>
             <div class="alert-box secondary">
             	<h4><a href="/kanbans/${k.id}">${k.name}</a></h4>
-                <a href="javascript:deleteKanban(${k.id})" class="close">&times;</a>
+                <a href="javascript:deleteKanban(${k.id}, '${k.name}')" class="close">&times;</a>
             </div>
             </li>
         #{/list}
@@ -30,17 +30,18 @@
 
 <script type="text/javascript">
 
-    function deleteKanban(kid)
+    function deleteKanban(kid, kname)
     {
-        var SM = new SimpleModal({hideHeader:true});
+        var SM = new SimpleModal();
         SM.addButton("Yes", "btn primary", function(){
             new Delete("/kanbans").action(kid);
             this.hide();
         });
         SM.addButton("No", "btn");
         SM.show({
-            "model":"modal",            
-            "contents":"Are you sure ?",            
+            "model": "modal",
+            "title": "Delete Kanban [ "+kname+" ]",      
+            "contents": "Are you sure ?",            
         });
     }
 
