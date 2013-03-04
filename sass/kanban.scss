@@ -111,36 +111,11 @@ body {
     top: 70px;
     ul li {
         display: inline;
+        opacity: 0.4;
         &:hover {
             cursor: pointer;
-            color: blak;
-        }
-        &#trashcan {
-            color: gray;     
-            &:hover {
-                color: gray;
-                cursor: default;
-            }
-            padding: 50px 50px 10px 50px;
-        }
-        &#globalmove {
-            color: gray;
-            &:hover {
-                color: black;
-            }
-        }
-        &#black_pen {
-            color: gray;
-            &:hover {
-                color: black;
-            }
-        }
-        &#eraser {
-            color: gray;     
-            &:hover {
-                color: black;
-            }
-        }
+            opacity: 1;
+        }        
         span {
             display: none;
         }
