@@ -104,6 +104,53 @@ public class NoteController extends Controller
 	}
 	
 	
+	public static void updateTextNote(long id, int x, int y, int width, int height, String color, int zindex, String text)
+	{
+		TextNote stickynote = null;
+		stickynote = TextNote.findById(id);
+		
+		checkAccess(stickynote.kanban.id);
+		stickynote.x = x;
+		stickynote.y = y;
+		stickynote.color = color;
+		stickynote.zindex = zindex;
+		stickynote.width = width;
+		stickynote.height = height;
+		stickynote.note = text;
+		
+		List<ValueStream> vs = ValueStream.find("byKanban", stickynote.kanban).fetch();
+		int valueSize = vs.size();
+		if (valueSize > 0)
+		{
+			int valueWidth = stickynote.kanban.board.width / valueSize;
+			
+			int current_x = 0;
+			for (int i = 0; i < vs.size(); i++)
+			{
+				ValueStream valueStream = vs.get(i);
+				valueStream.startx = current_x;
+				valueStream.endx = current_x + valueWidth;
+				current_x += valueWidth;
+			}
+			
+			for (ValueStream valueStream : vs)
+			{
+				if (x >= valueStream.startx && x < valueStream.endx)
+				{
+					stickynote.value = valueStream;
+					break;
+				}
+			}
+		}
+		
+		stickynote.save();
+		
+		HashMap<String, String> resp = new HashMap();
+		resp.put("status", "OK");
+		renderJSON(resp);
+	}
+
+
 	private static void checkAccess(long id)
 	{
 		Kanban kanban = Kanban.findById(id);

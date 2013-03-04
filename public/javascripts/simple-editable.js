@@ -42,22 +42,24 @@ var SimpleEditable = new Class({
     this.setOptions(options);
 
     element.addEvent('dblclick',function(){
-      console.log('dblclick');
-      element.store('oriHTML', element.get('html'));
-      var textarea = new Element('textarea', {'text': element.get('html'), 'style':'height:100%'});
-      //element.empty();
-      console.log(element);
-      // element.empty();
+      var textarea = new Element('textarea', {
+        value: element.get('text'),
+        styles: {'height': '100%', 'z-index': '99999'},
+        events: {
+          blur: function(){
+            textarea.destroy();
+            element.set('text', textarea.get('value'));
+            element.reveal();
+            this.fireEvent('complete');
+          }.bind(this)
+        }        
+      });
+      
       textarea.inject(element, 'after');
       element.toggle();
       textarea.focus();
-      var overlay = new Overlay('space');
-      overlay.open();
       this.fireEvent('beforeStart');
-
-
     }.bind(this));
-
   }
 });
 
