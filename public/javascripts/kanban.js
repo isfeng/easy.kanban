@@ -462,7 +462,7 @@ var Kanban = new Class({
 			_updatePos(el, color, this.container, 'text');
 		}.bind(this));
 
-		new Drag.Move(el, {
+		el.makeDraggable({
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
@@ -563,6 +563,20 @@ var Kanban = new Class({
 			
 		});
 
+		el.getElement('p').makeEditable({
+			onBeforeStart: function(){
+				el.retrieve('dragger').detach();
+				this.dragScroller.detach();	
+				el.getElement('.note_tool').toggle();
+			}.bind(this),
+			onComplete: function()
+			{
+				this.dragScroller.attach();
+				el.retrieve('dragger').attach();
+				_updateTextNote(el, color, this.container);
+				el.getElement('.note_tool').reveal();
+			}.bind(this)
+		});
 	},
 
 	stickDraw : function()
@@ -923,6 +937,27 @@ function _updatePos(element, color, container, type)
 		onFailure : function()
 		{
 			// console.log('_updatePos onFailure', 'text');
+		}
+	});
+
+	if (!KanbanApp.offline)
+		req.send();
+}
+
+function _updateTextNote(element, color, container)
+{
+	var req = new Request.JSON({
+		url : '/notes/text',
+		method : 'post',
+		data : {
+			'id' : element.get('nid'),
+			'x' : element.getPosition(container).x,
+			'y' : element.getPosition(container).y,
+			'width' : element.getCoordinates(container).width,
+			'height' : element.getCoordinates(container).height,
+			'color': color,
+			'zindex': element.getStyle('zIndex'),
+			'text': element.getElement('p').get('text')
 		}
 	});
 
