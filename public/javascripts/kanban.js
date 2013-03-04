@@ -426,7 +426,7 @@ var Kanban = new Class({
 			onCancel : function(element)
 			{
 				this.dragScroller.attach();
-				_updatePos(element, color, this.container, 'url');
+				// _updatePos(element, color, this.container, 'url');
 			}.bind(this)
 		})
 		if(_center)
@@ -467,54 +467,22 @@ var Kanban = new Class({
 			droppables : '#trashcan',
 			precalculate : false,
 			handle: 'drag' + el.get('nid'),
-			onDrop : function(element, droppable, event)
-			{
-				// console.log('onDrop');
-				// console.log(element.getPosition(this.container));
-				/* only trashcan droppable */
-				if (droppable)
-				{
-					// console.log(element, 'dropped on', droppable, 'event', event);
-					_deleteNote(element, 'text');
-				}
-				else
-				{
-					_updatePos(element, color, this.container, 'text');
-				}
-			}.bind(this),
-
-			onEnter : function(element, droppable)
-			{
-				// console.log(element, 'entered', droppable);
-			},
-
-			onLeave : function(element, droppable)
-			{
-				// console.log(element, 'left', droppable);
-			},
-
+			
 			onBeforeStart: function()
 			{
 				this.z += 1;
 				el.setStyle('zIndex', this.z);
 				this.dragScroller.detach();	
 			}.bind(this),
-			
-			onStart : function()
-			{
-							
-			}.bind(this),
-			
+				
 			onComplete: function()
 			{
-				// console.log('onComplete');
 				this.dragScroller.attach();
 			}.bind(this),
 
 			onCancel : function(element)
 			{
-				this.dragScroller.attach();
-				// _updatePos(element, color, this.container, 'text');
+				this.dragScroller.attach();				
 			}.bind(this)
 		})
 
@@ -551,13 +519,13 @@ var Kanban = new Class({
 			onComplete: function()
 			{
 				// console.log('resize onComplete');
-				_updatePos(el, color, this.container, 'text');
+				// _updatePos(el, color, this.container, 'text');
 				this.dragScroller.attach();
 			}.bind(this),
 
 			onCancel: function(){
 				// console.log('resize onCancel')
-				_updatePos(el, color, this.container, 'text');
+				//_updatePos(el, color, this.container, 'text');
 				this.dragScroller.attach();
 			}.bind(this),
 			
@@ -967,6 +935,7 @@ function _updateTextNote(element, color, container)
 
 function _deleteNote(el, type)
 {
+	$(el).removeEvents('click');
 	var req = new Request.JSON({
 		url : '/notes/' + $(el).get('nid') + '?x-http-method-override=DELETE&type='+type,
 		method : 'post',		
