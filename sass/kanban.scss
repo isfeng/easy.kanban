@@ -53,17 +53,14 @@ body {
             h5 {
                 font-family: 'Patrick Hand', cursive;
                 //font-weight: bold;
-                margin:0;
-                color: gray;
-                &:hover .icon-pushpin{
-                    visibility: hidden;
-                }
+                margin:0;                                          
             }
             p {
                 font-family: 'Patrick Hand', cursive;
                 //margin: 5px 1px 5px 1px;
                 font-weight: bold;
                 font-size: 1.1em;
+                height: 100%;
             }
         }
         .imgnote {
@@ -77,11 +74,7 @@ body {
             background-color: #FFFAFA;
             @include box-shadow(8px 8px 12px #333);
             h5 {
-                margin:0;
-                color: gray;
-                &:hover .icon-pushpin{
-                    visibility: hidden;
-                }
+                margin:0;                
             }        
         }
     }
@@ -110,11 +103,6 @@ body {
     li{
         list-style: none;
     }
-}
-
-.icon-pushpin{
-    cursor: move;
-    margin-left: 10px;  
 }
 
 #board_control {

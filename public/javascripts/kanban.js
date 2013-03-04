@@ -85,10 +85,9 @@ Mooml.register('text_post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'note ' + rotatecls,'nid' : note.nid, 'id': 'nid'+note.nid},
-		h5({'id': 'drag'+note.nid},
-			i({'class':'icon-pushpin'})
+		h5(			
 		),
-		p(note.note),
+		p({'id': 'drag'+note.nid},note.note),
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"}))
@@ -105,10 +104,9 @@ Mooml.register('url_post_tmpl', function(note)
 	var random = Number.random(-3, 3);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
-		h5({'id': 'drag'+note.nid},
-			i({'class':'icon-pushpin'})
+		h5(
 		),
-		img({src: note.url}),		
+		img({'id': 'drag'+note.nid, src: note.url}),		
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}))
@@ -428,12 +426,11 @@ var Kanban = new Class({
 			onCancel : function(element)
 			{
 				this.dragScroller.attach();
-				_updatePos(element, color, this.container, 'url');
+				// _updatePos(element, color, this.container, 'url');
 			}.bind(this)
 		})
-
 		if(_center)
-			el.position();
+			el.position({position:'upperLeft',relativeTo:'body',offset:{x:50,y:120}});
 		else
 		{
 			el.setPosition({
@@ -465,59 +462,27 @@ var Kanban = new Class({
 			_updatePos(el, color, this.container, 'text');
 		}.bind(this));
 
-		new Drag.Move(el, {
+		el.makeDraggable({
 			container : this.container,
 			droppables : '#trashcan',
 			precalculate : false,
 			handle: 'drag' + el.get('nid'),
-			onDrop : function(element, droppable, event)
-			{
-				// console.log('onDrop');
-				// console.log(element.getPosition(this.container));
-				/* only trashcan droppable */
-				if (droppable)
-				{
-					// console.log(element, 'dropped on', droppable, 'event', event);
-					_deleteNote(element, 'text');
-				}
-				else
-				{
-					_updatePos(element, color, this.container, 'text');
-				}
-			}.bind(this),
-
-			onEnter : function(element, droppable)
-			{
-				// console.log(element, 'entered', droppable);
-			},
-
-			onLeave : function(element, droppable)
-			{
-				// console.log(element, 'left', droppable);
-			},
-
+			
 			onBeforeStart: function()
 			{
 				this.z += 1;
 				el.setStyle('zIndex', this.z);
 				this.dragScroller.detach();	
 			}.bind(this),
-			
-			onStart : function()
-			{
-							
-			}.bind(this),
-			
+				
 			onComplete: function()
 			{
-				// console.log('onComplete');
 				this.dragScroller.attach();
 			}.bind(this),
 
 			onCancel : function(element)
 			{
-				this.dragScroller.attach();
-				// _updatePos(element, color, this.container, 'text');
+				this.dragScroller.attach();				
 			}.bind(this)
 		})
 
@@ -528,7 +493,7 @@ var Kanban = new Class({
 			el.addClass('yellow');
 
 		if(_center)
-			el.position();
+			el.position({position:'upperLeft',relativeTo:'body',offset:{x:50,y:120}});
 		else
 		{
 			el.setPosition({
@@ -554,18 +519,32 @@ var Kanban = new Class({
 			onComplete: function()
 			{
 				// console.log('resize onComplete');
-				_updatePos(el, color, this.container, 'text');
+				// _updatePos(el, color, this.container, 'text');
 				this.dragScroller.attach();
 			}.bind(this),
 
 			onCancel: function(){
 				// console.log('resize onCancel')
-				_updatePos(el, color, this.container, 'text');
+				//_updatePos(el, color, this.container, 'text');
 				this.dragScroller.attach();
 			}.bind(this),
 			
 		});
 
+		el.getElement('p').makeEditable({
+			onBeforeStart: function(){
+				el.retrieve('dragger').detach();
+				this.dragScroller.detach();	
+				el.getElement('.note_tool').toggle();
+			}.bind(this),
+			onComplete: function()
+			{
+				this.dragScroller.attach();
+				el.retrieve('dragger').attach();
+				_updateTextNote(el, color, this.container);
+				el.getElement('.note_tool').reveal();
+			}.bind(this)
+		});
 	},
 
 	stickDraw : function()
@@ -933,8 +912,30 @@ function _updatePos(element, color, container, type)
 		req.send();
 }
 
+function _updateTextNote(element, color, container)
+{
+	var req = new Request.JSON({
+		url : '/notes/text',
+		method : 'post',
+		data : {
+			'id' : element.get('nid'),
+			'x' : element.getPosition(container).x,
+			'y' : element.getPosition(container).y,
+			'width' : element.getCoordinates(container).width,
+			'height' : element.getCoordinates(container).height,
+			'color': color,
+			'zindex': element.getStyle('zIndex'),
+			'text': element.getElement('p').get('text')
+		}
+	});
+
+	if (!KanbanApp.offline)
+		req.send();
+}
+
 function _deleteNote(el, type)
 {
+	$(el).removeEvents('click');
 	var req = new Request.JSON({
 		url : '/notes/' + $(el).get('nid') + '?x-http-method-override=DELETE&type='+type,
 		method : 'post',		
