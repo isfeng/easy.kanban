@@ -138,7 +138,7 @@ var StickyNote = new Class({
 
 	showTextForm : function()
 	{
-		this.sm = new SimpleModal({width:200, offsetTop: 120, offsetLeft: 25});
+		this.sm = new SimpleModal({width:200, offsetTop: 120, offsetLeft: 25, draggable: false});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onTextOK(this.kid, $('text_note_title').value, $('text_note_area').value);
@@ -155,7 +155,7 @@ var StickyNote = new Class({
 	
 	showUrlForm : function()
 	{
-		this.sm = new SimpleModal({width:450, offsetTop: 120, offsetLeft: 25});
+		this.sm = new SimpleModal({width:450, offsetTop: 120, offsetLeft: 25, draggable: false});
 		this.sm.addButton("Post It", "btn primary", function()
 		{
 			this._onUrlOK(this.kid, $('url_note_url').value);
