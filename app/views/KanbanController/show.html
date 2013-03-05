@@ -36,6 +36,19 @@
         resizeKanban();
         window.addEvent('resize', resizeKanban);
 
+        Pusher.log = function(message) {
+          if (window.console && window.console.log) window.console.log(message);
+        };
+
+        // Flash fallback logging - don't include this in production
+        WEB_SOCKET_DEBUG = true;
+
+        var pusher = new Pusher('6ce7d993126461d44741');
+        var channel = pusher.subscribe('test_channel');
+        channel.bind('test_event', function(data) {
+          console.log("test_event - " + data);
+        });
+
     });
 
     function resizeKanban()

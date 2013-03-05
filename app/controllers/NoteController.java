@@ -9,11 +9,13 @@ import models.StickyNote;
 import models.TextNote;
 import models.UserKanban;
 import models.ValueStream;
+import play.libs.WS.HttpResponse;
 import play.mvc.Controller;
 import play.mvc.With;
 import securesocial.provider.SocialUser;
 import controllers.deadbolt.Deadbolt;
 import controllers.securesocial.SecureSocial;
+import play.modules.pusher.*;
 
 public class NoteController extends Controller
 {
@@ -24,6 +26,8 @@ public class NoteController extends Controller
 		Kanban k = Kanban.findById(id);
 		TextNote stickynote = new TextNote(k, title, note);
 		stickynote.save();
+		Pusher pusher = new Pusher();
+		HttpResponse response = pusher.trigger("test_channel", "test_event", "test_message");
 		renderJSON(stickynote.id);
 	}
 	
