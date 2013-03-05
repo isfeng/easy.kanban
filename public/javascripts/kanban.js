@@ -532,6 +532,7 @@ var Kanban = new Class({
 		});
 
 		el.getElement('p').makeEditable({
+			type: 'textarea',
 			onBeforeStart: function(){
 				el.retrieve('dragger').detach();
 				this.dragScroller.detach();	
