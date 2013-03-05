@@ -27,7 +27,7 @@ public class NoteController extends Controller
 		TextNote stickynote = new TextNote(k, title, note);
 		stickynote.save();
 		Pusher pusher = new Pusher();
-		HttpResponse response = pusher.trigger("test_channel", "test_event", "test_message");
+		HttpResponse response = pusher.trigger("test_channel", "create_event", "create");
 		renderJSON(stickynote.id);
 	}
 	
@@ -52,7 +52,9 @@ public class NoteController extends Controller
 		
 		checkAccess(stickynote.kanban.id);
 		stickynote.delete();
-		
+		Pusher pusher = new Pusher();
+		HttpResponse response = pusher.trigger("test_channel", "delete_event", "delete");
+
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
 		renderJSON(resp);
@@ -101,6 +103,9 @@ public class NoteController extends Controller
 		}
 		
 		stickynote.save();
+
+		Pusher pusher = new Pusher();
+		HttpResponse response = pusher.trigger("test_channel", "update_event", "updatePosition");
 		
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
@@ -149,6 +154,9 @@ public class NoteController extends Controller
 		
 		stickynote.save();
 		
+		Pusher pusher = new Pusher();
+		HttpResponse response = pusher.trigger("test_channel", "update_event", "updateTextNote");
+
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
 		renderJSON(resp);

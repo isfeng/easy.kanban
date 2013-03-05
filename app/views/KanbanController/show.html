@@ -45,8 +45,17 @@
 
         var pusher = new Pusher('6ce7d993126461d44741');
         var channel = pusher.subscribe('test_channel');
-        channel.bind('test_event', function(data) {
-          console.log("test_event - " + data);
+        
+        channel.bind('create_event', function(data) {
+          console.log("create_event - " + data);
+        });
+        
+        channel.bind('update_event', function(data) {
+          console.log("update_event - " + data);
+        });
+
+        channel.bind('delete_event', function(data) {
+          console.log("delete_event - " + data);
         });
 
     });
