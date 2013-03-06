@@ -38,7 +38,7 @@
         resizeKanban();
         window.addEvent('resize', resizeKanban);
 
-        new Collaboration(kanban, ${debug}).listenChannel();
+        new Collaboration(kanban, false).listenChannel();
     });
 
     function resizeKanban()
