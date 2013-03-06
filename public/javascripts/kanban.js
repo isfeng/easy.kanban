@@ -321,7 +321,7 @@ var PostStack = new Class({
 			onTextOk : function(el)	{
 				this.kanban.stickText(el, 0, 0, this.options.color, true);
 				// console.log('this.kanban.container '+this.kanban.container);
-				console.log('pull '+this.kanban.socket_id);
+				// console.log('pull '+this.kanban.socket_id);
 				_updatePos(el, this.options.color, this.kanban.container, 'text', this.kanban.socket_id);
 			}.bind(this)
 		});
@@ -349,6 +349,7 @@ var Kanban = new Class({
 	current_action: 'drag', //draw, erase, drag
 	thickness: 2,
 	socket_id: null,
+	editing: null,
 
 	options:{
 		isNew: false,
@@ -437,7 +438,7 @@ var Kanban = new Class({
 
 	stickText : function(textNote, x, y, color, _center, idx, width, height)
 	{
-		console.log('stickText ' +color);
+		// console.log('stickText ' +color);
 		var el = textNote.inject($(this.container));
 		if(idx)
 		{			
@@ -466,17 +467,18 @@ var Kanban = new Class({
 			handle: 'drag' + el.get('nid'),
 			
 			onBeforeStart: function(){
+				if(this.editing) this.editing.getElement('textarea').blur();
 				this.z += 1;
 				el.setStyle('zIndex', this.z);
 				this.dragScroller.detach();	
 			}.bind(this),
 				
-			onComplete: function(){
+			onComplete: function(){				
 				this.dragScroller.attach();
 				_updatePos(el, color, this.container, 'text', this.socket_id);
 			}.bind(this),
 
-			onCancel : function(element){
+			onCancel : function(element){				
 				this.dragScroller.attach();	
 				_updatePos(el, color, this.container, 'text', this.socket_id);		
 			}.bind(this)
@@ -507,15 +509,16 @@ var Kanban = new Class({
 			handle: 'resize' + el.get('nid'),
 			
 			onBeforeStart: function(){
+				if(this.editing) this.editing.getElement('textarea').blur();
 				this.dragScroller.detach();	
 			}.bind(this),
 
-			onComplete: function(){
+			onComplete: function(){				
 				this.dragScroller.attach();
 				_updatePos(el, color, this.container, 'text', this.socket_id);
 			}.bind(this),
 
-			onCancel: function(){
+			onCancel: function(){				
 				this.dragScroller.attach();
 			}.bind(this),
 			
@@ -524,15 +527,17 @@ var Kanban = new Class({
 		el.getElement('p').makeEditable({
 			type: 'textarea',
 			onBeforeStart: function(){
-				el.retrieve('dragger').detach();
+				// el.retrieve('dragger').detach();
+				this.editing = el;
 				this.dragScroller.detach();	
 				el.getElement('.note_tool').toggle();
 			}.bind(this),
 			onComplete: function(){
-				el.retrieve('dragger').attach();
+				// el.retrieve('dragger').attach();
 				this.dragScroller.attach();				
 				_updateTextNote(el, color, this.container, this.socket_id);
 				el.getElement('.note_tool').reveal();
+				this.editing = null;
 			}.bind(this)
 		});
 	},

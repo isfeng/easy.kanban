@@ -9,7 +9,7 @@ var Collaboration = new Class({
 	kanban: null,
 
     initialize: function(k, debug){
-        console.log('initialize');
+        // console.log('initialize');
         this.kanban = k;
 
         if(debug)
@@ -35,7 +35,7 @@ var Collaboration = new Class({
 
         channel.bind('create_event', function(data) {
             // console.log("create_event - " + data);
-            console.log('create_event color '+data.color);
+            // console.log('create_event color '+data.color);
             this.kanban.stickText(StickyNote.buildNoteEl(data.id, data.title, data.note), data.x, data.y, data.color, false, data.zindex, data.width, data.height);            
         }.bind(this));
 

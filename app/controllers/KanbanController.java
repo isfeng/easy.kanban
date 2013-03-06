@@ -12,6 +12,7 @@ import models.TextNote;
 import models.User;
 import models.UserKanban;
 import models.ValueStream;
+import play.Play;
 import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -31,6 +32,8 @@ public class KanbanController extends Controller
 		renderArgs.put("kanban", Kanban.findById(id));
 		if (isNew)
 			renderArgs.put("isNew", isNew);
+
+		renderArgs.put("debug", Play.configuration.getProperty("pusher.debug"));
 		render();
 	}
 	
