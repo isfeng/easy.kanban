@@ -90,7 +90,7 @@ Mooml.register('text_post_tmpl', function(note)
 		p({'id': 'drag'+note.nid},note.note),
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
-				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','text')"}))
+				li(i({'class':'icon-remove'}))
 			),
 			ul({'class':'right'},
 				li(i({'class':'icon-resize-full','id': 'resize' + note.nid}))
@@ -109,7 +109,7 @@ Mooml.register('url_post_tmpl', function(note)
 		img({'id': 'drag'+note.nid, src: note.url}),		
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
-				li(i({'class':'icon-remove','onclick':"_deleteNote('nid" + note.nid + "','url')"}))
+				li(i({'class':'icon-remove'}))
 			)
 		)
 	);
@@ -119,21 +119,24 @@ var StickyNote = new Class({
 
 	Implements : [ Options, Events, Mooml.Templates ],
 
+	kanban: null,
+	nid: null,
+	type: null,
+
 	options : {
-		onTextOk : Class.empty,
-		onDrawOk : Class.empty,
-		onMove : Class.empty
+		color: 'yellow'
 	},
 
-	initialize : function(kid, options)
+	initialize : function(k, options)
 	{
-		this.kid = kid;
+		this.kanban = k;
+		this.kid = k.kid;
 		this.setOptions(options);
 	},
 
 	tear : function()
 	{
-		alert('tear');
+		console.log('tear');
 	},
 
 	showTextForm : function()
@@ -183,13 +186,18 @@ var StickyNote = new Class({
 
 	_onTextOK : function(kid, title, note)
 	{
+		this.type = 'text';
+		var socket_id = this.kanban.socket_id
+		var color = this.options.color;
 		var req = new Request.JSON({
 			url : '/notes',
 			method : 'post',
 			data : {
 				'id' : kid,
 				'title' : title,
-				'note' : note
+				'note' : note,
+				'socket_id': socket_id,
+				'color': color
 			},
 			async : true,
 			onRequest : function()
@@ -228,12 +236,14 @@ var StickyNote = new Class({
 
 	_onUrlOK : function(kid, imgurl)
 	{
+		var socket_id = this.kanban.socket_id
 		var req = new Request.JSON({
 			url : '/notes/url',
 			method : 'post',
 			data : {
 				'id' : kid,
-				'url' : imgurl
+				'url' : imgurl,
+				'socket_id': socket_id
 			},
 			async : true,
 			onRequest : function()
@@ -282,9 +292,11 @@ var PostStack = new Class({
 
 	Implements : [ Options, Events ],
 
+	kanban: null,
+
 	options : {
 		type: 'text', //text, draw, url
-		color: '#fefabc'
+		color: 'yellow'
 	},
 
 	/* add edit event */
@@ -304,11 +316,13 @@ var PostStack = new Class({
 
 	pull : function()
 	{
-		var stickyNote = new StickyNote(this.kanban.kid, {
+		var stickyNote = new StickyNote(this.kanban, {
+			color: this.options.color,
 			onTextOk : function(el)	{
 				this.kanban.stickText(el, 0, 0, this.options.color, true);
 				// console.log('this.kanban.container '+this.kanban.container);
-				_updatePos(el, this.options.color, this.kanban.container, 'text');
+				// console.log('pull '+this.kanban.socket_id);
+				_updatePos(el, this.options.color, this.kanban.container, 'text', this.kanban.socket_id);
 			}.bind(this)
 		});
 		stickyNote.showTextForm();
@@ -316,10 +330,11 @@ var PostStack = new Class({
 
 	pullUrl : function()
 	{
-		var stickyNote = new StickyNote(this.kanban.kid, {
+		var stickyNote = new StickyNote(this.kanban, {
+			color: this.options.color,
 			onUrlOk : function(el)	{
 				this.kanban.stickUrl(el, 0, 0, this.options.color, true);
-				_updatePos(el, this.options.color, this.kanban.container, 'url');
+				_updatePos(el, this.options.color, this.kanban.container, 'url', this.kanban.socket_id);
 			}.bind(this)
 		});
 		stickyNote.showUrlForm();
@@ -333,6 +348,8 @@ var Kanban = new Class({
 
 	current_action: 'drag', //draw, erase, drag
 	thickness: 2,
+	socket_id: null,
+	editing: null,
 
 	options:{
 		isNew: false,
@@ -379,31 +396,16 @@ var Kanban = new Class({
 		el.addEvent('click', function(){
 			this.z += 1;
 			el.setStyle('zIndex', this.z);
-			_updatePos(el, color, this.container, 'url');
+			_updatePos(el, color, this.container, 'url', this.socket_id);
+		}.bind(this));
+
+		el.getElement('.icon-remove').addEvent('click', function(){
+			_deleteNote(el,'url', this.socket_id);
 		}.bind(this));
 
 		new Drag.Move(el, {
 			container : this.container,
-			droppables : '#trashcan',
-			precalculate : false,
 			handle: 'drag' + el.get('nid'),
-			onDrop : function(element, droppable, event)
-			{
-				if (droppable)
-					_deleteNote(element, 'url');
-				else
-					_updatePos(element, color, this.container, 'url');				
-			}.bind(this),
-
-			onEnter : function(element, droppable)
-			{
-				// console.log(element, 'entered', droppable);
-			},
-
-			onLeave : function(element, droppable)
-			{
-				// console.log(element, 'left', droppable);
-			},
 
 			onBeforeStart: function()
 			{
@@ -412,21 +414,13 @@ var Kanban = new Class({
 				this.dragScroller.detach();	
 			}.bind(this),
 			
-			onStart : function()
-			{
-							
-			}.bind(this),
-			
-			onComplete: function()
-			{
-				// console.log('onComplete');
+			onComplete: function(){
 				this.dragScroller.attach();
 			}.bind(this),
 
 			onCancel : function(element)
 			{
 				this.dragScroller.attach();
-				// _updatePos(element, color, this.container, 'url');
 			}.bind(this)
 		})
 		if(_center)
@@ -439,10 +433,12 @@ var Kanban = new Class({
 			});
 		}
 		
+
 	},
 
 	stickText : function(textNote, x, y, color, _center, idx, width, height)
 	{
+		// console.log('stickText ' +color);
 		var el = textNote.inject($(this.container));
 		if(idx)
 		{			
@@ -456,33 +452,35 @@ var Kanban = new Class({
 			el.setStyle('zIndex', this.z);
 		}
 
-		el.addEvent('click', function(){
-			this.z += 1;
-			el.setStyle('zIndex', this.z);
-			_updatePos(el, color, this.container, 'text');
+		// el.addEvent('click', function(){
+		// 	this.z += 1;
+		// 	el.setStyle('zIndex', this.z);
+		// 	_updatePos(el, color, this.container, 'text', this.socket_id);
+		// }.bind(this));
+
+		el.getElement('.icon-remove').addEvent('click', function(){
+			_deleteNote(el,'text', this.socket_id);
 		}.bind(this));
 
 		el.makeDraggable({
 			container : this.container,
-			droppables : '#trashcan',
-			precalculate : false,
 			handle: 'drag' + el.get('nid'),
 			
-			onBeforeStart: function()
-			{
+			onBeforeStart: function(){
+				if(this.editing) this.editing.getElement('textarea').blur();
 				this.z += 1;
 				el.setStyle('zIndex', this.z);
 				this.dragScroller.detach();	
 			}.bind(this),
 				
-			onComplete: function()
-			{
+			onComplete: function(){				
 				this.dragScroller.attach();
+				_updatePos(el, color, this.container, 'text', this.socket_id);
 			}.bind(this),
 
-			onCancel : function(element)
-			{
-				this.dragScroller.attach();				
+			onCancel : function(element){				
+				this.dragScroller.attach();	
+				_updatePos(el, color, this.container, 'text', this.socket_id);		
 			}.bind(this)
 		})
 
@@ -510,22 +508,17 @@ var Kanban = new Class({
 		el.makeResizable({
 			handle: 'resize' + el.get('nid'),
 			
-			onBeforeStart: function()
-			{
-				// console.log('resize onBeforeStart')
+			onBeforeStart: function(){
+				if(this.editing) this.editing.getElement('textarea').blur();
 				this.dragScroller.detach();	
 			}.bind(this),
 
-			onComplete: function()
-			{
-				// console.log('resize onComplete');
-				// _updatePos(el, color, this.container, 'text');
+			onComplete: function(){				
 				this.dragScroller.attach();
+				_updatePos(el, color, this.container, 'text', this.socket_id);
 			}.bind(this),
 
-			onCancel: function(){
-				// console.log('resize onCancel')
-				//_updatePos(el, color, this.container, 'text');
+			onCancel: function(){				
 				this.dragScroller.attach();
 			}.bind(this),
 			
@@ -534,16 +527,17 @@ var Kanban = new Class({
 		el.getElement('p').makeEditable({
 			type: 'textarea',
 			onBeforeStart: function(){
-				el.retrieve('dragger').detach();
+				// el.retrieve('dragger').detach();
+				this.editing = el;
 				this.dragScroller.detach();	
 				el.getElement('.note_tool').toggle();
 			}.bind(this),
-			onComplete: function()
-			{
-				this.dragScroller.attach();
-				el.retrieve('dragger').attach();
-				_updateTextNote(el, color, this.container);
+			onComplete: function(){
+				// el.retrieve('dragger').attach();
+				this.dragScroller.attach();				
+				_updateTextNote(el, color, this.container, this.socket_id);
 				el.getElement('.note_tool').reveal();
+				this.editing = null;
 			}.bind(this)
 		});
 	},
@@ -861,12 +855,10 @@ var Kanban = new Class({
 		});
 	},
 
-
 	addUrlStack : function(stack)
 	{
 		var postStack = new PostStack(this, stack, {color: 'black', type: 'url'});
 	},
-
 
 	activateTool: function(el)
 	{
@@ -875,13 +867,17 @@ var Kanban = new Class({
 		$('black_pen').removeClass('current_tool');
 		$('eraser').removeClass('current_tool');
 		$(el).addClass('current_tool');
+	},
+
+	setSocket_id: function(sid)
+	{
+		this.socket_id = sid;		
 	}
 
 });
 
-function _updatePos(element, color, container, type)
+function _updatePos(element, color, container, type, socket_id)
 {
-	// console.log(element.getPosition('space'));
 	var req = new Request.JSON({
 		url : '/notes/pos',
 		method : 'post',
@@ -893,7 +889,8 @@ function _updatePos(element, color, container, type)
 			'height' : element.getCoordinates(container).height,
 			'color': color,
 			'type': type,
-			'zindex': element.getStyle('zIndex')
+			'zindex': element.getStyle('zIndex'),
+			'socket_id': socket_id
 		},
 		onRequest : function()
 		{
@@ -913,7 +910,7 @@ function _updatePos(element, color, container, type)
 		req.send();
 }
 
-function _updateTextNote(element, color, container)
+function _updateTextNote(element, color, container, socket_id)
 {
 	var req = new Request.JSON({
 		url : '/notes/text',
@@ -926,7 +923,8 @@ function _updateTextNote(element, color, container)
 			'height' : element.getCoordinates(container).height,
 			'color': color,
 			'zindex': element.getStyle('zIndex'),
-			'text': element.getElement('p').get('text')
+			'text': element.getElement('p').get('text'),
+			'socket_id': socket_id
 		}
 	});
 
@@ -934,12 +932,13 @@ function _updateTextNote(element, color, container)
 		req.send();
 }
 
-function _deleteNote(el, type)
+function _deleteNote(el, type, socket_id)
 {
+	// console.log('_deleteNote ' + socket_id);
 	$(el).removeEvents('click');
 	var req = new Request.JSON({
-		url : '/notes/' + $(el).get('nid') + '?x-http-method-override=DELETE&type='+type,
-		method : 'post',		
+		url : '/notes/' + $(el).get('nid') + '?x-http-method-override=DELETE&type=' + type + '&socket_id=' + socket_id,
+		method : 'post',
 		onComplete : function()
 		{
 			// console.log('_deleteNote onComplete');
