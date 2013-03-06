@@ -31,6 +31,8 @@ DELETE	/notes/{id}								NoteController.delete
 GET     /about                                  Application.about
 GET  	/google6d1d349adf0fabd0.html			Application.webmaster
 
+GET     /admin                                  AdminController.index
+
 # test route
 GET     /test                                	Application.test
 # GET     /sendgrid                                   Application.sendgrid
