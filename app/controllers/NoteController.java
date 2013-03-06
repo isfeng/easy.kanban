@@ -20,30 +20,46 @@ import play.modules.pusher.*;
 public class NoteController extends Controller
 {
 	
-	public static void create(long id, String title, String note)
+	public static void create(long id, String title, String note, String color, String socket_id)
 	{
+		if(socket_id==null)
+			System.out.println("create");
+
 		checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		TextNote stickynote = new TextNote(k, title, note);
+		stickynote.color = color;
 		stickynote.save();
+		
 		Pusher pusher = new Pusher();
-		HttpResponse response = pusher.trigger("test_channel", "create_event", "create");
+		HttpResponse response = pusher.trigger("kanban_channel_" + k.id, "create_event", stickynote.toJson(), socket_id);
+		
 		renderJSON(stickynote.id);
 	}
 	
 	
-	public static void postURL(long id, String url)
+	public static void postURL(long id, String url, String socket_id)
 	{
+		if(socket_id==null)
+			System.out.println("postURL");
+
 		checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		DrawNote stickynote = new DrawNote(k, url);
 		stickynote.save();
+		
+		Pusher pusher = new Pusher();
+		HttpResponse response = pusher.trigger("kanban_channel_" + k.id, "create_url_event", stickynote.toJson(), socket_id);
+		
 		renderJSON(stickynote.id);
 	}
 	
 	
-	public static void delete(long id, String type)
+	public static void delete(long id, String type, String socket_id)
 	{
+		if(socket_id==null)
+			System.out.println("delete");
+
 		StickyNote stickynote = null;
 		if ("text".equals(type))
 			stickynote = TextNote.findById(id);
@@ -52,17 +68,21 @@ public class NoteController extends Controller
 		
 		checkAccess(stickynote.kanban.id);
 		stickynote.delete();
+		
 		Pusher pusher = new Pusher();
-		HttpResponse response = pusher.trigger("test_channel", "delete_event", "delete");
-
+		HttpResponse response = pusher.trigger("kanban_channel_" + stickynote.kanban.id, "delete_event", Long.toString(id), socket_id);
+		
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
 		renderJSON(resp);
 	}
 	
 	
-	public static void updatePosition(long id, int x, int y, int width, int height, String color, String type, int zindex)
+	public static void updatePosition(long id, int x, int y, int width, int height, String color, String type, int zindex, String socket_id)
 	{
+		if(socket_id==null)
+			System.out.println("updatePosition");
+
 		StickyNote stickynote = null;
 		if ("text".equals(type))
 			stickynote = TextNote.findById(id);
@@ -103,9 +123,9 @@ public class NoteController extends Controller
 		}
 		
 		stickynote.save();
-
+		
 		Pusher pusher = new Pusher();
-		HttpResponse response = pusher.trigger("test_channel", "update_event", "updatePosition");
+		HttpResponse response = pusher.trigger("kanban_channel_" + stickynote.kanban.id, "update_event", stickynote.toJson(), socket_id);
 		
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
@@ -113,8 +133,11 @@ public class NoteController extends Controller
 	}
 	
 	
-	public static void updateTextNote(long id, int x, int y, int width, int height, String color, int zindex, String text)
+	public static void updateTextNote(long id, int x, int y, int width, int height, String color, int zindex, String text, String socket_id)
 	{
+		if(socket_id==null)
+			System.out.println("updateTextNote");
+		
 		TextNote stickynote = null;
 		stickynote = TextNote.findById(id);
 		
@@ -155,14 +178,14 @@ public class NoteController extends Controller
 		stickynote.save();
 		
 		Pusher pusher = new Pusher();
-		HttpResponse response = pusher.trigger("test_channel", "update_event", "updateTextNote");
-
+		HttpResponse response = pusher.trigger("kanban_channel_" + stickynote.kanban.id, "update_event", stickynote.toJson(), socket_id);
+		
 		HashMap<String, String> resp = new HashMap();
 		resp.put("status", "OK");
 		renderJSON(resp);
 	}
-
-
+	
+	
 	private static void checkAccess(long id)
 	{
 		Kanban kanban = Kanban.findById(id);
