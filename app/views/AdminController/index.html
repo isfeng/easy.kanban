@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title:'All Kanbans' /}
+
+<div class="row">
+    <div class="ten columns centered">
+        <h3>Welcome - ${user.displayName}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="ten columns centered">
+        <ul class="grid_kanban">
+        #{list items:kanbans, as:'k'}
+            <li>
+            <div class="alert-box secondary">
+            	<h4><a href="/kanbans/${k.id}">${k.name}</a></h4>
+            </div>
+            </li>
+        #{/list}
+        </ul>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+</script>
