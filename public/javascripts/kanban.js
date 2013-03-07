@@ -610,6 +610,7 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				// console.log(json);
+				/*
 				var image = new Image();
 				image.src = json.background;
 				image.onload = function()
@@ -618,9 +619,10 @@ var Kanban = new Class({
 					this.stage.addChild(bm);
 					this.stage.update();
 				}.bind(this);
-
-				if(this.options.isNew)
-				{					
+				*/
+			
+				// if(this.options.isNew)
+				// {					
 					var value_stream = json.stream;
 					var space_width = $(this.container).getSize().x;
 					//console.log(space_width);
@@ -656,8 +658,8 @@ var Kanban = new Class({
 						current_x += value_width;
 					}.bind(this));
 
-					this.saveBackground();
-				}
+					// this.saveBackground();
+				// }
 			}.bind(this),
 			onFailure : function()
 			{
@@ -665,7 +667,7 @@ var Kanban = new Class({
 		});
 
 		if (!KanbanApp.offline)
-			req.send();
+		 	req.send();
 
 		this.stage.onMouseDown = function(evt)
 		{
@@ -718,8 +720,10 @@ var Kanban = new Class({
 
 		this.stage.onMouseUp = function(evt) {
 			this.isMouseDown = false;
+			/*
 			if(this.current_action=='draw'||this.current_action=='erase')
 				this.saveBackground();
+			*/
 			//evt.nativeEvent.target.style.cursor = 'default';
 		}.bind(this);
 
