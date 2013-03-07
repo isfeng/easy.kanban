@@ -180,7 +180,7 @@ footer {
     }    
 }
 
-@for $i from -3 through 3 {
+@for $i from -5 through 5 {
     .deg#{$i} { @include rotate(#{$i}deg); }
     
     img.deg#{$i}:hover {

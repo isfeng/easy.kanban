@@ -82,7 +82,7 @@ Mooml.register('url_form_tmpl', function(param)
 /* text post */
 Mooml.register('text_post_tmpl', function(note)
 {
-	var random = Number.random(-3, 3);
+	var random = Number.random(-5, 5);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'note ' + rotatecls,'nid' : note.nid, 'id': 'nid'+note.nid},
 		h5(			
@@ -101,7 +101,7 @@ Mooml.register('text_post_tmpl', function(note)
 /* image post */
 Mooml.register('url_post_tmpl', function(note)
 {
-	var random = Number.random(-3, 3);
+	var random = Number.random(-5, 5);
 	var rotatecls = 'deg' + random;
 	div({'class' : 'imgnote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
 		h5(
