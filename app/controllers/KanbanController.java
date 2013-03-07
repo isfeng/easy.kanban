@@ -255,6 +255,9 @@ public class KanbanController extends Controller
 		if (!kanban._public)
 		{
 			SocialUser suser = SecureSocial.getCurrentUser();
+			if (suser == null)
+				Application.welcome();
+			
 			if (!suser.email.equals("sergio.huang@gmail.com"))
 			{
 				UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
