@@ -13,14 +13,18 @@
         #{list items:kanbans.kanban, as:'k'}
             <li>
             <div class="alert-box secondary">
-            	<h4><a href="/kanbans/${k.id}">${k.name}</a></h4>
-                <a href="javascript:deleteKanban(${k.id}, '${k.name}')" class="close">&times;</a>
+            	<h4>
+                    <a href="/kanbans/${k.id}/edit" class="icon-wrench" title="EDIT"></a> 
+                    <a href="/kanbans/${k.id}/share" class="icon-share-alt" title="SHARE"></a> 
+                    <a href="/kanbans/${k.id}">${k.name}</a>                    
+                </h4>
+                <a href="javascript:deleteKanban(${k.id}, '${k.name}')" class="close">X</a>
             </div>
             </li>
         #{/list}
             <li>
                 <div class="alert-box secondary">
-                  <h4><a href="/kanbans/new">Create New Kanban</a></h4>
+                  <h4><a href="/kanbans/new"><i class="icon-plus"></i>Create New Kanban</a></h4>
                 </div>
             </li>
         </ul>

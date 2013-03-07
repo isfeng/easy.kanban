@@ -204,7 +204,8 @@ ul.grid_kanban {
         //font-family: 'Schoolbell', cursive;
         color: #888e7e;
         &:hover {
-            @include text-shadow(rgba(#888e7e, 0.2) 1px 1px 0, rgba(#888e7e, 0.2) 2px 2px 0, rgba(#888e7e, 0.2) 3px 3px 0);
+            @include text-shadow(rgba(RED, 0.2) 2px 2px 0, rgba(#888e7e, 0.2) 4px 4px 0, rgba(#888e7e, 0.2) 6px 6px 0);
+            color: #000;
             @include single-transition();        
         }
     }

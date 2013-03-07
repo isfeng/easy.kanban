@@ -3,7 +3,7 @@
 
 <div class="row">
 	<div class="ten columns centered">
-		<h3 class="subheader">Edit Kanban:</h3>
+		<h3 class="subheader">Edit Kanban: ${kanban.name}</h3>
 	</div>
 </div>
 
@@ -14,8 +14,8 @@
 			<fieldset>
 			    <legend>You are editing kanban [${kanban.name}]</legend>
 			    <label>Name: </label>
-			    <input type="text" name="name" placeholder="kanban name" value="${kanban.name}" class="six"/>
-			    <label for="public"><input type="checkbox" CHECKED id="public" name="public"> Public</label>
+			    <input type="text" name="name" placeholder="kanban name" value="${kanban.name}" class="six" maxlength="50"/>
+			    <label for="_public"><input type="checkbox" #{if kanban._public}CHECKED#{/if} id="_public" name="_public" value="true"> Public</label>
 			    <input type="submit" value="OK" class="small button"/>
 		    </fieldset>
 		</form>

@@ -108,10 +108,11 @@ public class KanbanController extends Controller
 	 * @param name
 	 * @param goal
 	 */
-	public static void update(long id, String name)
+	public static void update(long id, String name, boolean _public)
 	{
 		Kanban k = Kanban.findById(id);
 		k.name = name;
+		k._public = _public;
 		k.save();
 		index();
 	}
@@ -161,7 +162,7 @@ public class KanbanController extends Controller
 		Kanban k = Kanban.findById(id);
 		List<ValueStream> vs = ValueStream.find("byKanban", k).fetch();
 		HashMap m = new HashMap();
-		m.put("background", k.background);
+		// m.put("background", k.background);
 		for (ValueStream valueStream : vs)
 		{
 			valueStream.kanban = null;
