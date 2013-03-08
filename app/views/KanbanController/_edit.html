@@ -15,8 +15,11 @@
 			    <legend>You are editing kanban [${kanban.name}]</legend>
 			    <label>Name: </label>
 			    <input type="text" name="name" placeholder="kanban name" value="${kanban.name}" class="six" maxlength="50"/>
-			    <label for="_public"><input type="checkbox" #{if kanban._public}CHECKED#{/if} id="_public" name="_public" value="true"> Public</label>
-			    <input type="submit" value="OK" class="small button"/>
+			    <label for="_private"><input type="radio" #{if kanban.access==0}CHECKED#{/if} id="_private" name="access" value="0"> Private (only you and shared)</label>
+			    <label for="_read"><input type="radio" #{if kanban.access==1}CHECKED#{/if} id="_read" name="access" value="1"> Public (read only) </label>
+			    <label for="_write"><input type="radio" #{if kanban.access==2}CHECKED#{/if} id="_write" name="access" value="2"> Public (full control) </label>
+			    <label>--</label>
+			    <input type="submit" value="OK" class="small button"/> <a href="/kanbans" class="small secondary button">Cancel<a/>
 		    </fieldset>
 		</form>
 	</div>

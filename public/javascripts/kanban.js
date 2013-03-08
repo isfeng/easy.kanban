@@ -576,8 +576,8 @@ var Kanban = new Class({
 			}
 		});
 
-		if (!KanbanApp.offline)
-			req.send();
+		//if (!KanbanApp.offline)
+		req.send();
 
 		this._loadBackground();
 	},

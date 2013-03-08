@@ -15,8 +15,9 @@
             <div class="alert-box secondary">
             	<h4>
                     <a href="/kanbans/${k.id}/edit" class="icon-wrench" title="EDIT"></a> 
-                    <a href="/kanbans/${k.id}/share" class="icon-share-alt" title="SHARE"></a> 
-                    <a href="/kanbans/${k.id}">${k.name}</a>                    
+                    <!-- <a href="/kanbans/${k.id}/share" class="icon-share-alt" title="SHARE"></a>  -->
+                    <a href="/kanbans/${k.id}">${k.name}</a>
+                    #{if k.access!=0} <span class="secondary label"> --public--</span> #{/if}
                 </h4>
                 <a href="javascript:deleteKanban(${k.id}, '${k.name}')" class="close">X</a>
             </div>

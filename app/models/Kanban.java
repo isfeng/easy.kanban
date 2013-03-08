@@ -17,4 +17,8 @@ public class Kanban extends BaseModel
 
 	public boolean _public;
 
+	/**
+     *   0.private  1.read only 2.read and write
+	 */
+	public int access;
 }

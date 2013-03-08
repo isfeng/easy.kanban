@@ -29,9 +29,27 @@ public class KanbanController extends Controller
 {
 	public static void show(long id, boolean isNew)
 	{
-		renderArgs.put("kanban", Kanban.findById(id));
+		Kanban k = Kanban.findById(id);
+		renderArgs.put("kanban", k);
 		if (isNew)
 			renderArgs.put("isNew", isNew);
+
+		if(k.access==1)
+		{
+			SocialUser suser = SecureSocial.getCurrentUser();
+			if(suser==null)
+			{
+				renderArgs.put("offline", true);
+			}
+			else
+			{
+				UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
+				if (uk == null)
+					renderArgs.put("offline", true);
+			}
+		}
+		
+		
 
 		renderArgs.put("debug", Play.configuration.getProperty("pusher.debug"));
 		render();
@@ -108,11 +126,11 @@ public class KanbanController extends Controller
 	 * @param name
 	 * @param goal
 	 */
-	public static void update(long id, String name, boolean _public)
+	public static void update(long id, String name, int access)
 	{
 		Kanban k = Kanban.findById(id);
 		k.name = name;
-		k._public = _public;
+		k.access = access;		
 		k.save();
 		index();
 	}
@@ -253,7 +271,7 @@ public class KanbanController extends Controller
 		if (kanban == null)
 			Application.welcome();
 
-		if (!kanban._public)
+		if (kanban.access==0)
 		{
 			SocialUser suser = SecureSocial.getCurrentUser();
 			if (suser == null)

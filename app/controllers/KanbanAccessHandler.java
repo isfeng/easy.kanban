@@ -27,7 +27,7 @@ public class KanbanAccessHandler extends Controller implements DeadboltHandler
 		{
 			long id = NumberUtils.toLong(params.get("id"));
 			Kanban k = Kanban.findById(id);
-			if (k == null || !k._public)
+			if (k == null || k.access==0)
 			{
 				SecureSocial.DeadboltHelper.beforeRoleCheck();
 			}
