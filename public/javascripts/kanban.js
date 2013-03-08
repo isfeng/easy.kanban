@@ -224,7 +224,19 @@ var StickyNote = new Class({
 
 		if (!KanbanApp.offline)
 			req.send();
+		else
+		{
+			this.nid = 'random' + Number.random(0, 10000);
+			this.title = title;
+			this.note = note;
+			this.post_text_el = Mooml.render('text_post_tmpl', {
+				'title' : title,
+				'note' : note,
+				'nid' : this.nid
+			});
 
+			this.fireEvent('textOk', this.post_text_el);
+		}
 		
 	},
 
@@ -255,7 +267,7 @@ var StickyNote = new Class({
 				this.url = imgurl;
 				this.post_url_el = Mooml.render('url_post_tmpl', {
 					'url' : imgurl,
-					'nid' : nid
+					'nid' : this.nid
 				});
 				this.fireEvent('urlOk', this.post_url_el);
 				// console.log(this.post_url_el);
@@ -267,6 +279,16 @@ var StickyNote = new Class({
 
 		if (!KanbanApp.offline)
 			req.send();
+		else
+		{
+			this.nid = 'random' + Number.random(0, 10000);
+			this.url = imgurl;
+			this.post_url_el = Mooml.render('url_post_tmpl', {
+				'url' : imgurl,
+				'nid' : this.nid
+			});
+			this.fireEvent('urlOk', this.post_url_el);
+		}
 	}
 
 });
@@ -666,8 +688,8 @@ var Kanban = new Class({
 			}
 		});
 
-		if (!KanbanApp.offline)
-		 	req.send();
+		//if (!KanbanApp.offline)
+		req.send();
 
 		this.stage.onMouseDown = function(evt)
 		{
