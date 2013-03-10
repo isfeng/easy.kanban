@@ -78,18 +78,18 @@ body {
             }        
         }
         .videonote{
-            position: absolute;
-            z-index: 1;
+            //position:absolute;
             border: 1px solid black;
-            padding: 1px 1px 12px 1px;
+            padding: 20px 0 20ps 0;
             background-color: #FFFAFA;
             @include box-shadow(8px 8px 12px #333);
-            @include rotate(5deg);
-            @include background-image(linear-gradient(left top, #FFF, #fefabc));  
-            padding:20px;
-            #inneriframe {
-                
-            }    
+            @include background-image(linear-gradient(left top, #FFF, #fefabc));
+            h5 {
+                margin:0;                
+            }
+            iframe{
+                margin-bottom: 1.2em;
+            }     
         }
     }
     background-color: #FFF;

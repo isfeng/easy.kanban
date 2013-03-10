@@ -78,6 +78,17 @@ Mooml.register('url_form_tmpl', function(param)
 		})
 	);
 });
+/* url form */
+Mooml.register('video_form_tmpl', function(param)
+{
+	div( 
+		input({
+			'type' : 'text',
+			'id' : 'video_note_url',
+			'maxlength': 255
+		})
+	);
+});
 
 /* text post */
 Mooml.register('text_post_tmpl', function(note)
@@ -107,6 +118,27 @@ Mooml.register('url_post_tmpl', function(note)
 		h5(
 		),
 		img({'id': 'drag'+note.nid, src: note.url}),		
+		div({'class': 'note_tool'},
+			ul({'class':'left'},
+				li(i({'class':'icon-remove'}))
+			)
+		)
+	);
+});
+/* video post */
+Mooml.register('video_post_tmpl', function(note)
+{
+	console.log('video_post_tmpl '+ note);
+	var random = Number.random(-5, 5);
+	var rotatecls = 'deg' + random;
+	div({'class' : 'videonote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
+		h5({'id': 'drag'+note.nid}, note.nid),
+		iframe({
+			'src': 'https://www.youtube.com/embed/' + note.url + '?controls=0&showinfo=0',
+			'width': '320px',
+			'height': '180px',
+			'frameborder': 0
+		}),
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove'}))
@@ -171,6 +203,22 @@ var StickyNote = new Class({
 			"model": "modal",
 			"title": "IMAGE URL",
 			"contents" : Mooml.render('url_form_tmpl').get('html')
+		});
+	},
+
+	showVideoForm : function()
+	{
+		this.sm = new SimpleModal({width:450, offsetTop: 120, offsetLeft: 25, draggable: false});
+		this.sm.addButton("Post It", "btn primary", function()
+		{
+			this._onVideoOK(this.kid, $('video_note_url').value);
+			this.hide();
+		}.bind(this));
+		this.sm.addButton("Cancel", "btn secondary");
+		this.sm.show({
+			"model": "modal",
+			"title": "YouTube URL",
+			"contents" : Mooml.render('video_form_tmpl').get('html')
 		});
 	},
 
@@ -289,6 +337,54 @@ var StickyNote = new Class({
 			});
 			this.fireEvent('urlOk', this.post_url_el);
 		}
+	},
+
+	_onVideoOK : function(kid, video_url)
+	{
+		var vid = video_url.split("v=")[1];
+		var socket_id = this.kanban.socket_id
+		var req = new Request.JSON({
+			url : '/notes/video',
+			method : 'post',
+			data : {
+				'id' : kid,
+				'url' : vid,
+				'socket_id': socket_id
+			},
+			async : true,
+			onRequest : function()
+			{
+			},
+			onSuccess : function(nid)
+			{
+				this.nid = nid;
+				this.url = vid;
+				this.post_video_el = Mooml.render('video_post_tmpl', {
+					'url' : vid,
+					'nid' : this.nid
+				});
+				console.log(vid);
+				console.log(this.post_video_el);
+				this.fireEvent('videoOk', this.post_video_el);
+				// console.log(this.post_url_el);
+			}.bind(this),
+			onFailure : function()
+			{
+			}
+		});
+
+		if (!KanbanApp.offline)
+			req.send();
+		else
+		{
+			this.nid = 'random' + Number.random(0, 10000);
+			this.url = vid;
+			this.post_video_el = Mooml.render('video_post_tmpl', {
+				'url' : vid,
+				'nid' : this.nid
+			});
+			this.fireEvent('videoOk', this.post_video_el);
+		}
 	}
 
 });
@@ -310,6 +406,15 @@ StickyNote.buildUrlEl = function(nid, url)
 	});
 }
 
+StickyNote.buildVideoEl = function(nid, url)
+{
+	console.log(url);
+	return Mooml.render('video_post_tmpl', {
+		'url' : url,
+		'nid' : nid
+	});
+}
+
 var PostStack = new Class({
 
 	Implements : [ Options, Events ],
@@ -317,7 +422,7 @@ var PostStack = new Class({
 	kanban: null,
 
 	options : {
-		type: 'text', //text, draw, url
+		type: 'text', //text, draw, url, video
 		color: 'yellow'
 	},
 
@@ -333,6 +438,8 @@ var PostStack = new Class({
 				this.pull();
 			else if(this.options.type=='url')
 				this.pullUrl();
+			else if(this.options.type=='video')
+				this.pullVideo();
 		}.bind(this));
 	},
 
@@ -360,6 +467,19 @@ var PostStack = new Class({
 			}.bind(this)
 		});
 		stickyNote.showUrlForm();
+	},
+
+	pullVideo : function()
+	{
+		var stickyNote = new StickyNote(this.kanban, {
+			color: this.options.color,
+			onVideoOk : function(el){
+				console.log(el);
+				this.kanban.stickVideo(el, 0, 0, this.options.color, true);
+				_updatePos(el, this.options.color, this.kanban.container, 'video', this.kanban.socket_id);
+			}.bind(this)
+		});
+		stickyNote.showVideoForm();
 	}
 
 });
@@ -456,6 +576,57 @@ var Kanban = new Class({
 		}
 		
 
+	},
+
+	stickVideo : function(videoNote, x, y, color, _center, idx)
+	{
+		var el = videoNote.inject($(this.container));
+		if(idx)
+		{
+			el.setStyle('zIndex', idx);
+			if(idx > this.z)
+				this.z = idx;
+		}
+		else
+		{
+			this.z++;
+			el.setStyle('zIndex', this.z);
+		}
+
+		el.getElement('.icon-remove').addEvent('click', function(){
+			_deleteNote(el,'video', this.socket_id);
+		}.bind(this));
+
+		el.makeDraggable({
+			container : this.container,
+			handle: 'drag' + el.get('nid'),
+
+			onBeforeStart: function(){
+				this.z += 1;
+				el.setStyle('zIndex', this.z);
+				this.dragScroller.detach();	
+			}.bind(this),
+				
+			onComplete: function(){				
+				this.dragScroller.attach();
+				_updatePos(el, color, this.container, 'video', this.socket_id);
+			}.bind(this),
+
+			onCancel : function(element){				
+				this.dragScroller.attach();	
+				_updatePos(el, color, this.container, 'video', this.socket_id);		
+			}.bind(this)
+		})
+
+		if(_center)
+			el.position({position:'upperLeft',relativeTo:'body',offset:{x:50,y:120}});
+		else
+		{
+			el.setPosition({
+				'x' : x,
+				'y' : y
+			});
+		}
 	},
 
 	stickText : function(textNote, x, y, color, _center, idx, width, height)
@@ -586,9 +757,11 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
-					// console.log(el);
+					console.log(el);
 					if(el.url)
 						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color, false, el['zindex']);
+					else if(el.videoID)
+						this.stickVideo(StickyNote.buildVideoEl(el.id, el.videoID), el.x, el.y, el.color, false, el['zindex']);
 					else
 						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex'], el.width, el.height);
 				}.bind(this));
@@ -884,6 +1057,11 @@ var Kanban = new Class({
 	addUrlStack : function(stack)
 	{
 		var postStack = new PostStack(this, stack, {color: 'black', type: 'url'});
+	},
+
+	addVideoStack : function(stack)
+	{
+		var postStack = new PostStack(this, stack, {color: 'black', type: 'video'});
 	},
 
 	activateTool: function(el)

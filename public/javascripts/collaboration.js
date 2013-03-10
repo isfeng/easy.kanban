@@ -43,6 +43,11 @@ var Collaboration = new Class({
             // console.log("create_event - " + data);
             this.kanban.stickUrl(StickyNote.buildUrlEl(data.id, data.url), data.x, data.y, data.color, false, data.zindex);
         }.bind(this));
+
+        channel.bind('create_video_event', function(data) {
+            // console.log("create_event - " + data);
+            this.kanban.stickUrl(StickyNote.buildVideoEl(data.id, data.url), data.x, data.y, data.color, false, data.zindex);
+        }.bind(this));
         
         channel.bind('update_event', function(data) {
             // console.log("update_event - " + data);
