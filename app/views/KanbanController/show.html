@@ -3,7 +3,35 @@
 
 <div id="kanban">
     <div id="board">
-        <div id="space"><canvas id="mycanvas"></canvas></div>
+        <div id="space">
+            
+            <canvas id="mycanvas"></canvas>
+
+
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="videonote">
+                <iframe id="inneriframe" src="https://www.youtube.com/embed/3brcfttchzA?controls=0" width="320" height="180" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+
+        </div>
         <div id="board_control" >
         	<ul>
         	<li id="post_stack_yellow" class="icon-edit icon-2x"><span>yellow post</span></li>
@@ -39,6 +67,22 @@
         window.addEvent('resize', resizeKanban);
 
         new Collaboration(kanban, false).listenChannel();
+
+        $$('.videonote').makeDraggable({
+            container : 'space',
+            
+            onBeforeStart: function(){
+                kanban.dragScroller.detach(); 
+            }.bind(this),
+                
+            onComplete: function(){             
+                kanban.dragScroller.attach();                
+            }.bind(this),
+
+            onCancel : function(element){               
+                kanban.dragScroller.attach();
+            }.bind(this)
+        })
     });
 
     function resizeKanban()
