@@ -27,6 +27,7 @@ var Delete = new Class({
 	}
 });
 
+
 /*
 	html tempaltes
 	text_form_tmpl: text note form
@@ -134,7 +135,8 @@ Mooml.register('video_post_tmpl', function(note)
 	div({'class' : 'videonote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
 		h5({'id': 'drag'+note.nid}, note.nid),
 		iframe({
-			'src': 'https://www.youtube.com/embed/' + note.url + '?controls=0&showinfo=0',
+			'id': 'player' + note.nid,
+			'src': 'https://www.youtube.com/embed/' + note.url + '?enablejsapi=1&controls=0&showinfo=0',
 			'width': '320px',
 			'height': '180px',
 			'frameborder': 0
@@ -477,6 +479,7 @@ var PostStack = new Class({
 				console.log(el);
 				this.kanban.stickVideo(el, 0, 0, this.options.color, true);
 				_updatePos(el, this.options.color, this.kanban.container, 'video', this.kanban.socket_id);
+
 			}.bind(this)
 		});
 		stickyNote.showVideoForm();
@@ -492,6 +495,7 @@ var Kanban = new Class({
 	thickness: 2,
 	socket_id: null,
 	editing: null,
+	videos: new Array(),
 
 	options:{
 		isNew: false,
@@ -627,6 +631,7 @@ var Kanban = new Class({
 				'y' : y
 			});
 		}
+		
 	},
 
 	stickText : function(textNote, x, y, color, _center, idx, width, height)
@@ -760,11 +765,14 @@ var Kanban = new Class({
 					console.log(el);
 					if(el.url)
 						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color, false, el['zindex']);
-					else if(el.videoID)
+					else if(el.videoID){
+						this.videos.push('player'+el.id);
 						this.stickVideo(StickyNote.buildVideoEl(el.id, el.videoID), el.x, el.y, el.color, false, el['zindex']);
+					}						
 					else
 						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex'], el.width, el.height);
 				}.bind(this));
+				prepareYouTube(this.videos);
 			}.bind(this),
 			onFailure : function()
 			{
@@ -1162,4 +1170,57 @@ function _deleteNote(el, type, socket_id)
 	else
 		$(el).set('tween', {onComplete: function(){$(el).destroy();}}).fade(0);
 		
+}
+
+function prepareYouTube(videos)
+{
+	KanbanApp.videos = videos;
+
+	var tag = document.createElement('script');
+	tag.src = "//www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+function onPlayerReady(event)
+{
+	console.log(event.target.a.id);
+	var _id = event.target.a.id.replace('player','nid');
+	overlayYoutube(_id, event.target);
+}
+
+function onYouTubeIframeAPIReady() {
+	console.log('onYouTubeIframeAPIReady');
+	KanbanApp.videos.each(function(videoID){
+		var player = new YT.Player(videoID, {
+			events: {
+				'onReady': onPlayerReady
+			}
+		});
+	});
+	
+}
+
+function overlayYoutube(_id, target)
+{
+	var overlay = new Overlay(_id, {
+		duration: 300,
+		opacity: 0,
+		playing: false,
+		height: '180px',
+		onClick: function() {
+			// this.close();
+			console.log('onClick');
+			if(!this.options.playing)
+				target.playVideo();
+			else
+				target.pauseVideo();
+
+			this.options.playing = !this.options.playing;
+		},
+		onOpen: function() {
+			console.log('onOpen');
+		}
+	});
+	overlay.open();
 }

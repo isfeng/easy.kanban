@@ -24,7 +24,7 @@
 #{press.single-script 'collaboration.js' /}
 
 <script type="text/javascript">
-
+    
     window.addEvent('domready', function()
     {
     	#{if offline}KanbanApp.offline=true;#{/if}
@@ -43,22 +43,7 @@
         window.addEvent('resize', resizeKanban);
 
         new Collaboration(kanban, false).listenChannel();
-
-        $$('.videonote').makeDraggable({
-            container : 'space',
-            
-            onBeforeStart: function(){
-                kanban.dragScroller.detach(); 
-            }.bind(this),
-                
-            onComplete: function(){             
-                kanban.dragScroller.attach();                
-            }.bind(this),
-
-            onCancel : function(element){               
-                kanban.dragScroller.attach();
-            }.bind(this)
-        })
+        
     });
 
     function resizeKanban()
