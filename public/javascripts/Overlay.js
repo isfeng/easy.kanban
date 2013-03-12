@@ -25,7 +25,9 @@ var Overlay = new Class({
 		color: '#000',
 		duration: 500,
 		opacity: 0.5,
-		zIndex: 5000/*,
+		zIndex: 5000,
+		top: 0
+		/*,
 		onClick: function(){},
 		onClose: function(){},
 		onHide: function(){},
@@ -58,7 +60,7 @@ var Overlay = new Class({
 				position: (Browser.ie6) ? 'absolute' : 'fixed',
 				background: this.options.color,
 				left: 0,
-				top: 0,
+				top: this.options.top,
 				'z-index': this.options.zIndex,
 				opacity: 0
 			}
@@ -98,7 +100,7 @@ var Overlay = new Class({
 	tweenStart: function(){
 		this.overlay.setStyles({
 			width: '100%',
-			height: this.container.getScrollSize().y,
+			height: this.options.height||this.container.getScrollSize().y,
 			visibility: 'visible'
 		});
 		return this;
@@ -124,7 +126,7 @@ var Overlay = new Class({
 
 	resize: function(){
 		this.fireEvent('resize');
-		this.overlay.setStyle('height', this.container.getScrollSize().y);
+		this.overlay.setStyle('height', this.options.height||this.container.getScrollSize().y);
 		return this;
 	},
 

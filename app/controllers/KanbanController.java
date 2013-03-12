@@ -12,6 +12,7 @@ import models.TextNote;
 import models.User;
 import models.UserKanban;
 import models.ValueStream;
+import models.VideoNote;
 import play.Play;
 import play.data.validation.Required;
 import play.mvc.Before;
@@ -48,8 +49,8 @@ public class KanbanController extends Controller
 					renderArgs.put("offline", true);
 			}
 		}
-		
-		
+
+
 
 		renderArgs.put("debug", Play.configuration.getProperty("pusher.debug"));
 		render();
@@ -82,7 +83,12 @@ public class KanbanController extends Controller
 		UserKanban uk = new UserKanban(_user, k);
 		uk.save();
 
-		createWorkflow(workflow_customize, k);
+		if(workflow_customize.equals("as_kanban_name"))
+			createWorkflow(name, k);
+		else if(workflow_customize.equals("_empty_"))
+			createWorkflow("", k);
+		else
+			createWorkflow(workflow_customize, k);
 		// switch (workflow)
 		// {
 		// case 1:
@@ -130,7 +136,7 @@ public class KanbanController extends Controller
 	{
 		Kanban k = Kanban.findById(id);
 		k.name = name;
-		k.access = access;		
+		k.access = access;
 		k.save();
 		index();
 	}
@@ -163,7 +169,9 @@ public class KanbanController extends Controller
 	{
 		List<StickyNote> tnotes = TextNote.find("byKanban", Kanban.findById(id)).fetch();
 		List<StickyNote> dnotes = DrawNote.find("byKanban", Kanban.findById(id)).fetch();
+		List<StickyNote> vnotes = VideoNote.find("byKanban", Kanban.findById(id)).fetch();
 		tnotes.addAll(dnotes);
+		tnotes.addAll(vnotes);
 
 		for (StickyNote textNote : tnotes)
 		{
@@ -276,7 +284,7 @@ public class KanbanController extends Controller
 			SocialUser suser = SecureSocial.getCurrentUser();
 			if (suser == null)
 				Application.welcome();
-			
+
 			if (!suser.email.equals("sergio.huang@gmail.com"))
 			{
 				UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
