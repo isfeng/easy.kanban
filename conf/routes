@@ -24,6 +24,7 @@ POST    /kanbans/{id}/background                KanbanController.setBackground
 
 POST	/notes									NoteController.create
 POST	/notes/url								NoteController.postURL
+POST	/notes/video							NoteController.postVideo
 POST	/notes/pos								NoteController.updatePosition
 POST	/notes/text								NoteController.updateTextNote
 DELETE	/notes/{id}								NoteController.delete

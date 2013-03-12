@@ -27,6 +27,7 @@ var Delete = new Class({
 	}
 });
 
+
 /*
 	html tempaltes
 	text_form_tmpl: text note form
@@ -78,6 +79,17 @@ Mooml.register('url_form_tmpl', function(param)
 		})
 	);
 });
+/* url form */
+Mooml.register('video_form_tmpl', function(param)
+{
+	div( 
+		input({
+			'type' : 'text',
+			'id' : 'video_note_url',
+			'maxlength': 255
+		})
+	);
+});
 
 /* text post */
 Mooml.register('text_post_tmpl', function(note)
@@ -110,6 +122,29 @@ Mooml.register('url_post_tmpl', function(note)
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove'}))
+			)
+		)
+	);
+});
+/* video post */
+Mooml.register('video_post_tmpl', function(note)
+{
+	var random = Number.random(-5, 5);
+	var rotatecls = 'deg' + random;
+	div({'class': 'videonote '+rotatecls, 'nid': note.nid, 'id': 'nid'+note.nid},
+		iframe({
+			'id': 'player' + note.nid,
+			'src': 'https://www.youtube.com/embed/' + note.url + '?enablejsapi=1&controls=0&rel=0',
+			'width': '640px',
+			'height': '360px',
+			'frameborder': 0
+		}),
+		div({'class': 'note_tool'},
+			ul({'class':'left'},
+				li(i({'class':'icon-remove'}))
+			),
+			ul({'class':'right'},
+				li(i({'class':'icon-play','id': 'play' + note.nid}))
 			)
 		)
 	);
@@ -171,6 +206,22 @@ var StickyNote = new Class({
 			"model": "modal",
 			"title": "IMAGE URL",
 			"contents" : Mooml.render('url_form_tmpl').get('html')
+		});
+	},
+
+	showVideoForm : function()
+	{
+		this.sm = new SimpleModal({width:450, offsetTop: 120, offsetLeft: 25, draggable: false});
+		this.sm.addButton("Post It", "btn primary", function()
+		{
+			this._onVideoOK(this.kid, $('video_note_url').value);
+			this.hide();
+		}.bind(this));
+		this.sm.addButton("Cancel", "btn secondary");
+		this.sm.show({
+			"model": "modal",
+			"title": "YouTube URL",
+			"contents" : Mooml.render('video_form_tmpl').get('html')
 		});
 	},
 
@@ -289,6 +340,40 @@ var StickyNote = new Class({
 			});
 			this.fireEvent('urlOk', this.post_url_el);
 		}
+	},
+
+	_onVideoOK : function(kid, video_url)
+	{
+		var vid = video_url.split("v=")[1];
+		var socket_id = this.kanban.socket_id
+		var req = new Request.JSON({
+			url : '/notes/video',
+			method : 'post',
+			data : {
+				'id' : kid,
+				'url' : vid,
+				'socket_id': socket_id
+			},
+			onSuccess : function(nid)
+			{
+				this.nid = nid;
+				this.url = vid;
+				this.post_video_el = Mooml.render('video_post_tmpl', {
+					'url' : vid,
+					'nid' : this.nid
+				});
+				this.fireEvent('videoOk', {video_id:vid, id: this.nid});		
+			}.bind(this)
+		});
+
+		if (!KanbanApp.offline)
+			req.send();
+		else
+		{
+			this.nid = 'random' + Number.random(0, 10000);
+			this.url = vid;
+			this.fireEvent('videoOk', {video_id:vid, id: this.nid});
+		}
 	}
 
 });
@@ -310,6 +395,15 @@ StickyNote.buildUrlEl = function(nid, url)
 	});
 }
 
+StickyNote.buildVideoEl = function(nid, url)
+{
+	console.log(url);
+	return Mooml.render('video_post_tmpl', {
+		'url' : url,
+		'nid' : nid
+	});
+}
+
 var PostStack = new Class({
 
 	Implements : [ Options, Events ],
@@ -317,7 +411,7 @@ var PostStack = new Class({
 	kanban: null,
 
 	options : {
-		type: 'text', //text, draw, url
+		type: 'text', //text, draw, url, video
 		color: 'yellow'
 	},
 
@@ -333,6 +427,8 @@ var PostStack = new Class({
 				this.pull();
 			else if(this.options.type=='url')
 				this.pullUrl();
+			else if(this.options.type=='video')
+				this.pullVideo();
 		}.bind(this));
 	},
 
@@ -360,6 +456,22 @@ var PostStack = new Class({
 			}.bind(this)
 		});
 		stickyNote.showUrlForm();
+	},
+
+	pullVideo : function()
+	{
+		var stickyNote = new StickyNote(this.kanban, {
+			color: this.options.color,
+			onVideoOk : function(el){
+				console.log(el);
+				// this.kanban.stickVideo(el, 0, 0, this.options.color, true);
+				var vn = new VideoNote(this, el.video_id, el.id);
+				kanban.videos.push(vn);
+				vn.stick();
+				_updatePos(el, this.options.color, this.kanban.container, 'video', this.kanban.socket_id);
+			}.bind(this)
+		});
+		stickyNote.showVideoForm();
 	}
 
 });
@@ -372,6 +484,7 @@ var Kanban = new Class({
 	thickness: 2,
 	socket_id: null,
 	editing: null,
+	videos: new Array(),
 
 	options:{
 		isNew: false,
@@ -586,12 +699,16 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
-					// console.log(el);
 					if(el.url)
 						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color, false, el['zindex']);
+					else if(el.videoID)
+						this.videos.push(new VideoNote(this, el.videoID, el.id, {x:el.x, y:el.y, zindex:el.zindex, width:el.width, height:el.height}));											
 					else
 						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex'], el.width, el.height);
 				}.bind(this));
+				// load youtube api
+				prepareYouTube();
+
 			}.bind(this),
 			onFailure : function()
 			{
@@ -886,6 +1003,11 @@ var Kanban = new Class({
 		var postStack = new PostStack(this, stack, {color: 'black', type: 'url'});
 	},
 
+	addVideoStack : function(stack)
+	{
+		var postStack = new PostStack(this, stack, {color: 'black', type: 'video'});
+	},
+
 	activateTool: function(el)
 	{
 
@@ -898,6 +1020,13 @@ var Kanban = new Class({
 	setSocket_id: function(sid)
 	{
 		this.socket_id = sid;		
+	},
+
+	loadYouTube: function()
+	{
+		this.videos.each(function(video){
+			video.stick();
+		});
 	}
 
 });
@@ -985,3 +1114,136 @@ function _deleteNote(el, type, socket_id)
 		$(el).set('tween', {onComplete: function(){$(el).destroy();}}).fade(0);
 		
 }
+
+function prepareYouTube()
+{
+	var tag = document.createElement('script');
+	tag.src = "//www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+function onYouTubeIframeAPIReady() {
+	kanban.loadYouTube();
+}
+
+/*
+ * 	var vn = new VideoNote(kanban, video_id, nid);
+ 	vn.stick();
+ */
+var VideoNote = new Class({
+
+	Implements : [ Options, Events],
+
+	kanban: null,
+	video_id: '',
+	nid: '',
+	element: null,
+	player: null,
+
+	options : {
+		x: 50,
+		y: 200,
+		width: 360,
+		height: 640
+	},
+
+	initialize : function(Kanban, video_id, nid, options)
+	{
+		this.setOptions(options);
+		this.kanban = kanban;
+		this.video_id = video_id;
+		this.nid = nid;
+		this.element = Mooml.render('video_post_tmpl', {
+			'url' : video_id,
+			'nid' : nid,
+			width: this.options.width,
+			height: this.options.height
+		});
+	},
+
+	tear: function()
+	{
+		this.element.destroy();
+	},
+
+	play: function()
+	{
+		this.player.playVideo();
+	},
+
+	pause: function()
+	{
+		this.player.pauseVideo();
+	},
+
+	stick: function()
+	{
+		var el =this.element;
+		el.inject(this.kanban.container);
+		this._overlay();
+
+		this.kanban.z++;
+		
+		el.setStyle('zIndex', this.kanban.z);
+		
+		el.getElement('.icon-remove').addEvent('click', function(){
+			_deleteNote(el,'video', this.kanban.socket_id);
+		}.bind(this));
+
+		el.makeDraggable({
+			container : this.kanban.container,
+			handle: 'overlay'+this.nid,
+
+			onBeforeStart: function(){
+				this.kanban.z += 1;
+				el.setStyle('zIndex', this.kanban.z);
+				this.kanban.dragScroller.detach();	
+			}.bind(this),
+				
+			onComplete: function(){				
+				this.kanban.dragScroller.attach();
+				_updatePos(el, 'yellow', this.kanban.container, 'video', this.kanban.socket_id);
+			}.bind(this),
+
+			onCancel : function(element){				
+				this.kanban.dragScroller.attach();	
+				_updatePos(el, 'yellow', this.kanban.container, 'video', this.kanban.socket_id);		
+			}.bind(this)
+		});
+
+		el.setPosition({
+			'x' : this.options.x,
+			'y' : this.options.y
+		});
+		
+		this.player = new YT.Player('player' + this.nid, {
+			events: {
+				'onReady': this._onPlayerReady.bind(this)
+			}
+		});
+	},
+
+	_overlay: function()
+	{
+		var overlay = new Overlay('nid' + this.nid, {
+			id: 'overlay'+this.nid,
+			opacity: 0,
+			height: '360px'
+		});
+		overlay.open();
+	},
+
+	_onPlayerReady: function(event)
+	{
+		this.element.getElement('.icon-play').addEvent('click', function(){
+			if(!this.playing)
+				event.target.playVideo();
+			else
+				event.target.pauseVideo();
+
+			this.playing = !this.playing;
+		});
+	}
+
+});

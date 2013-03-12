@@ -65,7 +65,8 @@ body {
         }
         .imgnote {
             z-index: 1;
-            max-width: 320px;
+            max-width: 640px;
+            max-height: 640px;
             // min-width: 150px;
             // min-height: 65px;
             border-top: 1px solid #FFFAFA;
@@ -76,6 +77,17 @@ body {
             h5 {
                 margin:0;                
             }        
+        }
+        .videonote{
+            //position:absolute;
+            border: 1px solid black;
+            padding: 20px 0 20ps 0;
+            background-color: #FFFAFA;
+            @include box-shadow(8px 8px 12px #333);
+            @include background-image(linear-gradient(left top, #FFF, #fefabc));
+            iframe{
+                margin-bottom: 1.2em;
+            }
         }
     }
     background-color: #FFF;
@@ -88,6 +100,18 @@ body {
     z-index: 99999;
     bottom: 0;
     color: gray;
+    .icon-fullscreen{
+        cursor: pointer;
+        &:hover{
+            font-size: 1.5em;
+        }
+    }
+    .icon-play{
+        cursor: pointer;
+        &:hover{
+            font-size: 1.5em;
+        }
+    }
     .icon-remove{
         cursor: pointer;
         &:hover{
@@ -102,6 +126,7 @@ body {
     }
     li{
         list-style: none;
+        display: inline;
     }
 }
 
