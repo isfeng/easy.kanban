@@ -83,7 +83,12 @@ public class KanbanController extends Controller
 		UserKanban uk = new UserKanban(_user, k);
 		uk.save();
 
-		createWorkflow(workflow_customize, k);
+		if(workflow_customize.equals("as_kanban_name"))
+			createWorkflow(name, k);
+		else if(workflow_customize.equals("_empty_"))
+			createWorkflow("", k);
+		else
+			createWorkflow(workflow_customize, k);
 		// switch (workflow)
 		// {
 		// case 1:
