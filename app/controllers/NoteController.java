@@ -23,9 +23,6 @@ public class NoteController extends Controller
 
 	public static void create(long id, String title, String note, String color, String socket_id)
 	{
-		if (socket_id == null)
-			System.out.println("create");
-
 		checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		TextNote stickynote = new TextNote(k, title, note);
@@ -48,9 +45,6 @@ public class NoteController extends Controller
 
 	public static void postURL(long id, String url, String socket_id)
 	{
-		if (socket_id == null)
-			System.out.println("postURL");
-
 		checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		DrawNote stickynote = new DrawNote(k, url);
@@ -72,9 +66,6 @@ public class NoteController extends Controller
 
 	public static void postVideo(long id, String url, String socket_id)
 	{
-		if (socket_id == null)
-			System.out.println("postURL");
-
 		checkAccess(id);
 		Kanban k = Kanban.findById(id);
 		VideoNote stickynote = new VideoNote(k, url);
@@ -96,9 +87,6 @@ public class NoteController extends Controller
 
 	public static void delete(long id, String type, String socket_id)
 	{
-		if (socket_id == null)
-			System.out.println("delete");
-
 		StickyNote stickynote = null;
 		if ("text".equals(type))
 			stickynote = TextNote.findById(id);
@@ -128,18 +116,6 @@ public class NoteController extends Controller
 
 	public static void updatePosition(long id, int x, int y, int width, int height, String color, String type, int zindex, String socket_id)
 	{
-		System.out.println(id);
-		System.out.println(x);
-		System.out.println(y);
-		System.out.println(width);
-		System.out.println(height);
-		System.out.println(color);
-		System.out.println(type);
-		System.out.println(zindex);
-		System.out.println(socket_id);
-		if (socket_id == null)
-			System.out.println("updatePosition");
-
 		StickyNote stickynote = null;
 		if ("text".equals(type))
 			stickynote = TextNote.findById(id);
@@ -201,9 +177,6 @@ public class NoteController extends Controller
 
 	public static void updateTextNote(long id, int x, int y, int width, int height, String color, int zindex, String text, String socket_id)
 	{
-		if (socket_id == null)
-			System.out.println("updateTextNote");
-
 		TextNote stickynote = null;
 		stickynote = TextNote.findById(id);
 

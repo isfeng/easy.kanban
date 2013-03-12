@@ -6,7 +6,7 @@
         <div id="space">
             <canvas id="mycanvas"></canvas>
         </div>
-        <div id="board_control" >
+        <div id="board_control" #{if offline}style="display:none"#{/if}>
         	<ul>
         	<li id="post_stack_yellow" class="icon-edit icon-2x"><span>yellow post</span></li>
             <li id="post_stack_pink" class="icon-edit icon-2x"><span>pink post</span></li>
@@ -28,7 +28,7 @@
     window.addEvent('domready', function()
     {
     	#{if offline}KanbanApp.offline=true;#{/if}
-        var kanban = new Kanban('space','${kanban.id}',{#{if isNew}isNew: true,#{/if}board:'board', width: ${kanban.board.width}, height: ${kanban.board.height}});
+        kanban = new Kanban('space','${kanban.id}',{#{if isNew}isNew: true,#{/if}board:'board', width: ${kanban.board.width}, height: ${kanban.board.height}});
         kanban.load();
         kanban.addStack('post_stack_yellow','yellow');
         kanban.addStack('post_stack_pink','pink');
@@ -43,7 +43,6 @@
         window.addEvent('resize', resizeKanban);
 
         new Collaboration(kanban, false).listenChannel();
-        
     });
 
     function resizeKanban()

@@ -129,21 +129,22 @@ Mooml.register('url_post_tmpl', function(note)
 /* video post */
 Mooml.register('video_post_tmpl', function(note)
 {
-	console.log('video_post_tmpl '+ note);
 	var random = Number.random(-5, 5);
 	var rotatecls = 'deg' + random;
-	div({'class' : 'videonote ' + rotatecls,'nid' : note.nid, 'id': 'nid' + note.nid},
-		h5({'id': 'drag'+note.nid}, note.nid),
+	div({'class': 'videonote '+rotatecls, 'nid': note.nid, 'id': 'nid'+note.nid},
 		iframe({
 			'id': 'player' + note.nid,
-			'src': 'https://www.youtube.com/embed/' + note.url + '?enablejsapi=1&controls=0&showinfo=0',
-			'width': '320px',
-			'height': '180px',
+			'src': 'https://www.youtube.com/embed/' + note.url + '?enablejsapi=1&controls=0&rel=0',
+			'width': '640px',
+			'height': '360px',
 			'frameborder': 0
 		}),
 		div({'class': 'note_tool'},
 			ul({'class':'left'},
 				li(i({'class':'icon-remove'}))
+			),
+			ul({'class':'right'},
+				li(i({'class':'icon-play','id': 'play' + note.nid}))
 			)
 		)
 	);
@@ -353,10 +354,6 @@ var StickyNote = new Class({
 				'url' : vid,
 				'socket_id': socket_id
 			},
-			async : true,
-			onRequest : function()
-			{
-			},
 			onSuccess : function(nid)
 			{
 				this.nid = nid;
@@ -365,14 +362,8 @@ var StickyNote = new Class({
 					'url' : vid,
 					'nid' : this.nid
 				});
-				console.log(vid);
-				console.log(this.post_video_el);
-				this.fireEvent('videoOk', this.post_video_el);
-				// console.log(this.post_url_el);
-			}.bind(this),
-			onFailure : function()
-			{
-			}
+				this.fireEvent('videoOk', {video_id:vid, id: this.nid});		
+			}.bind(this)
 		});
 
 		if (!KanbanApp.offline)
@@ -381,11 +372,7 @@ var StickyNote = new Class({
 		{
 			this.nid = 'random' + Number.random(0, 10000);
 			this.url = vid;
-			this.post_video_el = Mooml.render('video_post_tmpl', {
-				'url' : vid,
-				'nid' : this.nid
-			});
-			this.fireEvent('videoOk', this.post_video_el);
+			this.fireEvent('videoOk', {video_id:vid, id: this.nid});
 		}
 	}
 
@@ -477,9 +464,11 @@ var PostStack = new Class({
 			color: this.options.color,
 			onVideoOk : function(el){
 				console.log(el);
-				this.kanban.stickVideo(el, 0, 0, this.options.color, true);
+				// this.kanban.stickVideo(el, 0, 0, this.options.color, true);
+				var vn = new VideoNote(this, el.video_id, el.id);
+				kanban.videos.push(vn);
+				vn.stick();
 				_updatePos(el, this.options.color, this.kanban.container, 'video', this.kanban.socket_id);
-
 			}.bind(this)
 		});
 		stickyNote.showVideoForm();
@@ -580,58 +569,6 @@ var Kanban = new Class({
 		}
 		
 
-	},
-
-	stickVideo : function(videoNote, x, y, color, _center, idx)
-	{
-		var el = videoNote.inject($(this.container));
-		if(idx)
-		{
-			el.setStyle('zIndex', idx);
-			if(idx > this.z)
-				this.z = idx;
-		}
-		else
-		{
-			this.z++;
-			el.setStyle('zIndex', this.z);
-		}
-
-		el.getElement('.icon-remove').addEvent('click', function(){
-			_deleteNote(el,'video', this.socket_id);
-		}.bind(this));
-
-		el.makeDraggable({
-			container : this.container,
-			handle: 'drag' + el.get('nid'),
-
-			onBeforeStart: function(){
-				this.z += 1;
-				el.setStyle('zIndex', this.z);
-				this.dragScroller.detach();	
-			}.bind(this),
-				
-			onComplete: function(){				
-				this.dragScroller.attach();
-				_updatePos(el, color, this.container, 'video', this.socket_id);
-			}.bind(this),
-
-			onCancel : function(element){				
-				this.dragScroller.attach();	
-				_updatePos(el, color, this.container, 'video', this.socket_id);		
-			}.bind(this)
-		})
-
-		if(_center)
-			el.position({position:'upperLeft',relativeTo:'body',offset:{x:50,y:120}});
-		else
-		{
-			el.setPosition({
-				'x' : x,
-				'y' : y
-			});
-		}
-		
 	},
 
 	stickText : function(textNote, x, y, color, _center, idx, width, height)
@@ -762,17 +699,16 @@ var Kanban = new Class({
 			onSuccess : function(json)
 			{
 				json.each(function(el){
-					console.log(el);
 					if(el.url)
 						this.stickUrl(StickyNote.buildUrlEl(el.id, el.url), el.x, el.y, el.color, false, el['zindex']);
-					else if(el.videoID){
-						this.videos.push('player'+el.id);
-						this.stickVideo(StickyNote.buildVideoEl(el.id, el.videoID), el.x, el.y, el.color, false, el['zindex']);
-					}						
+					else if(el.videoID)
+						this.videos.push(new VideoNote(this, el.videoID, el.id, {x:el.x, y:el.y, zindex:el.zindex, width:el.width, height:el.height}));											
 					else
 						this.stickText(StickyNote.buildNoteEl(el.id, el.title, el.note), el.x, el.y, el.color, false, el['zindex'], el.width, el.height);
 				}.bind(this));
-				prepareYouTube(this.videos);
+				// load youtube api
+				prepareYouTube();
+
 			}.bind(this),
 			onFailure : function()
 			{
@@ -1084,6 +1020,13 @@ var Kanban = new Class({
 	setSocket_id: function(sid)
 	{
 		this.socket_id = sid;		
+	},
+
+	loadYouTube: function()
+	{
+		this.videos.each(function(video){
+			video.stick();
+		});
 	}
 
 });
@@ -1172,55 +1115,135 @@ function _deleteNote(el, type, socket_id)
 		
 }
 
-function prepareYouTube(videos)
+function prepareYouTube()
 {
-	KanbanApp.videos = videos;
-
 	var tag = document.createElement('script');
 	tag.src = "//www.youtube.com/iframe_api";
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
-function onPlayerReady(event)
-{
-	console.log(event.target.a.id);
-	var _id = event.target.a.id.replace('player','nid');
-	overlayYoutube(_id, event.target);
+function onYouTubeIframeAPIReady() {
+	kanban.loadYouTube();
 }
 
-function onYouTubeIframeAPIReady() {
-	console.log('onYouTubeIframeAPIReady');
-	KanbanApp.videos.each(function(videoID){
-		var player = new YT.Player(videoID, {
+/*
+ * 	var vn = new VideoNote(kanban, video_id, nid);
+ 	vn.stick();
+ */
+var VideoNote = new Class({
+
+	Implements : [ Options, Events],
+
+	kanban: null,
+	video_id: '',
+	nid: '',
+	element: null,
+	player: null,
+
+	options : {
+		x: 50,
+		y: 200,
+		width: 360,
+		height: 640
+	},
+
+	initialize : function(Kanban, video_id, nid, options)
+	{
+		this.setOptions(options);
+		this.kanban = kanban;
+		this.video_id = video_id;
+		this.nid = nid;
+		this.element = Mooml.render('video_post_tmpl', {
+			'url' : video_id,
+			'nid' : nid,
+			width: this.options.width,
+			height: this.options.height
+		});
+	},
+
+	tear: function()
+	{
+		this.element.destroy();
+	},
+
+	play: function()
+	{
+		this.player.playVideo();
+	},
+
+	pause: function()
+	{
+		this.player.pauseVideo();
+	},
+
+	stick: function()
+	{
+		var el =this.element;
+		el.inject(this.kanban.container);
+		this._overlay();
+
+		this.kanban.z++;
+		
+		el.setStyle('zIndex', this.kanban.z);
+		
+		el.getElement('.icon-remove').addEvent('click', function(){
+			_deleteNote(el,'video', this.kanban.socket_id);
+		}.bind(this));
+
+		el.makeDraggable({
+			container : this.kanban.container,
+			handle: 'overlay'+this.nid,
+
+			onBeforeStart: function(){
+				this.kanban.z += 1;
+				el.setStyle('zIndex', this.kanban.z);
+				this.kanban.dragScroller.detach();	
+			}.bind(this),
+				
+			onComplete: function(){				
+				this.kanban.dragScroller.attach();
+				_updatePos(el, 'yellow', this.kanban.container, 'video', this.kanban.socket_id);
+			}.bind(this),
+
+			onCancel : function(element){				
+				this.kanban.dragScroller.attach();	
+				_updatePos(el, 'yellow', this.kanban.container, 'video', this.kanban.socket_id);		
+			}.bind(this)
+		});
+
+		el.setPosition({
+			'x' : this.options.x,
+			'y' : this.options.y
+		});
+		
+		this.player = new YT.Player('player' + this.nid, {
 			events: {
-				'onReady': onPlayerReady
+				'onReady': this._onPlayerReady.bind(this)
 			}
 		});
-	});
-	
-}
+	},
 
-function overlayYoutube(_id, target)
-{
-	var overlay = new Overlay(_id, {
-		duration: 300,
-		opacity: 0,
-		playing: false,
-		height: '180px',
-		onClick: function() {
-			// this.close();
-			console.log('onClick');
-			if(!this.options.playing)
-				target.playVideo();
+	_overlay: function()
+	{
+		var overlay = new Overlay('nid' + this.nid, {
+			id: 'overlay'+this.nid,
+			opacity: 0,
+			height: '360px'
+		});
+		overlay.open();
+	},
+
+	_onPlayerReady: function(event)
+	{
+		this.element.getElement('.icon-play').addEvent('click', function(){
+			if(!this.playing)
+				event.target.playVideo();
 			else
-				target.pauseVideo();
+				event.target.pauseVideo();
 
-			this.options.playing = !this.options.playing;
-		},
-		onOpen: function() {
-			console.log('onOpen');
-		}
-	});
-	overlay.open();
-}
+			this.playing = !this.playing;
+		});
+	}
+
+});
