@@ -57,7 +57,7 @@ var Overlay = new Class({
 		this.overlay = new Element('div', {
 			id: this.options.id,
 			styles: {
-				position: (Browser.ie6 || Browser.firefox) ? 'absolute' : 'fixed',
+				position: (Browser.ie || Browser.firefox) ? 'absolute' : 'fixed',
 				background: this.options.color,
 				left: 0,
 				top: this.options.top,
