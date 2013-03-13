@@ -131,10 +131,9 @@ Mooml.register('video_post_tmpl', function(note)
 {
 	var random = Number.random(-5, 5);
 	var rotatecls = 'deg' + random;
-	if(Browser.firefox)
-	{
+	if(!(Browser.chrome||Browser.safari))
 		rotatecls = '';
-	}
+	
 	div({'class': 'videonote '+rotatecls, 'nid': note.nid, 'id': 'nid'+note.nid},
 		iframe({
 			'id': 'player' + note.nid,
