@@ -134,6 +134,8 @@ public class KanbanController extends Controller
 	 */
 	public static void update(long id, String name, int access)
 	{
+		checkOwner(id);
+		
 		Kanban k = Kanban.findById(id);
 		k.name = name;
 		k.access = access;
@@ -144,8 +146,9 @@ public class KanbanController extends Controller
 
 	public static void delete(long id)
 	{
-		Kanban k = Kanban.findById(id);
+		checkOwner(id);
 
+		Kanban k = Kanban.findById(id);
 		TextNote.delete("kanban", k);
 		ValueStream.delete("kanban=?", k);
 		UserKanban.delete("kanban", k);
@@ -213,15 +216,10 @@ public class KanbanController extends Controller
 	}
 
 
-	public static void _update(long id)
-	{
-		Kanban kanban = Kanban.findById(id);
-		render(kanban);
-	}
-
-
 	public static void share(long id, String email)
 	{
+		checkOwner(id);
+
 		User u = User.find("byEmail", email).first();
 		Kanban k = Kanban.findById(id);
 
@@ -238,6 +236,8 @@ public class KanbanController extends Controller
 
 	public static void _share(long id)
 	{
+		checkOwner(id);
+
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
@@ -245,6 +245,8 @@ public class KanbanController extends Controller
 
 	public static void _edit(long id)
 	{
+		checkOwner(id);
+
 		Kanban kanban = Kanban.findById(id);
 		render(kanban);
 	}
@@ -292,6 +294,17 @@ public class KanbanController extends Controller
 					forbidden();
 			}
 		}
+	}
+
+	private static void checkOwner(Long id)
+	{
+		SocialUser suser = SecureSocial.getCurrentUser();
+		if(suser==null)
+			forbidden();
+
+		UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
+		if (uk == null)
+			forbidden();
 	}
 
 }

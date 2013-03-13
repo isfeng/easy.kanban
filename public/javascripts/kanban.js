@@ -131,10 +131,15 @@ Mooml.register('video_post_tmpl', function(note)
 {
 	var random = Number.random(-5, 5);
 	var rotatecls = 'deg' + random;
+	if(Browser.firefox)
+	{
+		rotatecls = '';
+	}
 	div({'class': 'videonote '+rotatecls, 'nid': note.nid, 'id': 'nid'+note.nid},
 		iframe({
 			'id': 'player' + note.nid,
-			'src': 'https://www.youtube.com/embed/' + note.url + '?enablejsapi=1&controls=0&rel=0',
+			'src': 'https://www.youtube.com/embed/' + note.url + '?enablejsapi=1&controls=0&rel=0&wmode=transparent',
+			'wmode': 'Opaque',
 			'width': '640px',
 			'height': '360px',
 			'frameborder': 0

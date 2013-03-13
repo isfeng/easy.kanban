@@ -59,7 +59,10 @@
 <script>
 $(window).load(function(){
   //$("#featured").orbit();
-  if(navigator.vendor!='Google Inc.')
+  var ua = navigator.userAgent.toLowerCase();
+  var UA = ua.match(/(opera|ie|firefox|chrome|version)[\s\/:]([\w\d\.]+)?.*?(safari|version[\s\/:]([\w\d\.]+)|$)/) || [null, 'unknown', 0];
+  console.log(UA);
+  if (!(UA[3]=='safari' || UA[3]=='chrome'))
     $('#testb').fadeIn();
   
 });
