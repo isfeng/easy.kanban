@@ -41,7 +41,7 @@
 </div>
 
 <div class="row" style="display:none" id="testb">
-  <div class="alert-box secondary" style="text-align:center">
+  <div class="alert-box" style="text-align:center">
     You are using a web browser we don't support. Please download <a class="secondary medium radius button" href="https://www.google.com/intl/zh-TW/chrome/">Google Chrome.</a>
     <a href="" class="close">&times;</a>
   </div>
@@ -61,7 +61,6 @@ $(window).load(function(){
   //$("#featured").orbit();
   var ua = navigator.userAgent.toLowerCase();
   var UA = ua.match(/(opera|ie|firefox|chrome|version)[\s\/:]([\w\d\.]+)?.*?(safari|version[\s\/:]([\w\d\.]+)|$)/) || [null, 'unknown', 0];
-  console.log(UA);
   if (!(UA[3]=='safari' || UA[3]=='chrome'))
     $('#testb').fadeIn();
   
