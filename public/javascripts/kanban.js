@@ -72,6 +72,7 @@ Mooml.register('uploader_form_tmpl', function(param)
 Mooml.register('url_form_tmpl', function(param)
 {
 	div( 
+		span({class:'radius secondary label'}, 'ex: http://goo.gl/bhIk8'),
 		input({
 			'type' : 'text',
 			'id' : 'url_note_url',
@@ -82,7 +83,8 @@ Mooml.register('url_form_tmpl', function(param)
 /* url form */
 Mooml.register('video_form_tmpl', function(param)
 {
-	div( 
+	div(
+		span({class:'radius secondary label'}, 'ex: http://www.youtube.com/watch?v=5kzl2cNCN1w'),		
 		input({
 			'type' : 'text',
 			'id' : 'video_note_url',
