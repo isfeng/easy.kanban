@@ -51,7 +51,7 @@ public class KanbanController extends Controller
 		}
 
 
-
+		renderArgs.put("meta_description", k.name);
 		renderArgs.put("debug", Play.configuration.getProperty("pusher.debug"));
 		render();
 	}
