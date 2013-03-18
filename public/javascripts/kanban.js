@@ -1237,7 +1237,36 @@ var VideoNote = new Class({
 			opacity: 0,
 			height: '360px'
 		});
-		overlay.open();
+		
+		var xbound = [320-50, 320+50];//640 320 100
+		var ybound = [180-35, 180+35];//360 180  70
+
+		$('overlay'+this.nid).addEvent('click', function(e){
+			if(e.event.offsetX>=xbound[0]&&e.event.offsetX<=xbound[1]&&e.event.offsetY>=ybound[0]&&e.event.offsetY<=ybound[1])
+			{
+				
+				if(!this.playing)
+					this.play();
+				else
+					this.pause();
+
+				this.playing = !this.playing;
+			
+			}			
+		}.bind(this));
+
+		$('overlay'+this.nid).addEvent('mousemove', function(e){
+			if(e.event.offsetX>=xbound[0]&&e.event.offsetX<=xbound[1]&&e.event.offsetY>=ybound[0]&&e.event.offsetY<=ybound[1])
+			{						
+				e.target.setStyle('cursor', 'pointer');
+			}
+			else
+			{
+				e.target.setStyle('cursor', 'move');
+			}
+		}.bind(this));
+
+		overlay.open();		
 	},
 
 	_onPlayerReady: function(event)
