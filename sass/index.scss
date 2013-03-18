@@ -48,3 +48,12 @@ body{
     margin-top: 50px;
 }
 
+#example {
+    img {
+        @include opacity(0.3);
+        &:hover {
+            @include opacity(0.8);
+        }
+    }
+}
+
