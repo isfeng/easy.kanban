@@ -50,7 +50,7 @@ body{
 
 #example {
     img {
-        @include opacity(0.3);
+        @include opacity(0.4);
         &:hover {
             @include opacity(0.8);
         }
