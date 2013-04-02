@@ -42,7 +42,7 @@
         resizeKanban();
         window.addEvent('resize', resizeKanban);
 
-        new Collaboration(kanban, false).listenChannel();
+        new Collaboration(kanban, false).listenChannel('${play.configuration.getProperty("pusher.key")}');
     });
 
     function resizeKanban()
