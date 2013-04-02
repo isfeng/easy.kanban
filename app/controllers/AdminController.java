@@ -7,6 +7,7 @@ import models.User;
 import models.UserKanban;
 import controllers.deadbolt.Deadbolt;
 import controllers.securesocial.SecureSocial;
+import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
