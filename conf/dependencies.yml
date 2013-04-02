@@ -4,12 +4,12 @@ require:
     - play 1.2.5
     - play -> securesocial 0.2.6
     - play -> deadbolt 1.5.4
-    - press -> press 1.0.36
+    - play -> press 1.0.36
     - play -> pusher 0.1
 
-repositories:
-    - My modules:
-        type:       local
-        artifact:   ${application.path}/localmodule/press-1.0.36.zip
-        contains:
-            - press
+#repositories:
+#    - My modules:
+#        type:       local
+#        artifact:   ${application.path}/localmodule/press-1.0.36.zip
+#        contains:
+#            - press

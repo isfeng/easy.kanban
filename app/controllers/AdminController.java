@@ -27,7 +27,7 @@ public class AdminController extends Controller
 	static void checkKanbanAccessRight(long id) throws Throwable
 	{
 		SocialUser suser = SecureSocial.getCurrentUser();
-		if (!suser.email.equals("sergio.huang@gmail.com"))
+		if (!suser.email.equals(Play.configuration.getProperty("easykanban.admin")))
 			forbidden();
 	}
 }
