@@ -27,7 +27,7 @@ line_comments = false
 # my bootstrap mixins
 # require "compass-normalize"
 # require "compass-recipes"
-require "animate"
+# require "animate"
 # require "compass_twitter_bootstrap"
 require "zurb-foundation"
 require "zocial"
