@@ -287,7 +287,7 @@ public class KanbanController extends Controller
 			if (suser == null)
 				Application.welcome();
 
-			if (!suser.email.equals("sergio.huang@gmail.com"))
+			if (!suser.email.equals(Play.configuration.getProperty("easykanban.admin")))
 			{
 				UserKanban uk = UserKanban.findBySocialIDAndKanbanID(suser.id.id, id);
 				if (uk == null)

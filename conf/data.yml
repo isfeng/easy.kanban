@@ -1,0 +1,20 @@
+Board(default_board_tiny):
+  width: 800
+  height: 450
+  name: TINY
+Board(default_board_small):
+  width: 1280
+  height: 720
+  name: SMALL
+Board(default_board_medium):
+  width: 1920
+  height: 1080
+  name: MEDIUM
+Board(default_board_large):
+  width: 2560
+  height: 1440
+  name: LARGE
+Board(default_board_huge):
+  width: 3840
+  height: 2160
+  name: HUGE
